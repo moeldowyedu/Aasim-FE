@@ -726,6 +726,321 @@ Generate a public share link for a report.
 
 ---
 
+## Webhooks (N8n Integration)
+
+### Overview
+
+Aasim uses N8n workflows for all evaluation processing. The system sends submission data to N8n via webhooks and receives results back through callback webhooks.
+
+**Architecture:**
+```
+Backend → POST to N8n → N8n Agents Process → N8n Callback → Backend
+```
+
+---
+
+### Webhook Callback: Receive Evaluation Results
+
+Receives evaluation results from N8n workflows.
+
+**Endpoint:** `POST /webhooks/evaluation-callback`
+
+**Headers:**
+```
+Content-Type: application/json
+X-N8n-Signature: <hmac-sha256-signature>
+X-Webhook-Secret: <shared-secret>
+```
+
+**Request Body (from N8n):**
+```json
+{
+  "workflow_id": "n8n-workflow-123",
+  "submission_id": "650e8400-e29b-41d4-a716-446655440000",
+  "status": "completed",
+  "agent": "video_audio_analysis",
+  "results": {
+    "overall_score": 85.5,
+    "confidence": 92.0,
+    "scores": [
+      {
+        "criterion": "presentation_quality",
+        "score": 88.0,
+        "weight": 0.3,
+        "comments": "Excellent delivery and visual aids"
+      },
+      {
+        "criterion": "clarity",
+        "score": 90.0,
+        "weight": 0.25,
+        "comments": "Very clear articulation"
+      }
+    ],
+    "insights": [
+      {
+        "type": "strength",
+        "title": "Strong vocal presence",
+        "description": "Confident delivery with excellent tone",
+        "priority": 5
+      },
+      {
+        "type": "recommendation",
+        "title": "Add more visual examples",
+        "description": "Consider including more diagrams",
+        "priority": 3
+      }
+    ]
+  },
+  "processing_time": 45,
+  "timestamp": "2024-11-05T10:30:00Z"
+}
+```
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "message": "Results received and processed",
+  "submission_id": "650e8400-e29b-41d4-a716-446655440000"
+}
+```
+
+**Agent Types:**
+- `video_audio_analysis` - Video & Audio Analysis Agent
+- `document_review` - Document Review Agent
+- `code_assessment` - Source Code Assessment Agent
+- `custom_evaluation` - Custom Evaluation Criteria Agent
+- `consistency_check` - Objective & Consistent Scoring Agent
+
+---
+
+### Webhook Callback: Receive Report Results
+
+Receives generated report from N8n report generation workflow.
+
+**Endpoint:** `POST /webhooks/report-callback`
+
+**Headers:**
+```
+Content-Type: application/json
+X-N8n-Signature: <hmac-sha256-signature>
+X-Webhook-Secret: <shared-secret>
+```
+
+**Request Body (from N8n):**
+```json
+{
+  "workflow_id": "n8n-workflow-456",
+  "submission_id": "650e8400-e29b-41d4-a716-446655440000",
+  "evaluation_id": "850e8400-e29b-41d4-a716-446655440000",
+  "report_url": "https://storage.aasim.app/reports/report-123.pdf",
+  "report_format": "pdf",
+  "file_size": 245760,
+  "status": "completed",
+  "timestamp": "2024-11-05T10:35:00Z"
+}
+```
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "message": "Report received and saved",
+  "report_uuid": "b50e8400-e29b-41d4-a716-446655440000"
+}
+```
+
+---
+
+### Webhook Callback: Receive Error Notifications
+
+Receives error notifications when N8n workflow fails.
+
+**Endpoint:** `POST /webhooks/error-callback`
+
+**Headers:**
+```
+Content-Type: application/json
+X-N8n-Signature: <hmac-sha256-signature>
+X-Webhook-Secret: <shared-secret>
+```
+
+**Request Body (from N8n):**
+```json
+{
+  "workflow_id": "n8n-workflow-789",
+  "submission_id": "650e8400-e29b-41d4-a716-446655440000",
+  "agent": "video_audio_analysis",
+  "status": "failed",
+  "error": {
+    "code": "PROCESSING_ERROR",
+    "message": "Failed to extract audio from video",
+    "details": "Corrupted file format or unsupported codec",
+    "retry_attempted": true,
+    "retry_count": 3
+  },
+  "timestamp": "2024-11-05T10:32:00Z"
+}
+```
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "message": "Error logged and user notified"
+}
+```
+
+---
+
+### Webhook Callback: Receive Progress Updates
+
+Receives real-time progress updates during long-running evaluations.
+
+**Endpoint:** `POST /webhooks/progress-callback`
+
+**Headers:**
+```
+Content-Type: application/json
+X-N8n-Signature: <hmac-sha256-signature>
+X-Webhook-Secret: <shared-secret>
+```
+
+**Request Body (from N8n):**
+```json
+{
+  "workflow_id": "n8n-workflow-123",
+  "submission_id": "650e8400-e29b-41d4-a716-446655440000",
+  "agent": "video_audio_analysis",
+  "status": "processing",
+  "progress": {
+    "step": "audio_extraction",
+    "step_number": 2,
+    "total_steps": 5,
+    "percentage": 40,
+    "message": "Extracting audio from video file..."
+  },
+  "timestamp": "2024-11-05T10:30:30Z"
+}
+```
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "message": "Progress updated"
+}
+```
+
+---
+
+### Get Webhook Logs
+
+Retrieve webhook activity logs for a submission.
+
+**Endpoint:** `GET /submissions/{uuid}/webhook-logs`
+
+**Headers:** `Authorization: Bearer {token}`
+
+**Query Parameters:**
+- `type` (string): `outgoing` or `incoming`
+- `status` (string): `pending`, `success`, `failed`
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "data": {
+    "logs": [
+      {
+        "id": 123,
+        "webhook_type": "outgoing",
+        "agent_name": "video_audio_analysis",
+        "endpoint": "https://n8n.aasim.app/webhook/video-audio-analysis",
+        "status": "success",
+        "status_code": 200,
+        "retry_count": 0,
+        "created_at": "2024-11-05T10:25:00Z"
+      },
+      {
+        "id": 124,
+        "webhook_type": "incoming",
+        "agent_name": "video_audio_analysis",
+        "status": "success",
+        "status_code": 200,
+        "created_at": "2024-11-05T10:30:00Z"
+      }
+    ]
+  }
+}
+```
+
+---
+
+### Retry Failed Webhook
+
+Manually retry a failed webhook delivery.
+
+**Endpoint:** `POST /webhooks/retry/{log_id}`
+
+**Headers:** `Authorization: Bearer {token}`
+
+**Permissions:** Admin only
+
+**Response:** `200 OK`
+```json
+{
+  "success": true,
+  "message": "Webhook retry queued",
+  "log_id": 123
+}
+```
+
+---
+
+### Webhook Security
+
+#### HMAC Signature Verification
+
+All incoming webhooks from N8n must include an HMAC signature for verification.
+
+**Signature Generation (N8n side):**
+```javascript
+const crypto = require('crypto');
+const payload = JSON.stringify(data);
+const secret = 'your-shared-secret';
+const signature = crypto
+  .createHmac('sha256', secret)
+  .update(payload)
+  .digest('hex');
+```
+
+**Signature Verification (Backend):**
+```php
+$signature = $_SERVER['HTTP_X_N8N_SIGNATURE'];
+$payload = file_get_contents('php://input');
+$secret = $_ENV['N8N_WEBHOOK_SECRET'];
+
+$expectedSignature = hash_hmac('sha256', $payload, $secret);
+
+if (!hash_equals($signature, $expectedSignature)) {
+    http_response_code(401);
+    die(json_encode(['error' => 'Invalid signature']));
+}
+```
+
+#### IP Whitelisting
+
+Configure firewall to only accept webhooks from N8n server IPs.
+
+#### Shared Secret
+
+Both backend and N8n must share the same webhook secret:
+- Backend: `N8N_WEBHOOK_SECRET` in `.env`
+- N8n: Configure in credentials/environment
+
+---
+
 ## Error Responses
 
 ### Standard Error Format

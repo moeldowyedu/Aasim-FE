@@ -399,6 +399,109 @@ CREATE TABLE system_settings (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
 
+### 17. webhook_logs
+
+Tracks all webhook communications with N8n workflows.
+
+```sql
+CREATE TABLE webhook_logs (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    submission_id BIGINT UNSIGNED NOT NULL,
+    workflow_id VARCHAR(100),
+    workflow_type VARCHAR(50) NOT NULL COMMENT 'video_audio_analysis, document_review, code_assessment, etc.',
+    agent_name VARCHAR(100),
+    webhook_type ENUM('outgoing', 'incoming') NOT NULL,
+    endpoint VARCHAR(500),
+    request_payload LONGTEXT,
+    response_payload LONGTEXT,
+    status_code INT,
+    status ENUM('pending', 'success', 'failed') DEFAULT 'pending',
+    error_message TEXT,
+    retry_count TINYINT DEFAULT 0,
+    processing_time INT COMMENT 'Time in seconds',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (submission_id) REFERENCES submissions(id) ON DELETE CASCADE,
+    INDEX idx_submission_id (submission_id),
+    INDEX idx_workflow_id (workflow_id),
+    INDEX idx_workflow_type (workflow_type),
+    INDEX idx_webhook_type (webhook_type),
+    INDEX idx_status (status),
+    INDEX idx_created_at (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
+
+---
+
+## Relationships Diagram (Updated for N8n Integration)
+
+```
+users (1) ----< (*) submissions
+users (1) ----< (*) sessions
+users (1) ----< (*) evaluation_criteria
+users (1) ----< (*) competitions
+users (1) ----< (*) competition_participants
+users (1) ----< (*) activity_logs
+users (1) ----< (*) notifications
+users (1) ----< (*) api_keys
+
+submissions (1) ----< (*) submission_files
+submissions (1) ----< (*) evaluations
+submissions (1) ----< (*) webhook_logs [NEW for N8n]
+
+evaluation_criteria (1) ----< (*) evaluations
+evaluation_criteria (1) ----< (*) competitions
+
+evaluations (1) ----< (*) evaluation_scores
+evaluations (1) ----< (*) evaluation_insights
+evaluations (1) ----< (*) reports
+
+competitions (1) ----< (*) competition_participants
+```
+
+---
+
+## N8n Integration Schema Changes
+
+### Modified Table: evaluations
+
+Add fields for N8n workflow tracking:
+
+```sql
+ALTER TABLE evaluations
+ADD COLUMN workflow_id VARCHAR(100) AFTER ai_model,
+ADD COLUMN workflow_type VARCHAR(50) COMMENT 'Type of N8n workflow used',
+ADD COLUMN webhook_status ENUM('pending', 'sent', 'processing', 'completed', 'failed') DEFAULT 'pending',
+ADD COLUMN n8n_callback_received_at TIMESTAMP NULL,
+ADD INDEX idx_workflow_id (workflow_id),
+ADD INDEX idx_webhook_status (webhook_status);
+```
+
+### Modified Table: submissions
+
+Add N8n processing status:
+
+```sql
+ALTER TABLE submissions
+ADD COLUMN n8n_processing_started_at TIMESTAMP NULL AFTER processed_at,
+ADD COLUMN n8n_processing_completed_at TIMESTAMP NULL,
+ADD COLUMN total_webhooks_sent INT DEFAULT 0,
+ADD COLUMN total_webhooks_completed INT DEFAULT 0;
+```
+
+---
+
+## Data Retention Policy (Updated)
+
+- **Active Data:** Indefinite
+- **Soft Deletes:** 90 days before hard delete
+- **Session Data:** 30 days
+- **Activity Logs:** 1 year
+- **Password Resets:** 24 hours
+- **Expired Reports:** Archive after 6 months
+- **Webhook Logs:** 90 days (archive successful, keep failed for 1 year)
+
 ---
 
 ## Relationships Diagram
