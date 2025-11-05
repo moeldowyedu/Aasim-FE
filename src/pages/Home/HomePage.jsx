@@ -75,14 +75,8 @@ const HomePage = () => {
   return (
     <MainLayout showFooter={true}>
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center -mt-32 px-6">
+      <section className="flex items-center justify-center -mt-25 px-6 ">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="fade-in-up">
-            <div className="inline-block glass-card rounded-full px-6 py-3 mb-8">
-              <span className="text-sm font-medium text-gray-700">Powered by Advanced AI Technology</span>
-            </div>
-          </div>
-
           <h1 className="text-6xl md:text-8xl font-bold mb-6 text-gray-900 text-shadow-lg">
             Meet <span className="gradient-text">Aasim</span>
           </h1>
@@ -107,13 +101,6 @@ const HomePage = () => {
             <a href="#about" className="glass-btn-secondary rounded-full px-8 py-4 text-lg">
               Learn More
             </a>
-          </div>
-
-          {/* Floating Icon */}
-          <div className="mt-20 animate-bounce">
-            <div className="inline-block glass-card rounded-3xl p-8">
-              <span className="material-icons text-8xl text-primary-600">psychology</span>
-            </div>
           </div>
         </div>
       </section>
