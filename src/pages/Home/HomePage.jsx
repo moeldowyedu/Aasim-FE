@@ -13,9 +13,9 @@ const HomePage = () => {
   const testimonials = [
     {
       quote: t.testimonial1Quote || "Aasim has transformed how we evaluate student projects at ITI. The precision and consistency of AI-powered assessments have significantly improved our educational outcomes while reducing evaluation time by 70%.",
-      name: "Dr. Heba Salah",
+      name: "Dr. Heba Saleh",
       position: "ITI Chairwoman",
-      image: "https://i.pravatar.cc/150?img=47", // Placeholder - replace with actual image
+      image: "./../../src/assets/imgs/HebaSaleh.png", // Placeholder - replace with actual image
       rating: 5
     },
     {
