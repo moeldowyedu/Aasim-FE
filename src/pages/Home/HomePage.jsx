@@ -810,27 +810,6 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-
-      {/* Final CTA */}
-      <section className="py-20 px-6 bg-gradient-to-b from-purple-50 to-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 font-heading">
-            {t.finalCtaTitle}
-          </h2>
-
-          <p className="text-xl text-gray-700 mb-10">
-            {t.finalCtaSubtitle}
-          </p>
-
-          <Link to="/register" className="glass-btn-primary rounded-full px-12 py-5 text-xl font-semibold inline-block glow mb-6">
-            {t.startFreeTrial}
-          </Link>
-
-          <p className="text-gray-600">
-            {t.noCredit}
-          </p>
-        </div>
-      </section>
     </MainLayout>
   )
 }
