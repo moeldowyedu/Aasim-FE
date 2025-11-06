@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/authStore'
 import { useLanguage } from '../../contexts/LanguageContext'
@@ -13,6 +13,34 @@ const Header = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false)
   const [agentsMenuOpen, setAgentsMenuOpen] = useState(false)
+
+  // Refs for dropdown menus
+  const userMenuRef = useRef(null)
+  const languageMenuRef = useRef(null)
+  const agentsMenuRef = useRef(null)
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setUserMenuOpen(false)
+      }
+      if (languageMenuRef.current && !languageMenuRef.current.contains(event.target)) {
+        setLanguageMenuOpen(false)
+      }
+      if (agentsMenuRef.current && !agentsMenuRef.current.contains(event.target)) {
+        setAgentsMenuOpen(false)
+      }
+    }
+
+    // Add event listener
+    document.addEventListener('mousedown', handleClickOutside)
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
 
   const languages = [
     { code: 'en', name: 'English', flag: 'us' },
@@ -58,7 +86,7 @@ const Header = () => {
                 </Link>
 
                 {/* Language Switcher */}
-                <div className="relative">
+                <div className="relative" ref={languageMenuRef}>
                   <button
                     onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
                     className="flex items-center space-x-2 text-gray-700 hover:text-primary-600 transition-colors"
@@ -112,7 +140,7 @@ const Header = () => {
                 </Link>
 
                 {/* AI Agents Dropdown */}
-                <div className="relative">
+                <div className="relative" ref={agentsMenuRef}>
                   <button
                     onClick={() => setAgentsMenuOpen(!agentsMenuOpen)}
                     className="flex items-center space-x-1 text-gray-700 hover:text-primary-600 transition-colors font-medium"
@@ -176,7 +204,7 @@ const Header = () => {
                 )}
 
                 {/* Language Switcher */}
-                <div className="relative">
+                <div className="relative" ref={languageMenuRef}>
                   <button
                     onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
                     className="flex items-center space-x-2 text-gray-700 hover:text-primary-600 transition-colors"
@@ -214,7 +242,7 @@ const Header = () => {
                 </div>
 
                 {/* User Menu */}
-                <div className="relative">
+                <div className="relative" ref={userMenuRef}>
                   <button
                     onClick={toggleUserMenu}
                     className="flex items-center space-x-2 glass-card px-4 py-2 rounded-xl hover:bg-white/90 transition-all"

@@ -27,17 +27,27 @@ const LoginPage = () => {
     // Simulate API call
     setTimeout(() => {
       // Mock login - replace with actual API call
+      // Check if email is admin email
+      const isAdmin = formData.email.toLowerCase().includes('admin') || formData.email === 'admin@aasim.ai'
+
       const mockUser = {
-        id: 1,
-        name: 'John Doe',
+        id: isAdmin ? 999 : 1,
+        name: isAdmin ? 'Admin User' : 'John Doe',
         email: formData.email,
-        role: 'user',
+        role: isAdmin ? 'admin' : 'user',
       }
       const mockToken = 'mock-jwt-token-123456789'
 
       login(mockUser, mockToken)
       toast.success('Login successful!')
-      navigate('/dashboard')
+
+      // Redirect based on role
+      if (isAdmin) {
+        navigate('/admin')
+      } else {
+        navigate('/dashboard')
+      }
+
       setIsLoading(false)
     }, 1000)
   }
@@ -120,6 +130,12 @@ const LoginPage = () => {
                 <Link to="/register" className="text-primary-600 hover:text-primary-700 font-semibold">
                   Sign up
                 </Link>
+              </p>
+            </div>
+
+            <div className="mt-4 p-4 bg-blue-50 rounded-xl border border-blue-200">
+              <p className="text-xs text-gray-700 text-center">
+                <span className="font-semibold">💡 Demo Mode:</span> Use any email with "admin" in it (e.g., <span className="font-mono">admin@aasim.ai</span>) to log in as admin.
               </p>
             </div>
           </div>
