@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import MainLayout from '../../components/layout/MainLayout'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 
 const AgentMarketplacePage = () => {
+  const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState('')
   const [filterCategory, setFilterCategory] = useState('all')
   const [selectedAgent, setSelectedAgent] = useState(null)
@@ -129,10 +130,12 @@ const AgentMarketplacePage = () => {
   }
 
   const confirmHiring = () => {
-    toast.success(`Successfully hired ${selectedAgent.name}!`)
+    const agentId = selectedAgent.id
+    const agentName = selectedAgent.name
+    toast.success(`Successfully hired ${agentName}!`)
     setSelectedAgent(null)
     // Navigate to configuration page
-    window.location.href = `/agent/configure/${selectedAgent.id}`
+    navigate(`/agent/configure/${agentId}`)
   }
 
   return (
