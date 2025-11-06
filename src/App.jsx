@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { LanguageProvider } from './contexts/LanguageContext'
+import ScrollToTop from './components/ScrollToTop'
 import HomePage from './pages/Home/HomePage'
 import LoginPage from './pages/Auth/LoginPage'
 import RegisterPage from './pages/Auth/RegisterPage'
@@ -31,6 +32,7 @@ function App() {
   return (
     <LanguageProvider>
       <div className="App">
+      <ScrollToTop />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
