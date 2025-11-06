@@ -1,12 +1,23 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/authStore'
+import { useLanguage } from '../../contexts/LanguageContext'
+import { translations } from '../../translations'
 
 const Header = () => {
   const { isAuthenticated, user, logout } = useAuthStore()
+  const { language, changeLanguage } = useLanguage()
+  const t = translations[language]
   const navigate = useNavigate()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false)
+
+  const languages = [
+    { code: 'en', name: 'English', flag: '🇺🇸' },
+    { code: 'es', name: 'Español', flag: '🇪🇸' },
+    { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+  ]
 
   const handleLogout = () => {
     logout()
@@ -25,10 +36,10 @@ const Header = () => {
     <header className="glass-card sticky top-0 z-40 mb-8">
       <nav className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to={isAuthenticated ? '/dashboard' : '/'} className="flex items-center space-x-2">
+          {/* Logo - Always links to homepage */}
+          <Link to="/" className="flex items-center space-x-2">
             <span className="material-icons text-3xl text-primary-600">gavel</span>
-            <span className="text-2xl font-bold text-gray-900 text-shadow">Aasim</span>
+            <span className="text-2xl font-bold text-gray-900 text-shadow font-heading">Aasim</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -36,37 +47,98 @@ const Header = () => {
             {!isAuthenticated ? (
               <>
                 <Link to="/#features" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
-                  Features
+                  {t.features}
                 </Link>
                 <Link to="/#use-cases" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
-                  Use Cases
+                  {t.useCases}
                 </Link>
                 <Link to="/login" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
-                  Login
+                  {t.login}
                 </Link>
+
+                {/* Language Switcher */}
+                <div className="relative">
+                  <button
+                    onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
+                    className="flex items-center space-x-2 text-gray-700 hover:text-primary-600 transition-colors"
+                  >
+                    <span className="text-xl">{languages.find(l => l.code === language)?.flag}</span>
+                    <span className="material-icons text-sm">expand_more</span>
+                  </button>
+                  {languageMenuOpen && (
+                    <div className="absolute right-0 mt-2 w-40 glass-card rounded-xl overflow-hidden shadow-2xl">
+                      {languages.map(lang => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            changeLanguage(lang.code)
+                            setLanguageMenuOpen(false)
+                          }}
+                          className={`w-full text-left px-4 py-3 hover:bg-white/50 transition-colors flex items-center space-x-2 ${
+                            language === lang.code ? 'bg-white/50' : ''
+                          }`}
+                        >
+                          <span className="text-xl">{lang.flag}</span>
+                          <span>{lang.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
                 <Link
                   to="/register"
                   className="glass-btn-primary rounded-xl px-6 py-2"
                 >
-                  Get Started
+                  {t.getStarted}
                 </Link>
               </>
             ) : (
               <>
                 <Link to="/dashboard" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
-                  Dashboard
+                  {t.dashboard}
                 </Link>
                 <Link to="/submissions" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
-                  Submissions
+                  {t.submissions}
                 </Link>
                 <Link to="/criteria" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
-                  Criteria
+                  {t.criteria}
                 </Link>
                 {user?.role === 'admin' && (
                   <Link to="/admin" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">
-                    Admin
+                    {t.admin}
                   </Link>
                 )}
+
+                {/* Language Switcher */}
+                <div className="relative">
+                  <button
+                    onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
+                    className="flex items-center space-x-2 text-gray-700 hover:text-primary-600 transition-colors"
+                  >
+                    <span className="text-xl">{languages.find(l => l.code === language)?.flag}</span>
+                    <span className="material-icons text-sm">expand_more</span>
+                  </button>
+                  {languageMenuOpen && (
+                    <div className="absolute right-0 mt-2 w-40 glass-card rounded-xl overflow-hidden shadow-2xl">
+                      {languages.map(lang => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            changeLanguage(lang.code)
+                            setLanguageMenuOpen(false)
+                          }}
+                          className={`w-full text-left px-4 py-3 hover:bg-white/50 transition-colors flex items-center space-x-2 ${
+                            language === lang.code ? 'bg-white/50' : ''
+                          }`}
+                        >
+                          <span className="text-xl">{lang.flag}</span>
+                          <span>{lang.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
                 {/* User Menu */}
                 <div className="relative">
@@ -95,7 +167,7 @@ const Header = () => {
                       >
                         <div className="flex items-center space-x-2">
                           <span className="material-icons text-sm">person</span>
-                          <span>Profile</span>
+                          <span>{t.profile}</span>
                         </div>
                       </Link>
                       <Link
@@ -105,7 +177,7 @@ const Header = () => {
                       >
                         <div className="flex items-center space-x-2">
                           <span className="material-icons text-sm">notifications</span>
-                          <span>Notifications</span>
+                          <span>{t.notifications}</span>
                         </div>
                       </Link>
                       <button
@@ -114,7 +186,7 @@ const Header = () => {
                       >
                         <div className="flex items-center space-x-2">
                           <span className="material-icons text-sm">logout</span>
-                          <span>Logout</span>
+                          <span>{t.logout}</span>
                         </div>
                       </button>
                     </div>

@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { LanguageProvider } from './contexts/LanguageContext'
 import HomePage from './pages/Home/HomePage'
 import LoginPage from './pages/Auth/LoginPage'
 import RegisterPage from './pages/Auth/RegisterPage'
@@ -22,7 +23,8 @@ import ProtectedRoute from './router/ProtectedRoute'
 
 function App() {
   return (
-    <div className="App">
+    <LanguageProvider>
+      <div className="App">
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
@@ -143,7 +145,8 @@ function App() {
         <Route path="/404" element={<NotFoundPage />} />
         <Route path="*" element={<Navigate to="/404" replace />} />
       </Routes>
-    </div>
+      </div>
+    </LanguageProvider>
   )
 }
 
