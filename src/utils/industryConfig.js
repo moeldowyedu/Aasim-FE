@@ -49,6 +49,66 @@ export const industries = [
     icon: 'palette',
     description: 'Design Projects, Creative Work',
   },
+  {
+    id: 'real_estate',
+    name: 'Real Estate & Property',
+    icon: 'home_work',
+    description: 'Property Appraisals, Real Estate Transactions',
+  },
+  {
+    id: 'construction',
+    name: 'Construction & Engineering',
+    icon: 'engineering',
+    description: 'Building Projects, Infrastructure, Safety',
+  },
+  {
+    id: 'hospitality',
+    name: 'Hospitality & Tourism',
+    icon: 'hotel',
+    description: 'Hotels, Restaurants, Travel Services',
+  },
+  {
+    id: 'transportation',
+    name: 'Transportation & Logistics',
+    icon: 'local_shipping',
+    description: 'Fleet Management, Supply Chain, Delivery',
+  },
+  {
+    id: 'energy',
+    name: 'Energy & Utilities',
+    icon: 'bolt',
+    description: 'Power Generation, Renewable Energy, Utilities',
+  },
+  {
+    id: 'media',
+    name: 'Media & Entertainment',
+    icon: 'movie',
+    description: 'Film, TV, Streaming, Content Production',
+  },
+  {
+    id: 'nonprofit',
+    name: 'Non-profit & Social Services',
+    icon: 'volunteer_activism',
+    description: 'NGOs, Charities, Social Impact Programs',
+  },
+  {
+    id: 'agriculture',
+    name: 'Agriculture & Food Services',
+    icon: 'agriculture',
+    description: 'Farming, Food Production, Agricultural Tech',
+  },
+  {
+    id: 'manufacturing',
+    name: 'Manufacturing & Industrial',
+    icon: 'precision_manufacturing',
+    description: 'Production, Quality Control, Industrial Operations',
+  },
+  {
+    id: 'government',
+    name: 'Government & Public Sector',
+    icon: 'account_balance',
+    description: 'Public Services, Policy, Civic Programs',
+  },
 ]
 
 // Industry-specific rubric templates
@@ -195,6 +255,186 @@ export const industryRubrics = {
       { name: 'Needs Improvement', range: '0-59', description: 'Requires more development' },
     ],
     additionalFields: ['medium', 'style', 'projectType', 'targetAudience'],
+  },
+
+  real_estate: {
+    defaultCriteria: [
+      { name: 'Market Analysis', weight: 30, description: 'Comparative market analysis accuracy' },
+      { name: 'Property Valuation', weight: 30, description: 'Appraisal methodology and accuracy' },
+      { name: 'Documentation', weight: 20, description: 'Completeness of property documentation' },
+      { name: 'Legal Compliance', weight: 15, description: 'Regulatory and legal requirements' },
+      { name: 'Presentation', weight: 5, description: 'Quality of listing or report presentation' },
+    ],
+    gradingScale: [
+      { name: 'Excellent', range: '90-100', description: 'Market-leading quality' },
+      { name: 'Good', range: '80-89', description: 'Professional standards met' },
+      { name: 'Satisfactory', range: '70-79', description: 'Acceptable with minor issues' },
+      { name: 'Needs Improvement', range: '60-69', description: 'Significant gaps present' },
+      { name: 'Unsatisfactory', range: '0-59', description: 'Does not meet standards' },
+    ],
+    additionalFields: ['propertyType', 'propertyLocation', 'appraisalPurpose'],
+  },
+
+  construction: {
+    defaultCriteria: [
+      { name: 'Safety Standards', weight: 35, description: 'Compliance with safety regulations' },
+      { name: 'Engineering Quality', weight: 25, description: 'Technical engineering standards' },
+      { name: 'Project Planning', weight: 20, description: 'Schedule and resource planning' },
+      { name: 'Cost Management', weight: 15, description: 'Budget accuracy and control' },
+      { name: 'Environmental Impact', weight: 5, description: 'Environmental considerations' },
+    ],
+    gradingScale: [
+      { name: 'Excellent', range: '90-100', description: 'Exceeds industry standards' },
+      { name: 'Good', range: '80-89', description: 'Meets all requirements' },
+      { name: 'Satisfactory', range: '70-79', description: 'Acceptable quality' },
+      { name: 'Below Standard', range: '60-69', description: 'Safety or quality concerns' },
+      { name: 'Unacceptable', range: '0-59', description: 'Critical deficiencies' },
+    ],
+    additionalFields: ['projectType', 'projectScale', 'safetyStandards'],
+  },
+
+  hospitality: {
+    defaultCriteria: [
+      { name: 'Service Quality', weight: 35, description: 'Customer service excellence' },
+      { name: 'Operations', weight: 25, description: 'Operational efficiency and standards' },
+      { name: 'Guest Experience', weight: 20, description: 'Overall guest satisfaction' },
+      { name: 'Cleanliness & Safety', weight: 15, description: 'Hygiene and safety protocols' },
+      { name: 'Value', weight: 5, description: 'Price-to-quality ratio' },
+    ],
+    gradingScale: [
+      { name: 'Exceptional', range: '90-100', description: '5-star quality' },
+      { name: 'Excellent', range: '80-89', description: 'Exceeds expectations' },
+      { name: 'Good', range: '70-79', description: 'Meets expectations' },
+      { name: 'Fair', range: '60-69', description: 'Below expectations' },
+      { name: 'Poor', range: '0-59', description: 'Significant improvement needed' },
+    ],
+    additionalFields: ['facilityType', 'serviceLevel', 'guestCapacity'],
+  },
+
+  transportation: {
+    defaultCriteria: [
+      { name: 'Safety & Compliance', weight: 35, description: 'Safety records and regulatory compliance' },
+      { name: 'Operational Efficiency', weight: 25, description: 'On-time performance and reliability' },
+      { name: 'Cost Effectiveness', weight: 20, description: 'Operational cost optimization' },
+      { name: 'Service Quality', weight: 15, description: 'Customer satisfaction and service' },
+      { name: 'Sustainability', weight: 5, description: 'Environmental impact and efficiency' },
+    ],
+    gradingScale: [
+      { name: 'Excellent', range: '90-100', description: 'Industry-leading performance' },
+      { name: 'Good', range: '80-89', description: 'Strong operational standards' },
+      { name: 'Satisfactory', range: '70-79', description: 'Meets basic requirements' },
+      { name: 'Needs Improvement', range: '60-69', description: 'Performance gaps present' },
+      { name: 'Unsatisfactory', range: '0-59', description: 'Critical issues' },
+    ],
+    additionalFields: ['transportMode', 'fleetSize', 'routeType'],
+  },
+
+  energy: {
+    defaultCriteria: [
+      { name: 'Efficiency', weight: 30, description: 'Energy generation/distribution efficiency' },
+      { name: 'Reliability', weight: 25, description: 'System uptime and stability' },
+      { name: 'Safety', weight: 25, description: 'Safety protocols and incident prevention' },
+      { name: 'Sustainability', weight: 15, description: 'Environmental impact and carbon footprint' },
+      { name: 'Innovation', weight: 5, description: 'Adoption of new technologies' },
+    ],
+    gradingScale: [
+      { name: 'Outstanding', range: '90-100', description: 'Best-in-class performance' },
+      { name: 'Excellent', range: '80-89', description: 'Exceeds standards' },
+      { name: 'Good', range: '70-79', description: 'Meets standards' },
+      { name: 'Needs Improvement', range: '60-69', description: 'Below standards' },
+      { name: 'Unsatisfactory', range: '0-59', description: 'Critical deficiencies' },
+    ],
+    additionalFields: ['energyType', 'capacity', 'sustainabilityGoals'],
+  },
+
+  media: {
+    defaultCriteria: [
+      { name: 'Content Quality', weight: 30, description: 'Production quality and storytelling' },
+      { name: 'Audience Engagement', weight: 25, description: 'Viewer/listener engagement metrics' },
+      { name: 'Technical Execution', weight: 20, description: 'Production technical standards' },
+      { name: 'Originality', weight: 15, description: 'Creative originality and innovation' },
+      { name: 'Distribution Strategy', weight: 10, description: 'Platform and reach optimization' },
+    ],
+    gradingScale: [
+      { name: 'Exceptional', range: '90-100', description: 'Award-worthy content' },
+      { name: 'Excellent', range: '80-89', description: 'Professional broadcast quality' },
+      { name: 'Good', range: '70-79', description: 'Solid production value' },
+      { name: 'Fair', range: '60-69', description: 'Needs refinement' },
+      { name: 'Poor', range: '0-59', description: 'Below broadcast standards' },
+    ],
+    additionalFields: ['contentType', 'distributionPlatform', 'targetDemographic'],
+  },
+
+  nonprofit: {
+    defaultCriteria: [
+      { name: 'Mission Impact', weight: 35, description: 'Effectiveness in achieving mission' },
+      { name: 'Financial Stewardship', weight: 25, description: 'Responsible use of resources' },
+      { name: 'Transparency', weight: 20, description: 'Accountability and reporting' },
+      { name: 'Community Engagement', weight: 15, description: 'Stakeholder and community involvement' },
+      { name: 'Sustainability', weight: 5, description: 'Long-term organizational viability' },
+    ],
+    gradingScale: [
+      { name: 'Exceptional', range: '90-100', description: 'Transformative impact' },
+      { name: 'Excellent', range: '80-89', description: 'Strong mission delivery' },
+      { name: 'Good', range: '70-79', description: 'Effective operations' },
+      { name: 'Fair', range: '60-69', description: 'Room for improvement' },
+      { name: 'Poor', range: '0-59', description: 'Significant concerns' },
+    ],
+    additionalFields: ['missionArea', 'fundingSource', 'impactMetrics'],
+  },
+
+  agriculture: {
+    defaultCriteria: [
+      { name: 'Production Quality', weight: 30, description: 'Crop/product quality and yield' },
+      { name: 'Sustainability', weight: 25, description: 'Environmental and resource management' },
+      { name: 'Compliance', weight: 20, description: 'Regulatory and safety standards' },
+      { name: 'Efficiency', weight: 15, description: 'Operational and resource efficiency' },
+      { name: 'Innovation', weight: 10, description: 'Adoption of modern techniques' },
+    ],
+    gradingScale: [
+      { name: 'Excellent', range: '90-100', description: 'Premium quality production' },
+      { name: 'Good', range: '80-89', description: 'High-quality standards' },
+      { name: 'Satisfactory', range: '70-79', description: 'Acceptable quality' },
+      { name: 'Needs Improvement', range: '60-69', description: 'Quality concerns' },
+      { name: 'Unsatisfactory', range: '0-59', description: 'Below acceptable standards' },
+    ],
+    additionalFields: ['farmType', 'farmSize', 'certifications'],
+  },
+
+  manufacturing: {
+    defaultCriteria: [
+      { name: 'Quality Control', weight: 30, description: 'Product quality and defect rates' },
+      { name: 'Process Efficiency', weight: 25, description: 'Manufacturing efficiency and waste reduction' },
+      { name: 'Safety Standards', weight: 20, description: 'Workplace safety and compliance' },
+      { name: 'Innovation', weight: 15, description: 'Process improvement and technology adoption' },
+      { name: 'Supply Chain', weight: 10, description: 'Materials management and logistics' },
+    ],
+    gradingScale: [
+      { name: 'World Class', range: '90-100', description: 'Industry-leading excellence' },
+      { name: 'Excellent', range: '80-89', description: 'High-performance operations' },
+      { name: 'Good', range: '70-79', description: 'Meets quality standards' },
+      { name: 'Needs Improvement', range: '60-69', description: 'Performance gaps' },
+      { name: 'Unsatisfactory', range: '0-59', description: 'Critical quality issues' },
+    ],
+    additionalFields: ['productCategory', 'productionVolume', 'qualityStandards'],
+  },
+
+  government: {
+    defaultCriteria: [
+      { name: 'Policy Effectiveness', weight: 30, description: 'Achievement of policy objectives' },
+      { name: 'Public Value', weight: 25, description: 'Benefit to citizens and stakeholders' },
+      { name: 'Efficiency', weight: 20, description: 'Resource utilization and cost-effectiveness' },
+      { name: 'Transparency', weight: 15, description: 'Accountability and public reporting' },
+      { name: 'Compliance', weight: 10, description: 'Legal and regulatory adherence' },
+    ],
+    gradingScale: [
+      { name: 'Excellent', range: '90-100', description: 'Exemplary public service' },
+      { name: 'Good', range: '80-89', description: 'Effective service delivery' },
+      { name: 'Satisfactory', range: '70-79', description: 'Meets basic standards' },
+      { name: 'Needs Improvement', range: '60-69', description: 'Performance gaps' },
+      { name: 'Unsatisfactory', range: '0-59', description: 'Significant deficiencies' },
+    ],
+    additionalFields: ['agencyLevel', 'policyArea', 'stakeholders'],
   },
 }
 
@@ -387,6 +627,206 @@ export const additionalFieldConfigs = {
     label: 'Target Audience',
     type: 'text',
     placeholder: 'e.g., Young Adults, Professionals, General Public',
+    required: false,
+  },
+
+  // Real Estate
+  propertyType: {
+    label: 'Property Type',
+    type: 'select',
+    options: ['Residential', 'Commercial', 'Industrial', 'Land', 'Mixed-Use'],
+    required: true,
+  },
+  propertyLocation: {
+    label: 'Property Location',
+    type: 'text',
+    placeholder: 'e.g., City, State, Neighborhood',
+    required: true,
+  },
+  appraisalPurpose: {
+    label: 'Appraisal Purpose',
+    type: 'select',
+    options: ['Sale', 'Purchase', 'Financing', 'Tax Assessment', 'Legal Dispute', 'Other'],
+    required: true,
+  },
+
+  // Construction
+  projectType: {
+    label: 'Project Type',
+    type: 'select',
+    options: ['Residential Building', 'Commercial Building', 'Infrastructure', 'Renovation', 'Civil Engineering'],
+    required: true,
+  },
+  projectScale: {
+    label: 'Project Scale',
+    type: 'select',
+    options: ['Small (<$1M)', 'Medium ($1M-$10M)', 'Large ($10M-$100M)', 'Mega (>$100M)'],
+    required: true,
+  },
+  safetyStandards: {
+    label: 'Safety Standards',
+    type: 'text',
+    placeholder: 'e.g., OSHA, ISO 45001',
+    required: false,
+  },
+
+  // Hospitality
+  facilityType: {
+    label: 'Facility Type',
+    type: 'select',
+    options: ['Hotel', 'Restaurant', 'Resort', 'Event Venue', 'Cruise', 'Theme Park'],
+    required: true,
+  },
+  serviceLevel: {
+    label: 'Service Level',
+    type: 'select',
+    options: ['Budget', 'Mid-Range', 'Upscale', 'Luxury', 'Ultra-Luxury'],
+    required: true,
+  },
+  guestCapacity: {
+    label: 'Guest Capacity',
+    type: 'text',
+    placeholder: 'e.g., 50 rooms, 200 seats',
+    required: false,
+  },
+
+  // Transportation
+  transportMode: {
+    label: 'Transport Mode',
+    type: 'select',
+    options: ['Road', 'Rail', 'Air', 'Sea', 'Multi-Modal'],
+    required: true,
+  },
+  fleetSize: {
+    label: 'Fleet Size',
+    type: 'text',
+    placeholder: 'e.g., 50 vehicles',
+    required: false,
+  },
+  routeType: {
+    label: 'Route Type',
+    type: 'select',
+    options: ['Local', 'Regional', 'National', 'International'],
+    required: true,
+  },
+
+  // Energy
+  energyType: {
+    label: 'Energy Type',
+    type: 'select',
+    options: ['Solar', 'Wind', 'Hydro', 'Nuclear', 'Fossil Fuel', 'Geothermal', 'Biomass'],
+    required: true,
+  },
+  capacity: {
+    label: 'Capacity',
+    type: 'text',
+    placeholder: 'e.g., 100 MW',
+    required: false,
+  },
+  sustainabilityGoals: {
+    label: 'Sustainability Goals',
+    type: 'text',
+    placeholder: 'e.g., Carbon neutral by 2030',
+    required: false,
+  },
+
+  // Media
+  contentType: {
+    label: 'Content Type',
+    type: 'select',
+    options: ['Film', 'TV Series', 'Documentary', 'Podcast', 'Web Series', 'Live Streaming', 'Animation'],
+    required: true,
+  },
+  distributionPlatform: {
+    label: 'Distribution Platform',
+    type: 'text',
+    placeholder: 'e.g., Netflix, YouTube, Broadcast TV',
+    required: false,
+  },
+  targetDemographic: {
+    label: 'Target Demographic',
+    type: 'text',
+    placeholder: 'e.g., Adults 18-34, Families',
+    required: true,
+  },
+
+  // Non-profit
+  missionArea: {
+    label: 'Mission Area',
+    type: 'text',
+    placeholder: 'e.g., Education, Healthcare, Environment',
+    required: true,
+  },
+  fundingSource: {
+    label: 'Primary Funding Source',
+    type: 'select',
+    options: ['Grants', 'Donations', 'Government', 'Corporate Sponsorship', 'Mixed'],
+    required: false,
+  },
+  impactMetrics: {
+    label: 'Impact Metrics',
+    type: 'textarea',
+    placeholder: 'Key performance indicators for measuring social impact',
+    required: false,
+  },
+
+  // Agriculture
+  farmType: {
+    label: 'Farm Type',
+    type: 'select',
+    options: ['Crop Production', 'Livestock', 'Dairy', 'Aquaculture', 'Organic', 'Greenhouse', 'AgriTech'],
+    required: true,
+  },
+  farmSize: {
+    label: 'Farm Size',
+    type: 'text',
+    placeholder: 'e.g., 100 acres, 50 hectares',
+    required: false,
+  },
+  certifications: {
+    label: 'Certifications',
+    type: 'text',
+    placeholder: 'e.g., Organic, Fair Trade, GAP',
+    required: false,
+  },
+
+  // Manufacturing
+  productCategory: {
+    label: 'Product Category',
+    type: 'text',
+    placeholder: 'e.g., Automotive Parts, Electronics, Textiles',
+    required: true,
+  },
+  productionVolume: {
+    label: 'Production Volume',
+    type: 'select',
+    options: ['Low Volume (<1000/yr)', 'Medium Volume (1K-100K/yr)', 'High Volume (>100K/yr)', 'Mass Production'],
+    required: true,
+  },
+  qualityStandards: {
+    label: 'Quality Standards',
+    type: 'text',
+    placeholder: 'e.g., ISO 9001, Six Sigma, Lean',
+    required: false,
+  },
+
+  // Government
+  agencyLevel: {
+    label: 'Agency Level',
+    type: 'select',
+    options: ['Federal', 'State', 'County', 'Municipal', 'International'],
+    required: true,
+  },
+  policyArea: {
+    label: 'Policy Area',
+    type: 'text',
+    placeholder: 'e.g., Transportation, Education, Public Safety',
+    required: true,
+  },
+  stakeholders: {
+    label: 'Key Stakeholders',
+    type: 'textarea',
+    placeholder: 'List primary stakeholders and affected parties',
     required: false,
   },
 }

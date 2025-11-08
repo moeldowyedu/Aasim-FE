@@ -463,6 +463,326 @@ const AgentMarketplacePage = () => {
       color: 'teal',
       popular: false
     },
+
+    // Real Estate Category
+    {
+      id: 'real-estate-appraisal-judge',
+      name: 'Real Estate Appraisal Analyzer',
+      category: 'Real Estate',
+      icon: 'home_work',
+      description: 'Comprehensive property valuation analysis with market comparison, property condition assessment, location analysis, and regulatory compliance verification',
+      price: 139,
+      features: ['Market Comparison Analysis', 'Property Condition Assessment', 'Location Value Analysis', 'Regulatory Compliance', 'Investment ROI Calculation', 'Market Trends Analysis'],
+      rating: 4.8,
+      reviews: 94,
+      evaluations: 2134,
+      color: 'stone',
+      popular: false
+    },
+
+    // Construction Category
+    {
+      id: 'construction-safety-judge',
+      name: 'Construction Safety Inspector',
+      category: 'Construction',
+      icon: 'engineering',
+      description: 'Rigorous construction site safety evaluation with OSHA compliance checks, hazard identification, safety protocol assessment, and incident prevention planning',
+      price: 149,
+      features: ['OSHA Compliance Verification', 'Hazard Identification & Assessment', 'Safety Protocol Review', 'PPE Requirements Check', 'Emergency Response Planning', 'Incident Risk Scoring'],
+      rating: 4.9,
+      reviews: 78,
+      evaluations: 1876,
+      color: 'yellow',
+      popular: true
+    },
+
+    // Hospitality Category
+    {
+      id: 'hotel-operations-judge',
+      name: 'Hotel Operations Quality Auditor',
+      category: 'Hospitality',
+      icon: 'hotel',
+      description: 'Complete hospitality operations assessment covering service standards, guest experience, cleanliness protocols, staff training, and revenue management optimization',
+      price: 119,
+      features: ['Service Standards Evaluation', 'Guest Experience Analysis', 'Cleanliness & Hygiene Audit', 'Staff Training Assessment', 'Revenue Management Review', 'Brand Consistency Check'],
+      rating: 4.8,
+      reviews: 86,
+      evaluations: 2245,
+      color: 'pink',
+      popular: false
+    },
+
+    // Transportation Category
+    {
+      id: 'fleet-management-judge',
+      name: 'Fleet Management Optimizer',
+      category: 'Transportation',
+      icon: 'local_shipping',
+      description: 'Advanced fleet operations analysis with route optimization, fuel efficiency tracking, maintenance scheduling, driver performance evaluation, and cost reduction strategies',
+      price: 129,
+      features: ['Route Optimization Analysis', 'Fuel Efficiency Tracking', 'Maintenance Schedule Optimization', 'Driver Performance Scoring', 'Cost Reduction Opportunities', 'Compliance & Safety Metrics'],
+      rating: 4.7,
+      reviews: 71,
+      evaluations: 1654,
+      color: 'gray',
+      popular: false
+    },
+
+    // Energy Category
+    {
+      id: 'energy-efficiency-judge',
+      name: 'Energy Efficiency Auditor',
+      category: 'Energy',
+      icon: 'bolt',
+      description: 'Comprehensive energy systems evaluation with efficiency analysis, sustainability assessment, carbon footprint calculation, and renewable energy integration recommendations',
+      price: 159,
+      features: ['Energy Efficiency Analysis', 'Carbon Footprint Assessment', 'Renewable Energy Feasibility', 'Grid Performance Review', 'Sustainability Metrics', 'Cost Savings Opportunities'],
+      rating: 4.9,
+      reviews: 63,
+      evaluations: 1456,
+      color: 'yellow',
+      popular: false
+    },
+
+    // Media & Entertainment Category
+    {
+      id: 'media-content-judge',
+      name: 'Media Content Quality Reviewer',
+      category: 'Media',
+      icon: 'movie',
+      description: 'Professional media content evaluation covering production quality, storytelling effectiveness, technical standards, audience engagement potential, and distribution strategy optimization',
+      price: 109,
+      features: ['Production Quality Assessment', 'Storytelling & Narrative Analysis', 'Technical Standards Compliance', 'Audience Engagement Prediction', 'Platform Optimization', 'Content Licensing Review'],
+      rating: 4.8,
+      reviews: 102,
+      evaluations: 2567,
+      color: 'purple',
+      popular: true
+    },
+
+    // Non-profit Category
+    {
+      id: 'grant-proposal-evaluator',
+      name: 'Grant Application Evaluator',
+      category: 'Non-profit',
+      icon: 'volunteer_activism',
+      description: 'Expert grant proposal assessment with mission alignment verification, impact measurement, budget justification, sustainability planning, and funding probability scoring',
+      price: 99,
+      features: ['Mission Alignment Analysis', 'Impact Measurement Framework', 'Budget Justification Review', 'Sustainability Plan Assessment', 'Stakeholder Engagement Score', 'Funding Probability Prediction'],
+      rating: 4.8,
+      reviews: 89,
+      evaluations: 1987,
+      color: 'rose',
+      popular: false
+    },
+
+    // Agriculture Category
+    {
+      id: 'agricultural-compliance-judge',
+      name: 'Agricultural Compliance Checker',
+      category: 'Agriculture',
+      icon: 'agriculture',
+      description: 'Agricultural operations compliance evaluation including organic certification, food safety standards, environmental regulations, and sustainable farming practices assessment',
+      price: 119,
+      features: ['Organic Certification Review', 'Food Safety Standards (HACCP)', 'Environmental Compliance', 'Sustainable Farming Practices', 'Pesticide Usage Analysis', 'Water Quality Assessment'],
+      rating: 4.7,
+      reviews: 67,
+      evaluations: 1432,
+      color: 'green',
+      popular: false
+    },
+
+    // Manufacturing Category (Process Optimization)
+    {
+      id: 'manufacturing-process-optimizer',
+      name: 'Manufacturing Process Optimizer',
+      category: 'Manufacturing',
+      icon: 'settings',
+      description: 'Advanced manufacturing operations analysis with process efficiency optimization, lean manufacturing assessment, waste reduction strategies, and production capacity planning',
+      price: 139,
+      features: ['Process Flow Analysis', 'Lean Manufacturing Assessment', 'Waste Reduction Strategies', 'Capacity Utilization Review', 'Production Scheduling Optimization', 'OEE Calculation & Improvement'],
+      rating: 4.8,
+      reviews: 74,
+      evaluations: 1789,
+      color: 'slate',
+      popular: false
+    },
+
+    // Government Category
+    {
+      id: 'public-policy-judge',
+      name: 'Public Policy Impact Analyzer',
+      category: 'Government',
+      icon: 'account_balance',
+      description: 'Comprehensive policy evaluation with stakeholder impact analysis, cost-benefit assessment, implementation feasibility, public value measurement, and regulatory compliance review',
+      price: 149,
+      features: ['Stakeholder Impact Analysis', 'Cost-Benefit Assessment', 'Implementation Feasibility Study', 'Public Value Measurement', 'Regulatory Compliance Check', 'Risk & Mitigation Planning'],
+      rating: 4.9,
+      reviews: 56,
+      evaluations: 1234,
+      color: 'indigo',
+      popular: false
+    },
+
+    // Additional Technology Agent
+    {
+      id: 'ecommerce-platform-judge',
+      name: 'E-commerce Platform Analyzer',
+      category: 'Technology',
+      icon: 'shopping_cart',
+      description: 'Complete e-commerce platform evaluation covering UX/UI, payment security, checkout optimization, mobile responsiveness, SEO effectiveness, and conversion rate analysis',
+      price: 129,
+      features: ['UX/UI Quality Assessment', 'Payment Security Audit', 'Checkout Flow Optimization', 'Mobile Responsiveness Check', 'SEO Performance Analysis', 'Conversion Rate Optimization'],
+      rating: 4.8,
+      reviews: 118,
+      evaluations: 2876,
+      color: 'cyan',
+      popular: true
+    },
+
+    // Additional Cybersecurity Agent
+    {
+      id: 'blockchain-smart-contract-judge',
+      name: 'Blockchain Smart Contract Auditor',
+      category: 'Cybersecurity',
+      icon: 'link',
+      description: 'Specialized blockchain and smart contract security audit with vulnerability detection, gas optimization, logic verification, and Web3 security best practices assessment',
+      price: 189,
+      features: ['Smart Contract Vulnerability Scan', 'Gas Optimization Analysis', 'Logic & Functionality Verification', 'Reentrancy Attack Prevention', 'Access Control Review', 'Web3 Security Standards'],
+      rating: 5.0,
+      reviews: 92,
+      evaluations: 1543,
+      color: 'purple',
+      popular: true
+    },
+
+    // Additional Marketing Agent
+    {
+      id: 'social-media-campaign-judge',
+      name: 'Social Media Campaign Optimizer',
+      category: 'Marketing',
+      icon: 'share',
+      description: 'Social media marketing evaluation with engagement analysis, content strategy assessment, influencer collaboration review, platform-specific optimization, and viral potential prediction',
+      price: 99,
+      features: ['Engagement Metrics Analysis', 'Content Strategy Review', 'Influencer ROI Assessment', 'Platform-Specific Optimization', 'Viral Potential Scoring', 'Audience Growth Strategy'],
+      rating: 4.8,
+      reviews: 134,
+      evaluations: 3456,
+      color: 'sky',
+      popular: false
+    },
+
+    // Additional HR Agent
+    {
+      id: 'employee-performance-judge',
+      name: 'Employee Performance Evaluator',
+      category: 'HR & Recruitment',
+      icon: 'trending_up',
+      description: 'Comprehensive employee performance assessment with KPI tracking, competency evaluation, 360-degree feedback analysis, development planning, and retention risk scoring',
+      price: 109,
+      features: ['KPI Achievement Analysis', 'Competency-Based Assessment', '360-Degree Feedback Review', 'Career Development Planning', 'Retention Risk Prediction', 'Performance Improvement Plans'],
+      rating: 4.7,
+      reviews: 96,
+      evaluations: 2234,
+      color: 'emerald',
+      popular: false
+    },
+
+    // Additional Finance Agent
+    {
+      id: 'credit-risk-judge',
+      name: 'Credit Risk Assessment Agent',
+      category: 'Finance',
+      icon: 'credit_score',
+      description: 'Advanced credit risk evaluation with creditworthiness analysis, default probability scoring, collateral assessment, financial health indicators, and lending recommendation',
+      price: 159,
+      features: ['Creditworthiness Analysis', 'Default Probability Scoring', 'Collateral Valuation', 'Financial Health Indicators', 'Payment History Review', 'Lending Risk Recommendation'],
+      rating: 4.9,
+      reviews: 108,
+      evaluations: 2789,
+      color: 'lime',
+      popular: true
+    },
+
+    // Additional Healthcare Agent
+    {
+      id: 'pharmacy-safety-judge',
+      name: 'Pharmacy Safety Validator',
+      category: 'Healthcare',
+      icon: 'medication',
+      description: 'Pharmaceutical operations safety assessment with medication safety protocols, drug interaction checks, dispensing accuracy, storage compliance, and regulatory adherence verification',
+      price: 139,
+      features: ['Medication Safety Protocols', 'Drug Interaction Screening', 'Dispensing Accuracy Review', 'Storage & Handling Compliance', 'Regulatory Standards (FDA/EMA)', 'Patient Safety Assessment'],
+      rating: 4.9,
+      reviews: 71,
+      evaluations: 1654,
+      color: 'blue',
+      popular: false
+    },
+
+    // Additional Legal Agent
+    {
+      id: 'ip-trademark-judge',
+      name: 'Intellectual Property Analyzer',
+      category: 'Legal',
+      icon: 'copyright',
+      description: 'Intellectual property evaluation covering trademark analysis, patent prior art search, copyright infringement detection, IP portfolio assessment, and litigation risk evaluation',
+      price: 169,
+      features: ['Trademark Similarity Analysis', 'Patent Prior Art Search', 'Copyright Infringement Detection', 'IP Portfolio Strength', 'Litigation Risk Assessment', 'International IP Protection'],
+      rating: 4.8,
+      reviews: 84,
+      evaluations: 1876,
+      color: 'indigo',
+      popular: false
+    },
+
+    // Additional Business Agent
+    {
+      id: 'environmental-impact-judge',
+      name: 'Environmental Impact Assessor',
+      category: 'Business',
+      icon: 'eco',
+      description: 'ESG and environmental impact evaluation with carbon footprint analysis, sustainability metrics, regulatory compliance, green certification readiness, and CSR effectiveness assessment',
+      price: 129,
+      features: ['Carbon Footprint Calculation', 'ESG Metrics Assessment', 'Environmental Compliance', 'Sustainability Reporting', 'Green Certification Readiness', 'CSR Program Effectiveness'],
+      rating: 4.8,
+      reviews: 79,
+      evaluations: 1765,
+      color: 'green',
+      popular: false
+    },
+
+    // Additional Education Agent
+    {
+      id: 'scholarship-application-judge',
+      name: 'Scholarship Application Evaluator',
+      category: 'Education',
+      icon: 'school',
+      description: 'Scholarship application assessment with academic merit evaluation, personal statement analysis, extracurricular achievement scoring, financial need verification, and selection recommendation',
+      price: 89,
+      features: ['Academic Merit Evaluation', 'Personal Statement Analysis', 'Extracurricular Achievement Scoring', 'Financial Need Assessment', 'Leadership Potential', 'Selection Recommendation Ranking'],
+      rating: 4.7,
+      reviews: 112,
+      evaluations: 2567,
+      color: 'blue',
+      popular: false
+    },
+
+    // Additional Creative Agent
+    {
+      id: 'brand-identity-judge',
+      name: 'Brand Identity Consistency Checker',
+      category: 'Creative',
+      icon: 'loyalty',
+      description: 'Brand identity evaluation with visual consistency analysis, brand guideline compliance, messaging alignment, cross-platform coherence, and brand equity assessment',
+      price: 99,
+      features: ['Visual Identity Consistency', 'Brand Guideline Compliance', 'Messaging & Tone Alignment', 'Cross-Platform Coherence', 'Brand Equity Assessment', 'Competitor Differentiation'],
+      rating: 4.8,
+      reviews: 97,
+      evaluations: 2198,
+      color: 'rose',
+      popular: false
+    },
   ]
 
   const categories = [
@@ -481,7 +801,16 @@ const AgentMarketplacePage = () => {
     'Academic',
     'Communications',
     'Manufacturing',
-    'Customer Service'
+    'Customer Service',
+    'Real Estate',
+    'Construction',
+    'Hospitality',
+    'Transportation',
+    'Energy',
+    'Media',
+    'Non-profit',
+    'Agriculture',
+    'Government'
   ]
 
   const filteredAgents = agents.filter(agent => {
