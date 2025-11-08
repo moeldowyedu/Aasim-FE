@@ -79,6 +79,16 @@ const HomePage = () => {
     { name: t.events, icon: 'event' },
     { name: t.business, icon: 'business_center' },
     { name: t.creative, icon: 'palette' },
+    { name: t.realEstate, icon: 'home_work' },
+    { name: t.construction, icon: 'engineering' },
+    { name: t.hospitality, icon: 'hotel' },
+    { name: t.transportation, icon: 'local_shipping' },
+    { name: t.energy, icon: 'bolt' },
+    { name: t.media, icon: 'movie' },
+    { name: t.nonprofit, icon: 'volunteer_activism' },
+    { name: t.agriculture, icon: 'agriculture' },
+    { name: t.manufacturing, icon: 'precision_manufacturing' },
+    { name: t.government, icon: 'account_balance' },
   ]
 
   const agents = [
