@@ -8,16 +8,16 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#f0f4ff',
-          100: '#e0e9ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#4F46E5',  // Precision Blue - Main brand color
-          600: '#4338CA',
-          700: '#3730A3',
-          800: '#312e81',
-          900: '#1e1b4b',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6', // Precision Blue
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
         },
         secondary: {
           50: '#f0fdf4',
@@ -25,11 +25,11 @@ export default {
           200: '#bbf7d0',
           300: '#86efac',
           400: '#4ade80',
-          500: '#10B981',  // Action Green - Success states
-          600: '#059669',
-          700: '#047857',
-          800: '#065f46',
-          900: '#064e3b',
+          500: '#22c55e', // Action Green
+          600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
         },
         accent: {
           purple: {
@@ -46,18 +46,18 @@ export default {
             600: '#db2777',
             700: '#be185d',
           },
+          orange: '#f97316',
         },
         glass: {
-          white: 'rgba(255, 255, 255, 0.7)',
-          light: 'rgba(255, 255, 255, 0.5)',
-          medium: 'rgba(255, 255, 255, 0.3)',
-          dark: 'rgba(255, 255, 255, 0.1)',
+          white: 'rgba(255, 255, 255, 0.1)',
+          border: 'rgba(255, 255, 255, 0.2)',
         }
       },
       fontFamily: {
         heading: ['Inter', 'sans-serif'],
         body: ['SF Pro', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         sans: ['SF Pro', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Consolas', 'monospace'],
         arabic: ['Tajawal', 'sans-serif'],
       },
       backdropBlur: {
@@ -68,6 +68,7 @@ export default {
         'slide-up': 'slideUp 0.4s ease-out',
         'slide-down': 'slideDown 0.4s ease-out',
         'scale-in': 'scaleIn 0.3s ease-out',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         fadeIn: {

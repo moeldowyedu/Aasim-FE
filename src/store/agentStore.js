@@ -1,118 +1,186 @@
 import { create } from 'zustand';
 import agentService from '../services/agentService';
 
-const useAgentStore = create((set, get) => ({
-  marketplaceAgents: [],
-  myAgents: [],
-  privateAgents: [],
-  selectedAgent: null,
-  deployments: [],
-  loading: false,
+export const useAgentStore = create((set, get) => ({
+  agents: [],
+  currentAgent: null,
+  agentHistory: [],
+  isLoading: false,
   error: null,
 
-  // Actions
-  setMarketplaceAgents: (agents) => set({ marketplaceAgents: agents }),
-
-  setMyAgents: (agents) => set({ myAgents: agents }),
-
-  setPrivateAgents: (agents) => set({ privateAgents: agents }),
-
-  setSelectedAgent: (agent) => set({ selectedAgent: agent }),
-
-  fetchMarketplaceAgents: async (filters = {}) => {
-    set({ loading: true, error: null });
+  // Fetch all agents
+  fetchAgents: async (params = {}) => {
+    set({ isLoading: true, error: null });
     try {
-      const agents = await agentService.getMarketplaceAgents(filters);
-      set({ marketplaceAgents: agents, loading: false });
+      const agents = await agentService.getAgents(params);
+      set({ agents, isLoading: false });
+      return agents;
     } catch (error) {
-      set({ error: error.message, loading: false });
+      set({
+        error: error.response?.data?.message || 'Failed to fetch agents',
+        isLoading: false,
+      });
+      throw error;
     }
   },
 
-  fetchMyAgents: async () => {
-    set({ loading: true, error: null });
+  // Fetch agent by ID
+  fetchAgent: async (agentId) => {
+    set({ isLoading: true, error: null });
     try {
-      const agents = await agentService.getMyAgents();
-      set({ myAgents: agents, loading: false });
+      const agent = await agentService.getAgent(agentId);
+      set({ currentAgent: agent, isLoading: false });
+      return agent;
     } catch (error) {
-      set({ error: error.message, loading: false });
+      set({
+        error: error.response?.data?.message || 'Failed to fetch agent',
+        isLoading: false,
+      });
+      throw error;
     }
   },
 
-  fetchPrivateAgents: async () => {
-    set({ loading: true, error: null });
+  // Create agent
+  createAgent: async (agentData) => {
+    set({ isLoading: true, error: null });
     try {
-      const agents = await agentService.getPrivateAgents();
-      set({ privateAgents: agents, loading: false });
+      const agent = await agentService.createAgent(agentData);
+      set((state) => ({
+        agents: [...state.agents, agent],
+        currentAgent: agent,
+        isLoading: false,
+      }));
+      return agent;
     } catch (error) {
-      set({ error: error.message, loading: false });
+      set({
+        error: error.response?.data?.message || 'Failed to create agent',
+        isLoading: false,
+      });
+      throw error;
     }
   },
 
-  deployAgent: async (agentId, deploymentConfig) => {
-    set({ loading: true, error: null });
+  // Update agent
+  updateAgent: async (agentId, agentData) => {
+    set({ isLoading: true, error: null });
     try {
-      const result = await agentService.deployAgent(agentId, deploymentConfig);
-      await get().fetchMyAgents(); // Refresh deployed agents
-      set({ loading: false });
+      const agent = await agentService.updateAgent(agentId, agentData);
+      set((state) => ({
+        agents: state.agents.map((a) => (a.id === agentId ? agent : a)),
+        currentAgent:
+          state.currentAgent?.id === agentId ? agent : state.currentAgent,
+        isLoading: false,
+      }));
+      return agent;
+    } catch (error) {
+      set({
+        error: error.response?.data?.message || 'Failed to update agent',
+        isLoading: false,
+      });
+      throw error;
+    }
+  },
+
+  // Delete agent
+  deleteAgent: async (agentId) => {
+    set({ isLoading: true, error: null });
+    try {
+      await agentService.deleteAgent(agentId);
+      set((state) => ({
+        agents: state.agents.filter((a) => a.id !== agentId),
+        currentAgent:
+          state.currentAgent?.id === agentId ? null : state.currentAgent,
+        isLoading: false,
+      }));
+    } catch (error) {
+      set({
+        error: error.response?.data?.message || 'Failed to delete agent',
+        isLoading: false,
+      });
+      throw error;
+    }
+  },
+
+  // Run agent
+  runAgent: async (agentId, inputData) => {
+    set({ isLoading: true, error: null });
+    try {
+      const result = await agentService.runAgent(agentId, inputData);
+      set({ isLoading: false });
       return result;
     } catch (error) {
-      set({ error: error.message, loading: false });
+      set({
+        error: error.response?.data?.message || 'Failed to run agent',
+        isLoading: false,
+      });
       throw error;
     }
   },
 
-  undeployAgent: async (deploymentId) => {
-    set({ loading: true, error: null });
+  // Fetch agent history
+  fetchAgentHistory: async (agentId, params = {}) => {
+    set({ isLoading: true, error: null });
     try {
-      await agentService.undeployAgent(deploymentId);
-      await get().fetchMyAgents(); // Refresh deployed agents
-      set({ loading: false });
+      const history = await agentService.getAgentHistory(agentId, params);
+      set({ agentHistory: history, isLoading: false });
+      return history;
     } catch (error) {
-      set({ error: error.message, loading: false });
+      set({
+        error: error.response?.data?.message || 'Failed to fetch history',
+        isLoading: false,
+      });
       throw error;
     }
   },
 
-  createPrivateAgent: async (agentData) => {
-    set({ loading: true, error: null });
+  // Update agent status
+  updateAgentStatus: async (agentId, status) => {
+    set({ isLoading: true, error: null });
     try {
-      const result = await agentService.createPrivateAgent(agentData);
-      await get().fetchPrivateAgents(); // Refresh private agents
-      set({ loading: false });
-      return result;
+      const agent = await agentService.updateAgentStatus(agentId, status);
+      set((state) => ({
+        agents: state.agents.map((a) => (a.id === agentId ? agent : a)),
+        currentAgent:
+          state.currentAgent?.id === agentId ? agent : state.currentAgent,
+        isLoading: false,
+      }));
+      return agent;
     } catch (error) {
-      set({ error: error.message, loading: false });
+      set({
+        error: error.response?.data?.message || 'Failed to update status',
+        isLoading: false,
+      });
       throw error;
     }
   },
 
-  updatePrivateAgent: async (agentId, agentData) => {
-    set({ loading: true, error: null });
+  // Publish agent
+  publishAgent: async (agentId, publishData) => {
+    set({ isLoading: true, error: null });
     try {
-      const result = await agentService.updatePrivateAgent(agentId, agentData);
-      await get().fetchPrivateAgents(); // Refresh private agents
-      set({ loading: false });
-      return result;
+      const agent = await agentService.publishToMarketplace(
+        agentId,
+        publishData
+      );
+      set((state) => ({
+        agents: state.agents.map((a) => (a.id === agentId ? agent : a)),
+        currentAgent:
+          state.currentAgent?.id === agentId ? agent : state.currentAgent,
+        isLoading: false,
+      }));
+      return agent;
     } catch (error) {
-      set({ error: error.message, loading: false });
+      set({
+        error: error.response?.data?.message || 'Failed to publish agent',
+        isLoading: false,
+      });
       throw error;
     }
   },
 
-  deletePrivateAgent: async (agentId) => {
-    set({ loading: true, error: null });
-    try {
-      await agentService.deletePrivateAgent(agentId);
-      await get().fetchPrivateAgents(); // Refresh private agents
-      set({ loading: false });
-    } catch (error) {
-      set({ error: error.message, loading: false });
-      throw error;
-    }
-  },
+  // Clear current agent
+  clearCurrentAgent: () => set({ currentAgent: null }),
 
-  clearError: () => set({ error: null })
+  // Clear error
+  clearError: () => set({ error: null }),
 }));
-
-export default useAgentStore;

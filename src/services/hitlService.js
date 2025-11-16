@@ -1,88 +1,89 @@
 import api from './api';
 
 const hitlService = {
-  // Oversight Modes
-  async getOversightModes() {
-    const response = await api.get('/hitl/modes');
-    return response.data;
-  },
-
-  async setOversightMode(modeId, config) {
-    const response = await api.post('/hitl/modes', { modeId, config });
-    return response.data;
-  },
-
-  async getOversightConfig() {
-    const response = await api.get('/hitl/config');
-    return response.data;
-  },
-
-  // Approval Queue
-  async getApprovalQueue(params = {}) {
+  // Get approval queue
+  getApprovalQueue: async (params = {}) => {
     const response = await api.get('/hitl/approvals', { params });
     return response.data;
   },
 
-  async approveItem(itemId, feedback = {}) {
-    const response = await api.post(`/hitl/approvals/${itemId}/approve`, feedback);
+  // Get approval by ID
+  getApproval: async (approvalId) => {
+    const response = await api.get(`/hitl/approvals/${approvalId}`);
     return response.data;
   },
 
-  async rejectItem(itemId, reason) {
-    const response = await api.post(`/hitl/approvals/${itemId}/reject`, { reason });
-    return response.data;
-  },
-
-  async bulkApprove(itemIds) {
-    const response = await api.post('/hitl/approvals/bulk-approve', { itemIds });
-    return response.data;
-  },
-
-  async bulkReject(itemIds, reason) {
-    const response = await api.post('/hitl/approvals/bulk-reject', { itemIds, reason });
-    return response.data;
-  },
-
-  // Workflows
-  async getWorkflows(params = {}) {
-    const response = await api.get('/hitl/workflows', { params });
-    return response.data;
-  },
-
-  async createWorkflow(workflowData) {
-    const response = await api.post('/hitl/workflows', workflowData);
-    return response.data;
-  },
-
-  async updateWorkflow(workflowId, workflowData) {
-    const response = await api.put(`/hitl/workflows/${workflowId}`, workflowData);
-    return response.data;
-  },
-
-  async deleteWorkflow(workflowId) {
-    const response = await api.delete(`/hitl/workflows/${workflowId}`);
-    return response.data;
-  },
-
-  // Activity Logs
-  async getActivityLogs(params = {}) {
-    const response = await api.get('/hitl/activity-logs', { params });
-    return response.data;
-  },
-
-  async exportActivityLogs(params = {}) {
-    const response = await api.get('/hitl/activity-logs/export', {
-      params,
-      responseType: 'blob'
+  // Approve execution
+  approve: async (approvalId, notes = '') => {
+    const response = await api.post(`/hitl/approvals/${approvalId}/approve`, {
+      notes,
     });
     return response.data;
   },
 
-  // Statistics
-  async getHITLStats(params = {}) {
+  // Reject execution
+  reject: async (approvalId, reason) => {
+    const response = await api.post(`/hitl/approvals/${approvalId}/reject`, {
+      reason,
+    });
+    return response.data;
+  },
+
+  // Request changes
+  requestChanges: async (approvalId, changes) => {
+    const response = await api.post(`/hitl/approvals/${approvalId}/request-changes`, {
+      changes,
+    });
+    return response.data;
+  },
+
+  // Get activity log
+  getActivityLog: async (params = {}) => {
+    const response = await api.get('/hitl/activity-log', { params });
+    return response.data;
+  },
+
+  // Get HITL settings
+  getHITLSettings: async () => {
+    const response = await api.get('/hitl/settings');
+    return response.data;
+  },
+
+  // Update HITL settings
+  updateHITLSettings: async (settings) => {
+    const response = await api.put('/hitl/settings', settings);
+    return response.data;
+  },
+
+  // Get approval routing rules
+  getRoutingRules: async () => {
+    const response = await api.get('/hitl/routing-rules');
+    return response.data;
+  },
+
+  // Create routing rule
+  createRoutingRule: async (ruleData) => {
+    const response = await api.post('/hitl/routing-rules', ruleData);
+    return response.data;
+  },
+
+  // Update routing rule
+  updateRoutingRule: async (ruleId, ruleData) => {
+    const response = await api.put(`/hitl/routing-rules/${ruleId}`, ruleData);
+    return response.data;
+  },
+
+  // Delete routing rule
+  deleteRoutingRule: async (ruleId) => {
+    const response = await api.delete(`/hitl/routing-rules/${ruleId}`);
+    return response.data;
+  },
+
+  // Get approval stats
+  getApprovalStats: async (params = {}) => {
     const response = await api.get('/hitl/stats', { params });
     return response.data;
-  }
+  },
 };
 
 export default hitlService;

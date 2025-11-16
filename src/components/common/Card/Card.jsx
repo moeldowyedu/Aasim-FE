@@ -4,32 +4,28 @@ const Card = ({
   children,
   className = '',
   padding = 'md',
-  shadow = true,
   hover = false,
-  onClick
+  onClick,
+  ...props
 }) => {
-  const baseStyles = 'bg-white rounded-lg border border-gray-200';
-
   const paddings = {
     none: '',
-    sm: 'p-3',
+    sm: 'p-4',
     md: 'p-6',
-    lg: 'p-8'
+    lg: 'p-8',
   };
-
-  const shadowStyles = shadow ? 'shadow-sm' : '';
-  const hoverStyles = hover ? 'hover:shadow-md transition-shadow duration-200 cursor-pointer' : '';
 
   return (
     <div
       className={clsx(
-        baseStyles,
+        'bg-white rounded-xl shadow-md border border-gray-100',
         paddings[padding],
-        shadowStyles,
-        hoverStyles,
+        hover && 'hover:shadow-lg transition-shadow duration-200 cursor-pointer',
+        onClick && 'cursor-pointer',
         className
       )}
       onClick={onClick}
+      {...props}
     >
       {children}
     </div>

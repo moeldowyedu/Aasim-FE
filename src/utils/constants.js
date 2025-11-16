@@ -1,266 +1,313 @@
-// Platform Branding & Constants for Aasim AI
-
+// Platform Information
 export const PLATFORM = {
   name: 'Aasim AI',
   tagline: 'AI Precision. Human Control.',
-  description: 'Enterprise-Ready Multimodal Agentic AI Platform',
+  description: 'Build, Deploy, and Monetize Precision AI Agents',
   version: '2.0.0',
 };
 
+// Precision AI Engines
 export const ENGINES = [
   {
     id: 'vision',
     name: 'Precision Vision Engine',
-    shortName: 'Vision Engine',
-    icon: '👁️',
-    iconName: 'image',
-    description: 'Advanced image and video analysis with custom rubrics',
-    color: 'bg-blue-100',
-    colorAccent: 'text-blue-600',
-    category: 'Vision',
+    icon: 'eye',
+    description: 'Image analysis, object detection, OCR',
+    color: '#3b82f6',
+    category: 'Visual',
+    inputTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'],
+    capabilities: ['object-detection', 'ocr', 'image-classification', 'face-recognition'],
   },
   {
     id: 'audio',
     name: 'Precision Audio Engine',
-    shortName: 'Audio Engine',
-    icon: '🎵',
-    iconName: 'mic',
-    description: 'Audio quality, transcription, and compliance evaluation',
-    color: 'bg-purple-100',
-    colorAccent: 'text-purple-600',
+    icon: 'mic',
+    description: 'Speech-to-text, audio analysis, transcription',
+    color: '#8b5cf6',
     category: 'Audio',
+    inputTypes: ['audio/mp3', 'audio/wav', 'audio/ogg'],
+    capabilities: ['transcription', 'speaker-identification', 'sentiment-analysis'],
   },
   {
     id: 'text',
     name: 'Precision Text Engine',
-    shortName: 'Text Engine',
-    icon: '📝',
-    iconName: 'text_fields',
-    description: 'NLP-powered text analysis with custom criteria',
-    color: 'bg-green-100',
-    colorAccent: 'text-green-600',
-    category: 'Text',
+    icon: 'type',
+    description: 'NLP, sentiment analysis, entity extraction',
+    color: '#06b6d4',
+    category: 'Language',
+    inputTypes: ['text/plain'],
+    capabilities: ['sentiment', 'entities', 'summarization', 'translation'],
   },
   {
     id: 'code',
     name: 'Precision Code Engine',
-    shortName: 'Code Engine',
-    icon: '💻',
-    iconName: 'code',
-    description: 'Automated code review and quality assessment',
-    color: 'bg-yellow-100',
-    colorAccent: 'text-yellow-600',
-    category: 'Code',
+    icon: 'code',
+    description: 'Code analysis, bug detection, optimization',
+    color: '#14b8a6',
+    category: 'Development',
+    inputTypes: ['text/plain'],
+    capabilities: ['syntax-check', 'bug-detection', 'optimization', 'documentation'],
   },
   {
     id: 'document',
     name: 'Precision Document Engine',
-    shortName: 'Document Engine',
-    icon: '📄',
-    iconName: 'description',
-    description: 'PDF, DOCX analysis and compliance checking',
-    color: 'bg-red-100',
-    colorAccent: 'text-red-600',
-    category: 'Document',
+    icon: 'file-text',
+    description: 'PDF/DOCX processing, metadata extraction',
+    color: '#f59e0b',
+    category: 'Documents',
+    inputTypes: ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+    capabilities: ['text-extraction', 'metadata', 'table-detection', 'form-filling'],
   },
   {
     id: 'data',
     name: 'Precision Data Engine',
-    shortName: 'Data Engine',
-    icon: '📊',
-    iconName: 'analytics',
-    description: 'Structured data validation and quality checks',
-    color: 'bg-indigo-100',
-    colorAccent: 'text-indigo-600',
+    icon: 'database',
+    description: 'CSV/Excel analysis, data validation',
+    color: '#10b981',
     category: 'Data',
+    inputTypes: ['text/csv', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
+    capabilities: ['schema-detection', 'validation', 'transformation', 'insights'],
   },
   {
     id: 'web',
     name: 'Precision Web Engine',
-    shortName: 'Web Engine',
-    icon: '🌐',
-    iconName: 'language',
-    description: 'Web scraping validation and content evaluation',
-    color: 'bg-pink-100',
-    colorAccent: 'text-pink-600',
+    icon: 'globe',
+    description: 'Web scraping, content extraction, monitoring',
+    color: '#ec4899',
     category: 'Web',
+    inputTypes: ['text/html', 'url'],
+    capabilities: ['scraping', 'monitoring', 'seo-analysis', 'screenshot'],
   },
 ];
 
+// HITL Oversight Modes
 export const HITL_MODES = [
   {
-    id: 'full-auto',
-    name: 'Full Auto',
-    fullName: 'Fully AI-Driven',
-    description: 'Complete automation with no human oversight',
-    icon: '⚡',
-    color: 'bg-green-500',
-    badge: 'Fastest',
-    riskLevel: 'low',
+    id: 'fully-ai',
+    name: 'Fully AI-Driven',
+    description: 'Agent operates autonomously without human intervention',
+    icon: 'zap',
+    color: 'blue',
+    useCase: 'High-volume, low-risk tasks',
   },
   {
-    id: 'spot-check',
-    name: 'Spot Check',
-    fullName: 'Spot Check Sampling',
-    description: 'Random sampling for quality assurance',
-    icon: '🎯',
-    color: 'bg-blue-500',
-    badge: 'Balanced',
-    riskLevel: 'low-medium',
+    id: 'hitl',
+    name: 'Human-in-the-Loop (HITL)',
+    description: 'Human approval required before execution',
+    icon: 'user-check',
+    color: 'green',
+    useCase: 'Critical decisions, compliance requirements',
   },
   {
-    id: 'threshold',
-    name: 'Threshold',
-    fullName: 'Confidence Threshold',
-    description: 'Review when confidence falls below threshold',
-    icon: '📊',
-    color: 'bg-yellow-500',
-    badge: 'Smart',
-    riskLevel: 'medium',
+    id: 'standby',
+    name: 'Human-on-Standby',
+    description: 'AI executes, human monitors and can intervene',
+    icon: 'eye',
+    color: 'yellow',
+    useCase: 'Moderate risk, periodic oversight',
   },
   {
-    id: 'pre-approval',
-    name: 'Pre-Approval',
-    fullName: 'Pre-Approval Required',
-    description: 'Approve all actions before execution',
-    icon: '✋',
-    color: 'bg-orange-500',
-    badge: 'Safe',
-    riskLevel: 'low',
+    id: 'in-charge',
+    name: 'Human-in-Charge',
+    description: 'Human initiates and controls each step',
+    icon: 'shield',
+    color: 'red',
+    useCase: 'High-stakes, regulated environments',
   },
   {
-    id: 'co-pilot',
-    name: 'Co-Pilot',
-    fullName: 'Human-AI Co-Pilot',
-    description: 'Real-time collaboration with AI',
-    icon: '🤝',
-    color: 'bg-purple-500',
-    badge: 'Interactive',
-    riskLevel: 'very-low',
+    id: 'hybrid',
+    name: 'Hybrid Oversight',
+    description: 'Mix of automated and manual steps',
+    icon: 'layers',
+    color: 'purple',
+    useCase: 'Complex workflows with varying risk levels',
   },
 ];
 
+// Industries Served
 export const INDUSTRIES = [
-  'Healthcare',
-  'Education',
-  'HR & Recruitment',
-  'Legal',
-  'Real Estate',
-  'Technology',
-  'Finance & Banking',
-  'Insurance',
-  'Customer Service',
-  'Logistics',
-  'Public Sector',
-  'Manufacturing',
-  'Retail & E-commerce',
-  'Construction',
-  'Energy',
-  'Marketing & Advertising',
+  { id: 'healthcare', name: 'Healthcare', icon: 'heart' },
+  { id: 'education', name: 'Education', icon: 'graduation-cap' },
+  { id: 'hr', name: 'HR & Recruitment', icon: 'users' },
+  { id: 'legal', name: 'Legal', icon: 'scale' },
+  { id: 'real-estate', name: 'Real Estate', icon: 'home' },
+  { id: 'technology', name: 'Technology', icon: 'cpu' },
+  { id: 'finance', name: 'Finance & Banking', icon: 'dollar-sign' },
+  { id: 'insurance', name: 'Insurance', icon: 'shield' },
+  { id: 'customer-service', name: 'Customer Service', icon: 'headphones' },
+  { id: 'logistics', name: 'Logistics', icon: 'truck' },
+  { id: 'public-sector', name: 'Public Sector', icon: 'building' },
+  { id: 'manufacturing', name: 'Manufacturing', icon: 'factory' },
+  { id: 'retail', name: 'Retail & E-commerce', icon: 'shopping-cart' },
+  { id: 'construction', name: 'Construction', icon: 'hard-hat' },
+  { id: 'energy', name: 'Energy', icon: 'zap' },
+  { id: 'marketing', name: 'Marketing & Advertising', icon: 'megaphone' },
 ];
 
-export const AGENT_CATEGORIES = [
-  'Support',
-  'Analysis',
-  'Analytics',
-  'Automation',
-  'Communication',
-  'Data Processing',
-  'Document Management',
-  'Finance',
-  'HR',
-  'Legal',
-  'Marketing',
-  'Moderation',
-  'Sales',
-  'Security',
-];
-
-export const PRICING_TIERS = [
-  { value: 'free', label: 'Free', min: 0, max: 0 },
-  { value: 'under-100', label: 'Under $100', min: 1, max: 99 },
-  { value: '100-300', label: '$100 - $300', min: 100, max: 300 },
-  { value: 'over-300', label: 'Over $300', min: 301, max: Infinity },
-];
-
-export const USER_ROLES = [
-  { value: 'viewer', label: 'Viewer', permissions: ['read'] },
-  { value: 'member', label: 'Member', permissions: ['read', 'write'] },
-  { value: 'admin', label: 'Admin', permissions: ['read', 'write', 'delete', 'manage'] },
-  { value: 'owner', label: 'Owner', permissions: ['read', 'write', 'delete', 'manage', 'billing'] },
-];
-
-export const SUBSCRIPTION_PLANS = [
+// Subscription Plans
+export const PLANS = [
   {
     id: 'starter',
     name: 'Starter',
-    price: 0,
-    features: ['5 Users', '10 GB Storage', 'Basic Support', '1 Agent Deployment'],
+    price: 49,
+    interval: 'month',
+    features: [
+      '5 Precision AI Agents',
+      'Access to all 7 Engines',
+      'Basic rubrics',
+      '1,000 agent runs/month',
+      'Community support',
+      'Webhook integration',
+    ],
+    limits: {
+      maxAgents: 5,
+      maxRuns: 1000,
+      maxWorkflows: 3,
+      maxSchedules: 10,
+    },
   },
   {
-    id: 'professional',
-    name: 'Professional',
-    price: 49,
-    features: ['25 Users', '100 GB Storage', 'Priority Support', '10 Agent Deployments', 'Custom Rubrics'],
+    id: 'pro',
+    name: 'Pro',
+    price: 199,
+    interval: 'month',
+    popular: true,
+    features: [
+      'Unlimited Precision AI Agents',
+      'Custom rubrics',
+      '10,000 agent runs/month',
+      'Priority support',
+      'API + SDK access',
+      'Multi-agent orchestration',
+      'Publish to marketplace',
+      '70% revenue share',
+    ],
+    limits: {
+      maxAgents: -1, // unlimited
+      maxRuns: 10000,
+      maxWorkflows: 20,
+      maxSchedules: 100,
+    },
   },
   {
     id: 'enterprise',
     name: 'Enterprise',
-    price: 199,
-    features: ['Unlimited Users', '1 TB Storage', '24/7 Support', 'Unlimited Agents', 'Custom Rubrics', 'SSO', 'Advanced Analytics'],
+    price: 'Custom',
+    features: [
+      'Everything in Pro',
+      'Unlimited agent runs',
+      'Dedicated support',
+      'SLA guarantees',
+      'Custom integrations',
+      'Multi-tenant management',
+      'Advanced HITL workflows',
+      'White-label options',
+    ],
+    limits: {
+      maxAgents: -1,
+      maxRuns: -1,
+      maxWorkflows: -1,
+      maxSchedules: -1,
+    },
   },
 ];
 
-export const STATUS_VARIANTS = {
-  active: 'success',
-  inactive: 'default',
-  maintenance: 'warning',
-  error: 'danger',
-  pending: 'info',
-};
-
-export const PRIORITY_VARIANTS = {
-  low: 'default',
-  medium: 'warning',
-  high: 'danger',
-  critical: 'danger',
-};
-
-export const FILE_SIZE_LIMITS = {
-  image: 10 * 1024 * 1024, // 10MB
-  video: 500 * 1024 * 1024, // 500MB
-  audio: 50 * 1024 * 1024, // 50MB
-  document: 25 * 1024 * 1024, // 25MB
-  data: 100 * 1024 * 1024, // 100MB
-};
-
-export const SUPPORTED_FILE_TYPES = {
-  image: ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'],
-  video: ['.mp4', '.mov', '.avi', '.mkv', '.webm'],
-  audio: ['.mp3', '.wav', '.ogg', '.m4a', '.flac'],
-  document: ['.pdf', '.doc', '.docx', '.txt', '.rtf'],
-  data: ['.csv', '.json', '.xml', '.xlsx', '.xls'],
-  code: ['.js', '.jsx', '.ts', '.tsx', '.py', '.java', '.cpp', '.c', '.go', '.rs'],
-};
-
-export const NOTIFICATION_TYPES = {
-  success: { icon: '✓', color: 'green' },
-  error: { icon: '✗', color: 'red' },
-  warning: { icon: '⚠', color: 'yellow' },
-  info: { icon: 'ℹ', color: 'blue' },
-};
-
-export const REGIONS = [
-  { value: 'us-east-1', label: 'US East (N. Virginia)', flag: '🇺🇸' },
-  { value: 'us-west-2', label: 'US West (Oregon)', flag: '🇺🇸' },
-  { value: 'eu-west-1', label: 'EU (Ireland)', flag: '🇪🇺' },
-  { value: 'eu-central-1', label: 'EU (Frankfurt)', flag: '🇪🇺' },
-  { value: 'ap-southeast-1', label: 'Asia Pacific (Singapore)', flag: '🌏' },
-  { value: 'ap-northeast-1', label: 'Asia Pacific (Tokyo)', flag: '🇯🇵' },
+// Agent Execution Modes
+export const EXECUTION_MODES = [
+  {
+    id: 'once',
+    name: 'Run Once',
+    description: 'Execute agent immediately with manual trigger',
+    icon: 'play',
+  },
+  {
+    id: 'schedule',
+    name: 'Schedule',
+    description: 'Run agent on a recurring schedule (cron)',
+    icon: 'calendar',
+  },
+  {
+    id: 'orchestrate',
+    name: 'Orchestrate',
+    description: 'Chain multiple agents in a workflow',
+    icon: 'git-branch',
+  },
 ];
 
-export const ENVIRONMENTS = [
-  { value: 'development', label: 'Development', color: 'blue' },
-  { value: 'staging', label: 'Staging', color: 'yellow' },
-  { value: 'production', label: 'Production', color: 'green' },
+// Integration Types
+export const INTEGRATION_TYPES = [
+  {
+    id: 'webhook',
+    name: 'Webhooks',
+    description: 'HTTP callbacks for real-time events',
+    icon: 'webhook',
+    docsUrl: '/docs/integrations/webhooks',
+  },
+  {
+    id: 'rest-api',
+    name: 'REST API',
+    description: 'RESTful API for agent execution',
+    icon: 'api',
+    docsUrl: '/docs/integrations/rest-api',
+  },
+  {
+    id: 'sdk-js',
+    name: 'JavaScript SDK',
+    description: 'NPM package for Node.js/Browser',
+    icon: 'package',
+    docsUrl: '/docs/integrations/javascript-sdk',
+  },
+  {
+    id: 'sdk-python',
+    name: 'Python SDK',
+    description: 'PyPI package for Python apps',
+    icon: 'package',
+    docsUrl: '/docs/integrations/python-sdk',
+  },
+  {
+    id: 'n8n',
+    name: 'n8n Integration',
+    description: 'Custom nodes for n8n workflows',
+    icon: 'workflow',
+    docsUrl: '/docs/integrations/n8n',
+  },
 ];
+
+// Revenue Share
+export const REVENUE_SHARE = {
+  seller: 70,
+  platform: 30,
+};
+
+// Agent Status
+export const AGENT_STATUS = {
+  DRAFT: 'draft',
+  ACTIVE: 'active',
+  INACTIVE: 'inactive',
+  ARCHIVED: 'archived',
+};
+
+// Marketplace Categories
+export const MARKETPLACE_CATEGORIES = [
+  { id: 'all', name: 'All Agents' },
+  { id: 'featured', name: 'Featured' },
+  { id: 'popular', name: 'Most Popular' },
+  { id: 'new', name: 'New Arrivals' },
+  { id: 'free', name: 'Free Agents' },
+  ...INDUSTRIES,
+];
+
+// Rubric Types
+export const RUBRIC_TYPES = {
+  DEFAULT: 'default',
+  CUSTOM: 'custom',
+};
+
+// Workflow Node Types
+export const WORKFLOW_NODE_TYPES = {
+  AGENT: 'agent',
+  CONDITION: 'condition',
+  DELAY: 'delay',
+  WEBHOOK: 'webhook',
+  TRANSFORM: 'transform',
+};
