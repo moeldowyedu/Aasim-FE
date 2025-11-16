@@ -35,6 +35,7 @@ import CodeEnginePage from './pages/Engines/CodeEnginePage'
 import DocumentEnginePage from './pages/Engines/DocumentEnginePage'
 import DataEnginePage from './pages/Engines/DataEnginePage'
 import WebEnginePage from './pages/Engines/WebEnginePage'
+import BillingPage from './pages/Billing/BillingPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProtectedRoute from './router/ProtectedRoute'
 
@@ -129,6 +130,14 @@ function App() {
           element={
             <ProtectedRoute>
               <NotificationsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/billing"
+          element={
+            <ProtectedRoute>
+              <BillingPage />
             </ProtectedRoute>
           }
         />
