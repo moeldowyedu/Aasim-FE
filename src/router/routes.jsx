@@ -1,0 +1,391 @@
+import { Routes, Route, Navigate } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
+
+// Auth Pages
+import LoginPage from '../pages/Auth/LoginPage';
+import RegisterPage from '../pages/Auth/RegisterPage';
+import ForgotPasswordPage from '../pages/Auth/ForgotPasswordPage';
+import ResetPasswordPage from '../pages/Auth/ResetPasswordPage';
+
+// Main Pages
+import HomePage from '../pages/Home/HomePage';
+import DashboardPage from '../pages/Dashboard/DashboardPage';
+
+// Engine Pages
+import EnginesOverviewPage from '../pages/Engines/EnginesOverviewPage';
+import VisionEnginePage from '../pages/Engines/VisionEnginePage';
+import AudioEnginePage from '../pages/Engines/AudioEnginePage';
+import TextEnginePage from '../pages/Engines/TextEnginePage';
+import CodeEnginePage from '../pages/Engines/CodeEnginePage';
+import DocumentEnginePage from '../pages/Engines/DocumentEnginePage';
+import DataEnginePage from '../pages/Engines/DataEnginePage';
+import WebEnginePage from '../pages/Engines/WebEnginePage';
+
+// AgentX Pages
+import MarketplacePage from '../pages/AgentX/MarketplacePage';
+import AgentBuilderPage from '../pages/AgentX/AgentBuilderPage';
+import MyAgentsPage from '../pages/AgentX/MyAgentsPage';
+
+// HITL Pages
+import OversightModesPage from '../pages/HITL/OversightModesPage';
+import ApprovalWorkflowsPage from '../pages/HITL/ApprovalWorkflowsPage';
+import ActivityLogsPage from '../pages/HITL/ActivityLogsPage';
+
+// Settings Pages
+import TenantSettingsPage from '../pages/Settings/TenantSettingsPage';
+
+// Legacy Pages (to be migrated)
+import AgentSelectionPage from '../pages/Submissions/AgentSelectionPage';
+import CreateSubmissionForm from '../pages/Submissions/CreateSubmissionForm';
+import SubmissionsListPage from '../pages/Submissions/SubmissionsListPage';
+import SubmissionDetailsPage from '../pages/Submissions/SubmissionDetailsPage';
+import EvaluationResultsPage from '../pages/Evaluations/EvaluationResultsPage';
+import ReportViewerPage from '../pages/Evaluations/ReportViewerPage';
+import CriteriaManagementPage from '../pages/Evaluations/CriteriaManagementPage';
+import ProfilePage from '../pages/Profile/ProfilePage';
+import NotificationsPage from '../pages/Profile/NotificationsPage';
+import AdminDashboardPage from '../pages/Admin/AdminDashboardPage';
+import UserManagementPage from '../pages/Admin/UserManagementPage';
+import AnalyticsPage from '../pages/Admin/AnalyticsPage';
+import N8nWebhookManagementPage from '../pages/Admin/N8nWebhookManagementPage';
+import AgentMarketplacePage from '../pages/Marketplace/AgentMarketplacePage';
+import MultiAgentOrchestratorPage from '../pages/Orchestrator/MultiAgentOrchestratorPage';
+import AgentSchedulerPage from '../pages/Scheduler/AgentSchedulerPage';
+import AgentConfigurationPage from '../pages/Agent/AgentConfigurationPage';
+import AgentIntegrationPage from '../pages/Integration/AgentIntegrationPage';
+import NotFoundPage from '../pages/NotFoundPage';
+
+const AppRoutes = () => {
+  return (
+    <Routes>
+      {/* Public Routes */}
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+
+      {/* Dashboard */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Engines Routes */}
+      <Route
+        path="/engines"
+        element={
+          <ProtectedRoute>
+            <EnginesOverviewPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/vision"
+        element={
+          <ProtectedRoute>
+            <VisionEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/audio"
+        element={
+          <ProtectedRoute>
+            <AudioEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/text"
+        element={
+          <ProtectedRoute>
+            <TextEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/code"
+        element={
+          <ProtectedRoute>
+            <CodeEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/document"
+        element={
+          <ProtectedRoute>
+            <DocumentEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/data"
+        element={
+          <ProtectedRoute>
+            <DataEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/web"
+        element={
+          <ProtectedRoute>
+            <WebEnginePage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* AgentX Hub Routes */}
+      <Route
+        path="/agentx"
+        element={
+          <ProtectedRoute>
+            <MarketplacePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/agentx/marketplace"
+        element={
+          <ProtectedRoute>
+            <MarketplacePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/agentx/my-agents"
+        element={
+          <ProtectedRoute>
+            <MyAgentsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/agentx/builder"
+        element={
+          <ProtectedRoute>
+            <AgentBuilderPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* HITL Routes */}
+      <Route
+        path="/hitl"
+        element={
+          <ProtectedRoute>
+            <OversightModesPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/hitl/modes"
+        element={
+          <ProtectedRoute>
+            <OversightModesPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/hitl/approvals"
+        element={
+          <ProtectedRoute>
+            <ApprovalWorkflowsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/hitl/logs"
+        element={
+          <ProtectedRoute>
+            <ActivityLogsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Settings Routes */}
+      <Route
+        path="/settings"
+        element={
+          <ProtectedRoute>
+            <TenantSettingsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/settings/tenant"
+        element={
+          <ProtectedRoute>
+            <TenantSettingsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Legacy Routes - Submissions */}
+      <Route
+        path="/agent-select"
+        element={
+          <ProtectedRoute>
+            <AgentSelectionPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/submissions"
+        element={
+          <ProtectedRoute>
+            <SubmissionsListPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/submissions/create"
+        element={
+          <ProtectedRoute>
+            <CreateSubmissionForm />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/submissions/:id"
+        element={
+          <ProtectedRoute>
+            <SubmissionDetailsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Legacy Routes - Evaluations */}
+      <Route
+        path="/evaluations/:id"
+        element={
+          <ProtectedRoute>
+            <EvaluationResultsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/evaluations/:id/report"
+        element={
+          <ProtectedRoute>
+            <ReportViewerPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/criteria"
+        element={
+          <ProtectedRoute>
+            <CriteriaManagementPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Profile Routes */}
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/notifications"
+        element={
+          <ProtectedRoute>
+            <NotificationsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Legacy Agent Management Routes */}
+      <Route
+        path="/marketplace"
+        element={
+          <ProtectedRoute>
+            <AgentMarketplacePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/agent/configure/:agentId"
+        element={
+          <ProtectedRoute>
+            <AgentConfigurationPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/orchestrator"
+        element={
+          <ProtectedRoute>
+            <MultiAgentOrchestratorPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/scheduler"
+        element={
+          <ProtectedRoute>
+            <AgentSchedulerPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/integration"
+        element={
+          <ProtectedRoute>
+            <AgentIntegrationPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Admin Routes */}
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute requireAdmin>
+            <AdminDashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <ProtectedRoute requireAdmin>
+            <UserManagementPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/analytics"
+        element={
+          <ProtectedRoute requireAdmin>
+            <AnalyticsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/webhooks"
+        element={
+          <ProtectedRoute requireAdmin>
+            <N8nWebhookManagementPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* 404 Not Found */}
+      <Route path="/404" element={<NotFoundPage />} />
+      <Route path="*" element={<Navigate to="/404" replace />} />
+    </Routes>
+  );
+};
+
+export default AppRoutes;

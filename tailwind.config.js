@@ -32,8 +32,20 @@ export default {
           900: '#14532d',
         },
         accent: {
-          purple: '#8b5cf6',
-          pink: '#ec4899',
+          purple: {
+            50: '#faf5ff',
+            100: '#f3e8ff',
+            500: '#8B5CF6',
+            600: '#7c3aed',
+            700: '#6d28d9',
+          },
+          pink: {
+            50: '#fdf2f8',
+            100: '#fce7f3',
+            500: '#EC4899',
+            600: '#db2777',
+            700: '#be185d',
+          },
           orange: '#f97316',
         },
         glass: {
@@ -42,28 +54,40 @@ export default {
         }
       },
       fontFamily: {
-        heading: ['Inter', 'system-ui', 'sans-serif'],
-        body: ['SF Pro', 'system-ui', 'sans-serif'],
+        heading: ['Inter', 'sans-serif'],
+        body: ['SF Pro', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['SF Pro', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['JetBrains Mono', 'Consolas', 'monospace'],
+        arabic: ['Tajawal', 'sans-serif'],
       },
       backdropBlur: {
         xs: '2px',
       },
       animation: {
-        'slide-up': 'slideUp 0.3s ease-out',
-        'fade-in': 'fadeIn 0.2s ease-in',
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.4s ease-out',
+        'slide-down': 'slideDown 0.4s ease-out',
+        'scale-in': 'scaleIn 0.3s ease-out',
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
-        slideUp: {
-          '0%': { transform: 'translateY(10px)', opacity: 0 },
-          '100%': { transform: 'translateY(0)', opacity: 1 },
-        },
         fadeIn: {
-          '0%': { opacity: 0 },
-          '100%': { opacity: 1 },
-        }
-      }
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideDown: {
+          '0%': { transform: 'translateY(-20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { transform: 'scale(0.95)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+      },
     },
   },
   plugins: [],
