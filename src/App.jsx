@@ -25,6 +25,14 @@ import MultiAgentOrchestratorPage from './pages/Orchestrator/MultiAgentOrchestra
 import AgentSchedulerPage from './pages/Scheduler/AgentSchedulerPage'
 import AgentConfigurationPage from './pages/Agent/AgentConfigurationPage'
 import AgentIntegrationPage from './pages/Integration/AgentIntegrationPage'
+import EnginesOverviewPage from './pages/Engines/EnginesOverviewPage'
+import VisionEnginePage from './pages/Engines/VisionEnginePage'
+import AudioEnginePage from './pages/Engines/AudioEnginePage'
+import TextEnginePage from './pages/Engines/TextEnginePage'
+import CodeEnginePage from './pages/Engines/CodeEnginePage'
+import DocumentEnginePage from './pages/Engines/DocumentEnginePage'
+import DataEnginePage from './pages/Engines/DataEnginePage'
+import WebEnginePage from './pages/Engines/WebEnginePage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProtectedRoute from './router/ProtectedRoute'
 
@@ -119,6 +127,72 @@ function App() {
           element={
             <ProtectedRoute>
               <NotificationsPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Precision AI Engine Routes */}
+        <Route
+          path="/engines"
+          element={
+            <ProtectedRoute>
+              <EnginesOverviewPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/engines/vision"
+          element={
+            <ProtectedRoute>
+              <VisionEnginePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/engines/audio"
+          element={
+            <ProtectedRoute>
+              <AudioEnginePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/engines/text"
+          element={
+            <ProtectedRoute>
+              <TextEnginePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/engines/code"
+          element={
+            <ProtectedRoute>
+              <CodeEnginePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/engines/document"
+          element={
+            <ProtectedRoute>
+              <DocumentEnginePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/engines/data"
+          element={
+            <ProtectedRoute>
+              <DataEnginePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/engines/web"
+          element={
+            <ProtectedRoute>
+              <WebEnginePage />
             </ProtectedRoute>
           }
         />
