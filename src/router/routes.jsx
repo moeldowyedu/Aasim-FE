@@ -13,6 +13,13 @@ import DashboardPage from '../pages/Dashboard/DashboardPage';
 
 // Engine Pages
 import EnginesOverviewPage from '../pages/Engines/EnginesOverviewPage';
+import VisionEnginePage from '../pages/Engines/VisionEnginePage';
+import AudioEnginePage from '../pages/Engines/AudioEnginePage';
+import TextEnginePage from '../pages/Engines/TextEnginePage';
+import CodeEnginePage from '../pages/Engines/CodeEnginePage';
+import DocumentEnginePage from '../pages/Engines/DocumentEnginePage';
+import DataEnginePage from '../pages/Engines/DataEnginePage';
+import WebEnginePage from '../pages/Engines/WebEnginePage';
 
 // AgentX Pages
 import MarketplacePage from '../pages/AgentX/MarketplacePage';
@@ -74,10 +81,58 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/engines/:engineId"
+        path="/engines/vision"
         element={
           <ProtectedRoute>
-            <EnginesOverviewPage />
+            <VisionEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/audio"
+        element={
+          <ProtectedRoute>
+            <AudioEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/text"
+        element={
+          <ProtectedRoute>
+            <TextEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/code"
+        element={
+          <ProtectedRoute>
+            <CodeEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/document"
+        element={
+          <ProtectedRoute>
+            <DocumentEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/data"
+        element={
+          <ProtectedRoute>
+            <DataEnginePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/engines/web"
+        element={
+          <ProtectedRoute>
+            <WebEnginePage />
           </ProtectedRoute>
         }
       />
