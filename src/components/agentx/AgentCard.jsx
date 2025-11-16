@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom';
 import Card from '../common/Card/Card';
 import Badge from '../common/Badge/Badge';
 import Button from '../common/Button/Button';
 
-const AgentCard = ({ agent, onDeploy }) => {
+const AgentCard = ({ agent, onSelect, onDeploy }) => {
   const {
     id,
     name,
@@ -18,8 +17,14 @@ const AgentCard = ({ agent, onDeploy }) => {
     tags
   } = agent;
 
+  const handleClick = () => {
+    if (onSelect) {
+      onSelect(agent);
+    }
+  };
+
   return (
-    <Card hover className="h-full flex flex-col">
+    <Card hover className="h-full flex flex-col cursor-pointer" onClick={handleClick}>
       <div className="flex items-start justify-between mb-4">
         <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl">
           {icon || '🤖'}
@@ -66,15 +71,20 @@ const AgentCard = ({ agent, onDeploy }) => {
         </div>
       </div>
 
-      <div className="flex gap-2">
-        <Link to={`/agentx/agents/${id}`} className="flex-grow">
-          <Button variant="outline" className="w-full" size="sm">
-            Details
-          </Button>
-        </Link>
-        <Button onClick={() => onDeploy?.(agent)} className="flex-grow" size="sm">
-          Deploy
+      <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+        <Button
+          variant="outline"
+          className="flex-grow"
+          size="sm"
+          onClick={handleClick}
+        >
+          View Details
         </Button>
+        {onDeploy && (
+          <Button onClick={() => onDeploy(agent)} className="flex-grow" size="sm">
+            Deploy
+          </Button>
+        )}
       </div>
     </Card>
   );

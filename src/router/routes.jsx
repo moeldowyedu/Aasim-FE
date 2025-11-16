@@ -23,9 +23,13 @@ import WebEnginePage from '../pages/Engines/WebEnginePage';
 
 // AgentX Pages
 import MarketplacePage from '../pages/AgentX/MarketplacePage';
+import AgentBuilderPage from '../pages/AgentX/AgentBuilderPage';
+import MyAgentsPage from '../pages/AgentX/MyAgentsPage';
 
 // HITL Pages
 import OversightModesPage from '../pages/HITL/OversightModesPage';
+import ApprovalWorkflowsPage from '../pages/HITL/ApprovalWorkflowsPage';
+import ActivityLogsPage from '../pages/HITL/ActivityLogsPage';
 
 // Settings Pages
 import TenantSettingsPage from '../pages/Settings/TenantSettingsPage';
@@ -158,15 +162,15 @@ const AppRoutes = () => {
         path="/agentx/my-agents"
         element={
           <ProtectedRoute>
-            <MarketplacePage />
+            <MyAgentsPage />
           </ProtectedRoute>
         }
       />
       <Route
-        path="/agentx/private-agents"
+        path="/agentx/builder"
         element={
           <ProtectedRoute>
-            <MarketplacePage />
+            <AgentBuilderPage />
           </ProtectedRoute>
         }
       />
@@ -181,10 +185,26 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/hitl/oversight-modes"
+        path="/hitl/modes"
         element={
           <ProtectedRoute>
             <OversightModesPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/hitl/approvals"
+        element={
+          <ProtectedRoute>
+            <ApprovalWorkflowsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/hitl/logs"
+        element={
+          <ProtectedRoute>
+            <ActivityLogsPage />
           </ProtectedRoute>
         }
       />

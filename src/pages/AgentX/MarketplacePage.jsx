@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import AgentCard from '../../components/agentx/AgentCard';
 import MarketplaceFilters from '../../components/agentx/MarketplaceFilters';
-import DeploymentModal from '../../components/agentx/DeploymentModal';
-import Button from '../../components/common/Button/Button';
+import AgentDetailModal from '../../components/agentx/AgentDetailModal';
+import MainLayout from '../../components/layout/MainLayout';
 
 const MarketplacePage = () => {
   const [agents, setAgents] = useState([]);
@@ -10,7 +10,6 @@ const MarketplacePage = () => {
   const [activeFilters, setActiveFilters] = useState({});
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedAgent, setSelectedAgent] = useState(null);
-  const [isDeployModalOpen, setIsDeployModalOpen] = useState(false);
 
   useEffect(() => {
     // Mock data - replace with actual API call
@@ -126,14 +125,8 @@ const MarketplacePage = () => {
     setFilteredAgents(filtered);
   }, [activeFilters, searchQuery, agents]);
 
-  const handleDeploy = (agent) => {
+  const handleAgentSelect = (agent) => {
     setSelectedAgent(agent);
-    setIsDeployModalOpen(true);
-  };
-
-  const handleDeployConfirm = async (agent, config) => {
-    console.log('Deploying agent:', agent, 'with config:', config);
-    // TODO: Implement actual deployment logic
   };
 
   const filters = {
@@ -162,13 +155,14 @@ const MarketplacePage = () => {
   };
 
   return (
-    <div className="p-6">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">AgentX Marketplace</h1>
-        <p className="text-gray-600 mt-2">
-          Discover and deploy pre-built AI agents for your enterprise
-        </p>
-      </div>
+    <MainLayout>
+      <div className="p-6">
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold font-heading text-gray-900">AgentX Marketplace</h1>
+          <p className="text-gray-600 mt-2">
+            Discover and deploy pre-built AI agents for your enterprise
+          </p>
+        </div>
 
       {/* Search Bar */}
       <div className="mb-6">
@@ -204,7 +198,7 @@ const MarketplacePage = () => {
               <AgentCard
                 key={agent.id}
                 agent={agent}
-                onDeploy={handleDeploy}
+                onSelect={handleAgentSelect}
               />
             ))}
           </div>
@@ -217,14 +211,15 @@ const MarketplacePage = () => {
         </div>
       </div>
 
-      {/* Deployment Modal */}
-      <DeploymentModal
-        isOpen={isDeployModalOpen}
-        onClose={() => setIsDeployModalOpen(false)}
-        agent={selectedAgent}
-        onDeploy={handleDeployConfirm}
-      />
-    </div>
+        {/* Agent Detail Modal */}
+        {selectedAgent && (
+          <AgentDetailModal
+            agent={selectedAgent}
+            onClose={() => setSelectedAgent(null)}
+          />
+        )}
+      </div>
+    </MainLayout>
   );
 };
 
