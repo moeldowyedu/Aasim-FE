@@ -137,7 +137,7 @@ const HomePage = () => {
   ]
 
   return (
-    <MainLayout showFooter={true}>
+    <MainLayout showFooter={true} showSidebar={false}>
       {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center -mt-32 px-6">
         <div className="max-w-5xl mx-auto text-center">
