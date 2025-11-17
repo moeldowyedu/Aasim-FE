@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import MainLayout from '../../components/layout/MainLayout';
 import Card from '../../components/common/Card/Card';
 import Button from '../../components/common/Button/Button';
 import Badge from '../../components/common/Badge/Badge';
@@ -30,7 +31,8 @@ const TenantSettingsPage = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <MainLayout>
+      <div className="p-6 space-y-6">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Tenant Settings</h1>
@@ -228,7 +230,8 @@ const TenantSettingsPage = () => {
           Cancel
         </Button>
       </div>
-    </div>
+      </div>
+    </MainLayout>
   );
 };
 
