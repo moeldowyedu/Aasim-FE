@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { PLATFORM, ENGINES } from '../../../utils/constants';
 
 const Sidebar = () => {
+  const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [expandedSections, setExpandedSections] = useState({
     engines: false,
@@ -11,6 +12,24 @@ const Sidebar = () => {
     hitl: false,
     settings: false
   });
+
+  // Auto-expand sections based on current route
+  useEffect(() => {
+    const path = location.pathname;
+    const newExpanded = { ...expandedSections };
+
+    if (path.startsWith('/engines/')) {
+      newExpanded.engines = true;
+    } else if (path.startsWith('/agentx/')) {
+      newExpanded.agentx = true;
+    } else if (path.startsWith('/hitl/')) {
+      newExpanded.hitl = true;
+    } else if (path.startsWith('/settings/')) {
+      newExpanded.settings = true;
+    }
+
+    setExpandedSections(newExpanded);
+  }, [location.pathname]);
 
   const toggleSection = (section) => {
     setExpandedSections(prev => ({
@@ -116,11 +135,17 @@ const Sidebar = () => {
           {navigation.map((item) => {
             if (item.children) {
               const isExpanded = expandedSections[item.section];
+              const isAnyChildActive = item.children.some(child =>
+                location.pathname === child.href || location.pathname.startsWith(child.href + '/')
+              );
+
               return (
                 <li key={item.name}>
                   <button
                     onClick={() => !isCollapsed && toggleSection(item.section)}
-                    className={`w-full flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'} px-3 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 transition-colors group`}
+                    className={`w-full flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'} px-3 py-2 text-sm font-medium rounded-lg transition-colors group ${
+                      isAnyChildActive ? 'bg-primary-50 text-primary-700' : 'text-gray-700 hover:bg-gray-100'
+                    }`}
                     title={isCollapsed ? item.name : ''}
                   >
                     <div className="flex items-center gap-3">
@@ -234,7 +259,7 @@ const Sidebar = () => {
               Check our documentation and guides
             </p>
             <a
-              href="/developer/docs"
+              href="/agentx/developer"
               className="text-xs text-primary-600 hover:text-primary-700 font-medium"
             >
               View Documentation →
