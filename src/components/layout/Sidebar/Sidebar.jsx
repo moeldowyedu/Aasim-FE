@@ -76,10 +76,10 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`${isCollapsed ? 'w-20' : 'w-64'} bg-white border-r border-gray-200 h-screen sticky top-0 overflow-y-auto transition-all duration-300 ease-in-out group`}
+      className={`${isCollapsed ? 'w-20' : 'w-64'} bg-white border-r border-gray-200 h-screen sticky top-0 transition-all duration-300 ease-in-out flex flex-col`}
     >
       {/* Logo/Brand */}
-      <div className={`${isCollapsed ? 'p-4' : 'p-6'} border-b border-gray-200 transition-all duration-300`}>
+      <div className={`${isCollapsed ? 'p-4' : 'p-6'} border-b border-gray-200 transition-all duration-300 flex-shrink-0`}>
         <Link to="/dashboard" className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center flex-shrink-0">
             <span className="text-white text-xl font-bold">A</span>
@@ -110,8 +110,8 @@ const Sidebar = () => {
         )}
       </button>
 
-      {/* Navigation */}
-      <nav className="p-4">
+      {/* Navigation - Scrollable */}
+      <nav className="p-4 flex-grow overflow-y-auto">
         <ul className="space-y-1">
           {navigation.map((item) => {
             if (item.children) {
@@ -223,9 +223,9 @@ const Sidebar = () => {
         </ul>
       </nav>
 
-      {/* Bottom Section */}
+      {/* Bottom Section - Help */}
       {!isCollapsed && (
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white">
+        <div className="p-4 border-t border-gray-200 bg-white flex-shrink-0">
           <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-lg p-4">
             <h3 className="text-sm font-semibold text-gray-900 mb-1">
               Need Help?
@@ -234,7 +234,7 @@ const Sidebar = () => {
               Check our documentation and guides
             </p>
             <a
-              href="#"
+              href="/developer/docs"
               className="text-xs text-primary-600 hover:text-primary-700 font-medium"
             >
               View Documentation →
