@@ -44,7 +44,6 @@ const Header = () => {
 
   const languages = [
     { code: 'en', name: 'English', flag: 'us' },
-    { code: 'es', name: 'Español', flag: 'es' },
     { code: 'ar', name: 'العربية', flag: 'eg' },
   ]
 
