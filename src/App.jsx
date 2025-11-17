@@ -61,6 +61,31 @@ import AgentXMarketplacePage from './pages/AgentX/MarketplacePage'
 import MyAgentsPage from './pages/AgentX/MyAgentsPage'
 import PrivateAgentsPage from './pages/AgentX/PrivateAgentsPage'
 import DeveloperPortalPage from './pages/AgentX/DeveloperPortalPage'
+// Phase 10 Pages - Organization
+import BranchesPage from './pages/Organization/BranchesPage'
+import BranchDetailsPage from './pages/Organization/BranchDetailsPage'
+import DepartmentsPage from './pages/Organization/DepartmentsPage'
+import ProjectsPage from './pages/Organization/ProjectsPage'
+import TeamsPage from './pages/Organization/TeamsPage'
+// Phase 10 Pages - Agents
+import AllAgentsPage from './pages/Agents/AllAgentsPage'
+import AgentPerformancePage from './pages/Agents/AgentPerformancePage'
+import AgentDeploymentWizard from './components/agent-deployment/AgentDeploymentWizard'
+// Phase 10 Pages - Job Flows
+import JobFlowsListPage from './pages/JobFlows/JobFlowsListPage'
+import JobCalendarPage from './pages/JobFlows/JobCalendarPage'
+import ExecutionHistoryPage from './pages/JobFlows/ExecutionHistoryPage'
+// Phase 10 Pages - HITL
+import ApprovalQueuePage from './pages/HITL/ApprovalQueuePage'
+import MyApprovalsPage from './pages/HITL/MyApprovalsPage'
+import HITLConfigurationPage from './pages/HITL/HITLConfigurationPage'
+// Phase 10 Pages - Team & Users
+import AllUsersPage from './pages/Team/AllUsersPage'
+import InviteUserPage from './pages/Team/InviteUserPage'
+import RolesPermissionsPage from './pages/Team/RolesPermissionsPage'
+import UserActivityPage from './pages/Team/UserActivityPage'
+// Phase 10 Pages - Billing
+import BillingOverviewPage from './pages/Billing/BillingOverviewPage'
 import TenantSettingsPage from './pages/Settings/TenantSettingsPage'
 import RubricsPage from './pages/Settings/RubricsPage'
 import SettingsIntegrationsPage from './pages/Settings/IntegrationsPage'
@@ -166,7 +191,39 @@ function App() {
           path="/billing"
           element={
             <ProtectedRoute>
-              <BillingPage />
+              <BillingOverviewPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/billing/overview"
+          element={
+            <ProtectedRoute>
+              <BillingOverviewPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/billing/subscription"
+          element={
+            <ProtectedRoute>
+              <BillingOverviewPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/billing/usage"
+          element={
+            <ProtectedRoute>
+              <BillingOverviewPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/billing/invoices"
+          element={
+            <ProtectedRoute>
+              <BillingOverviewPage />
             </ProtectedRoute>
           }
         />
@@ -237,7 +294,81 @@ function App() {
           }
         />
 
+        {/* Organization Routes */}
+        <Route
+          path="/organization/branches"
+          element={
+            <ProtectedRoute>
+              <BranchesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/organization/branches/:id"
+          element={
+            <ProtectedRoute>
+              <BranchDetailsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/organization/departments"
+          element={
+            <ProtectedRoute>
+              <DepartmentsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/organization/projects"
+          element={
+            <ProtectedRoute>
+              <ProjectsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/organization/teams"
+          element={
+            <ProtectedRoute>
+              <TeamsPage />
+            </ProtectedRoute>
+          }
+        />
+
         {/* Agent Management Routes */}
+        <Route
+          path="/agents/all"
+          element={
+            <ProtectedRoute>
+              <AllAgentsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/agents/my-agents"
+          element={
+            <ProtectedRoute>
+              <MyAgentsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/agents/performance"
+          element={
+            <ProtectedRoute>
+              <AgentPerformancePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/agents/deploy"
+          element={
+            <ProtectedRoute>
+              <AgentDeploymentWizard />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/agents/create"
           element={
@@ -353,6 +484,14 @@ function App() {
 
         {/* HITL Routes */}
         <Route
+          path="/hitl"
+          element={
+            <ProtectedRoute>
+              <OversightModesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/hitl/modes"
           element={
             <ProtectedRoute>
@@ -369,10 +508,42 @@ function App() {
           }
         />
         <Route
+          path="/hitl/approval-queue"
+          element={
+            <ProtectedRoute>
+              <ApprovalQueuePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hitl/my-approvals"
+          element={
+            <ProtectedRoute>
+              <MyApprovalsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hitl/activity-logs"
+          element={
+            <ProtectedRoute>
+              <ActivityLogsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/hitl/logs"
           element={
             <ProtectedRoute>
               <ActivityLogsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/hitl/configuration"
+          element={
+            <ProtectedRoute>
+              <HITLConfigurationPage />
             </ProtectedRoute>
           }
         />
@@ -389,6 +560,32 @@ function App() {
           element={
             <ProtectedRoute>
               <HITLActivityPage />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Job Flows Routes */}
+        <Route
+          path="/job-flows/all"
+          element={
+            <ProtectedRoute>
+              <JobFlowsListPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/job-flows/calendar"
+          element={
+            <ProtectedRoute>
+              <JobCalendarPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/job-flows/history"
+          element={
+            <ProtectedRoute>
+              <ExecutionHistoryPage />
             </ProtectedRoute>
           }
         />
@@ -453,7 +650,49 @@ function App() {
           }
         />
 
+        {/* Team & Users Routes */}
+        <Route
+          path="/team-users/all"
+          element={
+            <ProtectedRoute>
+              <AllUsersPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/team-users/invite"
+          element={
+            <ProtectedRoute>
+              <InviteUserPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/team-users/roles"
+          element={
+            <ProtectedRoute>
+              <RolesPermissionsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/team-users/activity"
+          element={
+            <ProtectedRoute>
+              <UserActivityPage />
+            </ProtectedRoute>
+          }
+        />
+
         {/* Settings Routes */}
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <TenantSettingsPage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/settings/tenant"
           element={
@@ -483,6 +722,22 @@ function App() {
           element={
             <ProtectedRoute>
               <UsersRolesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings/security"
+          element={
+            <ProtectedRoute>
+              <TenantSettingsPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings/notifications"
+          element={
+            <ProtectedRoute>
+              <NotificationsPage />
             </ProtectedRoute>
           }
         />
