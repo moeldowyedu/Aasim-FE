@@ -41,7 +41,7 @@ const TenantTypeSelectionStep = ({ onNext, onBack }) => {
         'Full organizational hierarchy',
         'Advanced management',
         'Unlimited users',
-        'Department & project management',
+        'Set up after registration',
       ],
       badge: 'Enterprise',
       badgeColor: 'bg-purple-500',
@@ -188,14 +188,33 @@ const TenantTypeSelectionStep = ({ onNext, onBack }) => {
                 <td className="py-3 px-4 text-center text-sm text-gray-600">Advanced</td>
               </tr>
               <tr>
-                <td className="py-3 px-4 text-sm text-gray-700">Setup Time</td>
-                <td className="py-3 px-4 text-center text-sm text-gray-600">2 minutes</td>
-                <td className="py-3 px-4 text-center text-sm text-gray-600">10-15 minutes</td>
+                <td className="py-3 px-4 text-sm text-gray-700">Registration Time</td>
+                <td className="py-3 px-4 text-center text-sm text-gray-600">~1 minute</td>
+                <td className="py-3 px-4 text-center text-sm text-gray-600">~1 minute</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
+      {/* Organization Setup Note */}
+      {tenantType === 'organization' && (
+        <div className="mb-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <div className="flex items-start gap-3">
+            <div className="flex-shrink-0">
+              <svg className="w-5 h-5 text-blue-600 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-blue-900 mb-1">Quick Setup Now, Structure Later</h4>
+              <p className="text-sm text-blue-800">
+                Registration takes just 1 minute! You can set up your organization structure (branches, departments, teams, projects) from your dashboard after you sign in.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Navigation Buttons */}
       <div className="flex items-center justify-between gap-4">
