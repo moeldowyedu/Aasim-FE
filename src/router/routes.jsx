@@ -100,6 +100,11 @@ import AdminDashboardPage from '../pages/Admin/AdminDashboardPage';
 import UserManagementPage from '../pages/Admin/UserManagementPage';
 import AnalyticsPage from '../pages/Admin/AnalyticsPage';
 import N8nWebhookManagementPage from '../pages/Admin/N8nWebhookManagementPage';
+import TenantsManagementPage from '../pages/Admin/TenantsManagementPage';
+import EngineManagementPage from '../pages/Admin/EngineManagementPage';
+import AgentsManagementPage from '../pages/Admin/AgentsManagementPage';
+import ActiveAgentsMonitorPage from '../pages/Admin/ActiveAgentsMonitorPage';
+import IntegrationManagementPage from '../pages/Admin/IntegrationManagementPage';
 import AgentMarketplacePage from '../pages/Marketplace/AgentMarketplacePage';
 import MultiAgentOrchestratorPage from '../pages/Orchestrator/MultiAgentOrchestratorPage';
 import AgentSchedulerPage from '../pages/Scheduler/AgentSchedulerPage';
@@ -725,6 +730,72 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <AgentIntegrationPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* System Admin Routes */}
+      <Route
+        path="/system-admin"
+        element={
+          <ProtectedRoute requireAdmin>
+            <AdminDashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/system-admin/dashboard"
+        element={
+          <ProtectedRoute requireAdmin>
+            <AdminDashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/system-admin/tenants"
+        element={
+          <ProtectedRoute requireAdmin>
+            <TenantsManagementPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/system-admin/engines"
+        element={
+          <ProtectedRoute requireAdmin>
+            <EngineManagementPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/system-admin/agents"
+        element={
+          <ProtectedRoute requireAdmin>
+            <AgentsManagementPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/system-admin/active-agents"
+        element={
+          <ProtectedRoute requireAdmin>
+            <ActiveAgentsMonitorPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/system-admin/integrations"
+        element={
+          <ProtectedRoute requireAdmin>
+            <IntegrationManagementPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/system-admin/settings"
+        element={
+          <ProtectedRoute requireAdmin>
+            <TenantSettingsPage />
           </ProtectedRoute>
         }
       />
