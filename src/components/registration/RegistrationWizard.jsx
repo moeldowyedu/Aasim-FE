@@ -5,12 +5,6 @@ import { useAuthStore } from '../../store/authStore';
 import WizardSteps from '../wizard/WizardSteps';
 import AccountCreationStep from './AccountCreationStep';
 import TenantTypeSelectionStep from './TenantTypeSelectionStep';
-import OrganizationProfileStep from './organization/OrganizationProfileStep';
-import BranchesSetupStep from './organization/BranchesSetupStep';
-import DepartmentsSetupStep from './organization/DepartmentsSetupStep';
-import ProjectsSetupStep from './organization/ProjectsSetupStep';
-import TeamsSetupStep from './organization/TeamsSetupStep';
-import RolesPermissionsStep from './organization/RolesPermissionsStep';
 import PlanSelectionStep from './organization/PlanSelectionStep';
 import MainLayout from '../layout/MainLayout';
 
@@ -33,80 +27,29 @@ const RegistrationWizard = () => {
 
   const { register, isLoading } = useAuthStore();
 
-  // Define wizard steps based on tenant type
-  const getWizardSteps = () => {
-    const baseSteps = [
-      {
-        id: 'account',
-        title: 'Account',
-        description: 'Create account',
-      },
-      {
-        id: 'tenant-type',
-        title: 'Account Type',
-        description: 'Choose type',
-      },
-    ];
-
-    if (tenantType === 'organization') {
-      return [
-        ...baseSteps,
-        {
-          id: 'org-profile',
-          title: 'Organization',
-          description: 'Profile setup',
-        },
-        {
-          id: 'branches',
-          title: 'Branches',
-          description: 'Optional',
-        },
-        {
-          id: 'departments',
-          title: 'Departments',
-          description: 'Structure',
-        },
-        {
-          id: 'projects',
-          title: 'Projects',
-          description: 'Optional',
-        },
-        {
-          id: 'teams',
-          title: 'Teams',
-          description: 'Optional',
-        },
-        {
-          id: 'roles',
-          title: 'Roles',
-          description: 'Permissions',
-        },
-        {
-          id: 'plan',
-          title: 'Plan',
-          description: 'Select plan',
-        },
-      ];
-    } else if (tenantType === 'personal') {
-      return [
-        ...baseSteps,
-        {
-          id: 'plan',
-          title: 'Plan',
-          description: 'Select plan',
-        },
-      ];
-    }
-
-    return baseSteps;
-  };
-
-  const wizardSteps = getWizardSteps();
+  // Simplified wizard steps - same for both personal and organization
+  const wizardSteps = [
+    {
+      id: 'account',
+      title: 'Account',
+      description: 'Create account',
+    },
+    {
+      id: 'tenant-type',
+      title: 'Account Type',
+      description: 'Choose type',
+    },
+    {
+      id: 'plan',
+      title: 'Plan',
+      description: 'Select plan',
+    },
+  ];
 
   // Handle final registration submission
   const handleComplete = async () => {
     try {
-      // Prepare registration data
+      // Prepare simplified registration data
       const registrationData = {
         email: accountData.email,
         password: accountData.password,
@@ -116,18 +59,9 @@ const RegistrationWizard = () => {
         tenantType,
       };
 
-      // Add organization data if organization type
+      // Add plan selection
       if (tenantType === 'organization') {
-        registrationData.organization = {
-          profile: organizationData.profile,
-          branches: organizationData.branches,
-          departments: organizationData.departments,
-          projects: organizationData.projects,
-          teams: organizationData.teams,
-          roles: organizationData.roles,
-          customRoles: organizationData.customRoles,
-          selectedPlan: organizationData.selectedPlan,
-        };
+        registrationData.plan = organizationData.selectedPlan;
       } else {
         registrationData.plan = personalData.selectedPlan;
       }
@@ -138,7 +72,7 @@ const RegistrationWizard = () => {
       // Mark as complete
       completeRegistration();
 
-      // Navigate to dashboard or onboarding
+      // Navigate to dashboard where they can set up organization structure
       navigate('/dashboard');
     } catch (error) {
       console.error('Registration failed:', error);
@@ -153,47 +87,18 @@ const RegistrationWizard = () => {
     }
   }, [isComplete, navigate]);
 
-  // Render current step
+  // Render current step - simplified to 3 steps for all users
   const renderStep = () => {
-    // For steps 1-2 (account creation and tenant type selection)
-    if (currentStep === 1) {
-      return <AccountCreationStep onNext={nextStep} />;
-    }
-
-    if (currentStep === 2) {
-      return <TenantTypeSelectionStep onNext={nextStep} onBack={prevStep} />;
-    }
-
-    // Organization flow (9 steps total)
-    if (tenantType === 'organization') {
-      switch (currentStep) {
-        case 3:
-          return <OrganizationProfileStep onNext={nextStep} onBack={prevStep} />;
-        case 4:
-          return <BranchesSetupStep onNext={nextStep} onBack={prevStep} />;
-        case 5:
-          return <DepartmentsSetupStep onNext={nextStep} onBack={prevStep} />;
-        case 6:
-          return <ProjectsSetupStep onNext={nextStep} onBack={prevStep} />;
-        case 7:
-          return <TeamsSetupStep onNext={nextStep} onBack={prevStep} />;
-        case 8:
-          return <RolesPermissionsStep onNext={nextStep} onBack={prevStep} />;
-        case 9:
-          return <PlanSelectionStep onNext={handleComplete} onBack={prevStep} />;
-        default:
-          return null;
-      }
-    }
-
-    // Personal flow (3 steps total)
-    if (tenantType === 'personal') {
-      if (currentStep === 3) {
+    switch (currentStep) {
+      case 1:
+        return <AccountCreationStep onNext={nextStep} />;
+      case 2:
+        return <TenantTypeSelectionStep onNext={nextStep} onBack={prevStep} />;
+      case 3:
         return <PlanSelectionStep onNext={handleComplete} onBack={prevStep} />;
-      }
+      default:
+        return null;
     }
-
-    return null;
   };
 
   return (
@@ -204,7 +109,7 @@ const RegistrationWizard = () => {
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">Welcome to Aasim AI</h1>
             <p className="text-gray-600">
-              Let's get you set up. This will only take a few minutes.
+              Let's get you started. This will only take a minute.
             </p>
           </div>
 
@@ -239,6 +144,11 @@ const RegistrationWizard = () => {
                 Privacy Policy
               </a>
             </p>
+            {tenantType === 'organization' && currentStep === 3 && (
+              <p className="mt-4 text-sm text-gray-600">
+                💡 You can set up your organization structure (branches, departments, teams) after registration from your dashboard.
+              </p>
+            )}
           </div>
         </div>
       </div>
