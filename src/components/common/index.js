@@ -45,3 +45,9 @@ export { default as EmptyState } from './EmptyState';
 
 // NotificationBell
 export { default as NotificationBell } from './NotificationBell/NotificationBell';
+
+// ConfirmDialog
+export { default as ConfirmDialog } from './ConfirmDialog';
+
+// FormModal
+export { default as FormModal } from './FormModal';

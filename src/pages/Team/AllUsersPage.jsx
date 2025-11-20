@@ -19,6 +19,8 @@ import Input from '../../components/common/Input/Input';
 import Select from '../../components/common/Input/Select';
 import Card from '../../components/common/Card/Card';
 import Badge from '../../components/common/Badge/Badge';
+import FormModal from '../../components/common/FormModal';
+import ConfirmDialog from '../../components/common/ConfirmDialog';
 import MainLayout from '../../components/layout/MainLayout';
 
 const AllUsersPage = () => {
@@ -28,7 +30,22 @@ const AllUsersPage = () => {
   const [departmentFilter, setDepartmentFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
 
-  const [users] = useState([
+  // CRUD States
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Edit User States
+  const [editingUser, setEditingUser] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  // Delete User States
+  const [deletingUser, setDeletingUser] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // Deactivate User States
+  const [deactivatingUser, setDeactivatingUser] = useState(null);
+  const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
+
+  const [users, setUsers] = useState([
     {
       id: 1,
       name: 'John Smith',
@@ -122,7 +139,98 @@ const AllUsersPage = () => {
     },
   ]);
 
-  const departments = ['all', ...new Set(users.map((u) => u.department))];
+  // Dropdown Options
+  const roles = ['admin', 'manager', 'operator', 'reviewer', 'viewer'];
+  const departments = ['Management', 'Human Resources', 'Finance', 'Customer Service', 'IT', 'Sales', 'Marketing'];
+  const branches = ['Headquarters', 'West Coast Office', 'East Coast Office', 'Europe Office', 'Asia Pacific Office'];
+  const statuses = ['active', 'inactive'];
+
+  const departmentFilters = ['all', ...new Set(users.map((u) => u.department))];
+
+  // CRUD Functions
+
+  // Edit User
+  const handleEditUser = (user) => {
+    setEditingUser(user);
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateUser = async (formData) => {
+    // Validation
+    if (!formData.name || !formData.name.trim()) {
+      alert('Name is required');
+      return;
+    }
+
+    if (!formData.email || !formData.email.trim()) {
+      alert('Email is required');
+      return;
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+
+    setIsLoading(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      setUsers(users.map(user =>
+        user.id === editingUser.id
+          ? { ...user, ...formData }
+          : user
+      ));
+
+      setIsLoading(false);
+      setIsEditModalOpen(false);
+      setEditingUser(null);
+    }, 500);
+  };
+
+  // Delete User
+  const handleDeleteUser = (user) => {
+    setDeletingUser(user);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    setIsLoading(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      setUsers(users.filter(user => user.id !== deletingUser.id));
+
+      setIsLoading(false);
+      setIsDeleteModalOpen(false);
+      setDeletingUser(null);
+    }, 500);
+  };
+
+  // Deactivate/Activate User
+  const handleDeactivateUser = (user) => {
+    setDeactivatingUser(user);
+    setIsDeactivateModalOpen(true);
+  };
+
+  const handleConfirmDeactivate = async () => {
+    setIsLoading(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      setUsers(users.map(user =>
+        user.id === deactivatingUser.id
+          ? { ...user, status: user.status === 'active' ? 'inactive' : 'active' }
+          : user
+      ));
+
+      setIsLoading(false);
+      setIsDeactivateModalOpen(false);
+      setDeactivatingUser(null);
+    }, 500);
+  };
 
   const getRoleColor = (role) => {
     const colors = {
@@ -266,7 +374,7 @@ const AllUsersPage = () => {
           <Select
             value={departmentFilter}
             onChange={(e) => setDepartmentFilter(e.target.value)}
-            options={departments.map((dept) => ({
+            options={departmentFilters.map((dept) => ({
               value: dept,
               label: dept === 'all' ? 'All Departments' : dept,
             }))}
@@ -359,13 +467,28 @@ const AllUsersPage = () => {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center justify-center gap-2">
-                      <Button variant="ghost" size="sm">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleEditUser(user)}
+                        disabled={isLoading}
+                      >
                         <Edit className="w-4 h-4" />
                       </Button>
-                      <Button variant="ghost" size="sm">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleDeactivateUser(user)}
+                        disabled={isLoading}
+                      >
                         <UserX className="w-4 h-4 text-orange-600" />
                       </Button>
-                      <Button variant="ghost" size="sm">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleDeleteUser(user)}
+                        disabled={isLoading}
+                      >
                         <Trash2 className="w-4 h-4 text-red-600" />
                       </Button>
                     </div>
@@ -389,6 +512,188 @@ const AllUsersPage = () => {
             </p>
           </div>
         </Card>
+      )}
+
+      {/* Edit User Modal */}
+      {isEditModalOpen && editingUser && (
+        <FormModal
+          isOpen={isEditModalOpen}
+          onClose={() => {
+            setIsEditModalOpen(false);
+            setEditingUser(null);
+          }}
+          title="Edit User"
+          onSubmit={handleUpdateUser}
+          initialData={{
+            name: editingUser.name,
+            email: editingUser.email,
+            role: editingUser.role,
+            department: editingUser.department,
+            branch: editingUser.branch,
+            status: editingUser.status,
+          }}
+          isLoading={isLoading}
+        >
+          {(formData, handleChange) => (
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-secondary-700 mb-1">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors"
+                  placeholder="Enter full name"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-secondary-700 mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors"
+                  placeholder="Enter email address"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-secondary-700 mb-1">
+                  Role
+                </label>
+                <select
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors capitalize"
+                >
+                  {roles.map((role) => (
+                    <option key={role} value={role} className="capitalize">
+                      {role}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-secondary-700 mb-1">
+                  Department
+                </label>
+                <select
+                  name="department"
+                  value={formData.department}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors"
+                >
+                  {departments.map((dept) => (
+                    <option key={dept} value={dept}>
+                      {dept}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-secondary-700 mb-1">
+                  Branch
+                </label>
+                <select
+                  name="branch"
+                  value={formData.branch}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors"
+                >
+                  {branches.map((branch) => (
+                    <option key={branch} value={branch}>
+                      {branch}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-secondary-700 mb-1">
+                  Status
+                </label>
+                <select
+                  name="status"
+                  value={formData.status}
+                  onChange={handleChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors capitalize"
+                >
+                  {statuses.map((status) => (
+                    <option key={status} value={status} className="capitalize">
+                      {status}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          )}
+        </FormModal>
+      )}
+
+      {/* Delete User Confirmation Dialog */}
+      {isDeleteModalOpen && deletingUser && (
+        <ConfirmDialog
+          isOpen={isDeleteModalOpen}
+          onClose={() => {
+            setIsDeleteModalOpen(false);
+            setDeletingUser(null);
+          }}
+          onConfirm={handleConfirmDelete}
+          title="Delete User"
+          message={
+            <>
+              Are you sure you want to delete{' '}
+              <strong className="text-secondary-900">{deletingUser.name}</strong>?{' '}
+              This action cannot be undone and will remove all associated data.
+            </>
+          }
+          confirmText="Delete User"
+          confirmVariant="danger"
+          isLoading={isLoading}
+        />
+      )}
+
+      {/* Deactivate/Activate User Confirmation Dialog */}
+      {isDeactivateModalOpen && deactivatingUser && (
+        <ConfirmDialog
+          isOpen={isDeactivateModalOpen}
+          onClose={() => {
+            setIsDeactivateModalOpen(false);
+            setDeactivatingUser(null);
+          }}
+          onConfirm={handleConfirmDeactivate}
+          title={deactivatingUser.status === 'active' ? 'Deactivate User' : 'Activate User'}
+          message={
+            deactivatingUser.status === 'active' ? (
+              <>
+                Are you sure you want to deactivate{' '}
+                <strong className="text-secondary-900">{deactivatingUser.name}</strong>?{' '}
+                They will lose access to all systems immediately.
+              </>
+            ) : (
+              <>
+                Are you sure you want to activate{' '}
+                <strong className="text-secondary-900">{deactivatingUser.name}</strong>?{' '}
+                They will regain access to all previously assigned systems.
+              </>
+            )
+          }
+          confirmText={deactivatingUser.status === 'active' ? 'Deactivate' : 'Activate'}
+          confirmVariant={deactivatingUser.status === 'active' ? 'warning' : 'primary'}
+          isLoading={isLoading}
+        />
       )}
       </div>
     </MainLayout>
