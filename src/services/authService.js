@@ -4,22 +4,23 @@ const authService = {
   // Login
   login: async (credentials) => {
     const response = await api.post('/auth/login', credentials);
-    if (response.data.token) {
-      localStorage.setItem('auth_token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+    // Laravel backend returns { success: true, data: { user, token } }
+    if (response.data.success && response.data.data.token) {
+      localStorage.setItem('auth_token', response.data.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.data.user));
     }
-    return response.data;
+    return response.data.data;
   },
 
   // Register
   register: async (userData) => {
     const response = await api.post('/auth/register', userData);
     // Auto-login after registration by saving token and user
-    if (response.data.token) {
-      localStorage.setItem('auth_token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+    if (response.data.success && response.data.data.token) {
+      localStorage.setItem('auth_token', response.data.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.data.user));
     }
-    return response.data;
+    return response.data.data;
   },
 
   // Logout
@@ -57,15 +58,21 @@ const authService = {
   // Get Current User
   getCurrentUser: async () => {
     const response = await api.get('/auth/me');
-    localStorage.setItem('user', JSON.stringify(response.data));
-    return response.data;
+    if (response.data.success) {
+      localStorage.setItem('user', JSON.stringify(response.data.data));
+      return response.data.data;
+    }
+    return response.data.data;
   },
 
   // Update Profile
   updateProfile: async (profileData) => {
     const response = await api.put('/auth/profile', profileData);
-    localStorage.setItem('user', JSON.stringify(response.data));
-    return response.data;
+    if (response.data.success) {
+      localStorage.setItem('user', JSON.stringify(response.data.data));
+      return response.data.data;
+    }
+    return response.data.data;
   },
 
   // Change Password
