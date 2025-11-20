@@ -8,18 +8,36 @@ import {
   Search,
   ChevronRight,
   ChevronDown,
+  AlertTriangle,
 } from 'lucide-react';
 import MainLayout from '../../components/layout/MainLayout';
 import Button from '../../components/common/Button/Button';
 import Input from '../../components/common/Input/Input';
 import Card from '../../components/common/Card/Card';
 import Badge from '../../components/common/Badge/Badge';
+import FormModal from '../../components/common/FormModal';
+import ConfirmDialog from '../../components/common/ConfirmDialog';
 
 const DepartmentsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [expandedDepts, setExpandedDepts] = useState({});
 
-  const [departments] = useState([
+  // CRUD States
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [parentDepartment, setParentDepartment] = useState(null);
+  const [editingDepartment, setEditingDepartment] = useState(null);
+  const [editingParentId, setEditingParentId] = useState(null);
+  const [deletingDepartment, setDeletingDepartment] = useState(null);
+  const [deletingParentId, setDeletingParentId] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    head: '',
+    description: '',
+  });
+
+  const [departments, setDepartments] = useState([
     {
       id: 1,
       name: 'Human Resources',
@@ -155,7 +173,148 @@ const DepartmentsPage = () => {
 
   const stats = getTotalCounts();
 
-  const renderDepartment = (dept, level = 0) => {
+  // CRUD Handlers
+  const handleCreateDepartment = (parentId = null) => {
+    setFormData({ name: '', head: '', description: '' });
+    setParentDepartment(parentId);
+    setEditingDepartment(null);
+    setIsCreateModalOpen(true);
+  };
+
+  const handleSubmitNewDepartment = (e) => {
+    e.preventDefault();
+
+    // Validation
+    if (!formData.name.trim() || !formData.head.trim()) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    const newDepartment = {
+      id: Date.now(), // Simple ID generation
+      name: formData.name,
+      description: formData.description,
+      manager: formData.head,
+      employees: 0,
+      agents: 0,
+      ...(parentDepartment ? {} : { children: [] }),
+    };
+
+    if (parentDepartment) {
+      // Creating sub-department
+      setDepartments((prev) =>
+        prev.map((dept) => {
+          if (dept.id === parentDepartment.id) {
+            return {
+              ...dept,
+              children: [...(dept.children || []), newDepartment],
+            };
+          }
+          return dept;
+        })
+      );
+    } else {
+      // Creating main department
+      setDepartments((prev) => [...prev, newDepartment]);
+    }
+
+    setIsCreateModalOpen(false);
+    setParentDepartment(null);
+    setFormData({ name: '', head: '', description: '' });
+  };
+
+  const handleEditDepartment = (dept, parentId = null) => {
+    setEditingDepartment(dept);
+    setEditingParentId(parentId);
+    setFormData({
+      name: dept.name,
+      head: dept.manager,
+      description: dept.description,
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleUpdateDepartment = (e) => {
+    e.preventDefault();
+
+    // Validation
+    if (!formData.name.trim() || !formData.head.trim()) {
+      alert('Please fill in all required fields');
+      return;
+    }
+
+    const updatedData = {
+      ...editingDepartment,
+      name: formData.name,
+      manager: formData.head,
+      description: formData.description,
+    };
+
+    if (editingParentId) {
+      // Updating sub-department
+      setDepartments((prev) =>
+        prev.map((dept) => {
+          if (dept.id === editingParentId) {
+            return {
+              ...dept,
+              children: dept.children.map((child) =>
+                child.id === editingDepartment.id ? updatedData : child
+              ),
+            };
+          }
+          return dept;
+        })
+      );
+    } else {
+      // Updating main department
+      setDepartments((prev) =>
+        prev.map((dept) =>
+          dept.id === editingDepartment.id ? updatedData : dept
+        )
+      );
+    }
+
+    setIsEditModalOpen(false);
+    setEditingDepartment(null);
+    setEditingParentId(null);
+    setFormData({ name: '', head: '', description: '' });
+  };
+
+  const handleDeleteDepartment = (dept, parentId = null) => {
+    setDeletingDepartment(dept);
+    setDeletingParentId(parentId);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (deletingParentId) {
+      // Deleting sub-department
+      setDepartments((prev) =>
+        prev.map((dept) => {
+          if (dept.id === deletingParentId) {
+            return {
+              ...dept,
+              children: dept.children.filter(
+                (child) => child.id !== deletingDepartment.id
+              ),
+            };
+          }
+          return dept;
+        })
+      );
+    } else {
+      // Deleting main department
+      setDepartments((prev) =>
+        prev.filter((dept) => dept.id !== deletingDepartment.id)
+      );
+    }
+
+    setIsDeleteModalOpen(false);
+    setDeletingDepartment(null);
+    setDeletingParentId(null);
+  };
+
+  const renderDepartment = (dept, level = 0, parentId = null) => {
     const isExpanded = expandedDepts[dept.id];
     const hasChildren = dept.children && dept.children.length > 0;
 
@@ -213,7 +372,22 @@ const DepartmentsPage = () => {
               </div>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm" leftIcon={<Edit className="w-4 h-4" />}>
+              {level === 0 && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  leftIcon={<Plus className="w-4 h-4" />}
+                  onClick={() => handleCreateDepartment(dept)}
+                >
+                  Add Sub-Dept
+                </Button>
+              )}
+              <Button
+                variant="outline"
+                size="sm"
+                leftIcon={<Edit className="w-4 h-4" />}
+                onClick={() => handleEditDepartment(dept, parentId)}
+              >
                 Edit
               </Button>
               <Button
@@ -221,6 +395,7 @@ const DepartmentsPage = () => {
                 size="sm"
                 leftIcon={<Trash2 className="w-4 h-4" />}
                 className="text-red-600 hover:bg-red-50 border-red-200"
+                onClick={() => handleDeleteDepartment(dept, parentId)}
               >
                 Delete
               </Button>
@@ -230,7 +405,7 @@ const DepartmentsPage = () => {
 
         {hasChildren && isExpanded && (
           <div className="mt-2 space-y-2">
-            {dept.children.map((child) => renderDepartment(child, level + 1))}
+            {dept.children.map((child) => renderDepartment(child, level + 1, dept.id))}
           </div>
         )}
       </div>
@@ -248,7 +423,11 @@ const DepartmentsPage = () => {
             Manage your organization's department structure
           </p>
         </div>
-        <Button variant="primary" leftIcon={<Plus className="w-5 h-5" />}>
+        <Button
+          variant="primary"
+          leftIcon={<Plus className="w-5 h-5" />}
+          onClick={() => handleCreateDepartment(null)}
+        >
           Add Department
         </Button>
       </div>
@@ -317,6 +496,127 @@ const DepartmentsPage = () => {
           </div>
         </Card>
       )}
+
+      {/* Create/Edit Department Modal */}
+      <FormModal
+        isOpen={isCreateModalOpen || isEditModalOpen}
+        onClose={() => {
+          setIsCreateModalOpen(false);
+          setIsEditModalOpen(false);
+          setEditingDepartment(null);
+          setParentDepartment(null);
+          setFormData({ name: '', head: '', description: '' });
+        }}
+        onSubmit={editingDepartment ? handleUpdateDepartment : handleSubmitNewDepartment}
+        title={
+          editingDepartment
+            ? 'Edit Department'
+            : parentDepartment
+            ? 'Create Sub-Department'
+            : 'Create Department'
+        }
+        submitText={editingDepartment ? 'Update' : 'Create'}
+      >
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-semibold text-secondary-900 mb-2">
+              Department Name <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              placeholder="e.g., Human Resources"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-secondary-900 mb-2">
+              Head/Manager <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              value={formData.head}
+              onChange={(e) => setFormData({ ...formData, head: e.target.value })}
+              placeholder="e.g., John Doe"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-secondary-900 mb-2">
+              Description
+            </label>
+            <textarea
+              value={formData.description}
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              placeholder="Brief description of this department's responsibilities"
+              rows={4}
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+            />
+          </div>
+
+          {parentDepartment && (
+            <div className="bg-blue-50 border border-blue-200 p-4 rounded-xl">
+              <div className="flex items-start gap-3">
+                <Building className="w-5 h-5 text-blue-600 mt-0.5" />
+                <div>
+                  <p className="text-sm font-semibold text-blue-900 mb-1">
+                    Creating Sub-Department
+                  </p>
+                  <p className="text-sm text-blue-700">
+                    This will be created under:{' '}
+                    <strong>{parentDepartment.name}</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </FormModal>
+
+      {/* Delete Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={isDeleteModalOpen}
+        onClose={() => {
+          setIsDeleteModalOpen(false);
+          setDeletingDepartment(null);
+          setDeletingParentId(null);
+        }}
+        onConfirm={handleConfirmDelete}
+        title="Delete Department"
+        message={
+          deletingDepartment && deletingDepartment.children && deletingDepartment.children.length > 0 ? (
+            <div className="space-y-3">
+              <p>
+                Are you sure you want to delete{' '}
+                <strong>{deletingDepartment?.name}</strong>?
+              </p>
+              <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-lg">
+                <div className="flex items-start gap-2">
+                  <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-semibold text-yellow-900 mb-1">
+                      Warning: Has Sub-Departments
+                    </p>
+                    <p className="text-sm text-yellow-700">
+                      This department has {deletingDepartment.children.length}{' '}
+                      sub-department(s). Deleting it will remove all sub-departments as well.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            `Are you sure you want to delete ${deletingDepartment?.name}? This action cannot be undone.`
+          )
+        }
+        confirmText="Delete"
+        confirmVariant="danger"
+      />
       </div>
     </MainLayout>
   );
