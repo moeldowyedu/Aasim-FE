@@ -307,6 +307,10 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/messages"
+        element={<Navigate to="/chat" replace />}
+      />
 
       {/* HITL Routes */}
       <Route
