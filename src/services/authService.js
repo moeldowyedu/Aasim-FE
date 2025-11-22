@@ -15,6 +15,7 @@ const authService = {
   // Register
   register: async (userData) => {
     // Transform frontend data to match backend API expectations
+    // Only send fields that backend database supports
     const requestData = {
       name: userData.firstName && userData.lastName
         ? `${userData.firstName} ${userData.lastName}`.trim()
@@ -24,10 +25,8 @@ const authService = {
       password_confirmation: userData.password, // Laravel expects this
     };
 
-    // Add optional fields if provided
-    if (userData.phone) requestData.phone = userData.phone;
-    if (userData.tenantType) requestData.tenant_type = userData.tenantType;
-    if (userData.plan) requestData.plan = userData.plan;
+    // Only add optional fields if backend supports them
+    // Note: phone, tenant_type, plan removed - database doesn't have these columns
 
     console.log('📤 Sending registration data:', requestData);
 
