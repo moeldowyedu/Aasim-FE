@@ -23,7 +23,19 @@ const Sidebar = () => {
   // Auto-expand sections based on current route
   useEffect(() => {
     const path = location.pathname;
-    const newExpanded = { ...expandedSections };
+    const newExpanded = {
+      organization: false,
+      agentx: false,
+      jobFlows: false,
+      orchestration: false,
+      scheduling: false,
+      hitl: false,
+      engines: false,
+      integrations: false,
+      teamUsers: false,
+      billing: false,
+      settings: false
+    };
 
     if (path.startsWith('/organization/')) {
       newExpanded.organization = true;

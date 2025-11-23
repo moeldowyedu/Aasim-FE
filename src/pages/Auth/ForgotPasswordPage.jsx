@@ -26,7 +26,7 @@ const ForgotPasswordPage = () => {
   };
 
   return (
-    <MainLayout showFooter={false}>
+    <MainLayout showFooter={false} showSidebar={false}>
       <div className="min-h-[80vh] flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-md">
           <Card padding="lg">

@@ -12,10 +12,25 @@ const Header = () => {
   const navigate = useNavigate()
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   // Refs for dropdown menus
   const userMenuRef = useRef(null)
   const languageMenuRef = useRef(null)
+
+  // Handle scroll to shrink/expand header
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -52,13 +67,13 @@ const Header = () => {
   }
 
   return (
-    <header className="glass-card sticky top-0 z-40 mb-8">
-      <nav className="container mx-auto px-6 py-4">
+    <header className={`glass-card sticky top-0 z-40 mb-8 transition-all duration-300 ${isScrolled ? 'py-2 shadow-lg' : 'py-0'}`}>
+      <nav className={`container mx-auto px-6 transition-all duration-300 ${isScrolled ? 'py-2' : 'py-4'}`}>
         <div className="flex items-center justify-between">
           {/* Logo - Always links to homepage */}
           <Link to={isAuthenticated ? "/dashboard" : "/"} className="flex items-center space-x-2">
-            <span className="material-icons text-3xl text-primary-600">gavel</span>
-            <span className="text-2xl font-bold text-secondary-900 text-shadow font-heading">Aasim</span>
+            <span className={`material-icons text-primary-600 transition-all duration-300 ${isScrolled ? 'text-2xl' : 'text-3xl'}`}>gavel</span>
+            <span className={`font-bold text-secondary-900 text-shadow font-heading transition-all duration-300 ${isScrolled ? 'text-xl' : 'text-2xl'}`}>Aasim</span>
           </Link>
 
           {/* Desktop Navigation */}
