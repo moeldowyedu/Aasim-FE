@@ -88,7 +88,7 @@ const AgentDetailPage = () => {
         'Product recommendations',
         'Complaint resolution'
       ],
-      reviews: [
+      reviewsList: [
         {
           id: 1,
           author: 'Sarah Johnson',
@@ -424,8 +424,8 @@ const AgentDetailPage = () => {
                 </div>
                 <div className="space-y-2">
                   {[5, 4, 3, 2, 1].map((star) => {
-                    const count = agent.reviews.filter((r) => Math.floor(r.rating) === star).length;
-                    const percentage = (count / agent.reviews.length) * 100;
+                    const count = agent.reviewsList.filter((r) => Math.floor(r.rating) === star).length;
+                    const percentage = (count / agent.reviewsList.length) * 100;
                     return (
                       <div key={star} className="flex items-center gap-3">
                         <span className="text-sm font-medium text-secondary-700 w-8">{star} ★</span>
@@ -445,7 +445,7 @@ const AgentDetailPage = () => {
 
             {/* Individual Reviews */}
             <div className="space-y-4">
-              {agent.reviews.map((review) => (
+              {agent.reviewsList.map((review) => (
                 <div key={review.id} className="glass-card rounded-2xl p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-4">

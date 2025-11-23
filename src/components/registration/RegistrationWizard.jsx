@@ -23,12 +23,13 @@ const RegistrationWizard = () => {
 
   const { register, isLoading, isAuthenticated } = useAuthStore();
 
-  // Redirect authenticated users to dashboard
+  // Redirect authenticated users to dashboard (only once on mount)
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/dashboard', { replace: true });
     }
-  }, [isAuthenticated, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Simplified wizard steps - same for both personal and organization
   const wizardSteps = [

@@ -13,12 +13,13 @@ const LoginPage = () => {
     password: '',
   });
 
-  // Redirect authenticated users to dashboard
+  // Redirect authenticated users to dashboard (only once on mount)
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/dashboard', { replace: true });
     }
-  }, [isAuthenticated, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (e) => {
     clearError();
@@ -47,7 +48,7 @@ const LoginPage = () => {
   };
 
   return (
-    <MainLayout showFooter={false}>
+    <MainLayout showFooter={false} showSidebar={false}>
       <div className="min-h-[80vh] flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-md">
           <Card padding="lg">
