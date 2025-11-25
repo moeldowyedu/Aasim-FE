@@ -19,6 +19,13 @@ export const useBillingStore = create((set, get) => ({
       set({ currentSubscription: subscription, isLoading: false });
       return subscription;
     } catch (error) {
+      // Handle 404 (Not Found) gracefully - user might not have a subscription yet
+      if (error.response && error.response.status === 404) {
+        console.warn('Billing subscription endpoint not found (404). Assuming no active subscription.');
+        set({ currentSubscription: null, isLoading: false });
+        return null;
+      }
+
       set({
         error: error.response?.data?.message || 'Failed to fetch subscription',
         isLoading: false,

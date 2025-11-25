@@ -186,67 +186,6 @@ const TenantSettingsPage = () => {
     setActiveStep((prevStep) => Math.min(prevStep + 1, steps.length - 1));
   };
 
-  const handleBack = () => {
-    setActiveStep((prevStep) => Math.max(prevStep - 1, 0));
-  };
-
-  // Fetch tenant settings on component mount
-  useEffect(() => {
-    const loadTenantSettings = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // Check if current tenant exists
-        if (!currentTenant) {
-          throw new Error('No tenant selected. Please select a tenant from your account.');
-        }
-
-        const tenantId = currentTenant.id || currentTenant._id;
-        if (!tenantId) {
-          throw new Error('Invalid tenant configuration');
-        }
-
-        console.log('📥 Fetching settings for tenant:', tenantId);
-
-        // Fetch settings from Zustand store
-        const response = await fetchTenantSettings(tenantId);
-        console.log('📥 Fetched tenant settings:', response);
-
-        // Update state with fetched data
-        if (response) {
-          if (response.data) {
-            if (response.data.tenantInfo) {
-              setTenantInfo(response.data.tenantInfo);
-            }
-            if (response.data.settings) {
-              setSettings(response.data.settings);
-            }
-          } else if (response.tenantInfo || response.settings) {
-            // Handle direct response format
-            if (response.tenantInfo) {
-              setTenantInfo(response.tenantInfo);
-            }
-            if (response.settings) {
-              setSettings(response.settings);
-            }
-          }
-        }
-
-        toast.success('Settings loaded successfully');
-      } catch (err) {
-        console.error('❌ Error fetching tenant settings:', err);
-        const errorMessage = err.response?.data?.error || err.message || 'Failed to load settings';
-        setError(errorMessage);
-        toast.error(errorMessage);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadTenantSettings();
-  }, [currentTenant, fetchTenantSettings]);
-
   const handleSave = async () => {
     if (!currentTenant) {
       toast.error('No tenant selected');

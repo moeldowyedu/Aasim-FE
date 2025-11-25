@@ -133,9 +133,17 @@ const RegisterPage = () => {
           toast.success('Registration successful! Please check your email to verify your account.');
           navigate('/verify-email-sent', { replace: true });
         } else {
-          // Direct login - redirect to dashboard
+          // Direct login - pass tenant data to onboarding
           toast.success('Account created successfully!');
-          navigate('/dashboard', { replace: true });
+          navigate('/onboarding/tenant-setup', {
+            replace: true,
+            state: {
+              tenantType: formData.tenantType,
+              organizationName: formData.organizationName,
+              organizationDomain: formData.organizationDomain,
+              userFullName: formData.fullName
+            }
+          });
         }
       }
     } catch (error) {
@@ -330,9 +338,9 @@ const RegisterPage = () => {
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-xs text-secondary-600">Password Strength</span>
                     <span className={`text-xs font-medium ${passwordStrength < 40 ? 'text-red-600' :
-                        passwordStrength < 70 ? 'text-yellow-600' :
-                          passwordStrength < 90 ? 'text-blue-600' :
-                            'text-green-600'
+                      passwordStrength < 70 ? 'text-yellow-600' :
+                        passwordStrength < 90 ? 'text-blue-600' :
+                          'text-green-600'
                       }`}>
                       {strengthInfo.label}
                     </span>

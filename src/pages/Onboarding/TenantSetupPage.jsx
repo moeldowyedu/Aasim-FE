@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Building2, User, Sparkles, CheckCircle, ArrowRight, Users, Zap } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Sparkles, CheckCircle, ArrowRight, Zap, Users, Building, Rocket } from 'lucide-react';
 import Button from '../../components/common/Button/Button';
 import { useTenantStore } from '../../store/tenantStore';
 import { useAuthStore } from '../../store/authStore';
@@ -8,86 +8,121 @@ import toast from 'react-hot-toast';
 
 const TenantSetupPage = () => {
   const navigate = useNavigate();
-  const [selectedType, setSelectedType] = useState(null);
+  const location = useLocation();
+  const [selectedPlan, setSelectedPlan] = useState('free');
   const [isCreating, setIsCreating] = useState(false);
   const { createTenant, setCurrentTenant } = useTenantStore();
   const { user } = useAuthStore();
 
-  const tenantTypes = [
+  // Get tenant data from navigation state (passed from registration)
+  const tenantData = location.state || {};
+  const { tenantType, organizationName, organizationDomain, userFullName } = tenantData;
+
+  // If no tenant data, redirect to registration
+  useEffect(() => {
+    if (!tenantType) {
+      toast.error('Please complete registration first');
+      navigate('/register', { replace: true });
+    }
+  }, [tenantType, navigate]);
+
+  const plans = [
     {
-      id: 'personal',
-      icon: User,
-      title: 'Personal',
-      description: 'For individual use and personal projects',
+      id: 'free',
+      name: 'Free',
+      price: '$0',
+      period: 'forever',
+      description: 'Perfect for getting started',
       features: [
         'Up to 5 AI agents',
         'Basic analytics',
         'Community support',
-        'Personal workspace'
+        '1 GB storage',
+        'Email notifications'
       ],
+      icon: Users,
       gradient: 'from-blue-500 to-cyan-500',
       borderColor: 'border-blue-500',
-      bgColor: 'bg-blue-50',
-      iconColor: 'text-blue-600'
+      popular: false
     },
     {
-      id: 'organization',
-      icon: Building2,
-      title: 'Organization',
-      description: 'For teams and businesses',
+      id: 'pro',
+      name: 'Pro',
+      price: '$29',
+      period: 'per month',
+      description: 'For professionals and small teams',
       features: [
-        'Unlimited AI agents',
+        'Up to 50 AI agents',
         'Advanced analytics',
-        'Priority support',
-        'Team collaboration',
-        'Custom integrations'
+        'Priority email support',
+        '50 GB storage',
+        'Custom integrations',
+        'API access'
       ],
+      icon: Building,
       gradient: 'from-purple-500 to-pink-500',
       borderColor: 'border-purple-500',
-      bgColor: 'bg-purple-50',
-      iconColor: 'text-purple-600',
       popular: true
+    },
+    {
+      id: 'enterprise',
+      name: 'Enterprise',
+      price: 'Custom',
+      period: 'contact us',
+      description: 'For large organizations',
+      features: [
+        'Unlimited AI agents',
+        'Enterprise analytics',
+        '24/7 dedicated support',
+        'Unlimited storage',
+        'Custom integrations',
+        'SLA guarantee',
+        'On-premise deployment'
+      ],
+      icon: Rocket,
+      gradient: 'from-orange-500 to-red-500',
+      borderColor: 'border-orange-500',
+      popular: false
     }
   ];
 
-  const handleSelectType = (type) => {
-    setSelectedType(type);
+  const handleSelectPlan = (planId) => {
+    setSelectedPlan(planId);
   };
 
   const handleContinue = async () => {
-    if (!selectedType) {
-      toast.error('Please select an account type');
-      return;
-    }
-
-    if (selectedType === 'personal') {
-      // Auto-create personal tenant and redirect to dashboard
-      await createPersonalTenant();
-    } else {
-      // Redirect to organization setup
-      navigate('/onboarding/organization-setup');
-    }
-  };
-
-  const createPersonalTenant = async () => {
     try {
       setIsCreating(true);
 
-      // Create personal tenant with user's name
-      const tenantData = {
-        name: `${user?.firstName || 'Personal'}'s Workspace`,
-        type: 'personal',
-        plan: 'free',
+      // Prepare tenant data based on type
+      const newTenantData = {
+        type: tenantType,
+        plan: selectedPlan,
         owner: user?.id || user?._id
       };
 
-      const tenant = await createTenant(tenantData);
+      if (tenantType === 'organization') {
+        // Use organization details from registration
+        newTenantData.name = organizationName || 'My Organization';
+        newTenantData.short_name = organizationDomain || organizationName?.toLowerCase().replace(/\s+/g, '-');
+      } else {
+        // Create personal workspace name
+        newTenantData.name = `${userFullName || user?.name || 'Personal'}'s Workspace`;
+        newTenantData.short_name = `${(userFullName || user?.name || 'user').toLowerCase().replace(/\s+/g, '-')}-workspace`;
+      }
+
+      // Create the tenant
+      const tenant = await createTenant(newTenantData);
 
       if (tenant) {
         // Set as current tenant
         await setCurrentTenant(tenant.id || tenant._id);
 
-        toast.success('Your personal workspace is ready!');
+        toast.success(
+          tenantType === 'organization'
+            ? 'Your organization is ready!'
+            : 'Your workspace is ready!'
+        );
 
         // Redirect to dashboard
         setTimeout(() => {
@@ -95,7 +130,7 @@ const TenantSetupPage = () => {
         }, 500);
       }
     } catch (error) {
-      console.error('Failed to create personal tenant:', error);
+      console.error('Failed to create tenant:', error);
       toast.error('Failed to create workspace. Please try again.');
     } finally {
       setIsCreating(false);
@@ -110,40 +145,43 @@ const TenantSetupPage = () => {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
       </div>
 
-      <div className="w-full max-w-5xl relative z-10">
+      <div className="w-full max-w-6xl relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-600 to-purple-600 rounded-2xl mb-4 shadow-lg">
             <Sparkles className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl font-bold text-secondary-900 mb-3">
-            Welcome to Aasim AI!
+            Choose Your Plan
           </h1>
           <p className="text-lg text-secondary-600">
-            What brings you here today?
+            {tenantType === 'organization'
+              ? `Setting up ${organizationName || 'your organization'}`
+              : 'Setting up your personal workspace'
+            }
           </p>
         </div>
 
-        {/* Tenant Type Selection Cards */}
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          {tenantTypes.map((type) => {
-            const Icon = type.icon;
-            const isSelected = selectedType === type.id;
+        {/* Plan Selection Cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-8">
+          {plans.map((plan) => {
+            const Icon = plan.icon;
+            const isSelected = selectedPlan === plan.id;
 
             return (
               <button
-                key={type.id}
-                onClick={() => handleSelectType(type.id)}
+                key={plan.id}
+                onClick={() => handleSelectPlan(plan.id)}
                 className={`
                   relative glass-card rounded-3xl p-8 text-left transition-all duration-300
                   ${isSelected
-                    ? `ring-4 ring-${type.borderColor.split('-')[1]}-500 shadow-2xl scale-[1.02]`
+                    ? 'ring-4 ring-primary-500 shadow-2xl scale-[1.02]'
                     : 'hover:shadow-xl hover:scale-[1.01]'
                   }
                 `}
               >
                 {/* Popular Badge */}
-                {type.popular && (
+                {plan.popular && (
                   <div className="absolute -top-3 -right-3">
                     <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
                       <Zap className="w-3 h-3" />
@@ -155,30 +193,34 @@ const TenantSetupPage = () => {
                 {/* Selection Indicator */}
                 {isSelected && (
                   <div className="absolute top-6 right-6">
-                    <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${type.gradient} flex items-center justify-center shadow-lg`}>
+                    <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${plan.gradient} flex items-center justify-center shadow-lg`}>
                       <CheckCircle className="w-5 h-5 text-white" />
                     </div>
                   </div>
                 )}
 
                 {/* Icon */}
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${type.gradient} flex items-center justify-center mb-6 shadow-lg`}>
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${plan.gradient} flex items-center justify-center mb-6 shadow-lg`}>
                   <Icon className="w-8 h-8 text-white" />
                 </div>
 
                 {/* Content */}
                 <h3 className="text-2xl font-bold text-secondary-900 mb-2">
-                  {type.title}
+                  {plan.name}
                 </h3>
+                <div className="mb-4">
+                  <span className="text-3xl font-bold text-secondary-900">{plan.price}</span>
+                  <span className="text-sm text-secondary-600 ml-2">/ {plan.period}</span>
+                </div>
                 <p className="text-secondary-600 mb-6">
-                  {type.description}
+                  {plan.description}
                 </p>
 
                 {/* Features */}
                 <ul className="space-y-3">
-                  {type.features.map((feature, index) => (
+                  {plan.features.map((feature, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <CheckCircle className={`w-5 h-5 ${type.iconColor} flex-shrink-0 mt-0.5`} />
+                      <CheckCircle className="w-5 h-5 text-primary-600 flex-shrink-0 mt-0.5" />
                       <span className="text-sm text-secondary-700">{feature}</span>
                     </li>
                   ))}
@@ -192,7 +234,7 @@ const TenantSetupPage = () => {
         <div className="flex justify-center">
           <Button
             onClick={handleContinue}
-            disabled={!selectedType || isCreating}
+            disabled={isCreating}
             className="px-12 py-4 text-lg font-semibold"
           >
             {isCreating ? (
@@ -202,14 +244,17 @@ const TenantSetupPage = () => {
               </span>
             ) : (
               <span className="flex items-center gap-2">
-                Continue
+                Continue to Dashboard
                 <ArrowRight className="w-5 h-5" />
               </span>
             )}
           </Button>
         </div>
 
-
+        {/* Info Text */}
+        <p className="text-center text-sm text-secondary-600 mt-6">
+          You can upgrade or downgrade your plan anytime from settings
+        </p>
       </div>
     </div>
   );

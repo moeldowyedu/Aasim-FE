@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 // Get API base URL from environment
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api/v1';
+// Force relative path to use Vite proxy
+const API_BASE_URL = '/api/v1';
+// const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/v1';
 
 console.log('🌐 API Configuration:', {
   baseURL: API_BASE_URL,
@@ -98,6 +100,8 @@ api.interceptors.response.use(
           console.error('🔒 Unauthorized access - redirecting to login');
           localStorage.removeItem('auth_token');
           localStorage.removeItem('user');
+          localStorage.removeItem('aasim-auth-storage');
+          localStorage.removeItem('aasim-tenant-storage');
           if (window.location.pathname !== '/login') {
             window.location.href = '/login';
           }

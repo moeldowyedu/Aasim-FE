@@ -62,6 +62,8 @@ apiClient.interceptors.response.use(
         localStorage.removeItem('auth_token');
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('user');
+        localStorage.removeItem('aasim-auth-storage');
+        localStorage.removeItem('aasim-tenant-storage');
         window.location.href = '/login';
         return Promise.reject(refreshError);
       }
