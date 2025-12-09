@@ -1,6 +1,6 @@
 // Platform Information
 export const PLATFORM = {
-  name: 'Aasim AI',
+  name: 'OBSOLIO AI',
   tagline: 'AI Precision. Human Control.',
   description: 'Build, Deploy, and Monetize Precision AI Agents',
   version: '2.0.0',

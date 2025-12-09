@@ -1,4 +1,4 @@
-export const translations = {
+﻿export const translations = {
   en: {
     // Header
     features: 'Features',
@@ -14,24 +14,24 @@ export const translations = {
     logout: 'Logout',
 
     // Hero Section
-    heroTitle: 'AASIM',
+    heroTitle: 'OBSOLIO',
     heroSubtitle: 'Your Precision AI Agent',
-    heroBenefits: 'Effortless • Unbiased • Cost-Effective',
+    heroBenefits: 'Effortless â€¢ Unbiased â€¢ Cost-Effective',
     heroDescription: 'Save 80% of your budget and 90% of your time with AI-powered evaluation.',
     heroDescription2: 'No human feelings. Just pure objectivity.',
     startFreeTrial: 'Start Free Trial',
     viewPricing: 'View Pricing',
     bookDemo: 'Book Your Demo Session',
 
-    // Why Aasim Section
-    whyAasimTitle: 'Why Aasim is Perfect',
+    // Why OBSOLIO Section
+    whyOBSOLIOTitle: 'Why OBSOLIO is Perfect',
     saveYourBudget: 'Save Your Budget',
     humanJudges: 'Human evaluators: $50-200+/hour',
-    aasimPrice: 'Aasim: $1/evaluation',
+    OBSOLIOPrice: 'OBSOLIO: $1/evaluation',
     costReduction: '80% cost reduction',
     saveYourTime: 'Save Your Time',
     humansTime: 'Humans: hours to days',
-    aasimTime: 'Aasim: minutes',
+    OBSOLIOTime: 'OBSOLIO: minutes',
     fasterTime: '90% faster',
     zeroHumanBias: 'Zero Human Bias',
     noFeelings: 'No feelings, no favoritism, no bad days',
@@ -95,10 +95,10 @@ export const translations = {
     // Testimonials Section
     testimonialsTitle: 'What Our Clients Say',
     testimonialsSubtitle: 'Trusted by leading organizations and professionals worldwide',
-    testimonial1Quote: 'Aasim has transformed how we evaluate student projects at ITI. The precision and consistency of AI-powered assessments have significantly improved our educational outcomes while reducing evaluation time by 70%.',
-    testimonial2Quote: 'As a startup founder, Aasim\'s code review agents have been invaluable. We\'ve maintained high code quality standards without the overhead of hiring additional senior developers. It\'s like having an expert reviewer available 24/7.',
-    testimonial3Quote: 'The precision and objectivity of Aasim\'s evaluations have helped us scale our competition platform globally. We can now handle thousands of submissions with consistent, fair assessments that participants trust.',
-    testimonial4Quote: 'Aasim\'s document review capabilities have streamlined our compliance processes. What used to take days now happens in hours, with greater accuracy and detailed reports that our legal team relies on.',
+    testimonial1Quote: 'OBSOLIO has transformed how we evaluate student projects at ITI. The precision and consistency of AI-powered assessments have significantly improved our educational outcomes while reducing evaluation time by 70%.',
+    testimonial2Quote: 'As a startup founder, OBSOLIO\'s code review agents have been invaluable. We\'ve maintained high code quality standards without the overhead of hiring additional senior developers. It\'s like having an expert reviewer available 24/7.',
+    testimonial3Quote: 'The precision and objectivity of OBSOLIO\'s evaluations have helped us scale our competition platform globally. We can now handle thousands of submissions with consistent, fair assessments that participants trust.',
+    testimonial4Quote: 'OBSOLIO\'s document review capabilities have streamlined our compliance processes. What used to take days now happens in hours, with greater accuracy and detailed reports that our legal team relies on.',
 
     // Industries Section
     industriesTitle: 'Industries We Serve',
@@ -123,18 +123,18 @@ export const translations = {
 
     // Industry Disclaimers
     industriesDisclaimersTitle: 'Important Notice',
-    lawDisclaimer: '⚖️ Law: Aasim is not a replacement for legal professionals. We only provide legal analysis and advisory support.',
-    healthcareDisclaimer: '🏥 Healthcare: Aasim is not a replacement for medical professionals and does not provide medical prescriptions. All analysis and recommendations must be reviewed with your healthcare provider.',
+    lawDisclaimer: 'âš–ï¸ Law: OBSOLIO is not a replacement for legal professionals. We only provide legal analysis and advisory support.',
+    healthcareDisclaimer: 'ðŸ¥ Healthcare: OBSOLIO is not a replacement for medical professionals and does not provide medical prescriptions. All analysis and recommendations must be reviewed with your healthcare provider.',
 
     // Human in the Loop Section
     humanLoopTitle: 'Worried about AI? We get it.',
-    humanLoopSubtitle: 'That\'s why we built Aasim with Human-in-the-Loop capability.',
+    humanLoopSubtitle: 'That\'s why we built OBSOLIO with Human-in-the-Loop capability.',
     fullyAutomated: 'Fully Automated',
-    fullyAutomatedDesc: 'Let Aasim handle everything. Fast, efficient, objective. AI makes all decisions automatically.',
+    fullyAutomatedDesc: 'Let OBSOLIO handle everything. Fast, efficient, objective. AI makes all decisions automatically.',
     humanReview: 'Human Review (On-Demand)',
     humanReviewDesc: 'Optional human oversight. You review and approve final decisions before they\'re finalized.',
     youControl: 'You stay in control.',
-    assistantNotReplacement: 'Aasim is your assistant, not your replacement.',
+    assistantNotReplacement: 'OBSOLIO is your assistant, not your replacement.',
 
     // Pricing Section
     pricingTitle: 'Pricing',
@@ -162,12 +162,12 @@ export const translations = {
 
     // Final CTA
     finalCtaTitle: 'Ready to Transform Your Evaluation Process?',
-    finalCtaSubtitle: 'Join hundreds of organizations saving time and money with Aasim',
-    noCredit: 'No credit card required • 5 free evaluations',
+    finalCtaSubtitle: 'Join hundreds of organizations saving time and money with OBSOLIO',
+    noCredit: 'No credit card required â€¢ 5 free evaluations',
 
     // Additional Testimonials
     testimonial5Quote: 'The AI-powered video analysis has revolutionized our interview process. We can now evaluate candidates objectively and consistently, eliminating unconscious bias while saving our HR team countless hours.',
-    testimonial6Quote: 'Implementing Aasim for our design portfolio reviews has been a game-changer. The detailed feedback helps our students improve significantly, and the consistency ensures everyone is evaluated fairly.',
+    testimonial6Quote: 'Implementing OBSOLIO for our design portfolio reviews has been a game-changer. The detailed feedback helps our students improve significantly, and the consistency ensures everyone is evaluated fairly.',
 
     // HomePage - Hire Personal Agent Section
     hirePersonalAgentTitle: 'Hire Your Personal Precision AI Agent',
@@ -293,7 +293,7 @@ export const translations = {
     criterionAccuracy: 'Accuracy',
     criterionCompleteness: 'Completeness',
     criterionOriginality: 'Originality',
-    mustEqual100Percent: '⚠️ Must equal 100%',
+    mustEqual100Percent: 'âš ï¸ Must equal 100%',
     apiIntegrationTitle2: 'API Integration',
     webhookUrlLabel: 'Webhook URL',
     webhookUrlPlaceholder: 'https://your-domain.com/webhook',
@@ -340,7 +340,7 @@ export const translations = {
     pausedStatus: 'paused',
     agentLibraryTitle: 'Agent Library',
     addAgentsHint2: 'Click to add agents to your workflow',
-    addedIndicator: '✓ Added',
+    addedIndicator: 'âœ“ Added',
 
     // Agent Scheduler
     agentSchedulerTitle: 'Agent Scheduler',
@@ -521,9 +521,9 @@ export const translations = {
 
     // Integration Page
     apiIntegrationPageTitle: 'API & Integration',
-    apiIntegrationPageDesc: 'Integrate Aasim AI Agents into your applications, websites, and workflows',
+    apiIntegrationPageDesc: 'Integrate OBSOLIO AI Agents into your applications, websites, and workflows',
     gettingStartedTitle: 'Getting Started',
-    gettingStartedDesc: 'Aasim provides multiple ways to integrate AI-powered evaluations into your applications, websites, and workflows. Choose the integration method that best fits your needs.',
+    gettingStartedDesc: 'OBSOLIO provides multiple ways to integrate AI-powered evaluations into your applications, websites, and workflows. Choose the integration method that best fits your needs.',
     restApiTitle: 'REST API',
     restApiDesc: 'Direct HTTP API for maximum flexibility and control',
     officialSdksTitle: 'Official SDKs',
@@ -533,7 +533,7 @@ export const translations = {
     embedWidgetTitle: 'Embed Widget',
     embedWidgetDesc: 'Drop-in widget for quick website integration',
     apiKeyManagementTitle: 'API Key Management',
-    apiKeyManagementDesc: 'Your API key is used to authenticate requests to the Aasim API. Keep it secure and never share it publicly.',
+    apiKeyManagementDesc: 'Your API key is used to authenticate requests to the OBSOLIO API. Keep it secure and never share it publicly.',
     securityNote: 'Security Note: Keep your API keys secure and never expose them in client-side code. Use environment variables and secure backend servers.',
     quickStartTitle: 'Quick Start',
     step1Description: 'Copy your API key from above',
@@ -541,7 +541,7 @@ export const translations = {
     step3Description: 'Test with our examples and documentation',
     step4Description: 'Receive real-time notifications and results',
     restApiEndpointsTitle: 'REST API Endpoints',
-    baseUrl: 'Base URL: https://api.aasim.ai',
+    baseUrl: 'Base URL: https://api.OBSOLIO.ai',
     requestResponseTitle: 'Request & Response',
     exampleRequest: 'Example Request',
     exampleResponse: 'Example Response',
@@ -549,14 +549,14 @@ export const translations = {
     webhookEventsDesc: 'Receive real-time notifications when evaluations complete, fail, or require human review',
     configureWebhookTitle: 'Configure Webhook',
     webhookUrlLabel2: 'Webhook URL',
-    webhookUrlPlaceholder2: 'https://your-domain.com/webhooks/aasim',
+    webhookUrlPlaceholder2: 'https://your-domain.com/webhooks/OBSOLIO',
     webhookUrlDesc: 'Events will be sent as POST requests to this URL',
     testWebhookButton: 'Test Webhook',
     saveConfigButton2: 'Save Configuration',
     webhookPayloadTitle: 'Webhook Payload Example',
-    signatureVerificationNote: 'Signature Verification: Verify the X-Aasim-Signature header to ensure webhook authenticity',
+    signatureVerificationNote: 'Signature Verification: Verify the X-OBSOLIO-Signature header to ensure webhook authenticity',
     officialSdksSection: 'Official SDKs',
-    officialSdksDesc2: 'Use our official SDKs to quickly integrate Aasim into your application',
+    officialSdksDesc2: 'Use our official SDKs to quickly integrate OBSOLIO into your application',
     jsNodejsTitle: 'JavaScript / Node.js',
     pythonTitle: 'Python',
     phpTitle: 'PHP',
@@ -564,7 +564,7 @@ export const translations = {
     viewDocumentationLink: 'View Documentation',
     codeExamplesTitle: 'Code Examples',
     integrationExamplesTitle: 'Integration Examples',
-    integrationExamplesDesc: 'Real-world examples of how to integrate Aasim into your applications',
+    integrationExamplesDesc: 'Real-world examples of how to integrate OBSOLIO into your applications',
     fileUploadIntegrationTitle: 'File Upload Integration',
     fileUploadIntegrationDesc: 'Automatically evaluate files uploaded to your application',
     viewExampleLink: 'View Example',
@@ -599,600 +599,600 @@ export const translations = {
   },
   ar: {
     // Header
-    features: 'المميزات',
-    useCases: 'مجالات الاستخدام',
-    login: 'تسجيل الدخول',
-    getStarted: 'ابدأ الآن',
-    dashboard: 'لوحة التحكم',
-    submissions: 'الطلبات المقدمة',
-    criteria: 'معايير التقييم',
-    admin: 'الإدارة',
-    profile: 'حسابي',
-    notifications: 'الإشعارات',
-    logout: 'تسجيل الخروج',
+    features: 'Ø§Ù„Ù…Ù…ÙŠØ²Ø§Øª',
+    useCases: 'Ù…Ø¬Ø§Ù„Ø§Øª Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…',
+    login: 'ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø¯Ø®ÙˆÙ„',
+    getStarted: 'Ø§Ø¨Ø¯Ø£ Ø§Ù„Ø¢Ù†',
+    dashboard: 'Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ…',
+    submissions: 'Ø§Ù„Ø·Ù„Ø¨Ø§Øª Ø§Ù„Ù…Ù‚Ø¯Ù…Ø©',
+    criteria: 'Ù…Ø¹Ø§ÙŠÙŠØ± Ø§Ù„ØªÙ‚ÙŠÙŠÙ…',
+    admin: 'Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©',
+    profile: 'Ø­Ø³Ø§Ø¨ÙŠ',
+    notifications: 'Ø§Ù„Ø¥Ø´Ø¹Ø§Ø±Ø§Øª',
+    logout: 'ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø±ÙˆØ¬',
 
     // Hero Section
-    heroTitle: 'عاصم',
-    heroSubtitle: 'مساعدك الذكي الدقيق للتقييم',
-    heroBenefits: 'سريع • محايد • موفّر',
-    heroDescription: 'وفّر 80% من ميزانيتك و 90% من وقتك باستخدام التقييم الذكي المدعوم بالذكاء الاصطناعي.',
-    heroDescription2: 'بدون تحيز، بدون مشاعر. موضوعية كاملة في كل تقييم.',
-    startFreeTrial: 'جرّب مجاناً',
-    viewPricing: 'الأسعار',
-    bookDemo: 'احجز جلسة عرض تجريبي',
+    heroTitle: 'Ø¹Ø§ØµÙ…',
+    heroSubtitle: 'Ù…Ø³Ø§Ø¹Ø¯Ùƒ Ø§Ù„Ø°ÙƒÙŠ Ø§Ù„Ø¯Ù‚ÙŠÙ‚ Ù„Ù„ØªÙ‚ÙŠÙŠÙ…',
+    heroBenefits: 'Ø³Ø±ÙŠØ¹ â€¢ Ù…Ø­Ø§ÙŠØ¯ â€¢ Ù…ÙˆÙÙ‘Ø±',
+    heroDescription: 'ÙˆÙÙ‘Ø± 80% Ù…Ù† Ù…ÙŠØ²Ø§Ù†ÙŠØªÙƒ Ùˆ 90% Ù…Ù† ÙˆÙ‚ØªÙƒ Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø°ÙƒÙŠ Ø§Ù„Ù…Ø¯Ø¹ÙˆÙ… Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ.',
+    heroDescription2: 'Ø¨Ø¯ÙˆÙ† ØªØ­ÙŠØ²ØŒ Ø¨Ø¯ÙˆÙ† Ù…Ø´Ø§Ø¹Ø±. Ù…ÙˆØ¶ÙˆØ¹ÙŠØ© ÙƒØ§Ù…Ù„Ø© ÙÙŠ ÙƒÙ„ ØªÙ‚ÙŠÙŠÙ….',
+    startFreeTrial: 'Ø¬Ø±Ù‘Ø¨ Ù…Ø¬Ø§Ù†Ø§Ù‹',
+    viewPricing: 'Ø§Ù„Ø£Ø³Ø¹Ø§Ø±',
+    bookDemo: 'Ø§Ø­Ø¬Ø² Ø¬Ù„Ø³Ø© Ø¹Ø±Ø¶ ØªØ¬Ø±ÙŠØ¨ÙŠ',
 
-    // Why Aasim Section
-    whyAasimTitle: 'ليه عاصم هو الحل الأمثل؟',
-    saveYourBudget: 'وفّر فلوسك',
-    humanJudges: 'المقيّمين البشريين: 50-200 دولار/ساعة',
-    aasimPrice: 'عاصم: 1 دولار/تقييم',
-    costReduction: 'توفير 80% من التكلفة',
-    saveYourTime: 'وفّر وقتك',
-    humansTime: 'البشر: من ساعات لأيام',
-    aasimTime: 'عاصم: دقائق',
-    fasterTime: 'أسرع بنسبة 90%',
-    zeroHumanBias: 'موضوعية تامة',
-    noFeelings: 'بدون تحيز، بدون محاباة، بدون مزاج',
-    objectiveBased: '100% معايير موضوعية',
-    consistentSubmissions: 'نفس المعايير لكل الطلبات',
+    // Why OBSOLIO Section
+    whyOBSOLIOTitle: 'Ù„ÙŠÙ‡ Ø¹Ø§ØµÙ… Ù‡Ùˆ Ø§Ù„Ø­Ù„ Ø§Ù„Ø£Ù…Ø«Ù„ØŸ',
+    saveYourBudget: 'ÙˆÙÙ‘Ø± ÙÙ„ÙˆØ³Ùƒ',
+    humanJudges: 'Ø§Ù„Ù…Ù‚ÙŠÙ‘Ù…ÙŠÙ† Ø§Ù„Ø¨Ø´Ø±ÙŠÙŠÙ†: 50-200 Ø¯ÙˆÙ„Ø§Ø±/Ø³Ø§Ø¹Ø©',
+    OBSOLIOPrice: 'Ø¹Ø§ØµÙ…: 1 Ø¯ÙˆÙ„Ø§Ø±/ØªÙ‚ÙŠÙŠÙ…',
+    costReduction: 'ØªÙˆÙÙŠØ± 80% Ù…Ù† Ø§Ù„ØªÙƒÙ„ÙØ©',
+    saveYourTime: 'ÙˆÙÙ‘Ø± ÙˆÙ‚ØªÙƒ',
+    humansTime: 'Ø§Ù„Ø¨Ø´Ø±: Ù…Ù† Ø³Ø§Ø¹Ø§Øª Ù„Ø£ÙŠØ§Ù…',
+    OBSOLIOTime: 'Ø¹Ø§ØµÙ…: Ø¯Ù‚Ø§Ø¦Ù‚',
+    fasterTime: 'Ø£Ø³Ø±Ø¹ Ø¨Ù†Ø³Ø¨Ø© 90%',
+    zeroHumanBias: 'Ù…ÙˆØ¶ÙˆØ¹ÙŠØ© ØªØ§Ù…Ø©',
+    noFeelings: 'Ø¨Ø¯ÙˆÙ† ØªØ­ÙŠØ²ØŒ Ø¨Ø¯ÙˆÙ† Ù…Ø­Ø§Ø¨Ø§Ø©ØŒ Ø¨Ø¯ÙˆÙ† Ù…Ø²Ø§Ø¬',
+    objectiveBased: '100% Ù…Ø¹Ø§ÙŠÙŠØ± Ù…ÙˆØ¶ÙˆØ¹ÙŠØ©',
+    consistentSubmissions: 'Ù†ÙØ³ Ø§Ù„Ù…Ø¹Ø§ÙŠÙŠØ± Ù„ÙƒÙ„ Ø§Ù„Ø·Ù„Ø¨Ø§Øª',
 
     // AI Agents Section
-    aiAgentsTitle: 'اختر مساعدك الذكي الدقيق',
-    aiAgentsSubtitle: 'اختر المساعد المتخصص اللي يناسب احتياجاتك. ممكن تختار واحد أو أكتر، وتخصصه حسب متطلباتك الخاصة.',
+    aiAgentsTitle: 'Ø§Ø®ØªØ± Ù…Ø³Ø§Ø¹Ø¯Ùƒ Ø§Ù„Ø°ÙƒÙŠ Ø§Ù„Ø¯Ù‚ÙŠÙ‚',
+    aiAgentsSubtitle: 'Ø§Ø®ØªØ± Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ Ø§Ù„Ù…ØªØ®ØµØµ Ø§Ù„Ù„ÙŠ ÙŠÙ†Ø§Ø³Ø¨ Ø§Ø­ØªÙŠØ§Ø¬Ø§ØªÙƒ. Ù…Ù…ÙƒÙ† ØªØ®ØªØ§Ø± ÙˆØ§Ø­Ø¯ Ø£Ùˆ Ø£ÙƒØªØ±ØŒ ÙˆØªØ®ØµØµÙ‡ Ø­Ø³Ø¨ Ù…ØªØ·Ù„Ø¨Ø§ØªÙƒ Ø§Ù„Ø®Ø§ØµØ©.',
 
     // Agent 1
-    agent1Title: 'تحليل دقيق للفيديوهات والتسجيلات الصوتية',
-    agent1Description: 'راجع العروض التقديمية، المقابلات، والمحتوى المسجل بتحليل ذكي متقدم.',
-    agent1Feature1: 'تحليل الكلام والنطق',
-    agent1Feature2: 'التقييم البصري',
-    agent1Feature3: 'لغة الجسد',
-    agent1Feature4: 'مهارات العرض والتقديم',
+    agent1Title: 'ØªØ­Ù„ÙŠÙ„ Ø¯Ù‚ÙŠÙ‚ Ù„Ù„ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª ÙˆØ§Ù„ØªØ³Ø¬ÙŠÙ„Ø§Øª Ø§Ù„ØµÙˆØªÙŠØ©',
+    agent1Description: 'Ø±Ø§Ø¬Ø¹ Ø§Ù„Ø¹Ø±ÙˆØ¶ Ø§Ù„ØªÙ‚Ø¯ÙŠÙ…ÙŠØ©ØŒ Ø§Ù„Ù…Ù‚Ø§Ø¨Ù„Ø§ØªØŒ ÙˆØ§Ù„Ù…Ø­ØªÙˆÙ‰ Ø§Ù„Ù…Ø³Ø¬Ù„ Ø¨ØªØ­Ù„ÙŠÙ„ Ø°ÙƒÙŠ Ù…ØªÙ‚Ø¯Ù….',
+    agent1Feature1: 'ØªØ­Ù„ÙŠÙ„ Ø§Ù„ÙƒÙ„Ø§Ù… ÙˆØ§Ù„Ù†Ø·Ù‚',
+    agent1Feature2: 'Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø¨ØµØ±ÙŠ',
+    agent1Feature3: 'Ù„ØºØ© Ø§Ù„Ø¬Ø³Ø¯',
+    agent1Feature4: 'Ù…Ù‡Ø§Ø±Ø§Øª Ø§Ù„Ø¹Ø±Ø¶ ÙˆØ§Ù„ØªÙ‚Ø¯ÙŠÙ…',
 
     // Agent 2
-    agent2Title: 'مراجعة دقيقة للمستندات والصور',
-    agent2Description: 'حلل المستندات (PDF، Word) والصور (JPG، PNG) بفهم ذكي للمحتوى.',
-    agent2Feature1: 'تحليل المستندات',
-    agent2Feature2: 'التعرف على الصور',
-    agent2Feature3: 'استخراج النصوص',
-    agent2Feature4: 'دعم ملفات متعددة',
+    agent2Title: 'Ù…Ø±Ø§Ø¬Ø¹Ø© Ø¯Ù‚ÙŠÙ‚Ø© Ù„Ù„Ù…Ø³ØªÙ†Ø¯Ø§Øª ÙˆØ§Ù„ØµÙˆØ±',
+    agent2Description: 'Ø­Ù„Ù„ Ø§Ù„Ù…Ø³ØªÙ†Ø¯Ø§Øª (PDFØŒ Word) ÙˆØ§Ù„ØµÙˆØ± (JPGØŒ PNG) Ø¨ÙÙ‡Ù… Ø°ÙƒÙŠ Ù„Ù„Ù…Ø­ØªÙˆÙ‰.',
+    agent2Feature1: 'ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ù…Ø³ØªÙ†Ø¯Ø§Øª',
+    agent2Feature2: 'Ø§Ù„ØªØ¹Ø±Ù Ø¹Ù„Ù‰ Ø§Ù„ØµÙˆØ±',
+    agent2Feature3: 'Ø§Ø³ØªØ®Ø±Ø§Ø¬ Ø§Ù„Ù†ØµÙˆØµ',
+    agent2Feature4: 'Ø¯Ø¹Ù… Ù…Ù„ÙØ§Øª Ù…ØªØ¹Ø¯Ø¯Ø©',
 
     // Agent 3
-    agent3Title: 'تقييم دقيق للأكواد البرمجية',
-    agent3Description: 'راجع المشاريع البرمجية وجودة الكود وأفضل الممارسات في كل لغات البرمجة.',
-    agent3Feature1: 'جودة الكود',
-    agent3Feature2: 'أفضل الممارسات',
-    agent3Feature3: 'التوثيق',
-    agent3Feature4: 'الأداء والكفاءة',
+    agent3Title: 'ØªÙ‚ÙŠÙŠÙ… Ø¯Ù‚ÙŠÙ‚ Ù„Ù„Ø£ÙƒÙˆØ§Ø¯ Ø§Ù„Ø¨Ø±Ù…Ø¬ÙŠØ©',
+    agent3Description: 'Ø±Ø§Ø¬Ø¹ Ø§Ù„Ù…Ø´Ø§Ø±ÙŠØ¹ Ø§Ù„Ø¨Ø±Ù…Ø¬ÙŠØ© ÙˆØ¬ÙˆØ¯Ø© Ø§Ù„ÙƒÙˆØ¯ ÙˆØ£ÙØ¶Ù„ Ø§Ù„Ù…Ù…Ø§Ø±Ø³Ø§Øª ÙÙŠ ÙƒÙ„ Ù„ØºØ§Øª Ø§Ù„Ø¨Ø±Ù…Ø¬Ø©.',
+    agent3Feature1: 'Ø¬ÙˆØ¯Ø© Ø§Ù„ÙƒÙˆØ¯',
+    agent3Feature2: 'Ø£ÙØ¶Ù„ Ø§Ù„Ù…Ù…Ø§Ø±Ø³Ø§Øª',
+    agent3Feature3: 'Ø§Ù„ØªÙˆØ«ÙŠÙ‚',
+    agent3Feature4: 'Ø§Ù„Ø£Ø¯Ø§Ø¡ ÙˆØ§Ù„ÙƒÙØ§Ø¡Ø©',
 
     // Agent 4
-    agent4Title: 'معايير تقييم مخصصة',
-    agent4Description: 'حدد معايير التقييم ونظام التسجيل الخاص بيك حسب احتياجاتك.',
-    agent4Feature1: 'معايير مخصصة',
-    agent4Feature2: 'نظام تسجيل مرن',
-    agent4Feature3: 'أوزان للمعايير',
-    agent4Feature4: 'دعم جميع الصيغ',
+    agent4Title: 'Ù…Ø¹Ø§ÙŠÙŠØ± ØªÙ‚ÙŠÙŠÙ… Ù…Ø®ØµØµØ©',
+    agent4Description: 'Ø­Ø¯Ø¯ Ù…Ø¹Ø§ÙŠÙŠØ± Ø§Ù„ØªÙ‚ÙŠÙŠÙ… ÙˆÙ†Ø¸Ø§Ù… Ø§Ù„ØªØ³Ø¬ÙŠÙ„ Ø§Ù„Ø®Ø§Øµ Ø¨ÙŠÙƒ Ø­Ø³Ø¨ Ø§Ø­ØªÙŠØ§Ø¬Ø§ØªÙƒ.',
+    agent4Feature1: 'Ù…Ø¹Ø§ÙŠÙŠØ± Ù…Ø®ØµØµØ©',
+    agent4Feature2: 'Ù†Ø¸Ø§Ù… ØªØ³Ø¬ÙŠÙ„ Ù…Ø±Ù†',
+    agent4Feature3: 'Ø£ÙˆØ²Ø§Ù† Ù„Ù„Ù…Ø¹Ø§ÙŠÙŠØ±',
+    agent4Feature4: 'Ø¯Ø¹Ù… Ø¬Ù…ÙŠØ¹ Ø§Ù„ØµÙŠØº',
 
     // Agent 5
-    agent5Title: 'إنشاء التقارير التفصيلية',
-    agent5Description: 'احصل على تقارير تقييم شاملة مع تحليل تفصيلي وتوصيات للتحسين.',
-    agent5Feature1: 'ملاحظات تفصيلية',
-    agent5Feature2: 'تفصيل الدرجات',
-    agent5Feature3: 'توصيات للتحسين',
-    agent5Feature4: 'خيارات للتصدير',
+    agent5Title: 'Ø¥Ù†Ø´Ø§Ø¡ Ø§Ù„ØªÙ‚Ø§Ø±ÙŠØ± Ø§Ù„ØªÙØµÙŠÙ„ÙŠØ©',
+    agent5Description: 'Ø§Ø­ØµÙ„ Ø¹Ù„Ù‰ ØªÙ‚Ø§Ø±ÙŠØ± ØªÙ‚ÙŠÙŠÙ… Ø´Ø§Ù…Ù„Ø© Ù…Ø¹ ØªØ­Ù„ÙŠÙ„ ØªÙØµÙŠÙ„ÙŠ ÙˆØªÙˆØµÙŠØ§Øª Ù„Ù„ØªØ­Ø³ÙŠÙ†.',
+    agent5Feature1: 'Ù…Ù„Ø§Ø­Ø¸Ø§Øª ØªÙØµÙŠÙ„ÙŠØ©',
+    agent5Feature2: 'ØªÙØµÙŠÙ„ Ø§Ù„Ø¯Ø±Ø¬Ø§Øª',
+    agent5Feature3: 'ØªÙˆØµÙŠØ§Øª Ù„Ù„ØªØ­Ø³ÙŠÙ†',
+    agent5Feature4: 'Ø®ÙŠØ§Ø±Ø§Øª Ù„Ù„ØªØµØ¯ÙŠØ±',
 
     // Agent 6
-    agent6Title: 'موضوعية ومعايير ثابتة',
-    agent6Description: 'اضمن تقييم عادل وموضوعي لكل الطلبات بنفس المعايير.',
-    agent6Feature1: 'إلغاء التحيز',
-    agent6Feature2: 'تقييم عادل',
-    agent6Feature3: 'معايير ثابتة',
-    agent6Feature4: 'شفافية كاملة',
+    agent6Title: 'Ù…ÙˆØ¶ÙˆØ¹ÙŠØ© ÙˆÙ…Ø¹Ø§ÙŠÙŠØ± Ø«Ø§Ø¨ØªØ©',
+    agent6Description: 'Ø§Ø¶Ù…Ù† ØªÙ‚ÙŠÙŠÙ… Ø¹Ø§Ø¯Ù„ ÙˆÙ…ÙˆØ¶ÙˆØ¹ÙŠ Ù„ÙƒÙ„ Ø§Ù„Ø·Ù„Ø¨Ø§Øª Ø¨Ù†ÙØ³ Ø§Ù„Ù…Ø¹Ø§ÙŠÙŠØ±.',
+    agent6Feature1: 'Ø¥Ù„ØºØ§Ø¡ Ø§Ù„ØªØ­ÙŠØ²',
+    agent6Feature2: 'ØªÙ‚ÙŠÙŠÙ… Ø¹Ø§Ø¯Ù„',
+    agent6Feature3: 'Ù…Ø¹Ø§ÙŠÙŠØ± Ø«Ø§Ø¨ØªØ©',
+    agent6Feature4: 'Ø´ÙØ§ÙÙŠØ© ÙƒØ§Ù…Ù„Ø©',
 
-    customization: 'خصص المساعدين الأذكياء حسب بلدك أو مجال عملك، أو ارفع بياناتك الخاصة للتدريب المتخصص.',
+    customization: 'Ø®ØµØµ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø§Ù„Ø£Ø°ÙƒÙŠØ§Ø¡ Ø­Ø³Ø¨ Ø¨Ù„Ø¯Ùƒ Ø£Ùˆ Ù…Ø¬Ø§Ù„ Ø¹Ù…Ù„ÙƒØŒ Ø£Ùˆ Ø§Ø±ÙØ¹ Ø¨ÙŠØ§Ù†Ø§ØªÙƒ Ø§Ù„Ø®Ø§ØµØ© Ù„Ù„ØªØ¯Ø±ÙŠØ¨ Ø§Ù„Ù…ØªØ®ØµØµ.',
 
     // Testimonials Section
-    testimonialsTitle: 'آراء عملائنا',
-    testimonialsSubtitle: 'موثوق به من قبل مؤسسات ومهنيين رائدين في جميع أنحاء العالم',
-    testimonial1Quote: 'عاصم غيّر تماماً طريقة تقييمنا لمشاريع الطلاب في ITI. الدقة والاتساق في التقييمات المدعومة بالذكاء الاصطناعي حسّنت بشكل كبير نتائجنا التعليمية مع تقليل وقت التقييم بنسبة 70%.',
-    testimonial2Quote: 'كمؤسس شركة ناشئة، كانت مساعدات مراجعة الكود من عاصم لا تقدر بثمن. حافظنا على معايير عالية لجودة الكود بدون تكلفة توظيف مطورين كبار إضافيين. إنه مثل وجود مراجع خبير متاح 24/7.',
-    testimonial3Quote: 'الدقة والموضوعية في تقييمات عاصم ساعدتنا في توسيع منصة المسابقات عالمياً. يمكننا الآن التعامل مع آلاف الطلبات مع تقييمات متسقة وعادلة يثق بها المشاركون.',
-    testimonial4Quote: 'قدرات مراجعة المستندات من عاصم بسّطت عمليات الامتثال لدينا. ما كان يستغرق أياماً يحدث الآن في ساعات، مع دقة أكبر وتقارير مفصلة يعتمد عليها فريقنا القانوني.',
+    testimonialsTitle: 'Ø¢Ø±Ø§Ø¡ Ø¹Ù…Ù„Ø§Ø¦Ù†Ø§',
+    testimonialsSubtitle: 'Ù…ÙˆØ«ÙˆÙ‚ Ø¨Ù‡ Ù…Ù† Ù‚Ø¨Ù„ Ù…Ø¤Ø³Ø³Ø§Øª ÙˆÙ…Ù‡Ù†ÙŠÙŠÙ† Ø±Ø§Ø¦Ø¯ÙŠÙ† ÙÙŠ Ø¬Ù…ÙŠØ¹ Ø£Ù†Ø­Ø§Ø¡ Ø§Ù„Ø¹Ø§Ù„Ù…',
+    testimonial1Quote: 'Ø¹Ø§ØµÙ… ØºÙŠÙ‘Ø± ØªÙ…Ø§Ù…Ø§Ù‹ Ø·Ø±ÙŠÙ‚Ø© ØªÙ‚ÙŠÙŠÙ…Ù†Ø§ Ù„Ù…Ø´Ø§Ø±ÙŠØ¹ Ø§Ù„Ø·Ù„Ø§Ø¨ ÙÙŠ ITI. Ø§Ù„Ø¯Ù‚Ø© ÙˆØ§Ù„Ø§ØªØ³Ø§Ù‚ ÙÙŠ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…Ø§Øª Ø§Ù„Ù…Ø¯Ø¹ÙˆÙ…Ø© Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ø­Ø³Ù‘Ù†Øª Ø¨Ø´ÙƒÙ„ ÙƒØ¨ÙŠØ± Ù†ØªØ§Ø¦Ø¬Ù†Ø§ Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ© Ù…Ø¹ ØªÙ‚Ù„ÙŠÙ„ ÙˆÙ‚Øª Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø¨Ù†Ø³Ø¨Ø© 70%.',
+    testimonial2Quote: 'ÙƒÙ…Ø¤Ø³Ø³ Ø´Ø±ÙƒØ© Ù†Ø§Ø´Ø¦Ø©ØŒ ÙƒØ§Ù†Øª Ù…Ø³Ø§Ø¹Ø¯Ø§Øª Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„ÙƒÙˆØ¯ Ù…Ù† Ø¹Ø§ØµÙ… Ù„Ø§ ØªÙ‚Ø¯Ø± Ø¨Ø«Ù…Ù†. Ø­Ø§ÙØ¸Ù†Ø§ Ø¹Ù„Ù‰ Ù…Ø¹Ø§ÙŠÙŠØ± Ø¹Ø§Ù„ÙŠØ© Ù„Ø¬ÙˆØ¯Ø© Ø§Ù„ÙƒÙˆØ¯ Ø¨Ø¯ÙˆÙ† ØªÙƒÙ„ÙØ© ØªÙˆØ¸ÙŠÙ Ù…Ø·ÙˆØ±ÙŠÙ† ÙƒØ¨Ø§Ø± Ø¥Ø¶Ø§ÙÙŠÙŠÙ†. Ø¥Ù†Ù‡ Ù…Ø«Ù„ ÙˆØ¬ÙˆØ¯ Ù…Ø±Ø§Ø¬Ø¹ Ø®Ø¨ÙŠØ± Ù…ØªØ§Ø­ 24/7.',
+    testimonial3Quote: 'Ø§Ù„Ø¯Ù‚Ø© ÙˆØ§Ù„Ù…ÙˆØ¶ÙˆØ¹ÙŠØ© ÙÙŠ ØªÙ‚ÙŠÙŠÙ…Ø§Øª Ø¹Ø§ØµÙ… Ø³Ø§Ø¹Ø¯ØªÙ†Ø§ ÙÙŠ ØªÙˆØ³ÙŠØ¹ Ù…Ù†ØµØ© Ø§Ù„Ù…Ø³Ø§Ø¨Ù‚Ø§Øª Ø¹Ø§Ù„Ù…ÙŠØ§Ù‹. ÙŠÙ…ÙƒÙ†Ù†Ø§ Ø§Ù„Ø¢Ù† Ø§Ù„ØªØ¹Ø§Ù…Ù„ Ù…Ø¹ Ø¢Ù„Ø§Ù Ø§Ù„Ø·Ù„Ø¨Ø§Øª Ù…Ø¹ ØªÙ‚ÙŠÙŠÙ…Ø§Øª Ù…ØªØ³Ù‚Ø© ÙˆØ¹Ø§Ø¯Ù„Ø© ÙŠØ«Ù‚ Ø¨Ù‡Ø§ Ø§Ù„Ù…Ø´Ø§Ø±ÙƒÙˆÙ†.',
+    testimonial4Quote: 'Ù‚Ø¯Ø±Ø§Øª Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ù…Ø³ØªÙ†Ø¯Ø§Øª Ù…Ù† Ø¹Ø§ØµÙ… Ø¨Ø³Ù‘Ø·Øª Ø¹Ù…Ù„ÙŠØ§Øª Ø§Ù„Ø§Ù…ØªØ«Ø§Ù„ Ù„Ø¯ÙŠÙ†Ø§. Ù…Ø§ ÙƒØ§Ù† ÙŠØ³ØªØºØ±Ù‚ Ø£ÙŠØ§Ù…Ø§Ù‹ ÙŠØ­Ø¯Ø« Ø§Ù„Ø¢Ù† ÙÙŠ Ø³Ø§Ø¹Ø§ØªØŒ Ù…Ø¹ Ø¯Ù‚Ø© Ø£ÙƒØ¨Ø± ÙˆØªÙ‚Ø§Ø±ÙŠØ± Ù…ÙØµÙ„Ø© ÙŠØ¹ØªÙ…Ø¯ Ø¹Ù„ÙŠÙ‡Ø§ ÙØ±ÙŠÙ‚Ù†Ø§ Ø§Ù„Ù‚Ø§Ù†ÙˆÙ†ÙŠ.',
 
     // Industries Section
-    industriesTitle: 'المجالات اللي بنخدمها',
-    education: 'التعليم',
-    technology: 'التكنولوجيا',
-    law: 'القانون',
-    healthcare: 'الرعاية الصحية',
-    competitions: 'المسابقات',
-    events: 'الفعاليات والمؤتمرات',
-    business: 'الأعمال',
-    creative: 'الإبداع والفنون',
-    realEstate: 'العقارات والممتلكات',
-    construction: 'البناء والهندسة',
-    hospitality: 'الضيافة والسياحة',
-    transportation: 'النقل والخدمات اللوجستية',
-    energy: 'الطاقة والمرافق',
-    media: 'الإعلام والترفيه',
-    nonprofit: 'المنظمات غير الربحية والخدمات الاجتماعية',
-    agriculture: 'الزراعة والخدمات الغذائية',
-    manufacturing: 'التصنيع والصناعة',
-    government: 'الحكومة والقطاع العام',
+    industriesTitle: 'Ø§Ù„Ù…Ø¬Ø§Ù„Ø§Øª Ø§Ù„Ù„ÙŠ Ø¨Ù†Ø®Ø¯Ù…Ù‡Ø§',
+    education: 'Ø§Ù„ØªØ¹Ù„ÙŠÙ…',
+    technology: 'Ø§Ù„ØªÙƒÙ†ÙˆÙ„ÙˆØ¬ÙŠØ§',
+    law: 'Ø§Ù„Ù‚Ø§Ù†ÙˆÙ†',
+    healthcare: 'Ø§Ù„Ø±Ø¹Ø§ÙŠØ© Ø§Ù„ØµØ­ÙŠØ©',
+    competitions: 'Ø§Ù„Ù…Ø³Ø§Ø¨Ù‚Ø§Øª',
+    events: 'Ø§Ù„ÙØ¹Ø§Ù„ÙŠØ§Øª ÙˆØ§Ù„Ù…Ø¤ØªÙ…Ø±Ø§Øª',
+    business: 'Ø§Ù„Ø£Ø¹Ù…Ø§Ù„',
+    creative: 'Ø§Ù„Ø¥Ø¨Ø¯Ø§Ø¹ ÙˆØ§Ù„ÙÙ†ÙˆÙ†',
+    realEstate: 'Ø§Ù„Ø¹Ù‚Ø§Ø±Ø§Øª ÙˆØ§Ù„Ù…Ù…ØªÙ„ÙƒØ§Øª',
+    construction: 'Ø§Ù„Ø¨Ù†Ø§Ø¡ ÙˆØ§Ù„Ù‡Ù†Ø¯Ø³Ø©',
+    hospitality: 'Ø§Ù„Ø¶ÙŠØ§ÙØ© ÙˆØ§Ù„Ø³ÙŠØ§Ø­Ø©',
+    transportation: 'Ø§Ù„Ù†Ù‚Ù„ ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ù„ÙˆØ¬Ø³ØªÙŠØ©',
+    energy: 'Ø§Ù„Ø·Ø§Ù‚Ø© ÙˆØ§Ù„Ù…Ø±Ø§ÙÙ‚',
+    media: 'Ø§Ù„Ø¥Ø¹Ù„Ø§Ù… ÙˆØ§Ù„ØªØ±ÙÙŠÙ‡',
+    nonprofit: 'Ø§Ù„Ù…Ù†Ø¸Ù…Ø§Øª ØºÙŠØ± Ø§Ù„Ø±Ø¨Ø­ÙŠØ© ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª Ø§Ù„Ø§Ø¬ØªÙ…Ø§Ø¹ÙŠØ©',
+    agriculture: 'Ø§Ù„Ø²Ø±Ø§Ø¹Ø© ÙˆØ§Ù„Ø®Ø¯Ù…Ø§Øª Ø§Ù„ØºØ°Ø§Ø¦ÙŠØ©',
+    manufacturing: 'Ø§Ù„ØªØµÙ†ÙŠØ¹ ÙˆØ§Ù„ØµÙ†Ø§Ø¹Ø©',
+    government: 'Ø§Ù„Ø­ÙƒÙˆÙ…Ø© ÙˆØ§Ù„Ù‚Ø·Ø§Ø¹ Ø§Ù„Ø¹Ø§Ù…',
 
     // Industry Disclaimers
-    industriesDisclaimersTitle: 'تنويه هام',
-    lawDisclaimer: '⚖️ القانون: عاصم لا يمثل بديلاً عن المهنيين القانونيين. نحن نقدم فقط تحليل واستشارات قانونية مساعدة.',
-    healthcareDisclaimer: '🏥 الرعاية الصحية: عاصم ليس بديلاً عن المهنيين الطبيين ولا يقدم وصفات علاجية. كل التحليلات والاستشارات يجب مراجعتها مع طبيبك المختص.',
+    industriesDisclaimersTitle: 'ØªÙ†ÙˆÙŠÙ‡ Ù‡Ø§Ù…',
+    lawDisclaimer: 'âš–ï¸ Ø§Ù„Ù‚Ø§Ù†ÙˆÙ†: Ø¹Ø§ØµÙ… Ù„Ø§ ÙŠÙ…Ø«Ù„ Ø¨Ø¯ÙŠÙ„Ø§Ù‹ Ø¹Ù† Ø§Ù„Ù…Ù‡Ù†ÙŠÙŠÙ† Ø§Ù„Ù‚Ø§Ù†ÙˆÙ†ÙŠÙŠÙ†. Ù†Ø­Ù† Ù†Ù‚Ø¯Ù… ÙÙ‚Ø· ØªØ­Ù„ÙŠÙ„ ÙˆØ§Ø³ØªØ´Ø§Ø±Ø§Øª Ù‚Ø§Ù†ÙˆÙ†ÙŠØ© Ù…Ø³Ø§Ø¹Ø¯Ø©.',
+    healthcareDisclaimer: 'ðŸ¥ Ø§Ù„Ø±Ø¹Ø§ÙŠØ© Ø§Ù„ØµØ­ÙŠØ©: Ø¹Ø§ØµÙ… Ù„ÙŠØ³ Ø¨Ø¯ÙŠÙ„Ø§Ù‹ Ø¹Ù† Ø§Ù„Ù…Ù‡Ù†ÙŠÙŠÙ† Ø§Ù„Ø·Ø¨ÙŠÙŠÙ† ÙˆÙ„Ø§ ÙŠÙ‚Ø¯Ù… ÙˆØµÙØ§Øª Ø¹Ù„Ø§Ø¬ÙŠØ©. ÙƒÙ„ Ø§Ù„ØªØ­Ù„ÙŠÙ„Ø§Øª ÙˆØ§Ù„Ø§Ø³ØªØ´Ø§Ø±Ø§Øª ÙŠØ¬Ø¨ Ù…Ø±Ø§Ø¬Ø¹ØªÙ‡Ø§ Ù…Ø¹ Ø·Ø¨ÙŠØ¨Ùƒ Ø§Ù„Ù…Ø®ØªØµ.',
 
     // Human in the Loop Section
-    humanLoopTitle: 'قلقان من الاعتماد الكامل على الذكاء الاصطناعي؟',
-    humanLoopSubtitle: 'عشان كده بنيناه بخاصية المراجعة البشرية',
-    fullyAutomated: 'تلقائي بالكامل',
-    fullyAutomatedDesc: 'خلّي عاصم يتولى كل حاجة. سريع، فعّال، وموضوعي. الذكاء الاصطناعي بياخد كل القرارات تلقائياً.',
-    humanReview: 'مراجعة بشرية (عند الطلب)',
-    humanReviewDesc: 'إشراف بشري اختياري. انت اللي بتراجع وتوافق على القرارات النهائية قبل ما تتنفذ.',
-    youControl: 'انت صاحب القرار.',
-    assistantNotReplacement: 'عاصم مساعد ليك، مش بديل عنك.',
+    humanLoopTitle: 'Ù‚Ù„Ù‚Ø§Ù† Ù…Ù† Ø§Ù„Ø§Ø¹ØªÙ…Ø§Ø¯ Ø§Ù„ÙƒØ§Ù…Ù„ Ø¹Ù„Ù‰ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠØŸ',
+    humanLoopSubtitle: 'Ø¹Ø´Ø§Ù† ÙƒØ¯Ù‡ Ø¨Ù†ÙŠÙ†Ø§Ù‡ Ø¨Ø®Ø§ØµÙŠØ© Ø§Ù„Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ø¨Ø´Ø±ÙŠØ©',
+    fullyAutomated: 'ØªÙ„Ù‚Ø§Ø¦ÙŠ Ø¨Ø§Ù„ÙƒØ§Ù…Ù„',
+    fullyAutomatedDesc: 'Ø®Ù„Ù‘ÙŠ Ø¹Ø§ØµÙ… ÙŠØªÙˆÙ„Ù‰ ÙƒÙ„ Ø­Ø§Ø¬Ø©. Ø³Ø±ÙŠØ¹ØŒ ÙØ¹Ù‘Ø§Ù„ØŒ ÙˆÙ…ÙˆØ¶ÙˆØ¹ÙŠ. Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ø¨ÙŠØ§Ø®Ø¯ ÙƒÙ„ Ø§Ù„Ù‚Ø±Ø§Ø±Ø§Øª ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹.',
+    humanReview: 'Ù…Ø±Ø§Ø¬Ø¹Ø© Ø¨Ø´Ø±ÙŠØ© (Ø¹Ù†Ø¯ Ø§Ù„Ø·Ù„Ø¨)',
+    humanReviewDesc: 'Ø¥Ø´Ø±Ø§Ù Ø¨Ø´Ø±ÙŠ Ø§Ø®ØªÙŠØ§Ø±ÙŠ. Ø§Ù†Øª Ø§Ù„Ù„ÙŠ Ø¨ØªØ±Ø§Ø¬Ø¹ ÙˆØªÙˆØ§ÙÙ‚ Ø¹Ù„Ù‰ Ø§Ù„Ù‚Ø±Ø§Ø±Ø§Øª Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠØ© Ù‚Ø¨Ù„ Ù…Ø§ ØªØªÙ†ÙØ°.',
+    youControl: 'Ø§Ù†Øª ØµØ§Ø­Ø¨ Ø§Ù„Ù‚Ø±Ø§Ø±.',
+    assistantNotReplacement: 'Ø¹Ø§ØµÙ… Ù…Ø³Ø§Ø¹Ø¯ Ù„ÙŠÙƒØŒ Ù…Ø´ Ø¨Ø¯ÙŠÙ„ Ø¹Ù†Ùƒ.',
 
     // Pricing Section
-    pricingTitle: 'الأسعار',
-    pricingSubtitle: 'شوف هتوفر قد إيه مقارنة بالمقيّمين البشريين',
-    smallBusiness: 'الأعمال الصغيرة',
-    perMonth: '/شهر',
-    vsHiring: 'مقارنة بتوظيف بشر:',
-    saveMonth: 'وفّر 4,900 دولار/شهر',
-    evaluationsMonth: '100 تقييم شهرياً',
-    allAgents: 'كل المساعدين الأذكياء',
-    prioritySupport: 'دعم فني مميز',
-    medium: 'متوسط',
-    popular: 'الأكثر طلباً',
-    save14k: 'وفّر 14,750 دولار/شهر',
-    evaluations300: '300 تقييم شهرياً',
-    advancedAnalytics: 'تحليلات متقدمة',
-    apiAccess: 'الوصول لـ API',
-    enterprise: 'الشركات الكبيرة',
-    custom: 'حسب الطلب',
-    maximumSavings: 'أقصى توفير ممكن',
-    unlimitedEvaluations: 'تقييمات غير محدودة',
-    customModels: 'نماذج ذكاء اصطناعي مخصصة',
-    support247: 'دعم فني على مدار الساعة',
-    contactUs: 'تواصل معانا',
+    pricingTitle: 'Ø§Ù„Ø£Ø³Ø¹Ø§Ø±',
+    pricingSubtitle: 'Ø´ÙˆÙ Ù‡ØªÙˆÙØ± Ù‚Ø¯ Ø¥ÙŠÙ‡ Ù…Ù‚Ø§Ø±Ù†Ø© Ø¨Ø§Ù„Ù…Ù‚ÙŠÙ‘Ù…ÙŠÙ† Ø§Ù„Ø¨Ø´Ø±ÙŠÙŠÙ†',
+    smallBusiness: 'Ø§Ù„Ø£Ø¹Ù…Ø§Ù„ Ø§Ù„ØµØºÙŠØ±Ø©',
+    perMonth: '/Ø´Ù‡Ø±',
+    vsHiring: 'Ù…Ù‚Ø§Ø±Ù†Ø© Ø¨ØªÙˆØ¸ÙŠÙ Ø¨Ø´Ø±:',
+    saveMonth: 'ÙˆÙÙ‘Ø± 4,900 Ø¯ÙˆÙ„Ø§Ø±/Ø´Ù‡Ø±',
+    evaluationsMonth: '100 ØªÙ‚ÙŠÙŠÙ… Ø´Ù‡Ø±ÙŠØ§Ù‹',
+    allAgents: 'ÙƒÙ„ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø§Ù„Ø£Ø°ÙƒÙŠØ§Ø¡',
+    prioritySupport: 'Ø¯Ø¹Ù… ÙÙ†ÙŠ Ù…Ù…ÙŠØ²',
+    medium: 'Ù…ØªÙˆØ³Ø·',
+    popular: 'Ø§Ù„Ø£ÙƒØ«Ø± Ø·Ù„Ø¨Ø§Ù‹',
+    save14k: 'ÙˆÙÙ‘Ø± 14,750 Ø¯ÙˆÙ„Ø§Ø±/Ø´Ù‡Ø±',
+    evaluations300: '300 ØªÙ‚ÙŠÙŠÙ… Ø´Ù‡Ø±ÙŠØ§Ù‹',
+    advancedAnalytics: 'ØªØ­Ù„ÙŠÙ„Ø§Øª Ù…ØªÙ‚Ø¯Ù…Ø©',
+    apiAccess: 'Ø§Ù„ÙˆØµÙˆÙ„ Ù„Ù€ API',
+    enterprise: 'Ø§Ù„Ø´Ø±ÙƒØ§Øª Ø§Ù„ÙƒØ¨ÙŠØ±Ø©',
+    custom: 'Ø­Ø³Ø¨ Ø§Ù„Ø·Ù„Ø¨',
+    maximumSavings: 'Ø£Ù‚ØµÙ‰ ØªÙˆÙÙŠØ± Ù…Ù…ÙƒÙ†',
+    unlimitedEvaluations: 'ØªÙ‚ÙŠÙŠÙ…Ø§Øª ØºÙŠØ± Ù…Ø­Ø¯ÙˆØ¯Ø©',
+    customModels: 'Ù†Ù…Ø§Ø°Ø¬ Ø°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù…Ø®ØµØµØ©',
+    support247: 'Ø¯Ø¹Ù… ÙÙ†ÙŠ Ø¹Ù„Ù‰ Ù…Ø¯Ø§Ø± Ø§Ù„Ø³Ø§Ø¹Ø©',
+    contactUs: 'ØªÙˆØ§ØµÙ„ Ù…Ø¹Ø§Ù†Ø§',
 
     // Final CTA
-    finalCtaTitle: 'مستعد تطور نظام التقييم بتاعك؟',
-    finalCtaSubtitle: 'انضم لمئات المؤسسات اللي بتوفر وقت وفلوس مع عاصم',
-    noCredit: 'مش محتاج بطاقة ائتمان • 5 تقييمات مجانية',
+    finalCtaTitle: 'Ù…Ø³ØªØ¹Ø¯ ØªØ·ÙˆØ± Ù†Ø¸Ø§Ù… Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø¨ØªØ§Ø¹ÙƒØŸ',
+    finalCtaSubtitle: 'Ø§Ù†Ø¶Ù… Ù„Ù…Ø¦Ø§Øª Ø§Ù„Ù…Ø¤Ø³Ø³Ø§Øª Ø§Ù„Ù„ÙŠ Ø¨ØªÙˆÙØ± ÙˆÙ‚Øª ÙˆÙÙ„ÙˆØ³ Ù…Ø¹ Ø¹Ø§ØµÙ…',
+    noCredit: 'Ù…Ø´ Ù…Ø­ØªØ§Ø¬ Ø¨Ø·Ø§Ù‚Ø© Ø§Ø¦ØªÙ…Ø§Ù† â€¢ 5 ØªÙ‚ÙŠÙŠÙ…Ø§Øª Ù…Ø¬Ø§Ù†ÙŠØ©',
 
     // Additional Testimonials
-    testimonial5Quote: 'تحليل الفيديو المدعوم بالذكاء الاصطناعي غيّر تماماً عملية المقابلات لدينا. يمكننا الآن تقييم المرشحين بشكل موضوعي ومتسق، والقضاء على التحيز اللاواعي مع توفير ساعات لا تحصى لفريق الموارد البشرية لدينا.',
-    testimonial6Quote: 'تطبيق عاصم لمراجعات محافظ التصميم الخاصة بنا كان تغييراً جذرياً. التعليقات التفصيلية تساعد طلابنا على التحسن بشكل كبير، والاتساق يضمن تقييم الجميع بشكل عادل.',
+    testimonial5Quote: 'ØªØ­Ù„ÙŠÙ„ Ø§Ù„ÙÙŠØ¯ÙŠÙˆ Ø§Ù„Ù…Ø¯Ø¹ÙˆÙ… Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ØºÙŠÙ‘Ø± ØªÙ…Ø§Ù…Ø§Ù‹ Ø¹Ù…Ù„ÙŠØ© Ø§Ù„Ù…Ù‚Ø§Ø¨Ù„Ø§Øª Ù„Ø¯ÙŠÙ†Ø§. ÙŠÙ…ÙƒÙ†Ù†Ø§ Ø§Ù„Ø¢Ù† ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ù…Ø±Ø´Ø­ÙŠÙ† Ø¨Ø´ÙƒÙ„ Ù…ÙˆØ¶ÙˆØ¹ÙŠ ÙˆÙ…ØªØ³Ù‚ØŒ ÙˆØ§Ù„Ù‚Ø¶Ø§Ø¡ Ø¹Ù„Ù‰ Ø§Ù„ØªØ­ÙŠØ² Ø§Ù„Ù„Ø§ÙˆØ§Ø¹ÙŠ Ù…Ø¹ ØªÙˆÙÙŠØ± Ø³Ø§Ø¹Ø§Øª Ù„Ø§ ØªØ­ØµÙ‰ Ù„ÙØ±ÙŠÙ‚ Ø§Ù„Ù…ÙˆØ§Ø±Ø¯ Ø§Ù„Ø¨Ø´Ø±ÙŠØ© Ù„Ø¯ÙŠÙ†Ø§.',
+    testimonial6Quote: 'ØªØ·Ø¨ÙŠÙ‚ Ø¹Ø§ØµÙ… Ù„Ù…Ø±Ø§Ø¬Ø¹Ø§Øª Ù…Ø­Ø§ÙØ¸ Ø§Ù„ØªØµÙ…ÙŠÙ… Ø§Ù„Ø®Ø§ØµØ© Ø¨Ù†Ø§ ÙƒØ§Ù† ØªØºÙŠÙŠØ±Ø§Ù‹ Ø¬Ø°Ø±ÙŠØ§Ù‹. Ø§Ù„ØªØ¹Ù„ÙŠÙ‚Ø§Øª Ø§Ù„ØªÙØµÙŠÙ„ÙŠØ© ØªØ³Ø§Ø¹Ø¯ Ø·Ù„Ø§Ø¨Ù†Ø§ Ø¹Ù„Ù‰ Ø§Ù„ØªØ­Ø³Ù† Ø¨Ø´ÙƒÙ„ ÙƒØ¨ÙŠØ±ØŒ ÙˆØ§Ù„Ø§ØªØ³Ø§Ù‚ ÙŠØ¶Ù…Ù† ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø¬Ù…ÙŠØ¹ Ø¨Ø´ÙƒÙ„ Ø¹Ø§Ø¯Ù„.',
 
     // HomePage - Hire Personal Agent Section
-    hirePersonalAgentTitle: 'وظّف مساعدك الذكي الدقيق الخاص',
-    hirePersonalAgentDesc: 'انشر مساعدين أذكياء متخصصين يعملون حصرياً لك. كل مساعد مدرّب على مهام وصناعات محددة.',
-    dedicatedAgentTitle: 'مساعد مخصص',
-    dedicatedAgentDesc: 'مساعدك يعمل 24/7 حصرياً على مهامك بجودة ثابتة',
-    browseAgentsButton: 'تصفح المساعدين',
-    customConfigTitle: 'تخصيص شامل',
-    customConfigDesc: 'خصص سلوك المساعد والمعايير وسير العمل لتتناسب مع احتياجاتك',
-    customizeAgentButton: 'تخصيص المساعد',
-    easyIntegrationTitle: 'تكامل سهل',
-    easyIntegrationDesc: 'ادمج مساعدك في موقعك أو تطبيقك أو سير عملك باستخدام APIs بسيطة',
-    learnMoreButton: 'اعرف أكتر',
-    exploreMarketplaceButton: 'استكشف سوق المساعدين',
+    hirePersonalAgentTitle: 'ÙˆØ¸Ù‘Ù Ù…Ø³Ø§Ø¹Ø¯Ùƒ Ø§Ù„Ø°ÙƒÙŠ Ø§Ù„Ø¯Ù‚ÙŠÙ‚ Ø§Ù„Ø®Ø§Øµ',
+    hirePersonalAgentDesc: 'Ø§Ù†Ø´Ø± Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø£Ø°ÙƒÙŠØ§Ø¡ Ù…ØªØ®ØµØµÙŠÙ† ÙŠØ¹Ù…Ù„ÙˆÙ† Ø­ØµØ±ÙŠØ§Ù‹ Ù„Ùƒ. ÙƒÙ„ Ù…Ø³Ø§Ø¹Ø¯ Ù…Ø¯Ø±Ù‘Ø¨ Ø¹Ù„Ù‰ Ù…Ù‡Ø§Ù… ÙˆØµÙ†Ø§Ø¹Ø§Øª Ù…Ø­Ø¯Ø¯Ø©.',
+    dedicatedAgentTitle: 'Ù…Ø³Ø§Ø¹Ø¯ Ù…Ø®ØµØµ',
+    dedicatedAgentDesc: 'Ù…Ø³Ø§Ø¹Ø¯Ùƒ ÙŠØ¹Ù…Ù„ 24/7 Ø­ØµØ±ÙŠØ§Ù‹ Ø¹Ù„Ù‰ Ù…Ù‡Ø§Ù…Ùƒ Ø¨Ø¬ÙˆØ¯Ø© Ø«Ø§Ø¨ØªØ©',
+    browseAgentsButton: 'ØªØµÙØ­ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ†',
+    customConfigTitle: 'ØªØ®ØµÙŠØµ Ø´Ø§Ù…Ù„',
+    customConfigDesc: 'Ø®ØµØµ Ø³Ù„ÙˆÙƒ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ ÙˆØ§Ù„Ù…Ø¹Ø§ÙŠÙŠØ± ÙˆØ³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„ Ù„ØªØªÙ†Ø§Ø³Ø¨ Ù…Ø¹ Ø§Ø­ØªÙŠØ§Ø¬Ø§ØªÙƒ',
+    customizeAgentButton: 'ØªØ®ØµÙŠØµ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯',
+    easyIntegrationTitle: 'ØªÙƒØ§Ù…Ù„ Ø³Ù‡Ù„',
+    easyIntegrationDesc: 'Ø§Ø¯Ù…Ø¬ Ù…Ø³Ø§Ø¹Ø¯Ùƒ ÙÙŠ Ù…ÙˆÙ‚Ø¹Ùƒ Ø£Ùˆ ØªØ·Ø¨ÙŠÙ‚Ùƒ Ø£Ùˆ Ø³ÙŠØ± Ø¹Ù…Ù„Ùƒ Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù… APIs Ø¨Ø³ÙŠØ·Ø©',
+    learnMoreButton: 'Ø§Ø¹Ø±Ù Ø£ÙƒØªØ±',
+    exploreMarketplaceButton: 'Ø§Ø³ØªÙƒØ´Ù Ø³ÙˆÙ‚ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ†',
 
     // HomePage - Multi-Agent Orchestration
-    orchestrateAgentsTitle: 'نسّق بين مساعدين أذكياء متعددين',
-    orchestrateAgentsDesc: 'اجمع قوة مساعدين متخصصين متعددين للتعامل مع سير عمل وتقييمات معقدة',
-    buildWorkflowsTitle: 'ابنِ سير عمل ذكي',
-    sequentialProcessingTitle: 'معالجة تسلسلية',
-    sequentialProcessingDesc: 'اربط المساعدين لمعالجة الطلبات خطوة بخطوة',
-    parallelExecutionTitle: 'تنفيذ متوازي',
-    parallelExecutionDesc: 'شغّل مساعدين متعددين في وقت واحد للحصول على نتائج أسرع',
-    conditionalLogicTitle: 'منطق شرطي',
-    conditionalLogicDesc: 'وجّه الطلبات بناءً على المعايير والدرجات',
-    buildYourWorkflowButton: 'ابنِ سير عملك',
-    visualWorkflowBuilder: 'منشئ سير العمل المرئي',
-    dragDropInterface: 'واجهة السحب والإفلات',
+    orchestrateAgentsTitle: 'Ù†Ø³Ù‘Ù‚ Ø¨ÙŠÙ† Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø£Ø°ÙƒÙŠØ§Ø¡ Ù…ØªØ¹Ø¯Ø¯ÙŠÙ†',
+    orchestrateAgentsDesc: 'Ø§Ø¬Ù…Ø¹ Ù‚ÙˆØ© Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ù…ØªØ®ØµØµÙŠÙ† Ù…ØªØ¹Ø¯Ø¯ÙŠÙ† Ù„Ù„ØªØ¹Ø§Ù…Ù„ Ù…Ø¹ Ø³ÙŠØ± Ø¹Ù…Ù„ ÙˆØªÙ‚ÙŠÙŠÙ…Ø§Øª Ù…Ø¹Ù‚Ø¯Ø©',
+    buildWorkflowsTitle: 'Ø§Ø¨Ù†Ù Ø³ÙŠØ± Ø¹Ù…Ù„ Ø°ÙƒÙŠ',
+    sequentialProcessingTitle: 'Ù…Ø¹Ø§Ù„Ø¬Ø© ØªØ³Ù„Ø³Ù„ÙŠØ©',
+    sequentialProcessingDesc: 'Ø§Ø±Ø¨Ø· Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ù„Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„Ø·Ù„Ø¨Ø§Øª Ø®Ø·ÙˆØ© Ø¨Ø®Ø·ÙˆØ©',
+    parallelExecutionTitle: 'ØªÙ†ÙÙŠØ° Ù…ØªÙˆØ§Ø²ÙŠ',
+    parallelExecutionDesc: 'Ø´ØºÙ‘Ù„ Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ù…ØªØ¹Ø¯Ø¯ÙŠÙ† ÙÙŠ ÙˆÙ‚Øª ÙˆØ§Ø­Ø¯ Ù„Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ù†ØªØ§Ø¦Ø¬ Ø£Ø³Ø±Ø¹',
+    conditionalLogicTitle: 'Ù…Ù†Ø·Ù‚ Ø´Ø±Ø·ÙŠ',
+    conditionalLogicDesc: 'ÙˆØ¬Ù‘Ù‡ Ø§Ù„Ø·Ù„Ø¨Ø§Øª Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø¹Ø§ÙŠÙŠØ± ÙˆØ§Ù„Ø¯Ø±Ø¬Ø§Øª',
+    buildYourWorkflowButton: 'Ø§Ø¨Ù†Ù Ø³ÙŠØ± Ø¹Ù…Ù„Ùƒ',
+    visualWorkflowBuilder: 'Ù…Ù†Ø´Ø¦ Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„ Ø§Ù„Ù…Ø±Ø¦ÙŠ',
+    dragDropInterface: 'ÙˆØ§Ø¬Ù‡Ø© Ø§Ù„Ø³Ø­Ø¨ ÙˆØ§Ù„Ø¥ÙÙ„Ø§Øª',
 
     // HomePage - Scheduling Section
-    scheduleAutomateTitle: 'جدوِل وأتمت مساعديك الأذكياء',
-    scheduleAutomateDesc: 'أعد سير عمل تلقائي مع جدولة مرنة - كل ساعة، يومياً، أسبوعياً، شهرياً أو سنوياً',
-    hourlyTasksTitle: 'مهام كل ساعة',
-    hourlyTasksDesc: 'شغّل المساعدين كل ساعة للمعالجة الفورية',
-    dailyReportsTitle: 'تقارير يومية',
-    dailyReportsDesc: 'أنشئ تقييمات في أوقات محددة كل يوم',
-    weeklyBatchesTitle: 'دفعات أسبوعية',
-    weeklyBatchesDesc: 'عالج الطلبات أسبوعياً في أيام محددة',
-    customScheduleTitle: 'جدول مخصص',
-    customScheduleDesc: 'أنشئ أنماط جدولة معقدة',
-    visualCalendarTitle: 'واجهة تقويم مرئية',
-    dragDropCalendar: 'اسحب وأفلت المساعدين على التقويم',
-    expandShrinkDuration: 'وسّع أو قلّص مدة عمل المساعد',
-    recurringSchedulesMadeEasy: 'جداول متكررة بسهولة',
-    notifyOnCompletion: 'احصل على إشعارات عند إكمال المساعدين للمهام',
-    interactiveCalendar: 'تقويم تفاعلي',
-    dragDropCalendarDesc: 'اسحب، أفلت وجدوِل',
-    openSchedulerButton: 'افتح المجدوِل',
+    scheduleAutomateTitle: 'Ø¬Ø¯ÙˆÙÙ„ ÙˆØ£ØªÙ…Øª Ù…Ø³Ø§Ø¹Ø¯ÙŠÙƒ Ø§Ù„Ø£Ø°ÙƒÙŠØ§Ø¡',
+    scheduleAutomateDesc: 'Ø£Ø¹Ø¯ Ø³ÙŠØ± Ø¹Ù…Ù„ ØªÙ„Ù‚Ø§Ø¦ÙŠ Ù…Ø¹ Ø¬Ø¯ÙˆÙ„Ø© Ù…Ø±Ù†Ø© - ÙƒÙ„ Ø³Ø§Ø¹Ø©ØŒ ÙŠÙˆÙ…ÙŠØ§Ù‹ØŒ Ø£Ø³Ø¨ÙˆØ¹ÙŠØ§Ù‹ØŒ Ø´Ù‡Ø±ÙŠØ§Ù‹ Ø£Ùˆ Ø³Ù†ÙˆÙŠØ§Ù‹',
+    hourlyTasksTitle: 'Ù…Ù‡Ø§Ù… ÙƒÙ„ Ø³Ø§Ø¹Ø©',
+    hourlyTasksDesc: 'Ø´ØºÙ‘Ù„ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† ÙƒÙ„ Ø³Ø§Ø¹Ø© Ù„Ù„Ù…Ø¹Ø§Ù„Ø¬Ø© Ø§Ù„ÙÙˆØ±ÙŠØ©',
+    dailyReportsTitle: 'ØªÙ‚Ø§Ø±ÙŠØ± ÙŠÙˆÙ…ÙŠØ©',
+    dailyReportsDesc: 'Ø£Ù†Ø´Ø¦ ØªÙ‚ÙŠÙŠÙ…Ø§Øª ÙÙŠ Ø£ÙˆÙ‚Ø§Øª Ù…Ø­Ø¯Ø¯Ø© ÙƒÙ„ ÙŠÙˆÙ…',
+    weeklyBatchesTitle: 'Ø¯ÙØ¹Ø§Øª Ø£Ø³Ø¨ÙˆØ¹ÙŠØ©',
+    weeklyBatchesDesc: 'Ø¹Ø§Ù„Ø¬ Ø§Ù„Ø·Ù„Ø¨Ø§Øª Ø£Ø³Ø¨ÙˆØ¹ÙŠØ§Ù‹ ÙÙŠ Ø£ÙŠØ§Ù… Ù…Ø­Ø¯Ø¯Ø©',
+    customScheduleTitle: 'Ø¬Ø¯ÙˆÙ„ Ù…Ø®ØµØµ',
+    customScheduleDesc: 'Ø£Ù†Ø´Ø¦ Ø£Ù†Ù…Ø§Ø· Ø¬Ø¯ÙˆÙ„Ø© Ù…Ø¹Ù‚Ø¯Ø©',
+    visualCalendarTitle: 'ÙˆØ§Ø¬Ù‡Ø© ØªÙ‚ÙˆÙŠÙ… Ù…Ø±Ø¦ÙŠØ©',
+    dragDropCalendar: 'Ø§Ø³Ø­Ø¨ ÙˆØ£ÙÙ„Øª Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø¹Ù„Ù‰ Ø§Ù„ØªÙ‚ÙˆÙŠÙ…',
+    expandShrinkDuration: 'ÙˆØ³Ù‘Ø¹ Ø£Ùˆ Ù‚Ù„Ù‘Øµ Ù…Ø¯Ø© Ø¹Ù…Ù„ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯',
+    recurringSchedulesMadeEasy: 'Ø¬Ø¯Ø§ÙˆÙ„ Ù…ØªÙƒØ±Ø±Ø© Ø¨Ø³Ù‡ÙˆÙ„Ø©',
+    notifyOnCompletion: 'Ø§Ø­ØµÙ„ Ø¹Ù„Ù‰ Ø¥Ø´Ø¹Ø§Ø±Ø§Øª Ø¹Ù†Ø¯ Ø¥ÙƒÙ…Ø§Ù„ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ù„Ù„Ù…Ù‡Ø§Ù…',
+    interactiveCalendar: 'ØªÙ‚ÙˆÙŠÙ… ØªÙØ§Ø¹Ù„ÙŠ',
+    dragDropCalendarDesc: 'Ø§Ø³Ø­Ø¨ØŒ Ø£ÙÙ„Øª ÙˆØ¬Ø¯ÙˆÙÙ„',
+    openSchedulerButton: 'Ø§ÙØªØ­ Ø§Ù„Ù…Ø¬Ø¯ÙˆÙÙ„',
 
     // HomePage - Deployment Options
-    flexibleDeploymentTitle: 'خيارات نشر مرنة',
-    flexibleDeploymentDesc: 'اختر كيف تريد استخدام مساعديك الأذكياء - تشغيل لمرة واحدة، جداول مخصصة، أو تكامل سلس',
-    oneTimeRunTitle: 'تشغيل لمرة واحدة',
-    oneTimeRunDesc: 'نفّذ المساعدين عند الطلب لمهام التقييم الفورية بدون جداول متكررة',
-    instantExecution: 'تنفيذ فوري',
-    payPerUse: 'ادفع حسب الاستخدام',
-    noCommitment: 'بدون التزام',
-    customScheduleTitle2: 'جدول مخصص',
-    customScheduleDesc2: 'أعد سير عمل متكرر يعمل تلقائياً حسب جدولك المفضل',
-    automatedWorkflows: 'سير عمل تلقائي',
-    flexibleTiming: 'توقيت مرن',
-    setAndForget: 'اضبط وانسى',
-    websiteIntegrationTitle: 'تكامل الموقع',
-    websiteIntegrationDesc: 'ادمج المساعدين مباشرة في موقعك أو تطبيقك مع تكامل API بسيط',
+    flexibleDeploymentTitle: 'Ø®ÙŠØ§Ø±Ø§Øª Ù†Ø´Ø± Ù…Ø±Ù†Ø©',
+    flexibleDeploymentDesc: 'Ø§Ø®ØªØ± ÙƒÙŠÙ ØªØ±ÙŠØ¯ Ø§Ø³ØªØ®Ø¯Ø§Ù… Ù…Ø³Ø§Ø¹Ø¯ÙŠÙƒ Ø§Ù„Ø£Ø°ÙƒÙŠØ§Ø¡ - ØªØ´ØºÙŠÙ„ Ù„Ù…Ø±Ø© ÙˆØ§Ø­Ø¯Ø©ØŒ Ø¬Ø¯Ø§ÙˆÙ„ Ù…Ø®ØµØµØ©ØŒ Ø£Ùˆ ØªÙƒØ§Ù…Ù„ Ø³Ù„Ø³',
+    oneTimeRunTitle: 'ØªØ´ØºÙŠÙ„ Ù„Ù…Ø±Ø© ÙˆØ§Ø­Ø¯Ø©',
+    oneTimeRunDesc: 'Ù†ÙÙ‘Ø° Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø¹Ù†Ø¯ Ø§Ù„Ø·Ù„Ø¨ Ù„Ù…Ù‡Ø§Ù… Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„ÙÙˆØ±ÙŠØ© Ø¨Ø¯ÙˆÙ† Ø¬Ø¯Ø§ÙˆÙ„ Ù…ØªÙƒØ±Ø±Ø©',
+    instantExecution: 'ØªÙ†ÙÙŠØ° ÙÙˆØ±ÙŠ',
+    payPerUse: 'Ø§Ø¯ÙØ¹ Ø­Ø³Ø¨ Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…',
+    noCommitment: 'Ø¨Ø¯ÙˆÙ† Ø§Ù„ØªØ²Ø§Ù…',
+    customScheduleTitle2: 'Ø¬Ø¯ÙˆÙ„ Ù…Ø®ØµØµ',
+    customScheduleDesc2: 'Ø£Ø¹Ø¯ Ø³ÙŠØ± Ø¹Ù…Ù„ Ù…ØªÙƒØ±Ø± ÙŠØ¹Ù…Ù„ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ø­Ø³Ø¨ Ø¬Ø¯ÙˆÙ„Ùƒ Ø§Ù„Ù…ÙØ¶Ù„',
+    automatedWorkflows: 'Ø³ÙŠØ± Ø¹Ù…Ù„ ØªÙ„Ù‚Ø§Ø¦ÙŠ',
+    flexibleTiming: 'ØªÙˆÙ‚ÙŠØª Ù…Ø±Ù†',
+    setAndForget: 'Ø§Ø¶Ø¨Ø· ÙˆØ§Ù†Ø³Ù‰',
+    websiteIntegrationTitle: 'ØªÙƒØ§Ù…Ù„ Ø§Ù„Ù…ÙˆÙ‚Ø¹',
+    websiteIntegrationDesc: 'Ø§Ø¯Ù…Ø¬ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ù…Ø¨Ø§Ø´Ø±Ø© ÙÙŠ Ù…ÙˆÙ‚Ø¹Ùƒ Ø£Ùˆ ØªØ·Ø¨ÙŠÙ‚Ùƒ Ù…Ø¹ ØªÙƒØ§Ù…Ù„ API Ø¨Ø³ÙŠØ·',
     restApi: 'API REST',
-    webhookSupport: 'دعم Webhooks',
-    codeExamples: 'أمثلة الكود',
-    getStartedDeployment: 'ابدأ بطريقة النشر المفضلة لديك',
-    hireAnAgentButton: 'وظّف مساعد',
-    viewIntegrationDocsButton: 'عرض وثائق التكامل',
+    webhookSupport: 'Ø¯Ø¹Ù… Webhooks',
+    codeExamples: 'Ø£Ù…Ø«Ù„Ø© Ø§Ù„ÙƒÙˆØ¯',
+    getStartedDeployment: 'Ø§Ø¨Ø¯Ø£ Ø¨Ø·Ø±ÙŠÙ‚Ø© Ø§Ù„Ù†Ø´Ø± Ø§Ù„Ù…ÙØ¶Ù„Ø© Ù„Ø¯ÙŠÙƒ',
+    hireAnAgentButton: 'ÙˆØ¸Ù‘Ù Ù…Ø³Ø§Ø¹Ø¯',
+    viewIntegrationDocsButton: 'Ø¹Ø±Ø¶ ÙˆØ«Ø§Ø¦Ù‚ Ø§Ù„ØªÙƒØ§Ù…Ù„',
 
     // Agent Marketplace
-    agentMarketplaceTitle: 'سوق المساعدين الأذكياء',
-    agentMarketplaceDesc: 'تصفح ووظّف مساعدين أذكياء دقيقين متخصصين مدرّبين لصناعات ومهام محددة',
-    searchAgentPlaceholder: 'ابحث عن المساعدين بالاسم أو القدرة...',
-    allCategoriesOption: 'كل الفئات',
-    perMonthLabel: '/شهر',
-    evaluationsLabel: 'تقييمات',
-    hireAgentButton: 'وظّف المساعد',
-    keyFeaturesTitle: 'المميزات الرئيسية',
-    ratingLabel: 'التقييم',
-    reviewsLabel: 'المراجعات',
-    evaluationsLabel2: 'التقييمات',
-    priceLabel: 'السعر',
-    whatHappensNextTitle: 'ماذا بعد؟',
-    step1ConfigureAgent: 'اضبط سلوك ومعايير مساعدك',
-    step2SetupMode: 'أعد التشغيل لمرة واحدة، جدول مخصص، أو تكامل',
-    step3StartEvaluating: 'ابدأ التقييم مع مساعدك الذكي المخصص',
-    cancelButton: 'إلغاء',
-    hireAgentWithPrice: 'وظّف المساعد - $',
+    agentMarketplaceTitle: 'Ø³ÙˆÙ‚ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø§Ù„Ø£Ø°ÙƒÙŠØ§Ø¡',
+    agentMarketplaceDesc: 'ØªØµÙØ­ ÙˆÙˆØ¸Ù‘Ù Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø£Ø°ÙƒÙŠØ§Ø¡ Ø¯Ù‚ÙŠÙ‚ÙŠÙ† Ù…ØªØ®ØµØµÙŠÙ† Ù…Ø¯Ø±Ù‘Ø¨ÙŠÙ† Ù„ØµÙ†Ø§Ø¹Ø§Øª ÙˆÙ…Ù‡Ø§Ù… Ù…Ø­Ø¯Ø¯Ø©',
+    searchAgentPlaceholder: 'Ø§Ø¨Ø­Ø« Ø¹Ù† Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø¨Ø§Ù„Ø§Ø³Ù… Ø£Ùˆ Ø§Ù„Ù‚Ø¯Ø±Ø©...',
+    allCategoriesOption: 'ÙƒÙ„ Ø§Ù„ÙØ¦Ø§Øª',
+    perMonthLabel: '/Ø´Ù‡Ø±',
+    evaluationsLabel: 'ØªÙ‚ÙŠÙŠÙ…Ø§Øª',
+    hireAgentButton: 'ÙˆØ¸Ù‘Ù Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯',
+    keyFeaturesTitle: 'Ø§Ù„Ù…Ù…ÙŠØ²Ø§Øª Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©',
+    ratingLabel: 'Ø§Ù„ØªÙ‚ÙŠÙŠÙ…',
+    reviewsLabel: 'Ø§Ù„Ù…Ø±Ø§Ø¬Ø¹Ø§Øª',
+    evaluationsLabel2: 'Ø§Ù„ØªÙ‚ÙŠÙŠÙ…Ø§Øª',
+    priceLabel: 'Ø§Ù„Ø³Ø¹Ø±',
+    whatHappensNextTitle: 'Ù…Ø§Ø°Ø§ Ø¨Ø¹Ø¯ØŸ',
+    step1ConfigureAgent: 'Ø§Ø¶Ø¨Ø· Ø³Ù„ÙˆÙƒ ÙˆÙ…Ø¹Ø§ÙŠÙŠØ± Ù…Ø³Ø§Ø¹Ø¯Ùƒ',
+    step2SetupMode: 'Ø£Ø¹Ø¯ Ø§Ù„ØªØ´ØºÙŠÙ„ Ù„Ù…Ø±Ø© ÙˆØ§Ø­Ø¯Ø©ØŒ Ø¬Ø¯ÙˆÙ„ Ù…Ø®ØµØµØŒ Ø£Ùˆ ØªÙƒØ§Ù…Ù„',
+    step3StartEvaluating: 'Ø§Ø¨Ø¯Ø£ Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ù…Ø¹ Ù…Ø³Ø§Ø¹Ø¯Ùƒ Ø§Ù„Ø°ÙƒÙŠ Ø§Ù„Ù…Ø®ØµØµ',
+    cancelButton: 'Ø¥Ù„ØºØ§Ø¡',
+    hireAgentWithPrice: 'ÙˆØ¸Ù‘Ù Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ - $',
 
     // Agent Configuration
-    backToMarketplaceLink: 'العودة للسوق',
-    saveConfigButton: 'حفظ الإعدادات',
-    activateAgentButton: 'تفعيل المساعد',
-    chooseDeploymentModeTitle: 'اختر وضع النشر',
-    oneTimeRunTitle2: 'تشغيل لمرة واحدة',
-    oneTimeRunDesc2: 'نفّذ المساعد عند الطلب وقتما تحتاج',
-    manualTrigger: 'تشغيل يدوي',
-    instantExecution2: 'تنفيذ فوري',
-    payPerUse2: 'ادفع حسب الاستخدام',
-    customScheduleTitle3: 'جدول مخصص',
-    customScheduleDesc3: 'تنفيذ متكرر تلقائي حسب جدولك',
-    automatedWorkflow: 'سير عمل تلقائي',
-    flexibleTiming2: 'توقيت مرن',
-    setAndForget2: 'اضبط وانسى',
-    apiIntegrationTitle: 'تكامل API',
-    apiIntegrationDesc: 'ادمج في موقعك أو تطبيقك',
-    restApiAccess: 'الوصول لـ API REST',
-    webhookSupport2: 'دعم Webhooks',
-    realTimeResults: 'نتائج فورية',
-    scheduleConfigTitle: 'إعداد الجدول',
-    frequencyLabel: 'التكرار',
-    executionTimeLabel: 'وقت التنفيذ',
-    selectDaysLabel: 'اختر الأيام',
-    integrationSetupTitle: 'إعداد التكامل',
-    integrationSetupDesc: 'اضبط إعدادات تكامل API في تبويب التكامل لربط هذا المساعد بتطبيقك.',
-    configureIntegrationButton: 'اضبط التكامل',
-    evaluationCriteriaTitle: 'معايير التقييم',
-    useDefaultCriteriaCheckbox: 'استخدم معايير التقييم الافتراضية',
-    customizeCriteriaDesc: 'خصص وزن كل معيار (المجموع يجب أن يساوي 100%)',
-    criterionQuality: 'الجودة',
-    criterionAccuracy: 'الدقة',
-    criterionCompleteness: 'الاكتمال',
-    criterionOriginality: 'الأصالة',
-    mustEqual100Percent: '⚠️ يجب أن يساوي 100%',
-    apiIntegrationTitle2: 'تكامل API',
-    webhookUrlLabel: 'رابط Webhook',
+    backToMarketplaceLink: 'Ø§Ù„Ø¹ÙˆØ¯Ø© Ù„Ù„Ø³ÙˆÙ‚',
+    saveConfigButton: 'Ø­ÙØ¸ Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª',
+    activateAgentButton: 'ØªÙØ¹ÙŠÙ„ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯',
+    chooseDeploymentModeTitle: 'Ø§Ø®ØªØ± ÙˆØ¶Ø¹ Ø§Ù„Ù†Ø´Ø±',
+    oneTimeRunTitle2: 'ØªØ´ØºÙŠÙ„ Ù„Ù…Ø±Ø© ÙˆØ§Ø­Ø¯Ø©',
+    oneTimeRunDesc2: 'Ù†ÙÙ‘Ø° Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ Ø¹Ù†Ø¯ Ø§Ù„Ø·Ù„Ø¨ ÙˆÙ‚ØªÙ…Ø§ ØªØ­ØªØ§Ø¬',
+    manualTrigger: 'ØªØ´ØºÙŠÙ„ ÙŠØ¯ÙˆÙŠ',
+    instantExecution2: 'ØªÙ†ÙÙŠØ° ÙÙˆØ±ÙŠ',
+    payPerUse2: 'Ø§Ø¯ÙØ¹ Ø­Ø³Ø¨ Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…',
+    customScheduleTitle3: 'Ø¬Ø¯ÙˆÙ„ Ù…Ø®ØµØµ',
+    customScheduleDesc3: 'ØªÙ†ÙÙŠØ° Ù…ØªÙƒØ±Ø± ØªÙ„Ù‚Ø§Ø¦ÙŠ Ø­Ø³Ø¨ Ø¬Ø¯ÙˆÙ„Ùƒ',
+    automatedWorkflow: 'Ø³ÙŠØ± Ø¹Ù…Ù„ ØªÙ„Ù‚Ø§Ø¦ÙŠ',
+    flexibleTiming2: 'ØªÙˆÙ‚ÙŠØª Ù…Ø±Ù†',
+    setAndForget2: 'Ø§Ø¶Ø¨Ø· ÙˆØ§Ù†Ø³Ù‰',
+    apiIntegrationTitle: 'ØªÙƒØ§Ù…Ù„ API',
+    apiIntegrationDesc: 'Ø§Ø¯Ù…Ø¬ ÙÙŠ Ù…ÙˆÙ‚Ø¹Ùƒ Ø£Ùˆ ØªØ·Ø¨ÙŠÙ‚Ùƒ',
+    restApiAccess: 'Ø§Ù„ÙˆØµÙˆÙ„ Ù„Ù€ API REST',
+    webhookSupport2: 'Ø¯Ø¹Ù… Webhooks',
+    realTimeResults: 'Ù†ØªØ§Ø¦Ø¬ ÙÙˆØ±ÙŠØ©',
+    scheduleConfigTitle: 'Ø¥Ø¹Ø¯Ø§Ø¯ Ø§Ù„Ø¬Ø¯ÙˆÙ„',
+    frequencyLabel: 'Ø§Ù„ØªÙƒØ±Ø§Ø±',
+    executionTimeLabel: 'ÙˆÙ‚Øª Ø§Ù„ØªÙ†ÙÙŠØ°',
+    selectDaysLabel: 'Ø§Ø®ØªØ± Ø§Ù„Ø£ÙŠØ§Ù…',
+    integrationSetupTitle: 'Ø¥Ø¹Ø¯Ø§Ø¯ Ø§Ù„ØªÙƒØ§Ù…Ù„',
+    integrationSetupDesc: 'Ø§Ø¶Ø¨Ø· Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª ØªÙƒØ§Ù…Ù„ API ÙÙŠ ØªØ¨ÙˆÙŠØ¨ Ø§Ù„ØªÙƒØ§Ù…Ù„ Ù„Ø±Ø¨Ø· Ù‡Ø°Ø§ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ Ø¨ØªØ·Ø¨ÙŠÙ‚Ùƒ.',
+    configureIntegrationButton: 'Ø§Ø¶Ø¨Ø· Ø§Ù„ØªÙƒØ§Ù…Ù„',
+    evaluationCriteriaTitle: 'Ù…Ø¹Ø§ÙŠÙŠØ± Ø§Ù„ØªÙ‚ÙŠÙŠÙ…',
+    useDefaultCriteriaCheckbox: 'Ø§Ø³ØªØ®Ø¯Ù… Ù…Ø¹Ø§ÙŠÙŠØ± Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø§ÙØªØ±Ø§Ø¶ÙŠØ©',
+    customizeCriteriaDesc: 'Ø®ØµØµ ÙˆØ²Ù† ÙƒÙ„ Ù…Ø¹ÙŠØ§Ø± (Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹ ÙŠØ¬Ø¨ Ø£Ù† ÙŠØ³Ø§ÙˆÙŠ 100%)',
+    criterionQuality: 'Ø§Ù„Ø¬ÙˆØ¯Ø©',
+    criterionAccuracy: 'Ø§Ù„Ø¯Ù‚Ø©',
+    criterionCompleteness: 'Ø§Ù„Ø§ÙƒØªÙ…Ø§Ù„',
+    criterionOriginality: 'Ø§Ù„Ø£ØµØ§Ù„Ø©',
+    mustEqual100Percent: 'âš ï¸ ÙŠØ¬Ø¨ Ø£Ù† ÙŠØ³Ø§ÙˆÙŠ 100%',
+    apiIntegrationTitle2: 'ØªÙƒØ§Ù…Ù„ API',
+    webhookUrlLabel: 'Ø±Ø§Ø¨Ø· Webhook',
     webhookUrlPlaceholder: 'https://your-domain.com/webhook',
-    webhookUrlHelp: 'سنرسل نتائج التقييم لهذا الرابط',
-    apiKeyLabel: 'مفتاح API',
-    generateApiKeyPlaceholder: 'اضغط على إنشاء لتوليد مفتاح API',
-    generateKeyButton: 'إنشاء مفتاح',
-    autoSubmitCheckbox: 'إرسال التقييمات تلقائياً للـ webhook',
-    viewIntegrationDocsLink: 'عرض وثائق التكامل وأمثلة الكود',
-    notificationPreferencesTitle: 'تفضيلات الإشعارات',
-    emailNotificationsLabel: 'إشعارات البريد الإلكتروني',
-    emailNotificationsDesc: 'استقبل التحديثات عبر البريد',
-    slackNotificationsLabel: 'إشعارات Slack',
-    slackNotificationsDesc: 'انشر التحديثات على قناة Slack',
-    webhookNotificationsLabel: 'إشعارات Webhook',
-    webhookNotificationsDesc: 'أرسل لـ webhook مخصص',
+    webhookUrlHelp: 'Ø³Ù†Ø±Ø³Ù„ Ù†ØªØ§Ø¦Ø¬ Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ù„Ù‡Ø°Ø§ Ø§Ù„Ø±Ø§Ø¨Ø·',
+    apiKeyLabel: 'Ù…ÙØªØ§Ø­ API',
+    generateApiKeyPlaceholder: 'Ø§Ø¶ØºØ· Ø¹Ù„Ù‰ Ø¥Ù†Ø´Ø§Ø¡ Ù„ØªÙˆÙ„ÙŠØ¯ Ù…ÙØªØ§Ø­ API',
+    generateKeyButton: 'Ø¥Ù†Ø´Ø§Ø¡ Ù…ÙØªØ§Ø­',
+    autoSubmitCheckbox: 'Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…Ø§Øª ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ù„Ù„Ù€ webhook',
+    viewIntegrationDocsLink: 'Ø¹Ø±Ø¶ ÙˆØ«Ø§Ø¦Ù‚ Ø§Ù„ØªÙƒØ§Ù…Ù„ ÙˆØ£Ù…Ø«Ù„Ø© Ø§Ù„ÙƒÙˆØ¯',
+    notificationPreferencesTitle: 'ØªÙØ¶ÙŠÙ„Ø§Øª Ø§Ù„Ø¥Ø´Ø¹Ø§Ø±Ø§Øª',
+    emailNotificationsLabel: 'Ø¥Ø´Ø¹Ø§Ø±Ø§Øª Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ',
+    emailNotificationsDesc: 'Ø§Ø³ØªÙ‚Ø¨Ù„ Ø§Ù„ØªØ­Ø¯ÙŠØ«Ø§Øª Ø¹Ø¨Ø± Ø§Ù„Ø¨Ø±ÙŠØ¯',
+    slackNotificationsLabel: 'Ø¥Ø´Ø¹Ø§Ø±Ø§Øª Slack',
+    slackNotificationsDesc: 'Ø§Ù†Ø´Ø± Ø§Ù„ØªØ­Ø¯ÙŠØ«Ø§Øª Ø¹Ù„Ù‰ Ù‚Ù†Ø§Ø© Slack',
+    webhookNotificationsLabel: 'Ø¥Ø´Ø¹Ø§Ø±Ø§Øª Webhook',
+    webhookNotificationsDesc: 'Ø£Ø±Ø³Ù„ Ù„Ù€ webhook Ù…Ø®ØµØµ',
 
     // Multi-Agent Orchestrator
-    multiAgentOrchestratorTitle: 'منسّق المساعدين المتعددين',
-    multiAgentOrchestratorDesc: 'أنشئ سير عمل ذكي بدمج مساعدين أذكياء متعددين',
-    workflowBuilderTitle: 'منشئ سير العمل',
-    workflowNameLabel: 'اسم سير العمل',
-    workflowNamePlaceholder: 'أدخل اسم سير العمل',
-    executionModeLabel: 'وضع التنفيذ',
-    sequentialOption: 'تسلسلي (واحد تلو الآخر)',
-    parallelOption: 'متوازي (الكل معاً)',
-    conditionalOption: 'شرطي (قائم على القواعد)',
-    sequentialExecution: 'تنفيذ تسلسلي',
-    parallelExecution: 'تنفيذ متوازي',
-    conditionalExecution: 'تنفيذ شرطي',
-    sequentialExecDesc: 'يعالج المساعدون الطلبات واحداً تلو الآخر بالترتيب المحدد',
-    parallelExecDesc: 'يعالج كل المساعدين الطلب في وقت واحد للحصول على نتائج أسرع',
-    conditionalExecDesc: 'ينفّذ المساعدون بناءً على الشروط والنتائج السابقة',
-    workflowStepsTitle: 'خطوات سير العمل',
-    noAgentsAddedMessage: 'لم تضف مساعدين بعد',
-    addAgentsHint: 'أضف مساعدين من المكتبة على اليمين',
-    stepIndicator: 'خطوة',
-    saveWorkflowButton: 'حفظ سير العمل',
-    testRunButton: 'تشغيل تجريبي',
-    yourWorkflowsTitle: 'سير العمل الخاص بك',
-    agentsLabel: 'مساعدين',
-    runsLabel: 'تشغيلات',
-    activeStatus: 'نشط',
-    pausedStatus: 'موقوف مؤقتاً',
-    agentLibraryTitle: 'مكتبة المساعدين',
-    addAgentsHint2: 'اضغط لإضافة مساعدين لسير عملك',
-    addedIndicator: '✓ تمت الإضافة',
+    multiAgentOrchestratorTitle: 'Ù…Ù†Ø³Ù‘Ù‚ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø§Ù„Ù…ØªØ¹Ø¯Ø¯ÙŠÙ†',
+    multiAgentOrchestratorDesc: 'Ø£Ù†Ø´Ø¦ Ø³ÙŠØ± Ø¹Ù…Ù„ Ø°ÙƒÙŠ Ø¨Ø¯Ù…Ø¬ Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø£Ø°ÙƒÙŠØ§Ø¡ Ù…ØªØ¹Ø¯Ø¯ÙŠÙ†',
+    workflowBuilderTitle: 'Ù…Ù†Ø´Ø¦ Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„',
+    workflowNameLabel: 'Ø§Ø³Ù… Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„',
+    workflowNamePlaceholder: 'Ø£Ø¯Ø®Ù„ Ø§Ø³Ù… Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„',
+    executionModeLabel: 'ÙˆØ¶Ø¹ Ø§Ù„ØªÙ†ÙÙŠØ°',
+    sequentialOption: 'ØªØ³Ù„Ø³Ù„ÙŠ (ÙˆØ§Ø­Ø¯ ØªÙ„Ùˆ Ø§Ù„Ø¢Ø®Ø±)',
+    parallelOption: 'Ù…ØªÙˆØ§Ø²ÙŠ (Ø§Ù„ÙƒÙ„ Ù…Ø¹Ø§Ù‹)',
+    conditionalOption: 'Ø´Ø±Ø·ÙŠ (Ù‚Ø§Ø¦Ù… Ø¹Ù„Ù‰ Ø§Ù„Ù‚ÙˆØ§Ø¹Ø¯)',
+    sequentialExecution: 'ØªÙ†ÙÙŠØ° ØªØ³Ù„Ø³Ù„ÙŠ',
+    parallelExecution: 'ØªÙ†ÙÙŠØ° Ù…ØªÙˆØ§Ø²ÙŠ',
+    conditionalExecution: 'ØªÙ†ÙÙŠØ° Ø´Ø±Ø·ÙŠ',
+    sequentialExecDesc: 'ÙŠØ¹Ø§Ù„Ø¬ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙˆÙ† Ø§Ù„Ø·Ù„Ø¨Ø§Øª ÙˆØ§Ø­Ø¯Ø§Ù‹ ØªÙ„Ùˆ Ø§Ù„Ø¢Ø®Ø± Ø¨Ø§Ù„ØªØ±ØªÙŠØ¨ Ø§Ù„Ù…Ø­Ø¯Ø¯',
+    parallelExecDesc: 'ÙŠØ¹Ø§Ù„Ø¬ ÙƒÙ„ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø§Ù„Ø·Ù„Ø¨ ÙÙŠ ÙˆÙ‚Øª ÙˆØ§Ø­Ø¯ Ù„Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ù†ØªØ§Ø¦Ø¬ Ø£Ø³Ø±Ø¹',
+    conditionalExecDesc: 'ÙŠÙ†ÙÙ‘Ø° Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙˆÙ† Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ Ø§Ù„Ø´Ø±ÙˆØ· ÙˆØ§Ù„Ù†ØªØ§Ø¦Ø¬ Ø§Ù„Ø³Ø§Ø¨Ù‚Ø©',
+    workflowStepsTitle: 'Ø®Ø·ÙˆØ§Øª Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„',
+    noAgentsAddedMessage: 'Ù„Ù… ØªØ¶Ù Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø¨Ø¹Ø¯',
+    addAgentsHint: 'Ø£Ø¶Ù Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ù…Ù† Ø§Ù„Ù…ÙƒØªØ¨Ø© Ø¹Ù„Ù‰ Ø§Ù„ÙŠÙ…ÙŠÙ†',
+    stepIndicator: 'Ø®Ø·ÙˆØ©',
+    saveWorkflowButton: 'Ø­ÙØ¸ Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„',
+    testRunButton: 'ØªØ´ØºÙŠÙ„ ØªØ¬Ø±ÙŠØ¨ÙŠ',
+    yourWorkflowsTitle: 'Ø³ÙŠØ± Ø§Ù„Ø¹Ù…Ù„ Ø§Ù„Ø®Ø§Øµ Ø¨Ùƒ',
+    agentsLabel: 'Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ†',
+    runsLabel: 'ØªØ´ØºÙŠÙ„Ø§Øª',
+    activeStatus: 'Ù†Ø´Ø·',
+    pausedStatus: 'Ù…ÙˆÙ‚ÙˆÙ Ù…Ø¤Ù‚ØªØ§Ù‹',
+    agentLibraryTitle: 'Ù…ÙƒØªØ¨Ø© Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ†',
+    addAgentsHint2: 'Ø§Ø¶ØºØ· Ù„Ø¥Ø¶Ø§ÙØ© Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ù„Ø³ÙŠØ± Ø¹Ù…Ù„Ùƒ',
+    addedIndicator: 'âœ“ ØªÙ…Øª Ø§Ù„Ø¥Ø¶Ø§ÙØ©',
 
     // Agent Scheduler
-    agentSchedulerTitle: 'مجدوِل المساعدين',
-    agentSchedulerDesc: 'جدوِل وأتمت مساعديك الأذكياء بالسحب والإفلات',
-    todayButton: 'اليوم',
-    newScheduleButton: 'جدول جديد',
-    weekViewOption: 'عرض أسبوعي',
-    monthViewOption: 'عرض شهري',
-    dropAgentHint: 'أفلت المساعد هنا',
-    dragDropTip: 'نصيحة: اسحب المساعدين من الشريط الجانبي لجدولتهم على التقويم',
-    availableAgentsTitle: 'المساعدون المتاحون',
-    dragToScheduleHint: 'اسحب المساعدين للجدولة',
-    editScheduleTitle: 'تحرير الجدول',
-    startTimeLabel: 'وقت البدء',
-    endTimeLabel: 'وقت الانتهاء',
-    frequencyLabel2: 'التكرار',
-    removeScheduleButton: 'إزالة الجدول',
+    agentSchedulerTitle: 'Ù…Ø¬Ø¯ÙˆÙÙ„ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ†',
+    agentSchedulerDesc: 'Ø¬Ø¯ÙˆÙÙ„ ÙˆØ£ØªÙ…Øª Ù…Ø³Ø§Ø¹Ø¯ÙŠÙƒ Ø§Ù„Ø£Ø°ÙƒÙŠØ§Ø¡ Ø¨Ø§Ù„Ø³Ø­Ø¨ ÙˆØ§Ù„Ø¥ÙÙ„Ø§Øª',
+    todayButton: 'Ø§Ù„ÙŠÙˆÙ…',
+    newScheduleButton: 'Ø¬Ø¯ÙˆÙ„ Ø¬Ø¯ÙŠØ¯',
+    weekViewOption: 'Ø¹Ø±Ø¶ Ø£Ø³Ø¨ÙˆØ¹ÙŠ',
+    monthViewOption: 'Ø¹Ø±Ø¶ Ø´Ù‡Ø±ÙŠ',
+    dropAgentHint: 'Ø£ÙÙ„Øª Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ Ù‡Ù†Ø§',
+    dragDropTip: 'Ù†ØµÙŠØ­Ø©: Ø§Ø³Ø­Ø¨ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ù…Ù† Ø§Ù„Ø´Ø±ÙŠØ· Ø§Ù„Ø¬Ø§Ù†Ø¨ÙŠ Ù„Ø¬Ø¯ÙˆÙ„ØªÙ‡Ù… Ø¹Ù„Ù‰ Ø§Ù„ØªÙ‚ÙˆÙŠÙ…',
+    availableAgentsTitle: 'Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙˆÙ† Ø§Ù„Ù…ØªØ§Ø­ÙˆÙ†',
+    dragToScheduleHint: 'Ø§Ø³Ø­Ø¨ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ù„Ù„Ø¬Ø¯ÙˆÙ„Ø©',
+    editScheduleTitle: 'ØªØ­Ø±ÙŠØ± Ø§Ù„Ø¬Ø¯ÙˆÙ„',
+    startTimeLabel: 'ÙˆÙ‚Øª Ø§Ù„Ø¨Ø¯Ø¡',
+    endTimeLabel: 'ÙˆÙ‚Øª Ø§Ù„Ø§Ù†ØªÙ‡Ø§Ø¡',
+    frequencyLabel2: 'Ø§Ù„ØªÙƒØ±Ø§Ø±',
+    removeScheduleButton: 'Ø¥Ø²Ø§Ù„Ø© Ø§Ù„Ø¬Ø¯ÙˆÙ„',
 
     // Admin Dashboard
-    adminDashboardTitle: 'لوحة الإدارة',
-    adminDashboardDesc: 'نظرة عامة على النظام والإدارة',
-    last24HoursOption: 'آخر 24 ساعة',
-    last7DaysOption2: 'آخر 7 أيام',
-    last30DaysOption2: 'آخر 30 يوم',
-    last90DaysOption2: 'آخر 90 يوم',
-    revenueOverviewTitle: 'نظرة عامة على الإيرادات',
-    recentActivityTitle: 'النشاط الأخير',
-    viewAllLink: 'عرض الكل',
-    industryBreakdownTitle: 'التوزيع حسب الصناعة',
-    topUsersTitle: 'أفضل المستخدمين',
-    manageUsersLink: 'إدارة المستخدمين',
-    tableHeaderUser: 'المستخدم',
-    tableHeaderEmail: 'البريد الإلكتروني',
-    tableHeaderSubmissions: 'الطلبات',
-    tableHeaderAvgScore: 'متوسط الدرجة',
-    tableHeaderStatus: 'الحالة',
-    tableHeaderActions: 'الإجراءات',
-    viewDetailsButton: 'عرض التفاصيل',
-    systemHealthTitle: 'صحة النظام',
-    statusLabel: 'الحالة:',
-    uptimeLabel: 'وقت التشغيل:',
-    responseLabel: 'الاستجابة:',
-    manageUsersCard: 'إدارة المستخدمين',
-    manageUsersCardDesc: 'عرض وإدارة حسابات المستخدمين',
-    viewAnalyticsCard: 'عرض التحليلات',
-    viewAnalyticsCardDesc: 'تحليلات ورؤى مفصلة للمنصة',
-    webhooksCardDesc: 'إدارة تكاملات webhooks n8n',
-    manageCriteriaCardDesc: 'إعداد معايير التقييم',
+    adminDashboardTitle: 'Ù„ÙˆØ­Ø© Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©',
+    adminDashboardDesc: 'Ù†Ø¸Ø±Ø© Ø¹Ø§Ù…Ø© Ø¹Ù„Ù‰ Ø§Ù„Ù†Ø¸Ø§Ù… ÙˆØ§Ù„Ø¥Ø¯Ø§Ø±Ø©',
+    last24HoursOption: 'Ø¢Ø®Ø± 24 Ø³Ø§Ø¹Ø©',
+    last7DaysOption2: 'Ø¢Ø®Ø± 7 Ø£ÙŠØ§Ù…',
+    last30DaysOption2: 'Ø¢Ø®Ø± 30 ÙŠÙˆÙ…',
+    last90DaysOption2: 'Ø¢Ø®Ø± 90 ÙŠÙˆÙ…',
+    revenueOverviewTitle: 'Ù†Ø¸Ø±Ø© Ø¹Ø§Ù…Ø© Ø¹Ù„Ù‰ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª',
+    recentActivityTitle: 'Ø§Ù„Ù†Ø´Ø§Ø· Ø§Ù„Ø£Ø®ÙŠØ±',
+    viewAllLink: 'Ø¹Ø±Ø¶ Ø§Ù„ÙƒÙ„',
+    industryBreakdownTitle: 'Ø§Ù„ØªÙˆØ²ÙŠØ¹ Ø­Ø³Ø¨ Ø§Ù„ØµÙ†Ø§Ø¹Ø©',
+    topUsersTitle: 'Ø£ÙØ¶Ù„ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+    manageUsersLink: 'Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+    tableHeaderUser: 'Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…',
+    tableHeaderEmail: 'Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ',
+    tableHeaderSubmissions: 'Ø§Ù„Ø·Ù„Ø¨Ø§Øª',
+    tableHeaderAvgScore: 'Ù…ØªÙˆØ³Ø· Ø§Ù„Ø¯Ø±Ø¬Ø©',
+    tableHeaderStatus: 'Ø§Ù„Ø­Ø§Ù„Ø©',
+    tableHeaderActions: 'Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª',
+    viewDetailsButton: 'Ø¹Ø±Ø¶ Ø§Ù„ØªÙØ§ØµÙŠÙ„',
+    systemHealthTitle: 'ØµØ­Ø© Ø§Ù„Ù†Ø¸Ø§Ù…',
+    statusLabel: 'Ø§Ù„Ø­Ø§Ù„Ø©:',
+    uptimeLabel: 'ÙˆÙ‚Øª Ø§Ù„ØªØ´ØºÙŠÙ„:',
+    responseLabel: 'Ø§Ù„Ø§Ø³ØªØ¬Ø§Ø¨Ø©:',
+    manageUsersCard: 'Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+    manageUsersCardDesc: 'Ø¹Ø±Ø¶ ÙˆØ¥Ø¯Ø§Ø±Ø© Ø­Ø³Ø§Ø¨Ø§Øª Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+    viewAnalyticsCard: 'Ø¹Ø±Ø¶ Ø§Ù„ØªØ­Ù„ÙŠÙ„Ø§Øª',
+    viewAnalyticsCardDesc: 'ØªØ­Ù„ÙŠÙ„Ø§Øª ÙˆØ±Ø¤Ù‰ Ù…ÙØµÙ„Ø© Ù„Ù„Ù…Ù†ØµØ©',
+    webhooksCardDesc: 'Ø¥Ø¯Ø§Ø±Ø© ØªÙƒØ§Ù…Ù„Ø§Øª webhooks n8n',
+    manageCriteriaCardDesc: 'Ø¥Ø¹Ø¯Ø§Ø¯ Ù…Ø¹Ø§ÙŠÙŠØ± Ø§Ù„ØªÙ‚ÙŠÙŠÙ…',
 
     // User Management
-    totalUsersLabel: 'إجمالي المستخدمين',
-    activeUsersLabel: 'المستخدمون النشطون',
-    premiumUsersLabel: 'المستخدمون المميزون',
-    suspendedLabel: 'موقوفون',
-    userManagementTitle: 'إدارة المستخدمين',
-    userManagementDesc: 'إدارة ومراقبة حسابات المستخدمين',
-    addNewUserButton: 'إضافة مستخدم جديد',
-    searchUsersPlaceholder: 'ابحث عن مستخدمين...',
-    allRolesOption: 'كل الأدوار',
-    userRoleOption: 'مستخدم',
-    adminRoleOption: 'مدير',
-    allStatusOption: 'كل الحالات',
-    activeStatusOption: 'نشط',
-    suspendedStatusOption: 'موقوف',
-    pendingStatusOption: 'قيد الانتظار',
-    tableHeaderRole: 'الدور',
-    tableHeaderPlan: 'الخطة',
-    noUsersFoundMessage: 'لم يتم العثور على مستخدمين',
-    userSuspendedSuccess: 'تم إيقاف المستخدم بنجاح',
-    userActivatedSuccess: 'تم تفعيل المستخدم بنجاح',
-    userDeletedSuccess: 'تم حذف المستخدم بنجاح',
-    deleteUserConfirmation: 'هل أنت متأكد أنك تريد حذف هذا المستخدم؟',
+    totalUsersLabel: 'Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+    activeUsersLabel: 'Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙˆÙ† Ø§Ù„Ù†Ø´Ø·ÙˆÙ†',
+    premiumUsersLabel: 'Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙˆÙ† Ø§Ù„Ù…Ù…ÙŠØ²ÙˆÙ†',
+    suspendedLabel: 'Ù…ÙˆÙ‚ÙˆÙÙˆÙ†',
+    userManagementTitle: 'Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+    userManagementDesc: 'Ø¥Ø¯Ø§Ø±Ø© ÙˆÙ…Ø±Ø§Ù‚Ø¨Ø© Ø­Ø³Ø§Ø¨Ø§Øª Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+    addNewUserButton: 'Ø¥Ø¶Ø§ÙØ© Ù…Ø³ØªØ®Ø¯Ù… Ø¬Ø¯ÙŠØ¯',
+    searchUsersPlaceholder: 'Ø§Ø¨Ø­Ø« Ø¹Ù† Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†...',
+    allRolesOption: 'ÙƒÙ„ Ø§Ù„Ø£Ø¯ÙˆØ§Ø±',
+    userRoleOption: 'Ù…Ø³ØªØ®Ø¯Ù…',
+    adminRoleOption: 'Ù…Ø¯ÙŠØ±',
+    allStatusOption: 'ÙƒÙ„ Ø§Ù„Ø­Ø§Ù„Ø§Øª',
+    activeStatusOption: 'Ù†Ø´Ø·',
+    suspendedStatusOption: 'Ù…ÙˆÙ‚ÙˆÙ',
+    pendingStatusOption: 'Ù‚ÙŠØ¯ Ø§Ù„Ø§Ù†ØªØ¸Ø§Ø±',
+    tableHeaderRole: 'Ø§Ù„Ø¯ÙˆØ±',
+    tableHeaderPlan: 'Ø§Ù„Ø®Ø·Ø©',
+    noUsersFoundMessage: 'Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+    userSuspendedSuccess: 'ØªÙ… Ø¥ÙŠÙ‚Ø§Ù Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ø¨Ù†Ø¬Ø§Ø­',
+    userActivatedSuccess: 'ØªÙ… ØªÙØ¹ÙŠÙ„ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ø¨Ù†Ø¬Ø§Ø­',
+    userDeletedSuccess: 'ØªÙ… Ø­Ø°Ù Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù… Ø¨Ù†Ø¬Ø§Ø­',
+    deleteUserConfirmation: 'Ù‡Ù„ Ø£Ù†Øª Ù…ØªØ£ÙƒØ¯ Ø£Ù†Ùƒ ØªØ±ÙŠØ¯ Ø­Ø°Ù Ù‡Ø°Ø§ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ØŸ',
 
     // Analytics
-    analyticsDashboardTitle: 'لوحة التحليلات',
-    analyticsDashboardDesc: 'أداء ورؤى المنصة',
-    last7DaysOption: 'آخر 7 أيام',
-    last30DaysOption: 'آخر 30 يوم',
-    last90DaysOption: 'آخر 90 يوم',
-    lastYearOption: 'السنة الماضية',
-    exportReportButton: 'تصدير التقرير',
-    totalRevenueLabel: 'إجمالي الإيرادات',
-    newUsersLabel: 'مستخدمون جدد',
-    activeSessionsLabel: 'جلسات نشطة',
-    conversionRateLabel: 'معدل التحويل',
-    technologyIndustry: 'التكنولوجيا',
-    educationIndustry: 'التعليم',
-    businessIndustry: 'الأعمال',
-    healthcareIndustry: 'الرعاية الصحية',
-    lawIndustry: 'القانون',
-    userEngagementTrendsTitle: 'اتجاهات تفاعل المستخدمين',
-    topIndustriesTitle: 'أفضل الصناعات',
-    submissionsLabel: 'طلبات',
-    revenueBreakdownTitle: 'توزيع الإيرادات',
-    percentOfTotalRevenue: '% من إجمالي الإيرادات',
-    totalRevenueLabel2: 'إجمالي الإيرادات',
-    aiAgentPerformanceTitle: 'أداء المساعدين الأذكياء',
-    tableHeaderAgent: 'المساعد',
-    tableHeaderUsageCount: 'عدد الاستخدامات',
-    tableHeaderSatisfaction: 'الرضا',
-    tableHeaderPerformance: 'الأداء',
+    analyticsDashboardTitle: 'Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­Ù„ÙŠÙ„Ø§Øª',
+    analyticsDashboardDesc: 'Ø£Ø¯Ø§Ø¡ ÙˆØ±Ø¤Ù‰ Ø§Ù„Ù…Ù†ØµØ©',
+    last7DaysOption: 'Ø¢Ø®Ø± 7 Ø£ÙŠØ§Ù…',
+    last30DaysOption: 'Ø¢Ø®Ø± 30 ÙŠÙˆÙ…',
+    last90DaysOption: 'Ø¢Ø®Ø± 90 ÙŠÙˆÙ…',
+    lastYearOption: 'Ø§Ù„Ø³Ù†Ø© Ø§Ù„Ù…Ø§Ø¶ÙŠØ©',
+    exportReportButton: 'ØªØµØ¯ÙŠØ± Ø§Ù„ØªÙ‚Ø±ÙŠØ±',
+    totalRevenueLabel: 'Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª',
+    newUsersLabel: 'Ù…Ø³ØªØ®Ø¯Ù…ÙˆÙ† Ø¬Ø¯Ø¯',
+    activeSessionsLabel: 'Ø¬Ù„Ø³Ø§Øª Ù†Ø´Ø·Ø©',
+    conversionRateLabel: 'Ù…Ø¹Ø¯Ù„ Ø§Ù„ØªØ­ÙˆÙŠÙ„',
+    technologyIndustry: 'Ø§Ù„ØªÙƒÙ†ÙˆÙ„ÙˆØ¬ÙŠØ§',
+    educationIndustry: 'Ø§Ù„ØªØ¹Ù„ÙŠÙ…',
+    businessIndustry: 'Ø§Ù„Ø£Ø¹Ù…Ø§Ù„',
+    healthcareIndustry: 'Ø§Ù„Ø±Ø¹Ø§ÙŠØ© Ø§Ù„ØµØ­ÙŠØ©',
+    lawIndustry: 'Ø§Ù„Ù‚Ø§Ù†ÙˆÙ†',
+    userEngagementTrendsTitle: 'Ø§ØªØ¬Ø§Ù‡Ø§Øª ØªÙØ§Ø¹Ù„ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+    topIndustriesTitle: 'Ø£ÙØ¶Ù„ Ø§Ù„ØµÙ†Ø§Ø¹Ø§Øª',
+    submissionsLabel: 'Ø·Ù„Ø¨Ø§Øª',
+    revenueBreakdownTitle: 'ØªÙˆØ²ÙŠØ¹ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª',
+    percentOfTotalRevenue: '% Ù…Ù† Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª',
+    totalRevenueLabel2: 'Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª',
+    aiAgentPerformanceTitle: 'Ø£Ø¯Ø§Ø¡ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø§Ù„Ø£Ø°ÙƒÙŠØ§Ø¡',
+    tableHeaderAgent: 'Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯',
+    tableHeaderUsageCount: 'Ø¹Ø¯Ø¯ Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù…Ø§Øª',
+    tableHeaderSatisfaction: 'Ø§Ù„Ø±Ø¶Ø§',
+    tableHeaderPerformance: 'Ø§Ù„Ø£Ø¯Ø§Ø¡',
     outOfHundred: '/100',
     outOfFive: '/5',
-    keyInsightsTitle: 'رؤى رئيسية',
-    growingRevenueTitle: 'نمو الإيرادات',
-    growingRevenueDesc: 'زادت الإيرادات الشهرية بنسبة 22.5% مقارنة بالشهر الماضي، مدفوعة بالاشتراكات المميزة.',
-    userGrowthTitle: 'نمو المستخدمين',
-    userGrowthDesc: 'زادت تسجيلات المستخدمين الجدد بنسبة 18.2%. قطاعات التعليم والتكنولوجيا تظهر أعلى نمو.',
-    aiPerformanceTitle: 'أداء الذكاء الاصطناعي',
-    aiPerformanceDesc: 'يُظهر مساعد التقييم المخصص أعلى تقييم رضا عند 4.8/5 مع 91 متوسط درجة.',
+    keyInsightsTitle: 'Ø±Ø¤Ù‰ Ø±Ø¦ÙŠØ³ÙŠØ©',
+    growingRevenueTitle: 'Ù†Ù…Ùˆ Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª',
+    growingRevenueDesc: 'Ø²Ø§Ø¯Øª Ø§Ù„Ø¥ÙŠØ±Ø§Ø¯Ø§Øª Ø§Ù„Ø´Ù‡Ø±ÙŠØ© Ø¨Ù†Ø³Ø¨Ø© 22.5% Ù…Ù‚Ø§Ø±Ù†Ø© Ø¨Ø§Ù„Ø´Ù‡Ø± Ø§Ù„Ù…Ø§Ø¶ÙŠØŒ Ù…Ø¯ÙÙˆØ¹Ø© Ø¨Ø§Ù„Ø§Ø´ØªØ±Ø§ÙƒØ§Øª Ø§Ù„Ù…Ù…ÙŠØ²Ø©.',
+    userGrowthTitle: 'Ù†Ù…Ùˆ Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ†',
+    userGrowthDesc: 'Ø²Ø§Ø¯Øª ØªØ³Ø¬ÙŠÙ„Ø§Øª Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…ÙŠÙ† Ø§Ù„Ø¬Ø¯Ø¯ Ø¨Ù†Ø³Ø¨Ø© 18.2%. Ù‚Ø·Ø§Ø¹Ø§Øª Ø§Ù„ØªØ¹Ù„ÙŠÙ… ÙˆØ§Ù„ØªÙƒÙ†ÙˆÙ„ÙˆØ¬ÙŠØ§ ØªØ¸Ù‡Ø± Ø£Ø¹Ù„Ù‰ Ù†Ù…Ùˆ.',
+    aiPerformanceTitle: 'Ø£Ø¯Ø§Ø¡ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ',
+    aiPerformanceDesc: 'ÙŠÙØ¸Ù‡Ø± Ù…Ø³Ø§Ø¹Ø¯ Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ù…Ø®ØµØµ Ø£Ø¹Ù„Ù‰ ØªÙ‚ÙŠÙŠÙ… Ø±Ø¶Ø§ Ø¹Ù†Ø¯ 4.8/5 Ù…Ø¹ 91 Ù…ØªÙˆØ³Ø· Ø¯Ø±Ø¬Ø©.',
 
     // N8N Webhook Management
-    webhookManagementTitle: 'إدارة Webhooks N8N',
-    webhookManagementDesc: 'إدارة تكاملات webhooks وربط المساعدين الأذكياء بسير عمل n8n',
+    webhookManagementTitle: 'Ø¥Ø¯Ø§Ø±Ø© Webhooks N8N',
+    webhookManagementDesc: 'Ø¥Ø¯Ø§Ø±Ø© ØªÙƒØ§Ù…Ù„Ø§Øª webhooks ÙˆØ±Ø¨Ø· Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† Ø§Ù„Ø£Ø°ÙƒÙŠØ§Ø¡ Ø¨Ø³ÙŠØ± Ø¹Ù…Ù„ n8n',
     webhooksTab: 'Webhooks',
-    executionLogsTab: 'سجلات التنفيذ',
-    activeWebhooksLabel: 'Webhooks النشطة',
-    totalExecutionsLabel: 'إجمالي التنفيذات',
-    avgSuccessRateLabel: 'متوسط معدل النجاح',
-    availableAgentsLabel: 'المساعدون المتاحون',
-    searchWebhooksPlaceholder: 'ابحث عن webhooks...',
-    allStatusOption2: 'كل الحالات',
-    activeOption: 'نشط',
-    pausedOption: 'موقوف مؤقتاً',
-    createWebhookButton: 'إنشاء Webhook',
-    tableHeaderWebhookName: 'اسم Webhook',
-    tableHeaderStatus2: 'الحالة',
-    tableHeaderConnectedAgents: 'المساعدون المتصلون',
-    tableHeaderTrigger: 'المشغل',
-    tableHeaderExecutions: 'التنفيذات',
-    tableHeaderSuccessRate: 'معدل النجاح',
-    tableHeaderLastExecuted: 'آخر تنفيذ',
-    tableHeaderActions2: 'الإجراءات',
-    executionLogsTitle: 'سجلات التنفيذ',
-    allWebhooksOption: 'كل Webhooks',
-    editWebhookTitle: 'تحرير Webhook',
-    createNewWebhookTitle: 'إنشاء Webhook جديد',
-    basicInformationSection: 'معلومات أساسية',
-    webhookNameLabel: 'اسم Webhook *',
-    webhookNamePlaceholder: 'مثال، خط مراجعة الكود',
-    triggerEventLabel: 'حدث التشغيل *',
-    onSubmissionOption: 'عند التقديم',
-    onCompletionOption: 'عند الإكمال',
-    onApprovalOption: 'عند الموافقة',
-    onRejectionOption: 'عند الرفض',
-    scheduledOption: 'مجدول',
-    manualOption: 'يدوي',
-    n8nWebhookUrlLabel: 'رابط Webhook N8N *',
+    executionLogsTab: 'Ø³Ø¬Ù„Ø§Øª Ø§Ù„ØªÙ†ÙÙŠØ°',
+    activeWebhooksLabel: 'Webhooks Ø§Ù„Ù†Ø´Ø·Ø©',
+    totalExecutionsLabel: 'Ø¥Ø¬Ù…Ø§Ù„ÙŠ Ø§Ù„ØªÙ†ÙÙŠØ°Ø§Øª',
+    avgSuccessRateLabel: 'Ù…ØªÙˆØ³Ø· Ù…Ø¹Ø¯Ù„ Ø§Ù„Ù†Ø¬Ø§Ø­',
+    availableAgentsLabel: 'Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙˆÙ† Ø§Ù„Ù…ØªØ§Ø­ÙˆÙ†',
+    searchWebhooksPlaceholder: 'Ø§Ø¨Ø­Ø« Ø¹Ù† webhooks...',
+    allStatusOption2: 'ÙƒÙ„ Ø§Ù„Ø­Ø§Ù„Ø§Øª',
+    activeOption: 'Ù†Ø´Ø·',
+    pausedOption: 'Ù…ÙˆÙ‚ÙˆÙ Ù…Ø¤Ù‚ØªØ§Ù‹',
+    createWebhookButton: 'Ø¥Ù†Ø´Ø§Ø¡ Webhook',
+    tableHeaderWebhookName: 'Ø§Ø³Ù… Webhook',
+    tableHeaderStatus2: 'Ø§Ù„Ø­Ø§Ù„Ø©',
+    tableHeaderConnectedAgents: 'Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙˆÙ† Ø§Ù„Ù…ØªØµÙ„ÙˆÙ†',
+    tableHeaderTrigger: 'Ø§Ù„Ù…Ø´ØºÙ„',
+    tableHeaderExecutions: 'Ø§Ù„ØªÙ†ÙÙŠØ°Ø§Øª',
+    tableHeaderSuccessRate: 'Ù…Ø¹Ø¯Ù„ Ø§Ù„Ù†Ø¬Ø§Ø­',
+    tableHeaderLastExecuted: 'Ø¢Ø®Ø± ØªÙ†ÙÙŠØ°',
+    tableHeaderActions2: 'Ø§Ù„Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª',
+    executionLogsTitle: 'Ø³Ø¬Ù„Ø§Øª Ø§Ù„ØªÙ†ÙÙŠØ°',
+    allWebhooksOption: 'ÙƒÙ„ Webhooks',
+    editWebhookTitle: 'ØªØ­Ø±ÙŠØ± Webhook',
+    createNewWebhookTitle: 'Ø¥Ù†Ø´Ø§Ø¡ Webhook Ø¬Ø¯ÙŠØ¯',
+    basicInformationSection: 'Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø£Ø³Ø§Ø³ÙŠØ©',
+    webhookNameLabel: 'Ø§Ø³Ù… Webhook *',
+    webhookNamePlaceholder: 'Ù…Ø«Ø§Ù„ØŒ Ø®Ø· Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„ÙƒÙˆØ¯',
+    triggerEventLabel: 'Ø­Ø¯Ø« Ø§Ù„ØªØ´ØºÙŠÙ„ *',
+    onSubmissionOption: 'Ø¹Ù†Ø¯ Ø§Ù„ØªÙ‚Ø¯ÙŠÙ…',
+    onCompletionOption: 'Ø¹Ù†Ø¯ Ø§Ù„Ø¥ÙƒÙ…Ø§Ù„',
+    onApprovalOption: 'Ø¹Ù†Ø¯ Ø§Ù„Ù…ÙˆØ§ÙÙ‚Ø©',
+    onRejectionOption: 'Ø¹Ù†Ø¯ Ø§Ù„Ø±ÙØ¶',
+    scheduledOption: 'Ù…Ø¬Ø¯ÙˆÙ„',
+    manualOption: 'ÙŠØ¯ÙˆÙŠ',
+    n8nWebhookUrlLabel: 'Ø±Ø§Ø¨Ø· Webhook N8N *',
     n8nWebhookUrlPlaceholder: 'https://your-n8n-instance.com/webhook/your-webhook-id',
-    authenticationSection: 'المصادقة',
-    authenticationTypeLabel: 'نوع المصادقة',
-    noneOption: 'لا شيء',
-    apiKeyOption: 'مفتاح API',
-    basicAuthOption: 'مصادقة أساسية',
-    bearerTokenOption: 'رمز Bearer',
-    apiKeyLabel2: 'مفتاح API',
-    enterApiKeyPlaceholder: 'أدخل مفتاح API',
-    usernameLabel: 'اسم المستخدم',
-    usernamePlaceholder: 'اسم المستخدم',
-    passwordLabel: 'كلمة المرور',
-    passwordPlaceholder: 'كلمة المرور',
-    connectedAiAgentsTitle: 'المساعدون الأذكياء المتصلون',
-    agentSelectionDesc: 'اختر أي المساعدين يجب أن يشغل هذا الـ webhook عند إكمال التقييمات',
-    advancedSettingsSection: 'إعدادات متقدمة',
-    retryAttemptsLabel: 'محاولات إعادة المحاولة',
-    timeoutLabel: 'المهلة (ثواني)',
-    customHeadersSection: 'رؤوس مخصصة',
-    headerNamePlaceholder: 'اسم الرأس',
-    headerValuePlaceholder: 'قيمة الرأس',
-    addHeaderButton: 'إضافة رأس',
-    notificationsSection: 'الإشعارات',
-    notifyOnFailureLabel: 'إشعار عند فشل webhook',
-    notificationEmailLabel: 'بريد الإشعار',
+    authenticationSection: 'Ø§Ù„Ù…ØµØ§Ø¯Ù‚Ø©',
+    authenticationTypeLabel: 'Ù†ÙˆØ¹ Ø§Ù„Ù…ØµØ§Ø¯Ù‚Ø©',
+    noneOption: 'Ù„Ø§ Ø´ÙŠØ¡',
+    apiKeyOption: 'Ù…ÙØªØ§Ø­ API',
+    basicAuthOption: 'Ù…ØµØ§Ø¯Ù‚Ø© Ø£Ø³Ø§Ø³ÙŠØ©',
+    bearerTokenOption: 'Ø±Ù…Ø² Bearer',
+    apiKeyLabel2: 'Ù…ÙØªØ§Ø­ API',
+    enterApiKeyPlaceholder: 'Ø£Ø¯Ø®Ù„ Ù…ÙØªØ§Ø­ API',
+    usernameLabel: 'Ø§Ø³Ù… Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…',
+    usernamePlaceholder: 'Ø§Ø³Ù… Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…',
+    passwordLabel: 'ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±',
+    passwordPlaceholder: 'ÙƒÙ„Ù…Ø© Ø§Ù„Ù…Ø±ÙˆØ±',
+    connectedAiAgentsTitle: 'Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙˆÙ† Ø§Ù„Ø£Ø°ÙƒÙŠØ§Ø¡ Ø§Ù„Ù…ØªØµÙ„ÙˆÙ†',
+    agentSelectionDesc: 'Ø§Ø®ØªØ± Ø£ÙŠ Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ÙŠÙ† ÙŠØ¬Ø¨ Ø£Ù† ÙŠØ´ØºÙ„ Ù‡Ø°Ø§ Ø§Ù„Ù€ webhook Ø¹Ù†Ø¯ Ø¥ÙƒÙ…Ø§Ù„ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…Ø§Øª',
+    advancedSettingsSection: 'Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ù…ØªÙ‚Ø¯Ù…Ø©',
+    retryAttemptsLabel: 'Ù…Ø­Ø§ÙˆÙ„Ø§Øª Ø¥Ø¹Ø§Ø¯Ø© Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø©',
+    timeoutLabel: 'Ø§Ù„Ù…Ù‡Ù„Ø© (Ø«ÙˆØ§Ù†ÙŠ)',
+    customHeadersSection: 'Ø±Ø¤ÙˆØ³ Ù…Ø®ØµØµØ©',
+    headerNamePlaceholder: 'Ø§Ø³Ù… Ø§Ù„Ø±Ø£Ø³',
+    headerValuePlaceholder: 'Ù‚ÙŠÙ…Ø© Ø§Ù„Ø±Ø£Ø³',
+    addHeaderButton: 'Ø¥Ø¶Ø§ÙØ© Ø±Ø£Ø³',
+    notificationsSection: 'Ø§Ù„Ø¥Ø´Ø¹Ø§Ø±Ø§Øª',
+    notifyOnFailureLabel: 'Ø¥Ø´Ø¹Ø§Ø± Ø¹Ù†Ø¯ ÙØ´Ù„ webhook',
+    notificationEmailLabel: 'Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ø´Ø¹Ø§Ø±',
     adminEmailPlaceholder: 'admin@example.com',
-    cancelButton2: 'إلغاء',
-    updateWebhookButton: 'تحديث Webhook',
-    createWebhookButton2: 'إنشاء Webhook',
+    cancelButton2: 'Ø¥Ù„ØºØ§Ø¡',
+    updateWebhookButton: 'ØªØ­Ø¯ÙŠØ« Webhook',
+    createWebhookButton2: 'Ø¥Ù†Ø´Ø§Ø¡ Webhook',
 
     // Integration Page
-    apiIntegrationPageTitle: 'API والتكامل',
-    apiIntegrationPageDesc: 'ادمج مساعدي Aasim الأذكياء في تطبيقاتك ومواقعك وسير عملك',
-    gettingStartedTitle: 'البداية',
-    gettingStartedDesc: 'يوفر Aasim طرقاً متعددة لدمج التقييمات المدعومة بالذكاء الاصطناعي في تطبيقاتك ومواقعك وسير عملك. اختر طريقة التكامل التي تناسب احتياجاتك.',
+    apiIntegrationPageTitle: 'API ÙˆØ§Ù„ØªÙƒØ§Ù…Ù„',
+    apiIntegrationPageDesc: 'Ø§Ø¯Ù…Ø¬ Ù…Ø³Ø§Ø¹Ø¯ÙŠ OBSOLIO Ø§Ù„Ø£Ø°ÙƒÙŠØ§Ø¡ ÙÙŠ ØªØ·Ø¨ÙŠÙ‚Ø§ØªÙƒ ÙˆÙ…ÙˆØ§Ù‚Ø¹Ùƒ ÙˆØ³ÙŠØ± Ø¹Ù…Ù„Ùƒ',
+    gettingStartedTitle: 'Ø§Ù„Ø¨Ø¯Ø§ÙŠØ©',
+    gettingStartedDesc: 'ÙŠÙˆÙØ± OBSOLIO Ø·Ø±Ù‚Ø§Ù‹ Ù…ØªØ¹Ø¯Ø¯Ø© Ù„Ø¯Ù…Ø¬ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…Ø§Øª Ø§Ù„Ù…Ø¯Ø¹ÙˆÙ…Ø© Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙÙŠ ØªØ·Ø¨ÙŠÙ‚Ø§ØªÙƒ ÙˆÙ…ÙˆØ§Ù‚Ø¹Ùƒ ÙˆØ³ÙŠØ± Ø¹Ù…Ù„Ùƒ. Ø§Ø®ØªØ± Ø·Ø±ÙŠÙ‚Ø© Ø§Ù„ØªÙƒØ§Ù…Ù„ Ø§Ù„ØªÙŠ ØªÙ†Ø§Ø³Ø¨ Ø§Ø­ØªÙŠØ§Ø¬Ø§ØªÙƒ.',
     restApiTitle: 'API REST',
-    restApiDesc: 'API HTTP مباشر لأقصى قدر من المرونة والتحكم',
-    officialSdksTitle: 'SDKs الرسمية',
-    officialSdksDesc: 'مكتبات أصلية لـ JavaScript و Python و PHP وأكثر',
+    restApiDesc: 'API HTTP Ù…Ø¨Ø§Ø´Ø± Ù„Ø£Ù‚ØµÙ‰ Ù‚Ø¯Ø± Ù…Ù† Ø§Ù„Ù…Ø±ÙˆÙ†Ø© ÙˆØ§Ù„ØªØ­ÙƒÙ…',
+    officialSdksTitle: 'SDKs Ø§Ù„Ø±Ø³Ù…ÙŠØ©',
+    officialSdksDesc: 'Ù…ÙƒØªØ¨Ø§Øª Ø£ØµÙ„ÙŠØ© Ù„Ù€ JavaScript Ùˆ Python Ùˆ PHP ÙˆØ£ÙƒØ«Ø±',
     webhooksTitle: 'Webhooks',
-    webhooksDesc: 'إشعارات فورية لأحداث التقييم',
-    embedWidgetTitle: 'ويدجت مضمّن',
-    embedWidgetDesc: 'ويدجت للتكامل السريع في المواقع',
-    apiKeyManagementTitle: 'إدارة مفتاح API',
-    apiKeyManagementDesc: 'يستخدم مفتاح API الخاص بك للمصادقة على الطلبات إلى API Aasim. احتفظ به آمناً ولا تشاركه علناً أبداً.',
-    securityNote: 'ملاحظة أمنية: احتفظ بمفاتيح API الخاصة بك آمنة ولا تكشفها أبداً في كود جانب العميل. استخدم متغيرات البيئة وخوادم الواجهة الخلفية الآمنة.',
-    quickStartTitle: 'بداية سريعة',
-    step1Description: 'انسخ مفتاح API الخاص بك من الأعلى',
-    step2Description: 'اختر تكامل API REST أو SDK أو webhooks',
-    step3Description: 'اختبر بأمثلتنا ووثائقنا',
-    step4Description: 'استقبل الإشعارات والنتائج الفورية',
-    restApiEndpointsTitle: 'نقاط API REST',
-    baseUrl: 'الرابط الأساسي: https://api.aasim.ai',
-    requestResponseTitle: 'الطلب والاستجابة',
-    exampleRequest: 'مثال طلب',
-    exampleResponse: 'مثال استجابة',
-    webhookEventsTitle: 'أحداث Webhook',
-    webhookEventsDesc: 'استقبل إشعارات فورية عند إكمال التقييمات أو فشلها أو احتياجها لمراجعة بشرية',
-    configureWebhookTitle: 'إعداد Webhook',
-    webhookUrlLabel2: 'رابط Webhook',
-    webhookUrlPlaceholder2: 'https://your-domain.com/webhooks/aasim',
-    webhookUrlDesc: 'سيتم إرسال الأحداث كطلبات POST إلى هذا الرابط',
-    testWebhookButton: 'اختبار Webhook',
-    saveConfigButton2: 'حفظ الإعدادات',
-    webhookPayloadTitle: 'مثال حمولة Webhook',
-    signatureVerificationNote: 'التحقق من التوقيع: تحقق من رأس X-Aasim-Signature لضمان صحة webhook',
-    officialSdksSection: 'SDKs الرسمية',
-    officialSdksDesc2: 'استخدم SDKs الرسمية لدينا لدمج Aasim بسرعة في تطبيقك',
+    webhooksDesc: 'Ø¥Ø´Ø¹Ø§Ø±Ø§Øª ÙÙˆØ±ÙŠØ© Ù„Ø£Ø­Ø¯Ø§Ø« Ø§Ù„ØªÙ‚ÙŠÙŠÙ…',
+    embedWidgetTitle: 'ÙˆÙŠØ¯Ø¬Øª Ù…Ø¶Ù…Ù‘Ù†',
+    embedWidgetDesc: 'ÙˆÙŠØ¯Ø¬Øª Ù„Ù„ØªÙƒØ§Ù…Ù„ Ø§Ù„Ø³Ø±ÙŠØ¹ ÙÙŠ Ø§Ù„Ù…ÙˆØ§Ù‚Ø¹',
+    apiKeyManagementTitle: 'Ø¥Ø¯Ø§Ø±Ø© Ù…ÙØªØ§Ø­ API',
+    apiKeyManagementDesc: 'ÙŠØ³ØªØ®Ø¯Ù… Ù…ÙØªØ§Ø­ API Ø§Ù„Ø®Ø§Øµ Ø¨Ùƒ Ù„Ù„Ù…ØµØ§Ø¯Ù‚Ø© Ø¹Ù„Ù‰ Ø§Ù„Ø·Ù„Ø¨Ø§Øª Ø¥Ù„Ù‰ API OBSOLIO. Ø§Ø­ØªÙØ¸ Ø¨Ù‡ Ø¢Ù…Ù†Ø§Ù‹ ÙˆÙ„Ø§ ØªØ´Ø§Ø±ÙƒÙ‡ Ø¹Ù„Ù†Ø§Ù‹ Ø£Ø¨Ø¯Ø§Ù‹.',
+    securityNote: 'Ù…Ù„Ø§Ø­Ø¸Ø© Ø£Ù…Ù†ÙŠØ©: Ø§Ø­ØªÙØ¸ Ø¨Ù…ÙØ§ØªÙŠØ­ API Ø§Ù„Ø®Ø§ØµØ© Ø¨Ùƒ Ø¢Ù…Ù†Ø© ÙˆÙ„Ø§ ØªÙƒØ´ÙÙ‡Ø§ Ø£Ø¨Ø¯Ø§Ù‹ ÙÙŠ ÙƒÙˆØ¯ Ø¬Ø§Ù†Ø¨ Ø§Ù„Ø¹Ù…ÙŠÙ„. Ø§Ø³ØªØ®Ø¯Ù… Ù…ØªØºÙŠØ±Ø§Øª Ø§Ù„Ø¨ÙŠØ¦Ø© ÙˆØ®ÙˆØ§Ø¯Ù… Ø§Ù„ÙˆØ§Ø¬Ù‡Ø© Ø§Ù„Ø®Ù„ÙÙŠØ© Ø§Ù„Ø¢Ù…Ù†Ø©.',
+    quickStartTitle: 'Ø¨Ø¯Ø§ÙŠØ© Ø³Ø±ÙŠØ¹Ø©',
+    step1Description: 'Ø§Ù†Ø³Ø® Ù…ÙØªØ§Ø­ API Ø§Ù„Ø®Ø§Øµ Ø¨Ùƒ Ù…Ù† Ø§Ù„Ø£Ø¹Ù„Ù‰',
+    step2Description: 'Ø§Ø®ØªØ± ØªÙƒØ§Ù…Ù„ API REST Ø£Ùˆ SDK Ø£Ùˆ webhooks',
+    step3Description: 'Ø§Ø®ØªØ¨Ø± Ø¨Ø£Ù…Ø«Ù„ØªÙ†Ø§ ÙˆÙˆØ«Ø§Ø¦Ù‚Ù†Ø§',
+    step4Description: 'Ø§Ø³ØªÙ‚Ø¨Ù„ Ø§Ù„Ø¥Ø´Ø¹Ø§Ø±Ø§Øª ÙˆØ§Ù„Ù†ØªØ§Ø¦Ø¬ Ø§Ù„ÙÙˆØ±ÙŠØ©',
+    restApiEndpointsTitle: 'Ù†Ù‚Ø§Ø· API REST',
+    baseUrl: 'Ø§Ù„Ø±Ø§Ø¨Ø· Ø§Ù„Ø£Ø³Ø§Ø³ÙŠ: https://api.OBSOLIO.ai',
+    requestResponseTitle: 'Ø§Ù„Ø·Ù„Ø¨ ÙˆØ§Ù„Ø§Ø³ØªØ¬Ø§Ø¨Ø©',
+    exampleRequest: 'Ù…Ø«Ø§Ù„ Ø·Ù„Ø¨',
+    exampleResponse: 'Ù…Ø«Ø§Ù„ Ø§Ø³ØªØ¬Ø§Ø¨Ø©',
+    webhookEventsTitle: 'Ø£Ø­Ø¯Ø§Ø« Webhook',
+    webhookEventsDesc: 'Ø§Ø³ØªÙ‚Ø¨Ù„ Ø¥Ø´Ø¹Ø§Ø±Ø§Øª ÙÙˆØ±ÙŠØ© Ø¹Ù†Ø¯ Ø¥ÙƒÙ…Ø§Ù„ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…Ø§Øª Ø£Ùˆ ÙØ´Ù„Ù‡Ø§ Ø£Ùˆ Ø§Ø­ØªÙŠØ§Ø¬Ù‡Ø§ Ù„Ù…Ø±Ø§Ø¬Ø¹Ø© Ø¨Ø´Ø±ÙŠØ©',
+    configureWebhookTitle: 'Ø¥Ø¹Ø¯Ø§Ø¯ Webhook',
+    webhookUrlLabel2: 'Ø±Ø§Ø¨Ø· Webhook',
+    webhookUrlPlaceholder2: 'https://your-domain.com/webhooks/OBSOLIO',
+    webhookUrlDesc: 'Ø³ÙŠØªÙ… Ø¥Ø±Ø³Ø§Ù„ Ø§Ù„Ø£Ø­Ø¯Ø§Ø« ÙƒØ·Ù„Ø¨Ø§Øª POST Ø¥Ù„Ù‰ Ù‡Ø°Ø§ Ø§Ù„Ø±Ø§Ø¨Ø·',
+    testWebhookButton: 'Ø§Ø®ØªØ¨Ø§Ø± Webhook',
+    saveConfigButton2: 'Ø­ÙØ¸ Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª',
+    webhookPayloadTitle: 'Ù…Ø«Ø§Ù„ Ø­Ù…ÙˆÙ„Ø© Webhook',
+    signatureVerificationNote: 'Ø§Ù„ØªØ­Ù‚Ù‚ Ù…Ù† Ø§Ù„ØªÙˆÙ‚ÙŠØ¹: ØªØ­Ù‚Ù‚ Ù…Ù† Ø±Ø£Ø³ X-OBSOLIO-Signature Ù„Ø¶Ù…Ø§Ù† ØµØ­Ø© webhook',
+    officialSdksSection: 'SDKs Ø§Ù„Ø±Ø³Ù…ÙŠØ©',
+    officialSdksDesc2: 'Ø§Ø³ØªØ®Ø¯Ù… SDKs Ø§Ù„Ø±Ø³Ù…ÙŠØ© Ù„Ø¯ÙŠÙ†Ø§ Ù„Ø¯Ù…Ø¬ OBSOLIO Ø¨Ø³Ø±Ø¹Ø© ÙÙŠ ØªØ·Ø¨ÙŠÙ‚Ùƒ',
     jsNodejsTitle: 'JavaScript / Node.js',
     pythonTitle: 'Python',
     phpTitle: 'PHP',
     rubyTitle: 'Ruby',
-    viewDocumentationLink: 'عرض الوثائق',
-    codeExamplesTitle: 'أمثلة الكود',
-    integrationExamplesTitle: 'أمثلة التكامل',
-    integrationExamplesDesc: 'أمثلة من الواقع لكيفية دمج Aasim في تطبيقاتك',
-    fileUploadIntegrationTitle: 'تكامل رفع الملفات',
-    fileUploadIntegrationDesc: 'قيّم الملفات المرفوعة إلى تطبيقك تلقائياً',
-    viewExampleLink: 'عرض مثال',
-    lmsIntegrationTitle: 'تكامل LMS',
-    lmsIntegrationDesc: 'تكامل مع أنظمة إدارة التعلم مثل Moodle و Canvas و Blackboard',
-    viewExampleLink2: 'عرض مثال',
-    cicdPipelineTitle: 'خط CI/CD',
-    cicdPipelineDesc: 'أضف فحوصات جودة الكود لسير عمل التكامل المستمر الخاص بك',
-    viewExampleLink3: 'عرض مثال',
-    embedWidgetTitle2: 'ويدجت مضمّن',
-    embedWidgetDesc2: 'أضف ويدجت بسيط لموقعك للتقييمات الفورية',
-    viewExampleLink4: 'عرض مثال',
-    embedWidgetCodeTitle: 'كود الويدجت المضمّن',
-    embedWidgetCodeDesc: 'أضف هذا الجزء إلى HTML الخاص بك لتضمين ويدجت التقييم',
-    apiTestingToolTitle: 'أداة اختبار API',
-    apiTestingToolDesc: 'اختبر تكامل API الخاص بك مباشرة من هذه الصفحة',
-    testPayloadLabel: 'حمولة الاختبار',
-    testPayloadPlaceholder: 'أدخل حمولة JSON للاختبار',
-    sendTestRequestButton: 'إرسال طلب اختبار',
-    rateLimitsTitle: 'حدود المعدل',
-    rateLimitsDesc: 'حدود معدل API لضمان الاستخدام العادل واستقرار النظام',
-    requestsPerMinute: 'طلبات في الدقيقة',
-    requestsPerDay: 'طلبات في اليوم',
-    maxPayloadSize: 'أقصى حجم للحمولة',
-    higherLimitsNote: 'تحتاج حدود أعلى؟ اتصل بفريق المبيعات لدينا للحصول على خطط المؤسسات.',
-    errorCodesTitle: 'رموز الخطأ الشائعة',
-    error401Desc: 'مفتاح API غير صالح أو مفقود',
-    error429Desc: 'تجاوز حد المعدل',
-    error400Desc: 'حمولة طلب غير صالحة',
-    error404Desc: 'المورد غير موجود',
-    error500Desc: 'خطأ في الخادم، يرجى المحاولة مرة أخرى',
+    viewDocumentationLink: 'Ø¹Ø±Ø¶ Ø§Ù„ÙˆØ«Ø§Ø¦Ù‚',
+    codeExamplesTitle: 'Ø£Ù…Ø«Ù„Ø© Ø§Ù„ÙƒÙˆØ¯',
+    integrationExamplesTitle: 'Ø£Ù…Ø«Ù„Ø© Ø§Ù„ØªÙƒØ§Ù…Ù„',
+    integrationExamplesDesc: 'Ø£Ù…Ø«Ù„Ø© Ù…Ù† Ø§Ù„ÙˆØ§Ù‚Ø¹ Ù„ÙƒÙŠÙÙŠØ© Ø¯Ù…Ø¬ OBSOLIO ÙÙŠ ØªØ·Ø¨ÙŠÙ‚Ø§ØªÙƒ',
+    fileUploadIntegrationTitle: 'ØªÙƒØ§Ù…Ù„ Ø±ÙØ¹ Ø§Ù„Ù…Ù„ÙØ§Øª',
+    fileUploadIntegrationDesc: 'Ù‚ÙŠÙ‘Ù… Ø§Ù„Ù…Ù„ÙØ§Øª Ø§Ù„Ù…Ø±ÙÙˆØ¹Ø© Ø¥Ù„Ù‰ ØªØ·Ø¨ÙŠÙ‚Ùƒ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹',
+    viewExampleLink: 'Ø¹Ø±Ø¶ Ù…Ø«Ø§Ù„',
+    lmsIntegrationTitle: 'ØªÙƒØ§Ù…Ù„ LMS',
+    lmsIntegrationDesc: 'ØªÙƒØ§Ù…Ù„ Ù…Ø¹ Ø£Ù†Ø¸Ù…Ø© Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„ØªØ¹Ù„Ù… Ù…Ø«Ù„ Moodle Ùˆ Canvas Ùˆ Blackboard',
+    viewExampleLink2: 'Ø¹Ø±Ø¶ Ù…Ø«Ø§Ù„',
+    cicdPipelineTitle: 'Ø®Ø· CI/CD',
+    cicdPipelineDesc: 'Ø£Ø¶Ù ÙØ­ÙˆØµØ§Øª Ø¬ÙˆØ¯Ø© Ø§Ù„ÙƒÙˆØ¯ Ù„Ø³ÙŠØ± Ø¹Ù…Ù„ Ø§Ù„ØªÙƒØ§Ù…Ù„ Ø§Ù„Ù…Ø³ØªÙ…Ø± Ø§Ù„Ø®Ø§Øµ Ø¨Ùƒ',
+    viewExampleLink3: 'Ø¹Ø±Ø¶ Ù…Ø«Ø§Ù„',
+    embedWidgetTitle2: 'ÙˆÙŠØ¯Ø¬Øª Ù…Ø¶Ù…Ù‘Ù†',
+    embedWidgetDesc2: 'Ø£Ø¶Ù ÙˆÙŠØ¯Ø¬Øª Ø¨Ø³ÙŠØ· Ù„Ù…ÙˆÙ‚Ø¹Ùƒ Ù„Ù„ØªÙ‚ÙŠÙŠÙ…Ø§Øª Ø§Ù„ÙÙˆØ±ÙŠØ©',
+    viewExampleLink4: 'Ø¹Ø±Ø¶ Ù…Ø«Ø§Ù„',
+    embedWidgetCodeTitle: 'ÙƒÙˆØ¯ Ø§Ù„ÙˆÙŠØ¯Ø¬Øª Ø§Ù„Ù…Ø¶Ù…Ù‘Ù†',
+    embedWidgetCodeDesc: 'Ø£Ø¶Ù Ù‡Ø°Ø§ Ø§Ù„Ø¬Ø²Ø¡ Ø¥Ù„Ù‰ HTML Ø§Ù„Ø®Ø§Øµ Ø¨Ùƒ Ù„ØªØ¶Ù…ÙŠÙ† ÙˆÙŠØ¯Ø¬Øª Ø§Ù„ØªÙ‚ÙŠÙŠÙ…',
+    apiTestingToolTitle: 'Ø£Ø¯Ø§Ø© Ø§Ø®ØªØ¨Ø§Ø± API',
+    apiTestingToolDesc: 'Ø§Ø®ØªØ¨Ø± ØªÙƒØ§Ù…Ù„ API Ø§Ù„Ø®Ø§Øµ Ø¨Ùƒ Ù…Ø¨Ø§Ø´Ø±Ø© Ù…Ù† Ù‡Ø°Ù‡ Ø§Ù„ØµÙØ­Ø©',
+    testPayloadLabel: 'Ø­Ù…ÙˆÙ„Ø© Ø§Ù„Ø§Ø®ØªØ¨Ø§Ø±',
+    testPayloadPlaceholder: 'Ø£Ø¯Ø®Ù„ Ø­Ù…ÙˆÙ„Ø© JSON Ù„Ù„Ø§Ø®ØªØ¨Ø§Ø±',
+    sendTestRequestButton: 'Ø¥Ø±Ø³Ø§Ù„ Ø·Ù„Ø¨ Ø§Ø®ØªØ¨Ø§Ø±',
+    rateLimitsTitle: 'Ø­Ø¯ÙˆØ¯ Ø§Ù„Ù…Ø¹Ø¯Ù„',
+    rateLimitsDesc: 'Ø­Ø¯ÙˆØ¯ Ù…Ø¹Ø¯Ù„ API Ù„Ø¶Ù…Ø§Ù† Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„Ø¹Ø§Ø¯Ù„ ÙˆØ§Ø³ØªÙ‚Ø±Ø§Ø± Ø§Ù„Ù†Ø¸Ø§Ù…',
+    requestsPerMinute: 'Ø·Ù„Ø¨Ø§Øª ÙÙŠ Ø§Ù„Ø¯Ù‚ÙŠÙ‚Ø©',
+    requestsPerDay: 'Ø·Ù„Ø¨Ø§Øª ÙÙŠ Ø§Ù„ÙŠÙˆÙ…',
+    maxPayloadSize: 'Ø£Ù‚ØµÙ‰ Ø­Ø¬Ù… Ù„Ù„Ø­Ù…ÙˆÙ„Ø©',
+    higherLimitsNote: 'ØªØ­ØªØ§Ø¬ Ø­Ø¯ÙˆØ¯ Ø£Ø¹Ù„Ù‰ØŸ Ø§ØªØµÙ„ Ø¨ÙØ±ÙŠÙ‚ Ø§Ù„Ù…Ø¨ÙŠØ¹Ø§Øª Ù„Ø¯ÙŠÙ†Ø§ Ù„Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ø®Ø·Ø· Ø§Ù„Ù…Ø¤Ø³Ø³Ø§Øª.',
+    errorCodesTitle: 'Ø±Ù…ÙˆØ² Ø§Ù„Ø®Ø·Ø£ Ø§Ù„Ø´Ø§Ø¦Ø¹Ø©',
+    error401Desc: 'Ù…ÙØªØ§Ø­ API ØºÙŠØ± ØµØ§Ù„Ø­ Ø£Ùˆ Ù…ÙÙ‚ÙˆØ¯',
+    error429Desc: 'ØªØ¬Ø§ÙˆØ² Ø­Ø¯ Ø§Ù„Ù…Ø¹Ø¯Ù„',
+    error400Desc: 'Ø­Ù…ÙˆÙ„Ø© Ø·Ù„Ø¨ ØºÙŠØ± ØµØ§Ù„Ø­Ø©',
+    error404Desc: 'Ø§Ù„Ù…ÙˆØ±Ø¯ ØºÙŠØ± Ù…ÙˆØ¬ÙˆØ¯',
+    error500Desc: 'Ø®Ø·Ø£ ÙÙŠ Ø§Ù„Ø®Ø§Ø¯Ù…ØŒ ÙŠØ±Ø¬Ù‰ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ù…Ø±Ø© Ø£Ø®Ø±Ù‰',
   }
 }

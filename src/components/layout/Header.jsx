@@ -4,7 +4,7 @@ import { useAuthStore } from '../../store/authStore'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { translations } from '../../translations'
 import NotificationBell from '../common/NotificationBell/NotificationBell'
-import logo from '../../assets/imgs/Aasim-logo.png'
+import logo from '../../assets/imgs/OBSOLIO-logo.png'
 
 const Header = () => {
   const { isAuthenticated, user, logout } = useAuthStore()
@@ -69,38 +69,38 @@ const Header = () => {
   }
 
   return (
-    <header className={`glass-card sticky top-0 z-40 transition-all duration-500 ${isScrolled ? 'mb-4' : 'mb-8'}`}>
+    <header className={`bg-gray-900 sticky top-0 z-40 transition-all duration-500 ${isScrolled ? 'mb-4' : 'mb-8'} shadow-lg`}>
       <nav className={`max-w-7xl mx-auto px-6 transition-all duration-500 ${isScrolled ? 'py-2' : 'py-6'}`}>
         <div className="flex items-center justify-between">
           {/* Logo - Always links to homepage */}
           <Link to={isAuthenticated ? "/dashboard" : "/"} className="flex items-center space-x-2">
             <img
               src={logo}
-              alt="Aasim Logo"
+              alt="OBSOLIO Logo"
               className={`transition-all duration-500 object-contain ${isScrolled ? 'h-8' : 'h-16'}`}
             />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="flex items-center space-x-6">
-            <Link to="/" className="text-secondary-600 hover:text-secondary-900 font-medium transition-colors hidden sm:inline">Home</Link>
+            <Link to="/" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Home</Link>
 
             {isAuthenticated && (
-              <Link to="/dashboard" className="text-secondary-600 hover:text-secondary-900 font-medium transition-colors hidden sm:inline">Dashboard</Link>
+              <Link to="/dashboard" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Dashboard</Link>
             )}
 
             {!isAuthenticated ? (
               <>
-                <a href="#features" className="text-secondary-600 hover:text-secondary-900 font-medium transition-colors hidden sm:inline">Features</a>
-                <a href="#how-it-works" className="text-secondary-600 hover:text-secondary-900 font-medium transition-colors hidden sm:inline">How It Works</a>
-                <a href="#pricing" className="text-secondary-600 hover:text-secondary-900 font-medium transition-colors hidden sm:inline">Pricing</a>
-                <a href="/login" className="text-secondary-700 hover:text-secondary-900 font-semibold transition-colors">Sign In</a>
+                <a href="#features" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Features</a>
+                <a href="#how-it-works" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">How It Works</a>
+                <a href="#pricing" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Pricing</a>
+                <a href="/login" className="text-gray-200 hover:text-white font-semibold transition-colors">Sign In</a>
 
                 {/* Language Switcher */}
                 <div className="relative" ref={languageMenuRef}>
                   <button
                     onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
-                    className="flex items-center space-x-2 text-secondary-700 hover:text-primary-600 transition-colors"
+                    className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors"
                   >
                     <img
                       src={`https://flagcdn.com/24x18/${languages.find(l => l.code === language)?.flag}.png`}
@@ -186,15 +186,15 @@ const Header = () => {
                 <div className="relative" ref={userMenuRef}>
                   <button
                     onClick={toggleUserMenu}
-                    className="flex items-center space-x-2 glass-card px-4 py-2 rounded-xl hover:bg-white/90 transition-all"
+                    className="flex items-center space-x-2 bg-gray-800 px-4 py-2 rounded-xl hover:bg-gray-700 transition-all"
                   >
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-purple-500 flex items-center justify-center">
                       <span className="text-white font-semibold text-sm">
                         {user?.name?.charAt(0).toUpperCase() || 'U'}
                       </span>
                     </div>
-                    <span className="text-secondary-800 font-medium hidden sm:block">{user?.name || 'User'}</span>
-                    <span className="material-icons text-secondary-700 text-sm">
+                    <span className="text-white font-medium hidden sm:block">{user?.name || 'User'}</span>
+                    <span className="material-icons text-gray-300 text-sm">
                       {userMenuOpen ? 'expand_less' : 'expand_more'}
                     </span>
                   </button>
