@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Get API base URL from environment
 // Force relative path to use Vite proxy
-const API_BASE_URL = '/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/v1';
 // const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api/v1';
 
 console.log('🌐 API Configuration:', {
