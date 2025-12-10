@@ -14,11 +14,11 @@ const MainLayout = ({ children, showFooter = true, showSidebar = true }) => {
       {!shouldShowSidebar && <Header />}
       <div className="flex flex-grow">
         {shouldShowSidebar && <Sidebar />}
-        <main className={`flex-grow overflow-x-auto ${shouldShowSidebar ? 'bg-[#0B0E14] text-white px-8 lg:px-10 xl:px-12' : 'container mx-auto px-6'}`}>
+        <main className={`flex-grow overflow-x-auto ${shouldShowSidebar ? 'bg-gray-50 text-secondary-900 px-8 lg:px-10 xl:px-12' : 'container mx-auto px-6'}`}>
           {children}
         </main>
       </div>
-      {showFooter && <Footer />}
+      {showFooter && !shouldShowSidebar && <Footer />}
     </div>
   );
 };

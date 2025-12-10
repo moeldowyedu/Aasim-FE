@@ -71,6 +71,7 @@ const LoginPage = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
+              theme="dark"
               label="Email Address"
               type="email"
               name="email"
@@ -83,6 +84,7 @@ const LoginPage = () => {
             />
 
             <Input
+              theme="dark"
               label="Password"
               type="password"
               name="password"

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, LogOut, User, Building2, Settings } from 'lucide-react';
 import { useAuthStore } from '../../../store/authStore';
+import { useLayoutStore } from '../../../store/layoutStore';
 import { PLATFORM, ENGINES } from '../../../utils/constants';
 
 import logo from '../../../assets/imgs/OBSOLIO-logo-cyan.png';
@@ -9,75 +10,44 @@ import logo from '../../../assets/imgs/OBSOLIO-logo-cyan.png';
 const Sidebar = () => {
   const location = useLocation();
   const { user, logout } = useAuthStore();
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [expandedSections, setExpandedSections] = useState({
-    organization: false,
-    agentx: false,
-    jobFlows: false,
-    orchestration: false,
-    scheduling: false,
-    hitl: false,
-    engines: false,
-    integrations: false,
-    teamUsers: false,
-    billing: false,
-    settings: false
-  });
+  const {
+    isCollapsed,
+    toggleSidebar,
+    expandedSections,
+    toggleSection,
+    setSectionExpanded
+  } = useLayoutStore();
 
   // Auto-expand sections based on current route
   useEffect(() => {
     const path = location.pathname;
-    const newExpanded = {
-      organization: false,
-      agentx: false,
-      jobFlows: false,
-      orchestration: false,
-      scheduling: false,
-      hitl: false,
-      engines: false,
-      integrations: false,
-      teamUsers: false,
-      billing: false,
-      settings: false
-    };
 
-    if (path.startsWith('/organization/')) {
-      newExpanded.organization = true;
-    } else if (path.startsWith('/agentx/') || path.startsWith('/agents/')) {
-      newExpanded.agentx = true;
-    } else if (path.startsWith('/job-flows/')) {
-      newExpanded.jobFlows = true;
-    } else if (path.startsWith('/orchestration/')) {
-      newExpanded.orchestration = true;
-    } else if (path.startsWith('/scheduling/')) {
-      newExpanded.scheduling = true;
-    } else if (path.startsWith('/hitl/')) {
-      newExpanded.hitl = true;
-    } else if (path.startsWith('/engines/')) {
-      newExpanded.engines = true;
-    } else if (path.startsWith('/integrations/')) {
-      newExpanded.integrations = true;
-    } else if (path.startsWith('/team-users/')) {
-      newExpanded.teamUsers = true;
-    } else if (path.startsWith('/billing/')) {
-      newExpanded.billing = true;
-    } else if (path.startsWith('/settings/')) {
-      newExpanded.settings = true;
+    // Determine which section *should* be active
+    let activeSection = null;
+    if (path.startsWith('/organization/')) activeSection = 'organization';
+    else if (path.startsWith('/agentx/') || path.startsWith('/agents/')) activeSection = 'agentx';
+    else if (path.startsWith('/job-flows/')) activeSection = 'jobFlows';
+    else if (path.startsWith('/orchestration/')) activeSection = 'orchestration';
+    else if (path.startsWith('/scheduling/')) activeSection = 'scheduling';
+    else if (path.startsWith('/hitl/')) activeSection = 'hitl';
+    else if (path.startsWith('/engines/')) activeSection = 'engines';
+    else if (path.startsWith('/integrations/')) activeSection = 'integrations';
+    else if (path.startsWith('/team-users/')) activeSection = 'teamUsers';
+    else if (path.startsWith('/billing/')) activeSection = 'billing';
+    else if (path.startsWith('/settings/')) activeSection = 'settings';
+
+    // If an active section is found, expand it. DO NOT collapse others if they were manually opened.
+    // Or, for stricter navigation behavior, collapse others? The user said "keep sub menu expanded".
+    // A balanced approach: Ensure the active one is true.
+    // If an active section is found, expand it. DO NOT collapse others if they were manually opened.
+    if (activeSection) {
+      setSectionExpanded(activeSection, true);
     }
+  }, [location.pathname, setSectionExpanded]);
 
-    setExpandedSections(newExpanded);
-  }, [location.pathname]);
 
-  const toggleSection = (section) => {
-    setExpandedSections(prev => ({
-      ...prev,
-      [section]: !prev[section]
-    }));
-  };
 
-  const toggleSidebar = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+
 
   const navigation = [
     {
@@ -213,7 +183,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`${isCollapsed ? 'w-20' : 'w-64'} bg-[#0B0E14] border-r border-white/10 h-screen sticky top-0 transition-all duration-300 ease-in-out flex flex-col`}
+      className={`${isCollapsed ? 'w-20' : 'w-64'} bg-[#0B0E14] border-r border-white/10 h-screen sticky top-0 transition-all duration-300 ease-in-out flex flex-col flex-shrink-0`}
     >
       {/* Tenant Branding */}
       <div className={`${isCollapsed ? 'p-4' : 'p-6'} border-b border-white/10 transition-all duration-300 flex-shrink-0`}>

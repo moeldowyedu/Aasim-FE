@@ -314,7 +314,7 @@ const MarketplacePage = () => {
             key={i}
             className={`w-4 h-4 ${i < Math.floor(rating)
               ? 'fill-yellow-400 text-yellow-400'
-              : 'text-gray-300'
+              : 'text-secondary-700'
               }`}
           />
         ))}
@@ -327,62 +327,62 @@ const MarketplacePage = () => {
       <div className="p-6 space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold text-white mb-2">AgentX Marketplace</h1>
-          <p className="text-gray-400">
+          <h1 className="text-3xl font-bold text-secondary-900 mb-2">AgentX Marketplace</h1>
+          <p className="text-secondary-600">
             Discover and deploy pre-built AI agents for your enterprise
           </p>
         </div>
 
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="glass-card rounded-2xl p-6">
+          <div className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-gray-400">Total Agents</div>
+              <div className="text-sm font-medium text-secondary-600">Total Agents</div>
               <Grid3x3 className="w-5 h-5 text-blue-600" />
             </div>
-            <div className="text-3xl font-bold text-white">{totalAgents}</div>
-            <div className="text-xs text-gray-400 mt-1">Available to deploy</div>
+            <div className="text-3xl font-bold text-secondary-900">{totalAgents}</div>
+            <div className="text-xs text-secondary-600 mt-1">Available to deploy</div>
           </div>
 
-          <div className="glass-card rounded-2xl p-6">
+          <div className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-gray-400">Categories</div>
+              <div className="text-sm font-medium text-secondary-600">Categories</div>
               <Filter className="w-5 h-5 text-purple-600" />
             </div>
-            <div className="text-3xl font-bold text-white">{totalCategories}</div>
-            <div className="text-xs text-gray-400 mt-1">Different categories</div>
+            <div className="text-3xl font-bold text-secondary-900">{totalCategories}</div>
+            <div className="text-xs text-secondary-600 mt-1">Different categories</div>
           </div>
 
-          <div className="glass-card rounded-2xl p-6">
+          <div className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-gray-400">Avg Rating</div>
+              <div className="text-sm font-medium text-secondary-600">Avg Rating</div>
               <Star className="w-5 h-5 text-yellow-600" />
             </div>
-            <div className="text-3xl font-bold text-white">{avgRating}</div>
-            <div className="text-xs text-gray-400 mt-1">Based on user reviews</div>
+            <div className="text-3xl font-bold text-secondary-900">{avgRating}</div>
+            <div className="text-xs text-secondary-600 mt-1">Based on user reviews</div>
           </div>
 
-          <div className="glass-card rounded-2xl p-6">
+          <div className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-gray-400">Total Deployments</div>
+              <div className="text-sm font-medium text-secondary-600">Total Deployments</div>
               <Users className="w-5 h-5 text-green-600" />
             </div>
-            <div className="text-3xl font-bold text-white">{totalDeployments.toLocaleString()}</div>
-            <div className="text-xs text-gray-400 mt-1">Across all agents</div>
+            <div className="text-3xl font-bold text-secondary-900">{totalDeployments.toLocaleString()}</div>
+            <div className="text-xs text-secondary-600 mt-1">Across all agents</div>
           </div>
         </div>
 
         {/* Search and Filters */}
-        <div className="glass-card rounded-2xl p-6 space-y-4">
+        <div className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6 space-y-4">
           {/* Search Bar */}
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-secondary-600 w-5 h-5" />
             <input
               type="text"
               placeholder="Search agents by name, description, or tags..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-white/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
 
@@ -392,7 +392,7 @@ const MarketplacePage = () => {
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-4 py-2 border border-white/10 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               {categories.map(cat => (
                 <option key={cat} value={cat.toLowerCase()}>{cat}</option>
@@ -403,7 +403,7 @@ const MarketplacePage = () => {
             <select
               value={selectedIndustry}
               onChange={(e) => setSelectedIndustry(e.target.value)}
-              className="px-4 py-2 border border-white/10 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               {industries.map(ind => (
                 <option key={ind} value={ind.toLowerCase()}>{ind}</option>
@@ -414,7 +414,7 @@ const MarketplacePage = () => {
             <select
               value={selectedPricing}
               onChange={(e) => setSelectedPricing(e.target.value)}
-              className="px-4 py-2 border border-white/10 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               {pricingOptions.map(opt => (
                 <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -423,11 +423,11 @@ const MarketplacePage = () => {
 
             {/* Sort By */}
             <div className="flex items-center gap-2 ml-auto">
-              <ArrowUpDown className="w-4 h-4 text-gray-400" />
+              <ArrowUpDown className="w-4 h-4 text-secondary-600" />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 border border-white/10 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               >
                 <option value="popular">Most Popular</option>
                 <option value="rating">Highest Rated</option>
@@ -438,16 +438,16 @@ const MarketplacePage = () => {
             </div>
 
             {/* View Toggle */}
-            <div className="flex items-center gap-2 bg-white/5 text-white rounded-lg p-1">
+            <div className="flex items-center gap-2 bg-white text-secondary-900 rounded-lg p-1">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-2 rounded ${viewMode === 'grid' ? 'bg-white/10 shadow' : ''}`}
+                className={`p-2 rounded ${viewMode === 'grid' ? 'bg-gray-50 shadow' : ''}`}
               >
                 <Grid3x3 className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`p-2 rounded ${viewMode === 'list' ? 'bg-white/10 shadow' : ''}`}
+                className={`p-2 rounded ${viewMode === 'list' ? 'bg-gray-50 shadow' : ''}`}
               >
                 <List className="w-4 h-4" />
               </button>
@@ -457,8 +457,8 @@ const MarketplacePage = () => {
 
         {/* Results Count */}
         <div className="flex items-center justify-between">
-          <p className="text-gray-400">
-            <span className="font-semibold text-white">{filteredAgents.length}</span> agents found
+          <p className="text-secondary-600">
+            <span className="font-semibold text-secondary-900">{filteredAgents.length}</span> agents found
           </p>
         </div>
 
@@ -469,7 +469,7 @@ const MarketplacePage = () => {
               <div
                 key={agent.id}
                 onClick={() => navigate(`/agentx/marketplace/agent/${agent.id}`)}
-                className="glass-card rounded-2xl p-6 hover:shadow-xl transition-shadow cursor-pointer"
+                className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6 hover:shadow-xl transition-shadow cursor-pointer"
               >
                 {/* Icon */}
                 <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-3xl mb-4">
@@ -478,12 +478,12 @@ const MarketplacePage = () => {
 
                 {/* Header */}
                 <div className="mb-4">
-                  <h3 className="text-xl font-bold text-white mb-1">{agent.name}</h3>
+                  <h3 className="text-xl font-bold text-secondary-900 mb-1">{agent.name}</h3>
                   <div className="flex items-center gap-1.5">
-                    <span className="text-xs text-gray-400">by</span>
+                    <span className="text-xs text-secondary-600">by</span>
                     <span className={`text-xs font-semibold ${agent.owner === 'Obsolio'
                       ? 'text-primary-600'
-                      : 'text-gray-300'
+                      : 'text-secondary-700'
                       }`}>
                       {agent.owner}
                     </span>
@@ -494,13 +494,13 @@ const MarketplacePage = () => {
                     )}
                   </div>
                 </div>
-                <p className="text-sm text-gray-400 mb-4 line-clamp-2">{agent.description}</p>
+                <p className="text-sm text-secondary-600 mb-4 line-clamp-2">{agent.description}</p>
 
                 {/* Rating and Reviews */}
                 <div className="flex items-center gap-2 mb-4">
                   {renderStars(agent.rating)}
-                  <span className="text-sm font-semibold text-white">{agent.rating}</span>
-                  <span className="text-sm text-gray-400">({agent.reviews})</span>
+                  <span className="text-sm font-semibold text-secondary-900">{agent.rating}</span>
+                  <span className="text-sm text-secondary-600">({agent.reviews})</span>
                 </div>
 
                 {/* Tags */}
@@ -516,12 +516,12 @@ const MarketplacePage = () => {
                 </div>
 
                 {/* Stats */}
-                <div className="flex items-center gap-4 mb-4 pb-4 border-b border-white/10">
-                  <div className="flex items-center gap-1 text-sm text-gray-400">
+                <div className="flex items-center gap-4 mb-4 pb-4 border-b border-gray-200">
+                  <div className="flex items-center gap-1 text-sm text-secondary-600">
                     <Download className="w-4 h-4" />
                     <span>{agent.deployments.toLocaleString()}</span>
                   </div>
-                  <div className="text-sm text-gray-400">
+                  <div className="text-sm text-secondary-600">
                     {agent.category}
                   </div>
                 </div>
@@ -530,8 +530,8 @@ const MarketplacePage = () => {
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div>
-                      <div className="text-2xl font-bold text-white">{agent.pricingLabel}</div>
-                      <div className="text-xs text-gray-400">per month</div>
+                      <div className="text-2xl font-bold text-secondary-900">{agent.pricingLabel}</div>
+                      <div className="text-xs text-secondary-600">per month</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -540,16 +540,16 @@ const MarketplacePage = () => {
                         e.stopPropagation();
                         navigate(`/agentx/marketplace/checkout/${agent.id}`);
                       }}
-                      className="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-shadow text-sm"
+                      className="flex-1 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-secondary-900 rounded-xl font-semibold hover:shadow-lg transition-shadow text-sm"
                     >
                       Deploy
                     </button>
                     <button
                       onClick={(e) => e.stopPropagation()}
-                      className="px-3 py-2 border-2 border-white/10 rounded-xl hover:border-primary-600 hover:bg-primary-50 transition-colors group"
+                      className="px-3 py-2 border-2 border-gray-200 rounded-xl hover:border-primary-600 hover:bg-primary-50 transition-colors group"
                       title="Contact Owner"
                     >
-                      <MessageCircle className="w-4 h-4 text-gray-400 group-hover:text-primary-600" />
+                      <MessageCircle className="w-4 h-4 text-secondary-600 group-hover:text-primary-600" />
                     </button>
                   </div>
                 </div>
@@ -562,7 +562,7 @@ const MarketplacePage = () => {
               <div
                 key={agent.id}
                 onClick={() => navigate(`/agentx/marketplace/agent/${agent.id}`)}
-                className="glass-card rounded-2xl p-6 hover:shadow-lg transition-shadow cursor-pointer"
+                className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-shadow cursor-pointer"
               >
                 <div className="flex items-start gap-6">
                   {/* Icon */}
@@ -574,12 +574,12 @@ const MarketplacePage = () => {
                   <div className="flex-grow">
                     <div className="flex items-start justify-between mb-2">
                       <div>
-                        <h3 className="text-2xl font-bold text-white mb-1">{agent.name}</h3>
+                        <h3 className="text-2xl font-bold text-secondary-900 mb-1">{agent.name}</h3>
                         <div className="flex items-center gap-2 mb-2">
-                          <span className="text-sm text-gray-400">by</span>
+                          <span className="text-sm text-secondary-600">by</span>
                           <span className={`text-sm font-semibold ${agent.owner === 'Obsolio'
                             ? 'text-primary-600'
-                            : 'text-gray-300'
+                            : 'text-secondary-700'
                             }`}>
                             {agent.owner}
                           </span>
@@ -592,23 +592,23 @@ const MarketplacePage = () => {
                         <div className="flex items-center gap-3 mb-2">
                           <div className="flex items-center gap-2">
                             {renderStars(agent.rating)}
-                            <span className="text-sm font-semibold text-white">{agent.rating}</span>
-                            <span className="text-sm text-gray-400">({agent.reviews} reviews)</span>
+                            <span className="text-sm font-semibold text-secondary-900">{agent.rating}</span>
+                            <span className="text-sm text-secondary-600">({agent.reviews} reviews)</span>
                           </div>
-                          <span className="text-sm text-gray-400">•</span>
-                          <div className="flex items-center gap-1 text-sm text-gray-400">
+                          <span className="text-sm text-secondary-600">•</span>
+                          <div className="flex items-center gap-1 text-sm text-secondary-600">
                             <Download className="w-4 h-4" />
                             <span>{agent.deployments.toLocaleString()} deployments</span>
                           </div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-3xl font-bold text-white">{agent.pricingLabel}</div>
-                        <div className="text-sm text-gray-400">per month</div>
+                        <div className="text-3xl font-bold text-secondary-900">{agent.pricingLabel}</div>
+                        <div className="text-sm text-secondary-600">per month</div>
                       </div>
                     </div>
 
-                    <p className="text-gray-400 mb-4">{agent.description}</p>
+                    <p className="text-secondary-600 mb-4">{agent.description}</p>
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-4">
@@ -625,7 +625,7 @@ const MarketplacePage = () => {
                     {/* Features */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                       {agent.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-sm text-gray-300">
+                        <div key={idx} className="flex items-center gap-2 text-sm text-secondary-700">
                           <div className="w-1.5 h-1.5 bg-blue-600 rounded-full" />
                           {feature}
                         </div>
@@ -639,13 +639,13 @@ const MarketplacePage = () => {
                           e.stopPropagation();
                           navigate(`/agentx/marketplace/checkout/${agent.id}`);
                         }}
-                        className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-shadow"
+                        className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-secondary-900 rounded-xl font-semibold hover:shadow-lg transition-shadow"
                       >
                         Deploy Agent
                       </button>
                       <button
                         onClick={(e) => e.stopPropagation()}
-                        className="px-6 py-3 border-2 border-white/10 rounded-xl font-semibold text-gray-300 hover:border-primary-600 hover:bg-primary-900/20 hover:text-primary-300 transition-colors flex items-center gap-2"
+                        className="px-6 py-3 border-2 border-gray-200 rounded-xl font-semibold text-secondary-700 hover:border-primary-600 hover:bg-primary-900/20 hover:text-primary-300 transition-colors flex items-center gap-2"
                       >
                         <MessageCircle className="w-4 h-4" />
                         Contact
@@ -655,7 +655,7 @@ const MarketplacePage = () => {
                           e.stopPropagation();
                           navigate(`/agentx/marketplace/agent/${agent.id}`);
                         }}
-                        className="px-6 py-3 border border-white/10 rounded-xl font-semibold text-gray-300 hover:bg-white/5"
+                        className="px-6 py-3 border border-gray-200 rounded-xl font-semibold text-secondary-700 hover:bg-white"
                       >
                         View Details
                       </button>
@@ -669,10 +669,10 @@ const MarketplacePage = () => {
 
         {/* Empty State */}
         {filteredAgents.length === 0 && (
-          <div className="glass-card rounded-3xl p-12 text-center">
-            <TrendingUp className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-white mb-2">No agents found</h3>
-            <p className="text-gray-400 mb-6 max-w-md mx-auto">
+          <div className="bg-white shadow-sm border border-gray-100 rounded-3xl p-12 text-center">
+            <TrendingUp className="w-16 h-16 text-secondary-600 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-secondary-900 mb-2">No agents found</h3>
+            <p className="text-secondary-600 mb-6 max-w-md mx-auto">
               Try adjusting your filters or search query to find the perfect agent for your needs
             </p>
             <button
@@ -682,7 +682,7 @@ const MarketplacePage = () => {
                 setSelectedIndustry('all');
                 setSelectedPricing('all');
               }}
-              className="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700"
+              className="px-6 py-3 bg-blue-600 text-secondary-900 rounded-xl font-semibold hover:bg-blue-700"
             >
               Clear All Filters
             </button>

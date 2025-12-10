@@ -275,6 +275,7 @@ const RegisterPage = () => {
             {/* Full Name Field */}
             <div>
               <Input
+                theme="dark"
                 label="Full Name"
                 type="text"
                 name="fullName"
@@ -290,6 +291,7 @@ const RegisterPage = () => {
             {/* Email Field */}
             <div>
               <Input
+                theme="dark"
                 label="Email Address"
                 type="email"
                 name="email"
@@ -306,6 +308,7 @@ const RegisterPage = () => {
             <div>
               <div className="relative">
                 <Input
+                  theme="dark"
                   label="Password"
                   type={showPassword ? 'text' : 'password'}
                   name="password"
@@ -353,6 +356,7 @@ const RegisterPage = () => {
             <div>
               <div className="relative">
                 <Input
+                  theme="dark"
                   label="Confirm Password"
                   type={showConfirmPassword ? 'text' : 'password'}
                   name="confirmPassword"
@@ -385,6 +389,7 @@ const RegisterPage = () => {
                 {/* Organization Name */}
                 <div>
                   <Input
+                    theme="dark"
                     label="Organization Name"
                     type="text"
                     name="organizationName"
@@ -400,6 +405,7 @@ const RegisterPage = () => {
                 {/* Organization Domain (Optional) */}
                 <div>
                   <Input
+                    theme="dark"
                     label="Organization Domain (Optional)"
                     type="text"
                     name="organizationDomain"

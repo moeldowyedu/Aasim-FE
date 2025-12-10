@@ -280,8 +280,8 @@ const ConnectedAppsPage = () => {
     <MainLayout>
       <div className="p-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Connected Apps</h1>
-          <p className="text-gray-400">
+          <h1 className="text-3xl font-bold text-secondary-900 mb-2">Connected Apps</h1>
+          <p className="text-secondary-600">
             Manage your integrated third-party applications
           </p>
         </div>
@@ -289,13 +289,13 @@ const ConnectedAppsPage = () => {
         {/* Actions Bar */}
         <div className="flex items-center gap-4 mb-6">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-secondary-600 w-5 h-5" />
             <input
               type="text"
               placeholder="Search connected apps..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-white/20 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             />
           </div>
           <Button onClick={handleOpenConnectModal} icon={<Plus className="w-4 h-4" />}>
@@ -317,10 +317,10 @@ const ConnectedAppsPage = () => {
                         </span>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-white mb-1">
+                        <h3 className="text-lg font-semibold text-secondary-900 mb-1">
                           {app.name}
                         </h3>
-                        <p className="text-sm text-gray-400">{app.description}</p>
+                        <p className="text-sm text-secondary-600">{app.description}</p>
                       </div>
                     </div>
                     {app.status === 'connected' ? (
@@ -333,13 +333,13 @@ const ConnectedAppsPage = () => {
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
                       <p className="text-xs text-gray-500 mb-1">Connected</p>
-                      <p className="text-sm font-medium text-white">
+                      <p className="text-sm font-medium text-secondary-900">
                         {app.connectedAt}
                       </p>
                     </div>
                     <div>
                       <p className="text-xs text-gray-500 mb-1">Last Sync</p>
-                      <p className="text-sm font-medium text-white">
+                      <p className="text-sm font-medium text-secondary-900">
                         {app.lastSync}
                       </p>
                     </div>
@@ -351,7 +351,7 @@ const ConnectedAppsPage = () => {
                     </div>
                   )}
 
-                  <div className="flex items-center gap-2 pt-4 border-t border-white/10">
+                  <div className="flex items-center gap-2 pt-4 border-t border-gray-200">
                     {app.status === 'error' ? (
                       <Button
                         size="sm"
@@ -384,7 +384,7 @@ const ConnectedAppsPage = () => {
             ))
           ) : (
             <div className="col-span-2 text-center py-12">
-              <p className="text-gray-400">No connected apps found. Try a different search term.</p>
+              <p className="text-secondary-600">No connected apps found. Try a different search term.</p>
             </div>
           )}
         </div>
@@ -397,12 +397,12 @@ const ConnectedAppsPage = () => {
               onClick={() => setIsConnectModalOpen(false)}
             />
             <div className="flex min-h-full items-center justify-center p-4">
-              <div className="relative glass-card w-full max-w-4xl transform transition-all">
+              <div className="relative bg-white shadow-sm border border-gray-100 w-full max-w-4xl transform transition-all">
                 <div className="p-6">
-                  <h2 className="text-2xl font-bold text-white mb-4">
+                  <h2 className="text-2xl font-bold text-secondary-900 mb-4">
                     Connect New App
                   </h2>
-                  <p className="text-gray-400 mb-6">
+                  <p className="text-secondary-600 mb-6">
                     Choose an application to connect with Obsolio
                   </p>
 
@@ -419,7 +419,7 @@ const ConnectedAppsPage = () => {
                               <span className="text-3xl">{app.icon}</span>
                             </div>
                             <div className="flex-1">
-                              <h3 className="font-semibold text-white">
+                              <h3 className="font-semibold text-secondary-900">
                                 {app.name}
                               </h3>
                               <Badge color="blue" className="mt-1">
@@ -427,7 +427,7 @@ const ConnectedAppsPage = () => {
                               </Badge>
                             </div>
                           </div>
-                          <p className="text-sm text-gray-400">
+                          <p className="text-sm text-secondary-600">
                             {app.description}
                           </p>
                         </div>
@@ -437,7 +437,7 @@ const ConnectedAppsPage = () => {
 
                   {unconnectedApps.length === 0 && (
                     <div className="text-center py-12">
-                      <p className="text-gray-400">
+                      <p className="text-secondary-600">
                         All available apps are already connected!
                       </p>
                     </div>
@@ -477,10 +477,10 @@ const ConnectedAppsPage = () => {
                   <span className="text-4xl">{selectedAppToConnect.icon}</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white text-lg">
+                  <h3 className="font-semibold text-secondary-900 text-lg">
                     {selectedAppToConnect.name}
                   </h3>
-                  <p className="text-sm text-gray-400">
+                  <p className="text-sm text-secondary-600">
                     {selectedAppToConnect.description}
                   </p>
                 </div>
@@ -497,25 +497,25 @@ const ConnectedAppsPage = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-3">
+                <label className="block text-sm font-medium text-secondary-900 mb-3">
                   Permissions Requested
                 </label>
-                <div className="space-y-2 max-h-64 overflow-y-auto p-3 bg-white/5 rounded-xl border border-white/10">
+                <div className="space-y-2 max-h-64 overflow-y-auto p-3 bg-white/5 rounded-xl border border-gray-200">
                   {selectedAppToConnect.permissions.map((permission) => (
                     <label
                       key={permission.id}
-                      className="flex items-start gap-3 cursor-pointer hover:bg-white/5 p-3 rounded-lg transition-colors"
+                      className="flex items-start gap-3 cursor-pointer hover:bg-gray-50 p-3 rounded-lg transition-colors"
                     >
                       <input
                         type="checkbox"
                         checked={connectFormData.permissions.includes(permission.id)}
                         onChange={() => handlePermissionToggle(permission.id)}
                         disabled={permission.required}
-                        className="mt-0.5 w-4 h-4 text-primary-600 border-white/20 rounded focus:ring-primary-500"
+                        className="mt-0.5 w-4 h-4 text-primary-600 border-gray-200 rounded focus:ring-primary-500"
                       />
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
-                          <span className="text-sm font-medium text-white">
+                          <span className="text-sm font-medium text-secondary-900">
                             {permission.label}
                           </span>
                           {permission.required && (
@@ -524,7 +524,7 @@ const ConnectedAppsPage = () => {
                             </Badge>
                           )}
                         </div>
-                        <p className="text-xs text-gray-400 mt-1">
+                        <p className="text-xs text-secondary-600 mt-1">
                           {permission.id}
                         </p>
                       </div>
@@ -567,12 +567,12 @@ const ConnectedAppsPage = () => {
                   <span className="text-4xl">{managingApp.icon || managingApp.name[0]}</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white text-lg">
+                  <h3 className="font-semibold text-secondary-900 text-lg">
                     {managingApp.name}
                   </h3>
                   <div className="flex items-center gap-2 mt-1">
                     <Badge color="green">Connected</Badge>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-xs text-secondary-600">
                       Since {managingApp.connectedAt}
                     </span>
                   </div>
@@ -580,7 +580,7 @@ const ConnectedAppsPage = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-white mb-3">
+                <label className="block text-sm font-medium text-secondary-900 mb-3">
                   Active Permissions
                 </label>
                 <div className="space-y-2 p-4 bg-white/5 rounded-xl">
@@ -588,11 +588,11 @@ const ConnectedAppsPage = () => {
                     managingApp.permissions.map((perm) => (
                       <div key={perm} className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-green-600" />
-                        <span className="text-sm text-gray-300">{perm}</span>
+                        <span className="text-sm text-secondary-700">{perm}</span>
                       </div>
                     ))
                   ) : (
-                    <p className="text-sm text-gray-400">No permissions configured</p>
+                    <p className="text-sm text-secondary-600">No permissions configured</p>
                   )}
                 </div>
               </div>
@@ -610,8 +610,8 @@ const ConnectedAppsPage = () => {
                 </div>
               </div>
 
-              <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-                <p className="text-sm text-gray-400">
+              <div className="bg-white/5 border border-gray-200 rounded-xl p-4">
+                <p className="text-sm text-secondary-600">
                   To modify permissions, you'll need to reconnect the app. Contact support
                   for advanced configuration options.
                 </p>

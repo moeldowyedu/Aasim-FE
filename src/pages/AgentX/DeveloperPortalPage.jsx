@@ -202,7 +202,7 @@ const DeveloperPortalPage = () => {
       DELETE: 'bg-red-900/20 text-red-300',
       PATCH: 'bg-purple-900/20 text-purple-300'
     };
-    return colors[method] || 'bg-white/5 text-gray-700';
+    return colors[method] || 'bg-white text-gray-700';
   };
 
   const getStatusColor = (status) => {
@@ -286,9 +286,9 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
           <div>
             <div className="flex items-center gap-3 mb-2">
               <Terminal className="w-8 h-8 text-blue-600" />
-              <h1 className="text-3xl font-bold text-white">Developer Portal</h1>
+              <h1 className="text-3xl font-bold text-secondary-900">Developer Portal</h1>
             </div>
-            <p className="text-gray-400">
+            <p className="text-secondary-600">
               Build, integrate, and extend Obsolio AI Agents with our comprehensive developer tools
             </p>
           </div>
@@ -296,7 +296,7 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
             href="https://docs.obsolio.ai"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 border border-white/10 rounded-xl font-semibold hover:bg-white/5 inline-flex items-center gap-2"
+            className="px-6 py-3 border border-gray-200 rounded-xl font-semibold hover:bg-white inline-flex items-center gap-2"
           >
             <Book className="w-5 h-5" />
             View Documentation
@@ -305,42 +305,42 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="glass-card rounded-2xl p-6 hover:shadow-lg transition-shadow">
+          <div className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-shadow">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-gray-400">API Calls (30d)</div>
+              <div className="text-sm font-medium text-secondary-600">API Calls (30d)</div>
               <Database className="w-5 h-5 text-blue-600" />
             </div>
-            <div className="text-3xl font-bold text-white">186.5K</div>
+            <div className="text-3xl font-bold text-secondary-900">186.5K</div>
             <div className="text-xs text-green-600 mt-1 flex items-center gap-1">
               <TrendingUp className="w-3 h-3" />
               23% from last month
             </div>
           </div>
 
-          <div className="glass-card rounded-2xl p-6 hover:shadow-lg transition-shadow">
+          <div className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-shadow">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-gray-400">Active API Keys</div>
+              <div className="text-sm font-medium text-secondary-600">Active API Keys</div>
               <Key className="w-5 h-5 text-purple-600" />
             </div>
-            <div className="text-3xl font-bold text-white">{apiKeys.length}</div>
+            <div className="text-3xl font-bold text-secondary-900">{apiKeys.length}</div>
             <div className="text-xs text-gray-500 mt-1">Production & Development</div>
           </div>
 
-          <div className="glass-card rounded-2xl p-6 hover:shadow-lg transition-shadow">
+          <div className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-shadow">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-gray-400">Webhook Events</div>
+              <div className="text-sm font-medium text-secondary-600">Webhook Events</div>
               <Webhook className="w-5 h-5 text-green-600" />
             </div>
-            <div className="text-3xl font-bold text-white">6.3K</div>
+            <div className="text-3xl font-bold text-secondary-900">6.3K</div>
             <div className="text-xs text-green-600 mt-1">99.8% success rate</div>
           </div>
 
-          <div className="glass-card rounded-2xl p-6 hover:shadow-lg transition-shadow">
+          <div className="bg-white shadow-sm border border-gray-100 rounded-2xl p-6 hover:shadow-lg transition-shadow">
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-gray-400">Avg Latency</div>
+              <div className="text-sm font-medium text-secondary-600">Avg Latency</div>
               <Zap className="w-5 h-5 text-orange-600" />
             </div>
-            <div className="text-3xl font-bold text-white">285ms</div>
+            <div className="text-3xl font-bold text-secondary-900">285ms</div>
             <div className="text-xs text-green-600 mt-1 flex items-center gap-1">
               <TrendingUp className="w-3 h-3 rotate-180" />
               15% improvement
@@ -349,8 +349,8 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
         </div>
 
         {/* Tabs */}
-        <div className="glass-card rounded-2xl overflow-hidden">
-          <div className="border-b border-white/10">
+        <div className="bg-white shadow-sm border border-gray-100 rounded-2xl overflow-hidden">
+          <div className="border-b border-gray-200">
             <div className="flex overflow-x-auto">
               {[
                 { id: 'api-keys', label: 'API Keys', icon: Key },
@@ -366,7 +366,7 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center gap-2 px-6 py-4 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${activeTab === tab.id
                       ? 'border-blue-500 text-blue-400'
-                      : 'border-transparent text-gray-400 hover:text-white'
+                      : 'border-transparent text-secondary-600 hover:text-secondary-900'
                       }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -383,14 +383,14 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-2xl font-bold text-white mb-2">API Keys</h2>
-                    <p className="text-gray-400">
+                    <h2 className="text-2xl font-bold text-secondary-900 mb-2">API Keys</h2>
+                    <p className="text-secondary-600">
                       Manage your API keys to authenticate requests to the Obsolio API
                     </p>
                   </div>
                   <button
                     onClick={handleCreateApiKey}
-                    className="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 inline-flex items-center gap-2"
+                    className="px-6 py-3 bg-blue-600 text-secondary-900 rounded-xl font-semibold hover:bg-blue-700 inline-flex items-center gap-2"
                   >
                     <Plus className="w-5 h-5" />
                     Create New Key
@@ -398,25 +398,25 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                 </div>
 
                 {/* Rate Limits */}
-                <div className="glass-card rounded-xl p-6 bg-gradient-to-r from-blue-900/10 to-purple-900/10 border border-blue-900/30">
+                <div className="bg-white shadow-sm border border-gray-100 rounded-xl p-6 bg-gradient-to-r from-blue-900/10 to-purple-900/10 border border-blue-900/30">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center flex-shrink-0">
-                      <Zap className="w-6 h-6 text-white" />
+                      <Zap className="w-6 h-6 text-secondary-900" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-white mb-2">Rate Limits</h3>
+                      <h3 className="font-bold text-secondary-900 mb-2">Rate Limits</h3>
                       <div className="grid grid-cols-3 gap-6 text-sm">
                         <div>
-                          <div className="text-gray-400 mb-1">Requests per minute</div>
-                          <div className="text-2xl font-bold text-white">1,000</div>
+                          <div className="text-secondary-600 mb-1">Requests per minute</div>
+                          <div className="text-2xl font-bold text-secondary-900">1,000</div>
                         </div>
                         <div>
-                          <div className="text-gray-400 mb-1">Concurrent requests</div>
-                          <div className="text-2xl font-bold text-white">100</div>
+                          <div className="text-secondary-600 mb-1">Concurrent requests</div>
+                          <div className="text-2xl font-bold text-secondary-900">100</div>
                         </div>
                         <div>
-                          <div className="text-gray-400 mb-1">Monthly quota</div>
-                          <div className="text-2xl font-bold text-white">1M</div>
+                          <div className="text-secondary-600 mb-1">Monthly quota</div>
+                          <div className="text-2xl font-bold text-secondary-900">1M</div>
                         </div>
                       </div>
                     </div>
@@ -426,37 +426,37 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                 {/* API Keys List */}
                 <div className="space-y-3">
                   {apiKeys.map((apiKey) => (
-                    <div key={apiKey.id} className="glass-card rounded-xl p-6">
+                    <div key={apiKey.id} className="bg-white shadow-sm border border-gray-100 rounded-xl p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-grow">
                           <div className="flex items-center gap-3 mb-2">
-                            <h3 className="text-lg font-bold text-white">{apiKey.name}</h3>
+                            <h3 className="text-lg font-bold text-secondary-900">{apiKey.name}</h3>
                             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-900/20 text-green-300 border-green-800">
                               Active
                             </span>
                           </div>
                           <div className="flex items-center gap-3 mb-3">
-                            <code className="text-sm bg-white/5 px-3 py-2 rounded-lg font-mono">
+                            <code className="text-sm bg-white px-3 py-2 rounded-lg font-mono">
                               {showKey[apiKey.id] ? apiKey.key : maskKey(apiKey.key)}
                             </code>
                             <button
                               onClick={() => toggleShowKey(apiKey.id)}
-                              className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+                              className="p-2 hover:bg-white rounded-lg transition-colors"
                             >
                               {showKey[apiKey.id] ? (
-                                <EyeOff className="w-4 h-4 text-gray-400" />
+                                <EyeOff className="w-4 h-4 text-secondary-600" />
                               ) : (
-                                <Eye className="w-4 h-4 text-gray-400" />
+                                <Eye className="w-4 h-4 text-secondary-600" />
                               )}
                             </button>
                             <button
                               onClick={() => handleCopyKey(apiKey.key)}
-                              className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+                              className="p-2 hover:bg-white rounded-lg transition-colors"
                             >
-                              <Copy className="w-4 h-4 text-gray-400" />
+                              <Copy className="w-4 h-4 text-secondary-600" />
                             </button>
                           </div>
-                          <div className="flex items-center gap-6 text-sm text-gray-400">
+                          <div className="flex items-center gap-6 text-sm text-secondary-600">
                             <div>Created {formatDate(apiKey.created, 'short')}</div>
                             <div>•</div>
                             <div>Last used {apiKey.lastUsed ? formatRelativeTime(apiKey.lastUsed) : 'Never'}</div>
@@ -483,20 +483,20 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-2xl font-bold text-white mb-2">Webhooks</h2>
-                    <p className="text-gray-400">
+                    <h2 className="text-2xl font-bold text-secondary-900 mb-2">Webhooks</h2>
+                    <p className="text-secondary-600">
                       Configure webhooks to receive real-time notifications about agent events
                     </p>
                   </div>
-                  <button className="px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 inline-flex items-center gap-2">
+                  <button className="px-6 py-3 bg-blue-600 text-secondary-900 rounded-xl font-semibold hover:bg-blue-700 inline-flex items-center gap-2">
                     <Plus className="w-5 h-5" />
                     Add Webhook
                   </button>
                 </div>
 
                 {/* Available Events */}
-                <div className="glass-card rounded-xl p-6">
-                  <h3 className="font-bold text-white mb-4">Available Events</h3>
+                <div className="bg-white shadow-sm border border-gray-100 rounded-xl p-6">
+                  <h3 className="font-bold text-secondary-900 mb-4">Available Events</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {[
                       { event: 'agent.run.completed', desc: 'Agent successfully completed execution' },
@@ -506,11 +506,11 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                       { event: 'agent.hitl.rejected', desc: 'Human rejected the result' },
                       { event: 'agent.deployed', desc: 'New agent deployed' }
                     ].map((item, index) => (
-                      <div key={index} className="flex items-start gap-3 p-3 bg-white/5 rounded-lg">
+                      <div key={index} className="flex items-start gap-3 p-3 bg-white rounded-lg">
                         <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
                         <div>
-                          <code className="text-sm font-semibold text-white">{item.event}</code>
-                          <p className="text-xs text-gray-400 mt-1">{item.desc}</p>
+                          <code className="text-sm font-semibold text-secondary-900">{item.event}</code>
+                          <p className="text-xs text-secondary-600 mt-1">{item.desc}</p>
                         </div>
                       </div>
                     ))}
@@ -520,11 +520,11 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                 {/* Webhooks List */}
                 <div className="space-y-3">
                   {webhooks.map((webhook) => (
-                    <div key={webhook.id} className="glass-card rounded-xl p-6">
+                    <div key={webhook.id} className="bg-white shadow-sm border border-gray-100 rounded-xl p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-grow">
                           <div className="flex items-center gap-3 mb-2">
-                            <code className="text-lg font-bold text-white">{webhook.url}</code>
+                            <code className="text-lg font-bold text-secondary-900">{webhook.url}</code>
                             <span className="px-3 py-1 rounded-full text-xs font-semibold bg-green-900/20 text-green-300 border-green-800">
                               Active
                             </span>
@@ -539,7 +539,7 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                               </span>
                             ))}
                           </div>
-                          <div className="flex items-center gap-6 text-sm text-gray-400">
+                          <div className="flex items-center gap-6 text-sm text-secondary-600">
                             <div>{webhook.deliveries.toLocaleString()} deliveries</div>
                             <div>•</div>
                             <div className="text-green-600">{webhook.successRate}% success rate</div>
@@ -548,7 +548,7 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <button className="px-4 py-2 border border-white/10 rounded-lg text-sm font-semibold hover:bg-white/5">
+                          <button className="px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-white">
                             Edit
                           </button>
                           <button className="px-4 py-2 bg-red-100 text-red-700 rounded-lg text-sm font-semibold hover:bg-red-200">
@@ -566,8 +566,8 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
             {activeTab === 'sdk' && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-2">Official SDKs & Libraries</h2>
-                  <p className="text-gray-400 mb-6">
+                  <h2 className="text-2xl font-bold text-secondary-900 mb-2">Official SDKs & Libraries</h2>
+                  <p className="text-secondary-600 mb-6">
                     Download and integrate our official SDKs for your preferred programming language
                   </p>
                 </div>
@@ -617,14 +617,14 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                       color: 'from-cyan-500 to-cyan-600'
                     }
                   ].map((sdk, index) => (
-                    <div key={index} className="glass-card rounded-xl p-6 hover:shadow-lg transition-shadow">
+                    <div key={index} className="bg-white shadow-sm border border-gray-100 rounded-xl p-6 hover:shadow-lg transition-shadow">
                       <div className="flex items-start gap-4 mb-4">
                         <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${sdk.color} flex items-center justify-center text-3xl flex-shrink-0`}>
                           {sdk.icon}
                         </div>
                         <div className="flex-grow">
-                          <h3 className="text-xl font-bold text-white mb-1">{sdk.name}</h3>
-                          <code className="text-xs bg-white/5 px-2 py-1 rounded text-gray-300">
+                          <h3 className="text-xl font-bold text-secondary-900 mb-1">{sdk.name}</h3>
+                          <code className="text-xs bg-white px-2 py-1 rounded text-secondary-700">
                             {sdk.install}
                           </code>
                         </div>
@@ -634,7 +634,7 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                           href={sdk.docs}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex-grow px-4 py-2 border border-white/10 rounded-lg text-sm font-semibold hover:bg-white/5 text-center"
+                          className="flex-grow px-4 py-2 border border-gray-200 rounded-lg text-sm font-semibold hover:bg-white text-center"
                         >
                           View Docs
                         </a>
@@ -653,21 +653,21 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
             {activeTab === 'code-examples' && (
               <div className="space-y-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-2">Code Examples</h2>
-                  <p className="text-gray-400 mb-6">
+                  <h2 className="text-2xl font-bold text-secondary-900 mb-2">Code Examples</h2>
+                  <p className="text-secondary-600 mb-6">
                     Real-world examples to help you get started quickly
                   </p>
                 </div>
 
                 {/* Language Tabs */}
-                <div className="flex gap-2 border-b border-white/10">
+                <div className="flex gap-2 border-b border-gray-200">
                   {['python', 'javascript', 'curl'].map((lang) => (
                     <button
                       key={lang}
                       onClick={() => setCodeTab(lang)}
                       className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors ${codeTab === lang
                         ? 'border-blue-500 text-blue-400'
-                        : 'border-transparent text-gray-400 hover:text-white'
+                        : 'border-transparent text-secondary-600 hover:text-secondary-900'
                         }`}
                     >
                       {lang === 'python' && 'Python'}
@@ -684,7 +684,7 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                       navigator.clipboard.writeText(codeExamples[codeTab]);
                       alert('Code copied to clipboard!');
                     }}
-                    className="absolute top-4 right-4 px-4 py-2 bg-gray-700 text-white rounded-lg text-sm font-semibold hover:bg-gray-600 flex items-center gap-2 z-10"
+                    className="absolute top-4 right-4 px-4 py-2 bg-gray-700 text-secondary-900 rounded-lg text-sm font-semibold hover:bg-gray-600 flex items-center gap-2 z-10"
                   >
                     <Copy className="w-4 h-4" />
                     Copy
@@ -697,12 +697,12 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                 </div>
 
                 {/* API Base URL */}
-                <div className="glass-card rounded-xl p-6">
-                  <h3 className="font-bold text-white mb-3">Base URL</h3>
-                  <code className="bg-white/5 px-4 py-2 rounded-lg text-sm block">
+                <div className="bg-white shadow-sm border border-gray-100 rounded-xl p-6">
+                  <h3 className="font-bold text-secondary-900 mb-3">Base URL</h3>
+                  <code className="bg-white px-4 py-2 rounded-lg text-sm block">
                     https://api.obsolio.ai/v1
                   </code>
-                  <p className="text-sm text-gray-400 mt-3">
+                  <p className="text-sm text-secondary-600 mt-3">
                     All API requests should be made to this base URL with your API key in the Authorization header.
                   </p>
                 </div>
@@ -720,7 +720,7 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                 </div>
 
                 {/* Activity Log */}
-                <div className="glass-card rounded-xl overflow-hidden">
+                <div className="bg-white shadow-sm border border-gray-100 rounded-xl overflow-hidden">
                   <div className="overflow-x-auto">
                     <table className="w-full">
                       <thead className="bg-gray-50 border-b border-gray-200">
@@ -751,7 +751,7 @@ curl -X GET https://api.obsolio.ai/v1/runs/run-456 \\
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="flex items-center gap-1">
-                                <Clock className="w-4 h-4 text-gray-400" />
+                                <Clock className="w-4 h-4 text-secondary-600" />
                                 <span className="text-sm text-secondary-900">{activity.responseTime}ms</span>
                               </div>
                             </td>
