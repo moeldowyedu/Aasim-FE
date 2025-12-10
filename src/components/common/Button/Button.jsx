@@ -17,12 +17,12 @@ const Button = ({
   const baseStyles = 'font-medium rounded-lg transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variants = {
-    primary: 'bg-primary-600 text-white hover:bg-primary-600 active:bg-primary-700 shadow-md hover:shadow-lg',
-    secondary: 'bg-secondary-500 text-white hover:bg-secondary-600 active:bg-secondary-700 shadow-md hover:shadow-lg',
-    outline: 'border-2 border-primary-600 text-primary-600 hover:bg-primary-50 active:bg-primary-100',
-    ghost: 'text-primary-600 hover:bg-primary-50 active:bg-primary-100',
-    danger: 'bg-red-500 text-white hover:bg-red-600 active:bg-red-700 shadow-md hover:shadow-lg',
-    success: 'bg-green-500 text-white hover:bg-green-600 active:bg-green-700 shadow-md hover:shadow-lg',
+    primary: 'bg-primary-600 text-white hover:bg-primary-500 active:bg-primary-700 shadow-lg shadow-primary-500/20',
+    secondary: 'bg-white/10 text-white hover:bg-white/20 active:bg-white/5 border border-white/10 backdrop-blur-sm',
+    outline: 'border-2 border-primary-500 text-primary-400 hover:bg-primary-500/10 active:bg-primary-500/20',
+    ghost: 'text-gray-400 hover:text-white hover:bg-white/5 active:bg-white/10',
+    danger: 'bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 active:bg-red-500/30',
+    success: 'bg-green-500/10 text-green-400 border border-green-500/20 hover:bg-green-500/20 active:bg-green-500/30',
   };
 
   const sizes = {

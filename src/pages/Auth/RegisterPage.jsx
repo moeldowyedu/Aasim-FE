@@ -5,6 +5,7 @@ import { useAuthStore } from '../../store/authStore';
 import Input from '../../components/common/Input/Input';
 import Button from '../../components/common/Button/Button';
 import toast from 'react-hot-toast';
+import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -185,34 +186,33 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+    <div className="min-h-screen bg-[#0B0E14] relative flex items-center justify-center p-4 overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full opacity-30 pointer-events-none">
+        <div className="absolute top-[-20%] left-[20%] w-[600px] h-[600px] bg-primary-900/40 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow"></div>
+        <div className="absolute bottom-[-10%] right-[10%] w-[500px] h-[500px] bg-purple-900/30 rounded-full blur-[100px] mix-blend-screen animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
       </div>
 
-      <div className="w-full max-w-2xl relative z-10">
+      <div className="w-full max-w-2xl relative z-10 animate-fade-in my-8">
         {/* Logo/Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-600 to-purple-600 rounded-2xl mb-4 shadow-lg">
-            <Sparkles className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
-            OBSOLIO
-          </h1>
-          <p className="text-secondary-600 mt-2">Create your account to get started</p>
+          <Link to="/" className="inline-block mb-4">
+            <img src={logo} alt="OBSOLIO" className="h-16 mx-auto object-contain" />
+          </Link>
+          <p className="text-gray-400 mt-2">Create your account to get started</p>
         </div>
 
         {/* Registration Form Card */}
-        <div className="glass-card rounded-3xl p-8 shadow-2xl border border-white/20">
-          <h2 className="text-2xl font-bold text-secondary-900 mb-6">Sign Up</h2>
+        <div className="glass-card rounded-3xl p-8 shadow-2xl border border-white/10 relative overflow-hidden backdrop-blur-xl bg-[#1e293b]/40">
+          {/* Decor glow */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-50"></div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">Sign Up</h2>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Tenant Type Selector */}
             <div>
-              <label className="block text-sm font-medium text-secondary-700 mb-3">
+              <label className="block text-sm font-medium text-gray-300 mb-3 ml-1">
                 Account Type
               </label>
               <div className="grid grid-cols-2 gap-4">
@@ -220,22 +220,22 @@ const RegisterPage = () => {
                   type="button"
                   onClick={() => handleTenantTypeChange('personal')}
                   className={`
-                    relative p-4 rounded-xl border-2 transition-all duration-200
+                    relative p-4 rounded-xl border-2 transition-all duration-200 group
                     ${formData.tenantType === 'personal'
-                      ? 'border-primary-500 bg-primary-50 shadow-md'
-                      : 'border-gray-200 bg-white hover:border-gray-300'
+                      ? 'border-primary-500 bg-primary-500/10'
+                      : 'border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/20'
                     }
                   `}
                 >
                   <div className="flex flex-col items-center gap-2">
-                    <User className={`w-6 h-6 ${formData.tenantType === 'personal' ? 'text-primary-600' : 'text-gray-400'}`} />
-                    <span className={`font-semibold ${formData.tenantType === 'personal' ? 'text-primary-700' : 'text-gray-700'}`}>
+                    <User className={`w-6 h-6 ${formData.tenantType === 'personal' ? 'text-primary-400' : 'text-gray-400'}`} />
+                    <span className={`font-semibold ${formData.tenantType === 'personal' ? 'text-white' : 'text-gray-400 group-hover:text-gray-300'}`}>
                       Personal
                     </span>
                     <span className="text-xs text-gray-500 text-center">For individual use</span>
                   </div>
                   {formData.tenantType === 'personal' && (
-                    <div className="absolute top-2 right-2 w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center">
+                    <div className="absolute top-2 right-2 w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center shadow-lg shadow-primary-500/50">
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
@@ -247,22 +247,22 @@ const RegisterPage = () => {
                   type="button"
                   onClick={() => handleTenantTypeChange('organization')}
                   className={`
-                    relative p-4 rounded-xl border-2 transition-all duration-200
+                    relative p-4 rounded-xl border-2 transition-all duration-200 group
                     ${formData.tenantType === 'organization'
-                      ? 'border-primary-500 bg-primary-50 shadow-md'
-                      : 'border-gray-200 bg-white hover:border-gray-300'
+                      ? 'border-primary-500 bg-primary-500/10'
+                      : 'border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/20'
                     }
                   `}
                 >
                   <div className="flex flex-col items-center gap-2">
-                    <Building2 className={`w-6 h-6 ${formData.tenantType === 'organization' ? 'text-primary-600' : 'text-gray-400'}`} />
-                    <span className={`font-semibold ${formData.tenantType === 'organization' ? 'text-primary-700' : 'text-gray-700'}`}>
+                    <Building2 className={`w-6 h-6 ${formData.tenantType === 'organization' ? 'text-primary-400' : 'text-gray-400'}`} />
+                    <span className={`font-semibold ${formData.tenantType === 'organization' ? 'text-white' : 'text-gray-400 group-hover:text-gray-300'}`}>
                       Organization
                     </span>
                     <span className="text-xs text-gray-500 text-center">For teams & companies</span>
                   </div>
                   {formData.tenantType === 'organization' && (
-                    <div className="absolute top-2 right-2 w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center">
+                    <div className="absolute top-2 right-2 w-5 h-5 bg-primary-500 rounded-full flex items-center justify-center shadow-lg shadow-primary-500/50">
                       <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
@@ -274,10 +274,8 @@ const RegisterPage = () => {
 
             {/* Full Name Field */}
             <div>
-              <label className="block text-sm font-medium text-secondary-700 mb-2">
-                Full Name
-              </label>
               <Input
+                label="Full Name"
                 type="text"
                 name="fullName"
                 value={formData.fullName}
@@ -291,10 +289,8 @@ const RegisterPage = () => {
 
             {/* Email Field */}
             <div>
-              <label className="block text-sm font-medium text-secondary-700 mb-2">
-                Email Address
-              </label>
               <Input
+                label="Email Address"
                 type="email"
                 name="email"
                 value={formData.email}
@@ -308,11 +304,9 @@ const RegisterPage = () => {
 
             {/* Password Field */}
             <div>
-              <label className="block text-sm font-medium text-secondary-700 mb-2">
-                Password
-              </label>
               <div className="relative">
                 <Input
+                  label="Password"
                   type={showPassword ? 'text' : 'password'}
                   name="password"
                   value={formData.password}
@@ -325,7 +319,7 @@ const RegisterPage = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-400 hover:text-secondary-600 transition-colors"
+                  className="absolute right-3 top-[38px] text-gray-400 hover:text-gray-300 transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -334,18 +328,18 @@ const RegisterPage = () => {
 
               {/* Password Strength Indicator */}
               {formData.password && (
-                <div className="mt-2">
+                <div className="mt-2 pl-1">
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs text-secondary-600">Password Strength</span>
-                    <span className={`text-xs font-medium ${passwordStrength < 40 ? 'text-red-600' :
-                      passwordStrength < 70 ? 'text-yellow-600' :
-                        passwordStrength < 90 ? 'text-blue-600' :
-                          'text-green-600'
+                    <span className="text-xs text-gray-400">Password Strength</span>
+                    <span className={`text-xs font-medium ${passwordStrength < 40 ? 'text-red-400' :
+                      passwordStrength < 70 ? 'text-yellow-400' :
+                        passwordStrength < 90 ? 'text-blue-400' :
+                          'text-green-400'
                       }`}>
                       {strengthInfo.label}
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                  <div className="w-full bg-gray-700 rounded-full h-1.5 overflow-hidden">
                     <div
                       className={`h-full transition-all duration-300 ${strengthInfo.color}`}
                       style={{ width: `${passwordStrength}%` }}
@@ -357,11 +351,9 @@ const RegisterPage = () => {
 
             {/* Confirm Password Field */}
             <div>
-              <label className="block text-sm font-medium text-secondary-700 mb-2">
-                Confirm Password
-              </label>
               <div className="relative">
                 <Input
+                  label="Confirm Password"
                   type={showConfirmPassword ? 'text' : 'password'}
                   name="confirmPassword"
                   value={formData.confirmPassword}
@@ -374,7 +366,7 @@ const RegisterPage = () => {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-secondary-400 hover:text-secondary-600 transition-colors"
+                  className="absolute right-3 top-[38px] text-gray-400 hover:text-gray-300 transition-colors"
                   tabIndex={-1}
                 >
                   {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -384,18 +376,16 @@ const RegisterPage = () => {
 
             {/* Organization Fields - Conditional */}
             {formData.tenantType === 'organization' && (
-              <div className="space-y-5 pt-4 border-t border-gray-200">
-                <div className="flex items-center gap-2 text-sm text-primary-700 font-medium">
+              <div className="space-y-5 pt-4 border-t border-white/10 animate-slide-down">
+                <div className="flex items-center gap-2 text-sm text-primary-400 font-medium">
                   <Building2 className="w-4 h-4" />
                   <span>Organization Details</span>
                 </div>
 
                 {/* Organization Name */}
                 <div>
-                  <label className="block text-sm font-medium text-secondary-700 mb-2">
-                    Organization Name
-                  </label>
                   <Input
+                    label="Organization Name"
                     type="text"
                     name="organizationName"
                     value={formData.organizationName}
@@ -409,10 +399,8 @@ const RegisterPage = () => {
 
                 {/* Organization Domain (Optional) */}
                 <div>
-                  <label className="block text-sm font-medium text-secondary-700 mb-2">
-                    Organization Domain <span className="text-gray-400 font-normal">(Optional)</span>
-                  </label>
                   <Input
+                    label="Organization Domain (Optional)"
                     type="text"
                     name="organizationDomain"
                     value={formData.organizationDomain}
@@ -422,7 +410,7 @@ const RegisterPage = () => {
                     error={errors.organizationDomain}
                     disabled={isLoading}
                   />
-                  <p className="mt-1 text-xs text-gray-500">
+                  <p className="mt-1 text-xs text-gray-500 ml-1">
                     A unique identifier for your organization (e.g., acme-corp)
                   </p>
                 </div>
@@ -433,7 +421,7 @@ const RegisterPage = () => {
             <Button
               type="submit"
               variant="primary"
-              className="w-full py-3 text-base font-semibold mt-6"
+              className="w-full py-4 text-base font-semibold mt-6 shadow-lg shadow-primary-500/25"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -451,28 +439,34 @@ const RegisterPage = () => {
           </form>
 
           {/* Terms */}
-          <p className="text-xs text-center text-secondary-600 mt-6">
+          <p className="text-xs text-center text-gray-500 mt-6">
             By signing up, you agree to our{' '}
-            <Link to="/terms" className="text-primary-600 hover:text-primary-700 font-medium">
+            <Link to="/terms" className="text-primary-400 hover:text-primary-300 font-medium">
               Terms of Service
             </Link>{' '}
             and{' '}
-            <Link to="/privacy" className="text-primary-600 hover:text-primary-700 font-medium">
+            <Link to="/privacy" className="text-primary-400 hover:text-primary-300 font-medium">
               Privacy Policy
             </Link>
           </p>
 
           {/* Login Link */}
-          <div className="mt-6 pt-6 border-t border-gray-200 text-center">
-            <p className="text-sm text-secondary-600">
+          <div className="mt-6 pt-6 border-t border-white/10 text-center">
+            <p className="text-sm text-gray-400">
               Already have an account?{' '}
               <Link
                 to="/login"
-                className="text-primary-600 hover:text-primary-700 font-semibold transition-colors"
+                className="text-primary-400 hover:text-primary-300 font-semibold transition-colors"
               >
                 Sign In
               </Link>
             </p>
+          </div>
+
+          <div className="mt-4 text-center">
+            <Link to="/" className="text-sm text-gray-500 hover:text-gray-400 transition-colors">
+              ← Back to Home
+            </Link>
           </div>
         </div>
       </div>

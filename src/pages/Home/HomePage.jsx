@@ -462,9 +462,8 @@ const HomePage = () => {
         {/* Footer */}
         <footer className="py-12 px-6 border-t border-white/5 bg-[#05080f]">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-3">
-              <img src={ObsolioLogo} alt="Obsolio" className="w-8 h-8" />
-              <span className="text-xl font-bold tracking-tight">OBSOLIO</span>
+            <div className="flex items-center">
+              <img src={ObsolioLogo} alt="Obsolio" className="h-10 object-contain" />
             </div>
 
             <div className="text-sm text-gray-500">

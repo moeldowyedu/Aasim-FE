@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import MainLayout from '../../components/layout/MainLayout';
 import { useAuthStore } from '../../store/authStore';
-import { Button, Input, Card } from '../../components/common';
+import { Button, Input } from '../../components/common';
 import toast from 'react-hot-toast';
+import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -48,81 +48,99 @@ const LoginPage = () => {
   };
 
   return (
-    <MainLayout showFooter={false} showSidebar={false}>
-      <div className="min-h-[80vh] flex items-center justify-center px-6 py-12">
-        <div className="w-full max-w-md">
-          <Card padding="lg">
-            <div className="text-center mb-8">
-              <h1 className="text-4xl font-heading font-bold text-secondary-900 mb-2 tracking-tight">Welcome Back</h1>
-              <p className="text-secondary-600 font-medium">Sign in to continue to Aasim AI</p>
-            </div>
+    <div className="min-h-screen bg-[#0B0E14] relative flex items-center justify-center p-4 overflow-hidden">
+      {/* Background Ambience */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full opacity-30 pointer-events-none">
+        <div className="absolute top-[-20%] left-[20%] w-[600px] h-[600px] bg-primary-900/40 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow"></div>
+        <div className="absolute bottom-[-10%] right-[10%] w-[500px] h-[500px] bg-purple-900/30 rounded-full blur-[100px] mix-blend-screen animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+      </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <Input
-                label="Email Address"
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="you@example.com"
-                fullWidth
-                required
-                error={error && 'Please check your credentials'}
-              />
+      {/* Login Card */}
+      <div className="w-full max-w-md relative z-10 animate-fade-in">
+        <div className="text-center mb-8">
+          <Link to="/" className="inline-block mb-6">
+            <img src={logo} alt="OBSOLIO" className="h-16 mx-auto object-contain" />
+          </Link>
+          <h2 className="text-3xl font-bold text-white mb-2">Welcome Back</h2>
+          <p className="text-gray-400">Sign in to your account to continue</p>
+        </div>
 
-              <Input
-                label="Password"
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="••••••••"
-                fullWidth
-                required
-              />
+        <div className="glass-card p-8 shadow-2xl border border-white/10 relative overflow-hidden backdrop-blur-xl bg-[#1e293b]/40">
+          {/* Decor glow */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-50"></div>
 
-              <div className="flex items-center justify-between">
-                <label className="flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-                  />
-                  <span className="ml-2 text-sm text-secondary-600 font-medium">Remember me</span>
-                </label>
-                <Link
-                  to="/forgot-password"
-                  className="text-sm text-primary-600 hover:text-primary-700 font-semibold transition-colors"
-                >
-                  Forgot password?
-                </Link>
-              </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <Input
+              label="Email Address"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
+              fullWidth
+              required
+              error={error && 'Please check your credentials'}
+            />
 
-              <Button
-                type="submit"
-                variant="primary"
-                fullWidth
-                loading={isLoading}
-                disabled={isLoading}
+            <Input
+              label="Password"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="••••••••"
+              fullWidth
+              required
+            />
+
+            <div className="flex items-center justify-between">
+              <label className="flex items-center cursor-pointer group">
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 rounded border-gray-600 bg-gray-800 text-primary-500 focus:ring-primary-500/20 transition-all cursor-pointer"
+                />
+                <span className="ml-2 text-sm text-gray-400 group-hover:text-gray-300 transition-colors">Remember me</span>
+              </label>
+              <Link
+                to="/forgot-password"
+                className="text-sm text-primary-400 hover:text-primary-300 transition-colors"
               >
-                Sign In
-              </Button>
-            </form>
-
-            <div className="mt-6 text-center">
-              <p className="text-secondary-600 font-medium">
-                Don't have an account?{' '}
-                <Link
-                  to="/register"
-                  className="text-primary-600 hover:text-primary-700 font-bold transition-colors"
-                >
-                  Sign up
-                </Link>
-              </p>
+                Forgot password?
+              </Link>
             </div>
-          </Card>
+
+            <Button
+              type="submit"
+              variant="primary"
+              fullWidth
+              size="lg"
+              loading={isLoading}
+              disabled={isLoading}
+            >
+              Sign In
+            </Button>
+          </form>
+
+          <div className="mt-8 pt-6 border-t border-white/10 text-center">
+            <p className="text-gray-400">
+              Don't have an account?{' '}
+              <Link
+                to="/register"
+                className="text-primary-400 hover:text-primary-300 font-semibold transition-colors"
+              >
+                Sign up
+              </Link>
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link to="/" className="text-sm text-gray-500 hover:text-gray-400 transition-colors">
+            ← Back to Home
+          </Link>
         </div>
       </div>
-    </MainLayout>
+    </div>
   );
 };
 
