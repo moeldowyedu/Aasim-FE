@@ -7,6 +7,10 @@ import RegisterPage from '../pages/Auth/RegisterPage';
 import ForgotPasswordPage from '../pages/Auth/ForgotPasswordPage';
 import ResetPasswordPage from '../pages/Auth/ResetPasswordPage';
 
+// Public Pages
+import PrivacyPolicyPage from '../pages/Public/PrivacyPolicyPage';
+import TermsOfServicePage from '../pages/Public/TermsOfServicePage';
+
 // Main Pages
 import HomePage from '../pages/Home/HomePage';
 import DashboardPage from '../pages/Dashboard/DashboardPage';
@@ -117,6 +121,8 @@ const AppRoutes = () => {
       <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
       <Route path="/api-test" element={<APITestPage />} />
+      <Route path="/privacy" element={<PrivacyPolicyPage />} />
+      <Route path="/terms" element={<TermsOfServicePage />} />
 
       {/* Dashboard */}
       <Route
