@@ -100,6 +100,12 @@ const Header = () => {
               <a
                 href={(() => {
                   const subdomain = user?.tenant?.subdomain;
+                  console.log('🔗 Header Link Debug:', {
+                    userTenant: user?.tenant,
+                    subdomain,
+                    host: window.location.host
+                  });
+
                   if (!subdomain) return '/dashboard';
 
                   // Construct full URL with subdomain
