@@ -214,10 +214,12 @@ const Header = () => {
                   >
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-purple-500 flex items-center justify-center">
                       <span className="text-white font-semibold text-sm">
-                        {user?.name?.charAt(0).toUpperCase() || 'U'}
+                        {(user?.name || user?.fullName || user?.full_name || 'U').charAt(0).toUpperCase()}
                       </span>
                     </div>
-                    <span className="text-white font-medium hidden sm:block">{user?.name || 'User'}</span>
+                    <span className="text-white font-medium hidden sm:block">
+                      {user?.name || user?.fullName || user?.full_name || 'User'}
+                    </span>
                     <span className="material-icons text-gray-300 text-sm">
                       {userMenuOpen ? 'expand_less' : 'expand_more'}
                     </span>
@@ -227,7 +229,9 @@ const Header = () => {
                   {userMenuOpen && (
                     <div className="absolute right-0 mt-2 w-56 glass-card bg-[#0B0E14] border border-white/10 rounded-xl overflow-hidden shadow-2xl">
                       <div className="px-4 py-3 border-b border-white/10 bg-white/5">
-                        <p className="text-sm font-semibold text-white">{user?.name || 'User'}</p>
+                        <p className="text-sm font-semibold text-white">
+                          {user?.name || user?.fullName || user?.full_name || 'User'}
+                        </p>
                         <p className="text-xs text-gray-400 mt-0.5">{user?.email || 'user@example.com'}</p>
                         <p className="text-xs text-primary-400 font-medium mt-1 capitalize">{user?.role || 'User'}</p>
                       </div>

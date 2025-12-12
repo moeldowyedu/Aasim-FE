@@ -356,10 +356,12 @@ const Sidebar = () => {
             <div className="flex items-center justify-between p-2 rounded-lg bg-white/5 border border-white/5">
               <div className="flex items-center gap-3 overflow-hidden">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-primary-500 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
-                  {user?.name?.charAt(0) || 'U'}
+                  {(user?.name || user?.fullName || user?.full_name || 'U').charAt(0).toUpperCase()}
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-white truncate">{user?.name || 'User'}</p>
+                  <p className="text-sm font-medium text-white truncate">
+                    {user?.name || user?.fullName || user?.full_name || 'User'}
+                  </p>
                   <p className="text-xs text-gray-500 truncate">{user?.email}</p>
                 </div>
               </div>
@@ -374,8 +376,8 @@ const Sidebar = () => {
           </div>
         ) : (
           <div className="p-2 space-y-2">
-            <div className="w-10 h-10 mx-auto rounded-full bg-gradient-to-tr from-purple-500 to-primary-500 flex items-center justify-center text-white text-xs font-bold" title={user?.name}>
-              {user?.name?.charAt(0) || 'U'}
+            <div className="w-10 h-10 mx-auto rounded-full bg-gradient-to-tr from-purple-500 to-primary-500 flex items-center justify-center text-white text-xs font-bold" title={user?.name || user?.fullName || user?.full_name}>
+              {(user?.name || user?.fullName || user?.full_name || 'U').charAt(0).toUpperCase()}
             </div>
             <button
               onClick={logout}

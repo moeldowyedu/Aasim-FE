@@ -7,6 +7,8 @@ import { StatCard, QuickActions, RecentActivity, UsageChart, MyAgents } from '..
 import { PLANS } from '../../utils/constants';
 import { authService } from '../../services';
 
+import { differenceInDays } from 'date-fns';
+
 const DashboardPage = () => {
   const { user } = useAuthStore();
   const { currentSubscription, fetchSubscription } = useBillingStore();
@@ -17,6 +19,11 @@ const DashboardPage = () => {
     marketplace_sales: 0
   });
   const [isLoadingStats, setIsLoadingStats] = useState(true);
+
+  // Calculate Trial Status
+  const trialEndsAt = user?.tenant?.trial_ends_at;
+  const isTrial = !!trialEndsAt;
+  const daysLeft = trialEndsAt ? differenceInDays(new Date(trialEndsAt), new Date()) : 0;
 
   useEffect(() => {
     fetchSubscription();
@@ -58,10 +65,23 @@ const DashboardPage = () => {
           <div className="mt-4 md:mt-0">
             <div className="flex items-center gap-3">
               <div className="text-right">
-                <p className="text-sm text-secondary-600 font-semibold">Current Plan</p>
-                <Badge variant="primary" size="lg">
-                  {currentPlan?.name || 'Starter'}
-                </Badge>
+                <p className="text-sm text-secondary-600 font-semibold mb-1">Current Plan</p>
+                <div className="flex flex-col items-end">
+                  <Badge
+                    variant={isTrial ? (daysLeft >= 0 ? "warning" : "error") : "primary"}
+                    size="lg"
+                  >
+                    {isTrial
+                      ? (daysLeft >= 0 ? 'Free Trial' : 'Trial Expired')
+                      : (currentPlan?.name || 'Starter')
+                    }
+                  </Badge>
+                  {isTrial && daysLeft >= 0 && (
+                    <span className="text-xs font-medium text-orange-600 mt-1">
+                      {daysLeft} days remaining
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
