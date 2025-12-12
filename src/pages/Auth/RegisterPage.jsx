@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Sparkles, Building2, Users } from 'lucide-react';
+import { Mail, Lock, User, Eye, EyeOff, ArrowRight, Sparkles, Building2, Users, CheckCircle, XCircle, Globe, Phone, Upload } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 import Input from '../../components/common/Input/Input';
 import Button from '../../components/common/Button/Button';
@@ -17,12 +17,28 @@ const RegisterPage = () => {
     password: '',
     confirmPassword: '',
     tenantType: 'personal', // 'personal' or 'organization'
+    tenantType: 'personal', // 'personal' or 'organization'
+    tenantUrl: '',
+    // Personal & Shared Fields
+    fullName: '',
+    country: '',
+    phone: '',
+    countryCode: '+1', // Default
+    email: '',
+    password: '',
+    confirmPassword: '',
+    // Organization Specific
     organizationName: '',
+    organizationShortName: '', // New
+    organizationLogo: null, // New
     organizationDomain: ''
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [checkingDomain, setCheckingDomain] = useState(false);
+  const [domainStatus, setDomainStatus] = useState(null); // 'available', 'unavailable', null
+  const [domainMessage, setDomainMessage] = useState('');
   const [errors, setErrors] = useState({});
 
   // Password strength calculation
@@ -83,6 +99,14 @@ const RegisterPage = () => {
       newErrors.confirmPassword = 'Passwords do not match';
     }
 
+    // Common Validation
+    if (!formData.country) {
+      newErrors.country = 'Country is required';
+    }
+    if (!formData.phone) {
+      newErrors.phone = 'Phone number is required';
+    }
+
     // Organization-specific validation
     if (formData.tenantType === 'organization') {
       if (!formData.organizationName.trim()) {
@@ -91,14 +115,65 @@ const RegisterPage = () => {
         newErrors.organizationName = 'Organization name must be at least 2 characters';
       }
 
+      // Short name optional but good to validate length if present
+      if (formData.organizationShortName && formData.organizationShortName.length > 20) {
+        newErrors.organizationShortName = 'Short name must be less than 20 characters';
+      }
+
       // Domain is optional, but if provided, validate format
       if (formData.organizationDomain && !/^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$/.test(formData.organizationDomain)) {
         newErrors.organizationDomain = 'Invalid domain format (use alphanumeric and hyphens only)';
       }
     }
 
+    // Tenant URL Validation
+    if (!formData.tenantUrl) {
+      newErrors.tenantUrl = 'Workspace URL is required';
+    } else if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(formData.tenantUrl)) {
+      newErrors.tenantUrl = 'Use lowercase letters, numbers, and hyphens only';
+    } else if (domainStatus === 'unavailable') {
+      newErrors.tenantUrl = 'This URL is already taken';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const handleTenantUrlChange = (e) => {
+    const value = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '');
+    setFormData(prev => ({ ...prev, tenantUrl: value }));
+    setDomainStatus(null);
+    setDomainMessage('');
+    if (errors.tenantUrl) {
+      setErrors(prev => ({ ...prev, tenantUrl: '' }));
+    }
+  };
+
+  const { checkDomainAvailability } = useAuthStore();
+
+  const handleCheckDomain = async () => {
+    if (!formData.tenantUrl) return;
+
+    setCheckingDomain(true);
+    setDomainStatus(null);
+    setErrors(prev => ({ ...prev, tenantUrl: '' }));
+
+    try {
+      const result = await checkDomainAvailability(formData.tenantUrl);
+      if (result.available) {
+        setDomainStatus('available');
+      } else {
+        setDomainStatus('unavailable');
+        setDomainMessage(result.message || 'Already taken');
+      }
+    } catch (error) {
+      // If strict 404 means available check logic in authService
+      console.error(error);
+      setDomainStatus('unavailable');
+      setDomainMessage('Error checking availability');
+    } finally {
+      setCheckingDomain(false);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -115,15 +190,23 @@ const RegisterPage = () => {
         fullName: formData.fullName.trim(),
         email: formData.email.trim(),
         password: formData.password,
+        tenantUrl: formData.tenantUrl,
       };
 
       // Add organization fields if organization type
       if (formData.tenantType === 'organization') {
         payload.organizationName = formData.organizationName.trim();
+        payload.organizationShortName = formData.organizationShortName.trim();
         if (formData.organizationDomain) {
           payload.organizationDomain = formData.organizationDomain.trim();
         }
+        // Metadata or specific endpoint needed for logo upload - for now passing as null or handle separately
+        // payload.organizationLogo = formData.organizationLogo; 
       }
+
+      // Add common extended fields
+      payload.country = formData.country;
+      payload.phone = `${formData.countryCode}${formData.phone}`;
 
       // Register user
       const result = await register(payload);
@@ -142,7 +225,9 @@ const RegisterPage = () => {
               tenantType: formData.tenantType,
               organizationName: formData.organizationName,
               organizationDomain: formData.organizationDomain,
-              userFullName: formData.fullName
+              organizationDomain: formData.organizationDomain,
+              userFullName: formData.fullName,
+              tenantUrl: formData.tenantUrl
             }
           });
         }
@@ -272,6 +357,130 @@ const RegisterPage = () => {
               </div>
             </div>
 
+            {/* Tenant URL Field - For All Types */}
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-1 ml-1">
+                Workspace URL <span className="text-red-400">*</span>
+              </label>
+
+              <div className="flex items-center gap-3">
+                <div className={`
+                    flex-1 flex items-center bg-white/5 border rounded-lg overflow-hidden transition-all relative
+                    ${errors.tenantUrl ? 'border-red-500 focus-within:ring-2 focus-within:ring-red-500/20' :
+                    domainStatus === 'available' ? 'border-green-500 focus-within:ring-2 focus-within:ring-green-500/20' :
+                      'border-white/10 focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-500/20'}
+                  `}>
+                  <input
+                    type="text"
+                    name="tenantUrl"
+                    value={formData.tenantUrl}
+                    onChange={handleTenantUrlChange}
+                    className="w-full bg-transparent border-none text-white placeholder-gray-500 px-4 py-3 focus:ring-0 focus:outline-none"
+                    placeholder="your-workspace"
+                    disabled={isLoading}
+                  />
+
+                  {/* Availability Check Button (Inside Input) */}
+                  <div className="pr-2">
+                    <button
+                      type="button"
+                      onClick={handleCheckDomain}
+                      disabled={!formData.tenantUrl || checkingDomain || isLoading}
+                      className={`
+                          p-1.5 rounded-md transition-all duration-200 flex items-center gap-1
+                          ${!formData.tenantUrl
+                          ? 'opacity-50 text-gray-600 cursor-not-allowed'
+                          : 'opacity-100 hover:bg-white/10 text-primary-400 hover:text-white cursor-pointer'
+                        }
+                        `}
+                      title="Check Availability"
+                    >
+                      {checkingDomain ? (
+                        <div className="w-4 h-4 border-2 border-primary-400 border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <span className="text-xs font-bold uppercase tracking-wider">Check</span>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Suffix Outside */}
+                <div className="text-gray-400 font-medium select-none whitespace-nowrap bg-white/5 px-4 py-3 border border-white/10 rounded-lg">
+                  .obsolio.com
+                </div>
+              </div>
+
+              {/* Status Messages */}
+              {domainStatus === 'available' && !errors.tenantUrl && (
+                <p className="mt-1.5 text-xs text-green-400 ml-1 flex items-center gap-1 animate-fade-in">
+                  <CheckCircle className="w-3 h-3" /> Available
+                </p>
+              )}
+              {domainStatus === 'unavailable' && !errors.tenantUrl && (
+                <p className="mt-1.5 text-xs text-red-400 ml-1 flex items-center gap-1 animate-fade-in">
+                  <XCircle className="w-3 h-3" /> {domainMessage || 'Not available'}
+                </p>
+              )}
+              {errors.tenantUrl && (
+                <p className="mt-1.5 text-xs text-red-500 ml-1 animate-fade-in">{errors.tenantUrl}</p>
+              )}
+            </div>
+
+
+            {/* Organization Fields */}
+            {formData.tenantType === 'organization' && (
+              <div className="space-y-4 pt-2 pb-4 border-b border-white/5 animate-fade-in">
+
+                {/* Organization Name & Short Name */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Input
+                    theme="dark"
+                    label="Organization Name"
+                    type="text"
+                    name="organizationName"
+                    value={formData.organizationName}
+                    onChange={handleChange}
+                    placeholder="Acme Corp"
+                    icon={Building2}
+                    error={errors.organizationName}
+                    disabled={isLoading}
+                  />
+                  <Input
+                    theme="dark"
+                    label="Short Name (Optional)"
+                    type="text"
+                    name="organizationShortName"
+                    value={formData.organizationShortName}
+                    onChange={handleChange}
+                    placeholder="ACME"
+                    icon={Building2}
+                    error={errors.organizationShortName}
+                    disabled={isLoading}
+                  />
+                </div>
+
+                {/* Enhanced Logo Upload */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2 ml-1">
+                    Organization Logo
+                  </label>
+                  <div className="relative group cursor-pointer">
+                    <input type="file" className="hidden" id="org-logo" />
+                    <label
+                      htmlFor="org-logo"
+                      className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-primary-500/50 transition-all cursor-pointer"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <Upload className="w-6 h-6 text-primary-400" />
+                      </div>
+                      <span className="text-sm font-medium text-white">Click to upload logo</span>
+                      <span className="text-xs text-gray-500 mt-1">SVG, PNG, JPG (max 2MB)</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Full Name Field */}
             <div>
               <Input
@@ -286,6 +495,71 @@ const RegisterPage = () => {
                 error={errors.fullName}
                 disabled={isLoading}
               />
+            </div>
+
+            {/* Country and Phone */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1 ml-1">
+                  Country
+                </label>
+                <div className="relative">
+                  <select
+                    name="country"
+                    value={formData.country}
+                    onChange={handleChange}
+                    className={`
+                      w-full bg-white/5 border rounded-lg py-3 pl-10 pr-4 text-white appearance-none focus:outline-none focus:ring-2 transition-all cursor-pointer
+                      ${errors.country ? 'border-red-500 focus:ring-red-500/20' : 'border-white/10 focus:border-primary-500 focus:ring-primary-500/20'}
+                    `}
+                    disabled={isLoading}
+                  >
+                    <option value="" disabled className="text-gray-500 bg-white">Select a country</option>
+                    <option value="United States" className="text-gray-900 bg-white">United States</option>
+                    <option value="United Kingdom" className="text-gray-900 bg-white">United Kingdom</option>
+                    <option value="Canada" className="text-gray-900 bg-white">Canada</option>
+                    <option value="Germany" className="text-gray-900 bg-white">Germany</option>
+                    <option value="France" className="text-gray-900 bg-white">France</option>
+                    <option value="Australia" className="text-gray-900 bg-white">Australia</option>
+                    <option value="Japan" className="text-gray-900 bg-white">Japan</option>
+                    {/* Add more countries as needed - in real app use a library */}
+                  </select>
+                  <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </div>
+                </div>
+                {errors.country && (
+                  <p className="mt-1 text-xs text-red-500 ml-1 animate-fade-in">{errors.country}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1 ml-1">
+                  Phone Number
+                </label>
+                <div className="relative">
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="+1 555-0123"
+                    className={`
+                            w-full bg-white/5 border rounded-lg py-3 pl-10 pr-4 text-white focus:outline-none focus:ring-2 transition-all placeholder-gray-500
+                            ${errors.phone
+                        ? 'border-red-500 focus:ring-red-500/20'
+                        : 'border-white/10 focus:border-primary-500 focus:ring-primary-500/20'
+                      }
+                        `}
+                    disabled={isLoading}
+                  />
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" />
+                </div>
+                {errors.phone && (
+                  <p className="mt-1 text-xs text-red-500 ml-1 animate-fade-in">{errors.phone}</p>
+                )}
+              </div>
             </div>
 
             {/* Email Field */}
@@ -378,50 +652,7 @@ const RegisterPage = () => {
               </div>
             </div>
 
-            {/* Organization Fields - Conditional */}
-            {formData.tenantType === 'organization' && (
-              <div className="space-y-5 pt-4 border-t border-white/10 animate-slide-down">
-                <div className="flex items-center gap-2 text-sm text-primary-400 font-medium">
-                  <Building2 className="w-4 h-4" />
-                  <span>Organization Details</span>
-                </div>
 
-                {/* Organization Name */}
-                <div>
-                  <Input
-                    theme="dark"
-                    label="Organization Name"
-                    type="text"
-                    name="organizationName"
-                    value={formData.organizationName}
-                    onChange={handleChange}
-                    placeholder="Acme Corporation"
-                    icon={Building2}
-                    error={errors.organizationName}
-                    disabled={isLoading}
-                  />
-                </div>
-
-                {/* Organization Domain (Optional) */}
-                <div>
-                  <Input
-                    theme="dark"
-                    label="Organization Domain (Optional)"
-                    type="text"
-                    name="organizationDomain"
-                    value={formData.organizationDomain}
-                    onChange={handleChange}
-                    placeholder="acme-corp"
-                    icon={Users}
-                    error={errors.organizationDomain}
-                    disabled={isLoading}
-                  />
-                  <p className="mt-1 text-xs text-gray-500 ml-1">
-                    A unique identifier for your organization (e.g., acme-corp)
-                  </p>
-                </div>
-              </div>
-            )}
 
             {/* Submit Button */}
             <Button

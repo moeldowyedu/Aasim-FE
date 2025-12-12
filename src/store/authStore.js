@@ -115,6 +115,16 @@ export const useAuthStore = create(
         }
       },
 
+      // Check Domain Availability
+      checkDomainAvailability: async (slug) => {
+        // Don't set global loading state to avoid blocking UI
+        try {
+          return await authService.checkDomainAvailability(slug);
+        } catch (error) {
+          throw error;
+        }
+      },
+
       // Clear error
       clearError: () => set({ error: null }),
 

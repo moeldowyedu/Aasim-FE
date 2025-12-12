@@ -23,6 +23,7 @@ const authService = {
       email: userData.email,
       password: userData.password,
       password_confirmation: userData.password, // Laravel requires password confirmation
+      slug: userData.tenantUrl, // Map tenantUrl to slug
     };
 
     // Add organization-specific fields if type is organization
@@ -125,6 +126,22 @@ const authService = {
       localStorage.setItem('auth_token', response.data.token);
     }
     return response.data;
+  },
+
+  // Check Domain Availability
+  checkDomainAvailability: async (slug) => {
+    try {
+      const response = await api.post('/tenants/check-availability', { slug });
+      return response.data;
+    } catch (error) {
+      if (error.response?.status === 404) {
+        // If 404, usually means not found, which might mean available? 
+        // Or if the endpoint creates/checks, it depends.
+        // Assuming strict availability check endpoint: returns { available: boolean }
+        return { available: false, message: 'Availability check failed' };
+      }
+      throw error;
+    }
   },
 
   // Get Dashboard Stats
