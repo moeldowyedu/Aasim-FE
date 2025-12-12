@@ -86,6 +86,7 @@ import TenantSettingsPage from './pages/Settings/TenantSettingsPage'
 import RubricsPage from './pages/Settings/RubricsPage'
 import SecurityPage from './pages/Settings/SecurityPage'
 import SettingsNotificationsPage from './pages/Settings/NotificationsPage'
+import DocsPage from './pages/Docs/DocsPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProtectedRoute from './router/ProtectedRoute'
 
@@ -106,6 +107,11 @@ function App() {
           <Route path="/privacy" element={<PrivacyPolicyPage />} />
           <Route path="/terms" element={<TermsOfServicePage />} />
           <Route path="/contact" element={<ContactPage />} />
+
+          {/* Documentation Routes - Public */}
+          <Route path="/docs" element={<DocsPage />} />
+          <Route path="/docs/:section/:page" element={<DocsPage />} />
+
 
           {/* Onboarding Routes (Post-Registration) */}
           <Route
@@ -318,24 +324,13 @@ function App() {
               </ProtectedRoute>
             }
           />
+          {/* Public AgentX HUB - Browse and view agents without login */}
+          <Route path="/agentx/hub" element={<AgentXMarketplacePage />} />
+          <Route path="/agentx/hub/agent/:id" element={<AgentDetailPage />} />
+
+          {/* Protected - Requires authentication to deploy */}
           <Route
-            path="/agentx/marketplace"
-            element={
-              <ProtectedRoute>
-                <AgentXMarketplacePage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/agentx/marketplace/agent/:id"
-            element={
-              <ProtectedRoute>
-                <AgentDetailPage />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/agentx/marketplace/checkout/:id"
+            path="/agentx/hub/checkout/:id"
             element={
               <ProtectedRoute>
                 <CheckoutPage />
@@ -391,13 +386,26 @@ function App() {
             path="/agents/create"
             element={<Navigate to="/agentx/builder" replace />}
           />
+          {/* Legacy marketplace redirects */}
           <Route
             path="/marketplace"
-            element={<Navigate to="/agentx/marketplace" replace />}
+            element={<Navigate to="/agentx/hub" replace />}
           />
           <Route
             path="/marketplace/:id"
-            element={<Navigate to="/agentx/marketplace/agent/:id" replace />}
+            element={<Navigate to="/agentx/hub/agent/:id" replace />}
+          />
+          <Route
+            path="/agentx/marketplace"
+            element={<Navigate to="/agentx/hub" replace />}
+          />
+          <Route
+            path="/agentx/marketplace/agent/:id"
+            element={<Navigate to="/agentx/hub/agent/:id" replace />}
+          />
+          <Route
+            path="/agentx/marketplace/checkout/:id"
+            element={<Navigate to="/agentx/hub/checkout/:id" replace />}
           />
 
           {/* HITL Routes */}

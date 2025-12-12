@@ -72,7 +72,7 @@ const Sidebar = () => {
       icon: 'smart_toy',
       section: 'agentx',
       children: [
-        { name: 'Marketplace', href: '/agentx/marketplace', icon: 'store' },
+        { name: 'HUB', href: '/agentx/hub', icon: 'store' },
         { name: 'My Agents', href: '/agentx/my-agents', icon: 'person' },
         { name: 'Agent Builder', href: '/agentx/builder', icon: 'construction' },
         { name: 'Deploy Agent', href: '/agents/deploy', icon: 'add_circle' },

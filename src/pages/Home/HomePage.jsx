@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight, CheckCircle, Zap, Shield, TrendingUp, Users, Building2,
   Sparkles, Bot, Workflow, Eye, DollarSign, Database, FileText,
-  Code, Mic, Video, Globe, Activity, Briefcase
+  Code, Mic, Video, Globe, Activity, Briefcase, GraduationCap
 } from 'lucide-react';
 import MainLayout from '../../components/layout/MainLayout';
 import ObsolioLogo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
@@ -52,8 +52,8 @@ const HomePage = () => {
                     Start 7-Day Free Trial
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
-                  <a href="#how-it-works" className="glass-btn hover:bg-white/10 text-white flex items-center justify-center gap-2">
-                    See How It Works
+                  <a href="#docs" className="glass-btn hover:bg-white/10 text-white flex items-center justify-center gap-2">
+                    Docs
                   </a>
                 </div>
 
@@ -181,9 +181,9 @@ const HomePage = () => {
                 { icon: Zap, label: "Tech" },
                 { icon: Shield, label: "Law" },
                 { icon: Activity, label: "Health" },
-                { icon: Building2, label: "Real Estate" },
+                { icon: GraduationCap, label: "Education" },
                 { icon: Briefcase, label: "Business" },
-                { icon: TrendingUp, label: "Financial" },
+                { icon: Users, label: "HR" },
               ].map((sector, idx) => (
                 <div key={idx} className="glass-card p-6 flex flex-col items-center justify-center gap-3 hover:bg-white/10 transition-colors group">
                   <sector.icon className="w-8 h-8 text-gray-500 group-hover:text-primary-400 transition-colors" />

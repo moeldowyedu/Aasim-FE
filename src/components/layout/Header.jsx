@@ -5,7 +5,7 @@ import { useLanguage } from '../../contexts/LanguageContext'
 import { translations } from '../../translations'
 import NotificationBell from '../common/NotificationBell/NotificationBell'
 import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, LogIn } from 'lucide-react'
 
 const Header = () => {
   const { isAuthenticated, user, logout } = useAuthStore()
@@ -71,7 +71,7 @@ const Header = () => {
   }
 
   return (
-    <header className={`fixed top-0 w-full z-40 transition-all duration-500 ${isScrolled ? 'bg-[#0B0E14]/90 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-6'}`}>
+    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-[#0B0E14]/90 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-6'}`}>
       <nav className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
           {/* Logo - Always links to homepage */}
@@ -87,18 +87,39 @@ const Header = () => {
           <div className="flex items-center space-x-6">
             <Link to="/" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Home</Link>
 
+            {!isAuthenticated && (
+              <>
+                <a href="#features" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Features</a>
+                <a href="#pricing" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Pricing</a>
+                <Link to="/docs/getting-started/introduction" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Docs</Link>
+              </>
+            )}
+
+            {/* AgentX HUB - Public for everyone */}
+            <Link to="/agentx/hub" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">AgentX HUB</Link>
+
             {isAuthenticated && (
               <Link to="/dashboard" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Dashboard</Link>
             )}
 
             {!isAuthenticated ? (
               <>
-                <a href="#features" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Features</a>
-                <a href="#how-it-works" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">How It Works</a>
-                <a href="#pricing" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Pricing</a>
-                <a href="/login" className="text-gray-200 hover:text-white font-semibold transition-colors">Sign In</a>
+                <Link
+                  to="/login"
+                  className="flex items-center gap-2 px-4 py-2 border-2 border-primary-500 text-primary-400 hover:bg-primary-500 hover:text-white font-semibold rounded-lg transition-all"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Sign In
+                </Link>
 
-                {/* Language Switcher */}
+                <Link
+                  to="/register"
+                  className="bg-primary-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-700 transition-colors hidden sm:inline"
+                >
+                  Start Free Trial
+                </Link>
+
+                {/* Language Switcher - Moved to end */}
                 <div className="relative" ref={languageMenuRef}>
                   <button
                     onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
@@ -134,13 +155,6 @@ const Header = () => {
                     </div>
                   )}
                 </div>
-
-                <Link
-                  to="/register"
-                  className="bg-primary-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-primary-700 transition-colors hidden sm:inline"
-                >
-                  Start Free Trial
-                </Link>
 
                 {/* Mobile Menu Button */}
                 <button
