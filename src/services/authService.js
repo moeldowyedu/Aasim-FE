@@ -14,31 +14,47 @@ const authService = {
 
   // Register
   register: async (userData) => {
-    // Transform frontend data to match new unified registration API
-    const requestData = {
-      type: userData.type || 'personal', // 'personal' or 'organization'
-      fullName: userData.fullName || (userData.firstName && userData.lastName
-        ? `${userData.firstName} ${userData.lastName}`.trim()
-        : userData.name || userData.email?.split('@')[0] || 'User'),
-      email: userData.email,
-      password: userData.password,
-      password_confirmation: userData.password, // Laravel requires password confirmation
-      slug: userData.tenantUrl, // Map tenantUrl to slug
-    };
+    // Create FormData for file upload support
+    const formData = new FormData();
 
-    // Add organization-specific fields if type is organization
+    // Core Fields
+    formData.append('type', userData.type || 'personal');
+    formData.append('full_name', userData.fullName || userData.firstName + ' ' + userData.lastName);
+    formData.append('email', userData.email);
+    formData.append('password', userData.password);
+    formData.append('password_confirmation', userData.password); // Laravel confirmation
+    formData.append('tenant_url', userData.tenantUrl || userData.slug); // Map to backend field
+
+    // Extended Fields
+    if (userData.country) formData.append('country', userData.country);
+    if (userData.phone) formData.append('phone', userData.phone);
+
+    // Organization Specific Fields
     if (userData.type === 'organization') {
       if (userData.organizationName) {
-        requestData.organizationName = userData.organizationName;
+        formData.append('organization_name', userData.organizationName);
       }
+      if (userData.organizationShortName) {
+        formData.append('organization_short_name', userData.organizationShortName);
+      }
+      // Handle file upload
+      if (userData.organizationLogo instanceof File) {
+        formData.append('organization_logo', userData.organizationLogo);
+      }
+      // Legacy/Optional domain field if still used by backend
       if (userData.organizationDomain) {
-        requestData.organizationDomain = userData.organizationDomain;
+        formData.append('organization_domain', userData.organizationDomain);
       }
     }
 
-    console.log('📤 Sending registration data:', requestData);
+    console.log('📤 Sending registration FormData');
 
-    const response = await api.post('/auth/register', requestData);
+    // Send as multipart/form-data (axios handles this automatically with FormData)
+    const response = await api.post('/auth/register', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 
     // Check if email verification is required
     if (response.data.emailVerificationRequired) {

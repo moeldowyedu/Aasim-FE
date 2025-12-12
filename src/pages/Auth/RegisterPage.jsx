@@ -12,13 +12,10 @@ const RegisterPage = () => {
   const { register, isLoading } = useAuthStore();
 
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
     confirmPassword: '',
     tenantType: 'personal', // 'personal' or 'organization'
-    tenantType: 'personal', // 'personal' or 'organization'
     tenantUrl: '',
+    // Personal & Shared Fields
     // Personal & Shared Fields
     fullName: '',
     country: '',
@@ -200,8 +197,9 @@ const RegisterPage = () => {
         if (formData.organizationDomain) {
           payload.organizationDomain = formData.organizationDomain.trim();
         }
-        // Metadata or specific endpoint needed for logo upload - for now passing as null or handle separately
-        // payload.organizationLogo = formData.organizationLogo; 
+        if (formData.organizationLogo) {
+          payload.organizationLogo = formData.organizationLogo;
+        }
       }
 
       // Add common extended fields
@@ -225,7 +223,6 @@ const RegisterPage = () => {
               tenantType: formData.tenantType,
               organizationName: formData.organizationName,
               organizationDomain: formData.organizationDomain,
-              organizationDomain: formData.organizationDomain,
               userFullName: formData.fullName,
               tenantUrl: formData.tenantUrl
             }
@@ -245,6 +242,17 @@ const RegisterPage = () => {
       } else {
         toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
       }
+    }
+  };
+
+  const handleLogoChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 2 * 1024 * 1024) { // 2MB limit
+        toast.error('File size must be less than 2MB');
+        return;
+      }
+      setFormData(prev => ({ ...prev, organizationLogo: file }));
     }
   };
 
@@ -465,7 +473,13 @@ const RegisterPage = () => {
                     Organization Logo
                   </label>
                   <div className="relative group cursor-pointer">
-                    <input type="file" className="hidden" id="org-logo" />
+                    <input
+                      type="file"
+                      className="hidden"
+                      id="org-logo"
+                      accept="image/*"
+                      onChange={handleLogoChange}
+                    />
                     <label
                       htmlFor="org-logo"
                       className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-primary-500/50 transition-all cursor-pointer"
@@ -473,7 +487,9 @@ const RegisterPage = () => {
                       <div className="w-12 h-12 rounded-full bg-primary-500/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                         <Upload className="w-6 h-6 text-primary-400" />
                       </div>
-                      <span className="text-sm font-medium text-white">Click to upload logo</span>
+                      <span className="text-sm font-medium text-white">
+                        {formData.organizationLogo ? formData.organizationLogo.name : 'Click to upload logo'}
+                      </span>
                       <span className="text-xs text-gray-500 mt-1">SVG, PNG, JPG (max 2MB)</span>
                     </label>
                   </div>
