@@ -189,8 +189,8 @@ const Sidebar = () => {
       <div className={`${isCollapsed ? 'p-4' : 'p-6'} border-b border-white/10 transition-all duration-300 flex-shrink-0`}>
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary-900/20">
-            {user?.tenant_logo ? (
-              <img src={user.tenant_logo} alt="Tenant Logo" className="w-6 h-6 object-contain" />
+            {user?.tenant?.logo_url || user?.tenant?.logo ? (
+              <img src={user?.tenant?.logo_url || user?.tenant?.logo} alt="Tenant Logo" className="w-6 h-6 object-contain" />
             ) : (
               <Building2 className="w-6 h-6 text-white" />
             )}
@@ -198,7 +198,7 @@ const Sidebar = () => {
           {!isCollapsed && (
             <div className="overflow-hidden">
               <h1 className="text-sm font-bold text-white truncate">
-                {user?.tenant_name || user?.company || 'My Workspace'}
+                {user?.tenant?.organization_full_name || user?.tenant?.name || user?.tenant?.company || user?.company || 'My Workspace'}
               </h1>
               <div className="flex items-center gap-1.5 mt-0.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>

@@ -8,6 +8,10 @@ const authService = {
     if (response.data.success && response.data.data.token) {
       localStorage.setItem('auth_token', response.data.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.data.user));
+      // Store tenant ID if available to ensure X-Tenant-ID header is sent
+      if (response.data.data.user.tenant_id) {
+        localStorage.setItem('current_tenant_id', response.data.data.user.tenant_id);
+      }
     }
     return response.data.data;
   },

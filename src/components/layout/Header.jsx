@@ -97,7 +97,66 @@ const Header = () => {
             <Link to="/agentx/hub" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">AgentX HUB</Link>
 
             {isAuthenticated && (
-              <Link to="/dashboard" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">Dashboard</Link>
+              <a
+                href={(() => {
+                  const subdomain = user?.tenant?.subdomain;
+                  if (!subdomain) return '/dashboard';
+
+                  // Construct full URL with subdomain
+                  const currentHost = window.location.host; // e.g., localhost:3000 or obsolio.com
+                  const protocol = window.location.protocol;
+
+                  // If we are already on the correct subdomain, use internal link
+                  if (currentHost.startsWith(subdomain + '.')) {
+                    return '/dashboard';
+                  }
+
+                  // Otherwise, construct full URL
+                  // Handle localhost:3000 -> tenant.localhost:3000 is often tricky without /etc/hosts
+                  // Assuming obsolio.com -> tenant.obsolio.com
+                  // Assuming localhost environment aligns with user's setup (iti.localhost)
+
+                  // Basic logic: replace current subdomain or prepend
+                  const parts = currentHost.split('.');
+                  let rootDomain = currentHost;
+
+                  // Check if already has a subdomain (assuming 2 parts for localhost or 3 for prod)
+                  // localhost:3000 (1 part effectively if we ignore port, but split gives 1)
+                  // obsolio.com (2 parts)
+                  // www.obsolio.com (3 parts)
+
+                  // Simplest robust approach if using a wildcard domain:
+                  // Prepend if not 'www', replace if exists?
+                  // User said: "iti.localhost" or "iti.obsolio.com"
+
+                  if (parts.length > 2 || (parts.length === 2 && currentHost.includes('localhost'))) {
+                    // Already has subdomain, replace it?
+                    // e.g. www.obsolio.com -> iti.obsolio.com
+                    // e.g. other.obsolio.com -> iti.obsolio.com
+                    // localhost is special. localhost:3000 -> iti.localhost:3000 ? 
+                    // Most browsers support *.localhost.
+
+                    // If on localhost (plain), just prepend
+                    if (currentHost.includes('localhost') && parts.length === 1) {
+                      return `${protocol}//${subdomain}.${currentHost}/dashboard`;
+                    } else if (currentHost.includes('localhost')) {
+                      // tenant.localhost -> replace
+                      parts[0] = subdomain;
+                      return `${protocol}//${parts.join('.')}/dashboard`;
+                    } else {
+                      // Prod: replace first part
+                      parts[0] = subdomain;
+                      return `${protocol}//${parts.join('.')}/dashboard`;
+                    }
+                  } else {
+                    // No subdomain (e.g. obsolio.com or localhost)
+                    return `${protocol}//${subdomain}.${currentHost}/dashboard`;
+                  }
+                })()}
+                className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline"
+              >
+                Dashboard
+              </a>
             )}
 
             {!isAuthenticated ? (

@@ -36,7 +36,7 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
     !location.pathname.startsWith('/onboarding')
   ) {
     // If we have tenants, we're good
-    if (tenants.length > 0) {
+    if (tenants.length > 0 || user?.tenant_id || user?.tenant) {
       return children
     }
 
