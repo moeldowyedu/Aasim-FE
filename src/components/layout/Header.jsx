@@ -104,7 +104,7 @@ const Header = () => {
               <>
                 <Link
                   to="/login"
-                  className="flex items-center gap-2 px-4 py-2 border-2 border-primary-500 text-primary-400 hover:bg-primary-500 hover:text-white font-semibold rounded-lg transition-all"
+                  className="hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-primary-500 text-primary-400 hover:bg-primary-500 hover:text-white font-semibold rounded-lg transition-all"
                 >
                   <LogIn className="w-4 h-4" />
                   Sign In
