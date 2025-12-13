@@ -99,12 +99,8 @@ const Header = () => {
             {isAuthenticated && (
               <a
                 href={(() => {
-                  const subdomain = user?.tenant?.subdomain;
-                  console.log('🔗 Header Link Debug:', {
-                    userTenant: user?.tenant,
-                    subdomain,
-                    host: window.location.host
-                  });
+                  // Backend uses 'id' as the subdomain identifier (e.g., 'iti')
+                  const subdomain = user?.tenant?.subdomain || user?.tenant?.id;
 
                   if (!subdomain) return '/dashboard';
 
