@@ -4,10 +4,13 @@ import {
   Building2, Users, Cpu, Bot, Activity, Plug,
   Settings, LogOut, Menu, X, ChevronDown, LayoutDashboard
 } from 'lucide-react';
+import { useAuthStore } from '../../store/authStore';
+import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
 
 const AdminLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [profileOpen, setProfileOpen] = useState(false);
+  const { user } = useAuthStore();
   const location = useLocation();
 
   const isGodfather = location.pathname.startsWith('/godfather');
@@ -32,27 +35,25 @@ const AdminLayout = ({ children }) => {
     <div className={`min-h-screen ${isGodfather ? 'bg-gray-50' : 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'}`}>
       {/* Top Header */}
       <header className={`fixed top-0 left-0 right-0 h-16 backdrop-blur-sm border-b z-50 transition-colors duration-300 ${isGodfather
-          ? 'bg-white/90 border-gray-200'
-          : 'bg-gray-900/95 border-gray-700/50'
+        ? 'bg-white/90 border-gray-200'
+        : 'bg-gray-900/95 border-gray-700/50'
         }`}>
         <div className="h-full px-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
               className={`p-2 rounded-lg transition-colors ${isGodfather
-                  ? 'text-gray-600 hover:bg-gray-100'
-                  : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                ? 'text-gray-600 hover:bg-gray-100'
+                : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                 }`}
             >
               {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                <Settings className="w-5 h-5 text-white" />
-              </div>
+              <img src={logo} alt="Obsolio" className="h-8 w-auto" />
               <div>
                 <h1 className={`font-bold text-lg ${isGodfather ? 'text-gray-900' : 'text-white'}`}>
-                  {isGodfather ? 'Godfather Console' : 'Obsolio System Admin'}
+                  {isGodfather ? 'OBSOLIO Console' : 'Obsolio System Admin'}
                 </h1>
                 <p className={`text-xs ${isGodfather ? 'text-gray-500' : 'text-gray-400'}`}>
                   {isGodfather ? 'Master Control' : 'Platform Management Console'}
@@ -68,34 +69,38 @@ const AdminLayout = ({ children }) => {
               className={`flex items-center space-x-3 px-4 py-2 rounded-lg transition-colors ${isGodfather ? 'hover:bg-gray-100' : 'hover:bg-gray-800'
                 }`}
             >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                <span className="text-white font-semibold text-sm">SA</span>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center overflow-hidden">
+                {user?.profile_image ? (
+                  <img src={user.profile_image} alt={user.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span className="text-white font-semibold text-sm">{(user?.name || 'SA')[0]}</span>
+                )}
               </div>
               <div className="text-left hidden md:block">
-                <div className={`text-sm font-semibold ${isGodfather ? 'text-gray-900' : 'text-white'}`}>System Admin</div>
-                <div className={`text-xs ${isGodfather ? 'text-gray-500' : 'text-gray-400'}`}>admin@obsolio.com</div>
+                <div className={`text-sm font-semibold ${isGodfather ? 'text-gray-900' : 'text-white'}`}>{user?.name || 'System Admin'}</div>
+                <div className={`text-xs ${isGodfather ? 'text-gray-500' : 'text-gray-400'}`}>{user?.email || 'admin@obsolio.com'}</div>
               </div>
               <ChevronDown className={`w-4 h-4 ${isGodfather ? 'text-gray-500' : 'text-gray-400'}`} />
             </button>
 
             {profileOpen && (
               <div className={`absolute right-0 mt-2 w-48 rounded-lg shadow-xl border py-2 ${isGodfather
-                  ? 'bg-white border-gray-200'
-                  : 'bg-gray-800 border-gray-700'
+                ? 'bg-white border-gray-200'
+                : 'bg-gray-800 border-gray-700'
                 }`}>
                 <Link
                   to="/system-admin/settings"
                   className={`flex items-center space-x-2 px-4 py-2 transition-colors ${isGodfather
-                      ? 'text-gray-700 hover:bg-gray-100'
-                      : 'text-gray-300 hover:bg-gray-700'
+                    ? 'text-gray-700 hover:bg-gray-100'
+                    : 'text-gray-300 hover:bg-gray-700'
                     }`}
                 >
                   <Settings className="w-4 h-4" />
                   <span>Settings</span>
                 </Link>
                 <button className={`flex items-center space-x-2 px-4 py-2 transition-colors w-full text-left ${isGodfather
-                    ? 'text-red-600 hover:bg-red-50'
-                    : 'text-red-400 hover:bg-gray-700'
+                  ? 'text-red-600 hover:bg-red-50'
+                  : 'text-red-400 hover:bg-gray-700'
                   }`}>
                   <LogOut className="w-4 h-4" />
                   <span>Logout</span>
@@ -124,10 +129,10 @@ const AdminLayout = ({ children }) => {
                   key={item.name}
                   to={item.href}
                   className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all ${active
-                      ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                      : isGodfather
-                        ? 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                        : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
+                    : isGodfather
+                      ? 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                      : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                     }`}
                 >
                   <Icon className="w-5 h-5 flex-shrink-0" />
