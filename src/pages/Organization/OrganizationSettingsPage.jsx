@@ -39,6 +39,17 @@ const OrganizationSettingsPage = () => {
                     logo: null, // File matches cannot be prefilled
                     logo_preview: tenant.organizationLogo || tenant.logo_url || tenant.logo // Use existing logo as preview
                 });
+
+                // Sync fresh tenant data to global store so Sidebar updates immediately
+                const updatedUserTenant = {
+                    ...user.tenant,
+                    ...tenant,
+                    logo_url: tenant.organizationLogo || tenant.logo_url || tenant.logo
+                };
+                // Only update if signature changed to avoid loops/renders (simple check)
+                if (JSON.stringify(updatedUserTenant) !== JSON.stringify(user.tenant)) {
+                    updateUser({ tenant: updatedUserTenant });
+                }
             } catch (err) {
                 console.error('Failed to fetch tenant details:', err);
                 setError('Failed to load organization details.');
