@@ -4,6 +4,7 @@ import { useAuthStore } from '../../store/authStore';
 import { Button, Input } from '../../components/common';
 import toast from 'react-hot-toast';
 import { getSubdomain, isSystemAdminDomain } from '../../utils/subdomain';
+import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
 
 const LoginPage = () => {
   const navigate = useNavigate();
