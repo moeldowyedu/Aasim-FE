@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
-import { MapPin, ArrowRight, Loader, Mail, AlertCircle, Building, User } from 'lucide-react';
+import { ArrowRight, Loader, Mail, AlertCircle, Building, User } from 'lucide-react';
 import toast from 'react-hot-toast';
 import tenantLookupService from '../../services/tenantLookupService';
 import { redirectToTenantLogin } from '../../utils/tenantDetection';
+import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
 
 const SignInPage = () => {
     const [step, setStep] = useState('lookup'); // 'lookup', 'selection'
@@ -49,22 +50,26 @@ const SignInPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8">
-                <div className="text-center">
+        <div className="min-h-screen bg-[#0B0E14] relative flex items-center justify-center p-4 overflow-hidden">
+            {/* Background Ambience (Same as LoginPage) */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full opacity-30 pointer-events-none">
+                <div className="absolute top-[-20%] left-[20%] w-[600px] h-[600px] bg-primary-900/40 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow"></div>
+                <div className="absolute bottom-[-10%] right-[10%] w-[500px] h-[500px] bg-purple-900/30 rounded-full blur-[100px] mix-blend-screen animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+            </div>
+
+            <div className="w-full max-w-md relative z-10 animate-fade-in">
+                <div className="text-center mb-6">
                     {/* Logo */}
-                    <Link to="/" className="inline-block">
-                        <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-2">
-                            OBSOLIO
-                        </h1>
+                    <Link to="/" className="inline-block mb-4">
+                        <img src={logo} alt="OBSOLIO" className="h-16 mx-auto object-contain" />
                     </Link>
-                    <h2 className="mt-6 text-3xl font-bold text-gray-900 dark:text-gray-100">
-                        {step === 'lookup' ? 'Sign in to your workspace' : 'Select your workspace'}
+                    <h2 className="text-3xl font-bold text-white mb-2">
+                        {step === 'lookup' ? 'Find your workspace' : 'Select your workspace'}
                     </h2>
-                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-gray-400">
                         {step === 'lookup'
-                            ? 'Enter your email to find your existing account.'
-                            : `We found ${tenants.length} workspaces associated with your email.`}
+                            ? 'Enter your email to sign in.'
+                            : `Found ${tenants.length} workspaces for your email.`}
                     </p>
                 </div>
 
@@ -72,19 +77,21 @@ const SignInPage = () => {
                     <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 p-4 rounded-xl flex items-center gap-2 text-sm border border-red-100 dark:border-red-900/50"
+                        className="bg-red-500/10 text-red-400 p-4 rounded-xl flex items-center gap-2 text-sm border border-red-500/20 mb-6"
                     >
                         <AlertCircle size={16} />
                         {error}
                     </motion.div>
                 )}
 
-                <div className="mt-8 bg-white dark:bg-gray-800 py-8 px-4 shadow-xl rounded-2xl sm:px-10 border border-gray-100 dark:border-gray-700">
+                <div className="glass-card p-6 sm:p-8 shadow-2xl border border-white/10 relative overflow-hidden backdrop-blur-xl bg-[#1e293b]/40 rounded-xl">
+                    {/* Decor glow */}
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-50"></div>
 
                     {step === 'lookup' && (
                         <form className="space-y-6" onSubmit={handleSubmit(handleLookup)}>
                             <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-300">
                                     Email address
                                 </label>
                                 <div className="mt-1 relative">
@@ -96,7 +103,8 @@ const SignInPage = () => {
                                         name="email"
                                         type="email"
                                         autoComplete="email"
-                                        className={`appearance-none block w-full pl-10 px-3 py-3 border ${errors.email ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'} rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm bg-gray-50 dark:bg-gray-700/50 dark:text-white transition-all`}
+                                        autoFocus // Added autoFocus
+                                        className={`appearance-none block w-full pl-10 px-3 py-3 border ${errors.email ? 'border-red-500/50 focus:ring-red-500 focus:border-red-500' : 'border-white/10 focus:ring-primary-500 focus:border-primary-500'} rounded-xl shadow-sm placeholder-gray-500 focus:outline-none focus:ring-1 sm:text-sm bg-white/5 text-white transition-all caret-primary-500`}
                                         placeholder="you@company.com"
                                         {...register('email', {
                                             required: 'Email is required',
@@ -107,7 +115,7 @@ const SignInPage = () => {
                                         })}
                                     />
                                     {errors.email && (
-                                        <p className="mt-1 text-xs text-red-500">{errors.email.message}</p>
+                                        <p className="mt-1 text-xs text-red-400">{errors.email.message}</p>
                                     )}
                                 </div>
                             </div>
@@ -116,7 +124,7 @@ const SignInPage = () => {
                                 <button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-70 disabled:cursor-not-allowed transition-all"
+                                    className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-lg shadow-primary-500/20 text-sm font-medium text-white bg-primary-600 hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-70 disabled:cursor-not-allowed transition-all"
                                 >
                                     {loading ? <Loader className="animate-spin h-5 w-5" /> : 'Continue'}
                                 </button>
@@ -132,24 +140,24 @@ const SignInPage = () => {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     onClick={() => handleSelectTenant(tenant)}
-                                    className="w-full flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group text-left"
+                                    className="w-full flex items-center justify-between p-4 border border-white/10 rounded-xl hover:bg-white/5 transition-colors group text-left bg-white/5"
                                 >
                                     <div className="flex items-center gap-4">
-                                        <div className={`p-2 rounded-lg ${tenant.type === 'ORGANIZATION' ? 'bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400' : 'bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400'}`}>
+                                        <div className={`p-2 rounded-lg ${tenant.type === 'ORGANIZATION' ? 'bg-purple-500/20 text-purple-400' : 'bg-primary-500/20 text-primary-400'}`}>
                                             {tenant.type === 'ORGANIZATION' ? <Building size={20} /> : <User size={20} />}
                                         </div>
                                         <div>
-                                            <h3 className="font-semibold text-gray-900 dark:text-white">{tenant.name}</h3>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400">{tenant.slug}.obsolio.com</p>
+                                            <h3 className="font-semibold text-white">{tenant.name}</h3>
+                                            <p className="text-xs text-gray-400">{tenant.slug}.obsolio.com</p>
                                         </div>
                                     </div>
-                                    <ArrowRight size={18} className="text-gray-400 group-hover:text-primary-500 transform group-hover:translate-x-1 transition-all" />
+                                    <ArrowRight size={18} className="text-gray-500 group-hover:text-primary-400 transform group-hover:translate-x-1 transition-all" />
                                 </motion.button>
                             ))}
 
                             <button
                                 onClick={() => setStep('lookup')}
-                                className="w-full mt-4 text-center text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                                className="w-full mt-4 text-center text-sm text-gray-500 hover:text-gray-300 transition-colors"
                             >
                                 Use a different email
                             </button>
@@ -158,13 +166,19 @@ const SignInPage = () => {
 
                 </div>
 
-                <div className="text-center">
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="text-center mt-6">
+                    <p className="text-sm text-gray-400">
                         Don't have an account?{' '}
-                        <Link to="/register" className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400">
+                        <Link to="/register" className="font-medium text-primary-400 hover:text-primary-300 transition-colors">
                             Get started for free
                         </Link>
                     </p>
+                </div>
+
+                <div className="mt-4 text-center">
+                    <Link to="/" className="text-sm text-gray-600 hover:text-gray-400 transition-colors">
+                        ← Back to Home
+                    </Link>
                 </div>
             </div>
         </div>
