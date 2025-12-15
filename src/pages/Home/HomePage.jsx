@@ -10,6 +10,7 @@ import MainLayout from '../../components/layout/MainLayout';
 import ObsolioLogo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
 import DrHebaImage from '../../assets/imgs/heba-saleh.png';
 import AhmedSalahImage from '../../assets/imgs/ahmed-salah.jpg';
+import ObsolioText from '../../components/common/ObsolioText';
 
 const HomePage = () => {
   return (
@@ -37,7 +38,7 @@ const HomePage = () => {
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-8 leading-tight tracking-tight">
-                  <span className="block text-white">Welcome to OBSOLIO</span>
+                  <span className="block text-white">Welcome to <ObsolioText className="h-[0.85em] mb-1" /></span>
                   <span className="bg-gradient-to-r from-primary-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">
                     Your AgentX HUB
                   </span>
