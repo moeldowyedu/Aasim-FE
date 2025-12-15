@@ -10,8 +10,12 @@ import MainLayout from '../../components/layout/MainLayout';
 import ObsolioLogo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
 import DrHebaImage from '../../assets/imgs/heba-saleh.png';
 import AhmedSalahImage from '../../assets/imgs/ahmed-salah.jpg';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { translations } from '../../translations';
 
 const HomePage = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   return (
     <MainLayout showSidebar={false} showFooter={true}>
       <div className="min-h-screen bg-[#0B0E14] text-white selection:bg-primary-500/30 font-body">
@@ -32,7 +36,7 @@ const HomePage = () => {
                 <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full text-sm font-medium mb-8 backdrop-blur-md">
                   <Sparkles className="w-4 h-4 text-primary-400" />
                   <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">
-                    Industry-Specialized AI Agents
+                    {t.industrySpecializedAgents || 'Industry-Specialized AI Agents'}
                   </span>
                 </div>
 
@@ -41,32 +45,32 @@ const HomePage = () => {
                     OBSOLIO
                   </span>
                   <span className="block text-xl sm:text-2xl md:text-3xl mt-4 text-white font-medium tracking-wide">
-                    Your Precision AI Agent for Your Industry
+                    {t.landingHeroTagline}
                   </span>
                 </h1>
 
                 <p className="text-xl text-gray-300 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light tracking-wide">
-                  Discover specialized AI agents tailored for your industry. Each Precision AI Agent understands your domain's unique language, standards, and requirements.
+                  {t.landingHeroDescription}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                   <Link to="/agentx/hub" className="glass-btn-primary group flex items-center justify-center gap-3">
-                    Explore AgentX HUB
+                    {t.exploreAgentxHub}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <a href="#industries" className="glass-btn hover:bg-white/10 text-white flex items-center justify-center gap-2">
-                    View All Industries
+                    {t.viewAllIndustries}
                   </a>
                 </div>
 
                 <div className="mt-8 flex items-center justify-center lg:justify-start gap-6 text-sm text-gray-400">
                   <div className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-primary-500" />
-                    <span>Domain Expert AI</span>
+                    <span>{t.domainExpertAi}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <CheckCircle className="w-4 h-4 text-primary-500" />
-                    <span>Enterprise Grade</span>
+                    <span>{t.enterpriseGrade}</span>
                   </div>
                 </div>
               </div>
@@ -125,10 +129,10 @@ const HomePage = () => {
                 <Sparkles className="w-3 h-3" /> AgentX HUB
               </div>
               <h2 className="text-3xl md:text-5xl font-bold mb-6 font-heading">
-                Featured Precision AI Agents
+                {t.agentxHubMarketplaceTitle}
               </h2>
               <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                Ready-to-deploy agents solving complex challenges in Tech, Education, and Recruitment.
+                {t.agentxHubMarketplaceSubtitle}
               </p>
             </div>
 
@@ -140,19 +144,19 @@ const HomePage = () => {
                   <div className="p-3 bg-blue-500/20 rounded-xl">
                     <LineChart className="w-8 h-8 text-blue-400" />
                   </div>
-                  <span className="text-xs font-bold bg-blue-500/10 text-blue-300 px-3 py-1 rounded-full border border-blue-500/20">Tech Competitions</span>
+                  <span className="text-xs font-bold bg-blue-500/10 text-blue-300 px-3 py-1 rounded-full border border-blue-500/20">{t.techCompetitionsLabel}</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-3 text-white">Precision AI Judge Agent</h3>
+                <h3 className="text-2xl font-bold mb-3 text-white">{t.precisionJudgeAgentTitle}</h3>
                 <p className="text-gray-300 text-sm mb-4 leading-relaxed font-light">
-                  Specialized agent for evaluating tech competition submissions. Analyzes business models, technical feasibility, market potential, and pitch quality with consistent, unbiased scoring.
+                  {t.precisionJudgeAgentDesc}
                 </p>
                 <div className="space-y-2 mb-6 text-sm text-gray-300">
-                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-500" /> Standardized evaluation criteria</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-500" /> Business model assessment</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-500" /> Pitch deck scoring</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-500" /> {t.precisionJudgeFeature1}</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-500" /> {t.precisionJudgeFeature2}</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-blue-500" /> {t.precisionJudgeFeature3}</div>
                 </div>
                 <div className="text-xs text-gray-500 pt-4 border-t border-white/5">
-                  Requested by: ITI for Tech Competitions
+                  {t.precisionJudgeRequestedBy}
                 </div>
               </div>
 
@@ -162,19 +166,19 @@ const HomePage = () => {
                   <div className="p-3 bg-purple-500/20 rounded-xl">
                     <Languages className="w-8 h-8 text-purple-400" />
                   </div>
-                  <span className="text-xs font-bold bg-purple-500/10 text-purple-300 px-3 py-1 rounded-full border border-purple-500/20">Education</span>
+                  <span className="text-xs font-bold bg-purple-500/10 text-purple-300 px-3 py-1 rounded-full border border-purple-500/20">{t.educationLabel}</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-3 text-white">CEFR Assessment Agent</h3>
+                <h3 className="text-2xl font-bold mb-3 text-white">{t.cefrAgentTitle}</h3>
                 <p className="text-gray-300 text-sm mb-4 leading-relaxed font-light">
-                  A specialized linguistic agent ensuring alignment with the Common European Framework of Reference for Languages (CEFR). Specifically tuned for oral and written assessments.
+                  {t.cefrAgentDesc}
                 </p>
                 <div className="space-y-2 mb-6 text-sm text-gray-300">
-                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-purple-500" /> Oral proficiency grading</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-purple-500" /> Multi-language support</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-purple-500" /> Standardized scoring</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-purple-500" /> {t.cefrFeature1}</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-purple-500" /> {t.cefrFeature2}</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-purple-500" /> {t.cefrFeature3}</div>
                 </div>
                 <div className="text-xs text-gray-500 pt-4 border-t border-white/5">
-                  Used for: Language Certification
+                  {t.cefrUsedFor}
                 </div>
               </div>
 
@@ -184,19 +188,19 @@ const HomePage = () => {
                   <div className="p-3 bg-green-500/20 rounded-xl">
                     <FileSearch className="w-8 h-8 text-green-400" />
                   </div>
-                  <span className="text-xs font-bold bg-green-500/10 text-green-300 px-3 py-1 rounded-full border border-green-500/20">Document Processing</span>
+                  <span className="text-xs font-bold bg-green-500/10 text-green-300 px-3 py-1 rounded-full border border-green-500/20">{t.documentProcessingLabel}</span>
                 </div>
-                <h3 className="text-2xl font-bold mb-3 text-white">Precision AI Files Agent</h3>
+                <h3 className="text-2xl font-bold mb-3 text-white">{t.precisionFilesAgentTitle}</h3>
                 <p className="text-gray-300 text-sm mb-4 leading-relaxed font-light">
-                  Intelligent document processing agent that extracts, categorizes, and analyzes business files. Handles contracts, invoices, reports, and compliance documents with high accuracy.
+                  {t.precisionFilesAgentDesc}
                 </p>
                 <div className="space-y-2 mb-6 text-sm text-gray-300">
-                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Automated file classification</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Data extraction & validation</div>
-                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> Compliance checking</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> {t.precisionFilesFeature1}</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> {t.precisionFilesFeature2}</div>
+                  <div className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-green-500" /> {t.precisionFilesFeature3}</div>
                 </div>
                 <div className="text-xs text-gray-500 pt-4 border-t border-white/5">
-                  Requested by: GrossMargin for Enterprise Operations
+                  {t.precisionFilesRequestedBy}
                 </div>
               </div>
 
@@ -204,7 +208,7 @@ const HomePage = () => {
 
             <div className="text-center">
               <Link to="/agentx/hub" className="glass-btn-primary inline-flex items-center gap-2">
-                Explore All Agents in AgentX HUB
+                {t.exploreAllAgentsButton}
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
