@@ -230,6 +230,7 @@ const HomePage = () => {
                 { icon: Shield, color: "text-green-400", title: "Regulatory Compliance", desc: "Agents designed with compliance in mind (GDPR, ISO, Industry Standards)." },
                 { icon: Eye, color: "text-purple-400", title: "Human-in-the-Loop", desc: "Seamlessly integrate human oversight for critical decisions and quality assurance." },
                 { icon: Brain, color: "text-pink-400", title: "Continuous Learning", desc: "Agents adapt to your specific data and feedback loops for improved accuracy." },
+                { icon: Users, color: "text-cyan-400", title: "No Bias, No Bad Days", desc: "Consistent, objective analysis every time. No fatigue, no mood swings, no unconscious bias—just reliable, fair decision-making." },
                 { icon: DollarSign, color: "text-orange-400", title: "Transparent ROI", desc: "Measurable efficiency gains in document processing and decision support." },
               ].map((item, idx) => (
                 <div key={idx} className="glass-card hover:bg-white/5 p-8 transition-colors group cursor-default border-t-2 border-transparent hover:border-primary-500/50">
@@ -308,7 +309,7 @@ const HomePage = () => {
               {[
                 { icon: LineChart, label: "Tech & Finance", desc: "Competition & Market Analysis", metric: "High Precision" },
                 { icon: GraduationCap, label: "Education", desc: "Admissions & Language Assessment", metric: "CEFR Aligned" },
-                { icon: Gavel, label: "Legal Services", desc: "Contract Analysis", metric: "Fast Review" },
+                { icon: Gavel, label: "Legal Services", desc: "Contract Analysis (Country-Specific)", metric: "Customizable" },
                 { icon: Stethoscope, label: "Healthcare", desc: "Clinical Data Processing", metric: "Compliant" },
                 { icon: Users, label: "HR & Recruitment", desc: "Candidate Screening", metric: "Bias-Free" },
                 { icon: Building2, label: "Real Estate", desc: "Property Valuation", metric: "Market Data" },
@@ -367,6 +368,21 @@ const HomePage = () => {
                   <div>
                     <h4 className="font-bold text-white text-lg">Eng. Ahmed Salah</h4>
                     <p className="text-sm text-primary-400 uppercase tracking-wider">CEO, GrossMargin</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Third Testimonial - CEFR Agent */}
+              <div className="glass-card p-8 relative group border-t-2 border-transparent hover:border-purple-500/50">
+                <Quote className="absolute top-6 right-6 w-8 h-8 text-primary-500/20 group-hover:text-primary-500/40 transition-colors" />
+                <p className="text-gray-300 italic mb-8 leading-relaxed text-lg">
+                  "The CEFR Assessment Agent has brought unprecedented consistency to our language proficiency evaluations. It ensures every candidate is assessed against the same rigorous standards, eliminating subjectivity from our certification process."
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-purple-500/20 rounded-full flex items-center justify-center text-purple-400 font-bold text-xl border-2 border-primary-500/20">LS</div>
+                  <div>
+                    <h4 className="font-bold text-white text-lg">Dr. Laura Schmidt</h4>
+                    <p className="text-sm text-primary-400 uppercase tracking-wider">Director, Language Institute</p>
                   </div>
                 </div>
               </div>
