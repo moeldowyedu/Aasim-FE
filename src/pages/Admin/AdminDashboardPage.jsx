@@ -31,29 +31,50 @@ const AdminDashboardPage = () => {
   const pClass = isDark ? 'text-gray-400' : 'text-gray-600';
   const cardClassDark = 'glass-card rounded-2xl p-6 hover:shadow-xl transition-all border border-white/10 bg-[#1e293b]/40';
 
+  // Mock Data (Temporary until connected to Store)
+  const systemStats = [
+    { label: 'Total Users', value: '1,247', change: '+125', trend: 'up', icon: 'people', color: 'blue', percentage: '+11.2%' },
+    { label: 'Total Submissions', value: '8,456', change: '+892', trend: 'up', icon: 'upload_file', color: 'purple', percentage: '+11.8%' },
+    { label: 'Completed Evaluations', value: '7,234', change: '+756', trend: 'up', icon: 'check_circle', color: 'green', percentage: '+11.7%' },
+    { label: 'System Uptime', value: '99.98%', change: '+0.02%', trend: 'up', icon: 'cloud_done', color: 'indigo', percentage: 'Last 30 days' },
+  ];
 
-  return (
-  // Since AdminDashboardPage is used by different Routers, we might need Layout handling.
-  // But AdminRouter wraps it in <Outlet>? No, AdminRouter renders <AdminDashboardPage>.
-  // AdminDashboardPage uses <Layout>.
-  // We should just use a fragment or div because the Router (AdminRouter) should ideally provide the layout?
-  // Checking AdminRouter:
-  /*
-            <Route path="/" element={
-                <ProtectedRoute requireSystemAdmin>
-                    <AdminDashboardPage />
-                </ProtectedRoute>
-            } />
-  */
-  // It renders the page directly. So the page MUST render the Layout.
-  // Previously logic was: `const Layout = isSystemAdminPath ? AdminLayout : MainLayout;`
-  // If we assume this page is ONLY used for Admin now (per router check), we can force AdminLayout.
-  // But routes.jsx also imports it.
+  const revenueStats = [
+    { label: 'Monthly Revenue', value: '$24,580', change: '+15.3%', trend: 'up' },
+    { label: 'Avg. Revenue Per User', value: '$19.70', change: '+3.8%', trend: 'up' },
+    { label: 'Active Subscriptions', value: '847', change: '+67', trend: 'up' },
+    { label: 'Churn Rate', value: '2.4%', change: '-0.5%', trend: 'up' } // up meaning good (down)
+  ];
 
-  // Let's rely on simple check: if we are in AdminRouter, we want AdminLayout.
-  // We can default to AdminLayout if we are just refactoring for console.
-  
-  const Layout = AdminLayout; // Forced for Console rewrite
+  const recentActivity = [
+    { id: 1, user: 'Sarah Johnson', action: 'registered a new account', time: '2 mins ago', icon: 'person_add', color: 'green' },
+    { id: 2, user: 'Mike Chen', action: 'deployed a new agent', time: '15 mins ago', icon: 'rocket_launch', color: 'blue' },
+    { id: 3, user: 'Emma Davis', action: 'upgraded to Premium', time: '1 hour ago', icon: 'star', color: 'yellow' },
+    { id: 4, user: 'Alex Wilson', action: 'reported an issue', time: '2 hours ago', icon: 'bug_report', color: 'red' },
+  ];
+
+  const industryBreakdown = [
+    { name: 'Technology', count: 2845, percentage: 45, color: 'blue' },
+    { name: 'Healthcare', count: 1850, percentage: 30, color: 'green' },
+    { name: 'Finance', count: 950, percentage: 15, color: 'purple' },
+    { name: 'Education', count: 450, percentage: 10, color: 'orange' },
+  ];
+
+  const topUsers = [
+    { id: 1, name: 'John Doe', email: 'john@example.com', submissions: 145, score: 98, status: 'Premium' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', submissions: 120, score: 95, status: 'Basic' },
+    { id: 3, name: 'Alice Johnson', email: 'alice@example.com', submissions: 98, score: 92, status: 'Premium' },
+  ];
+
+  const systemHealth = [
+    { name: 'API Gateway', status: 'healthy', uptime: '99.99%', responseTime: '45ms', color: 'green' },
+    { name: 'Database Cluster', status: 'healthy', uptime: '99.95%', responseTime: '12ms', color: 'green' },
+    { name: 'AI Engine Nodes', status: 'healthy', uptime: '99.90%', responseTime: '250ms', color: 'green' },
+    { name: 'Storage Service', status: 'warning', uptime: '99.50%', responseTime: '150ms', color: 'yellow' },
+  ];
+
+  // Force AdminLayout for Console Dashboard
+  const Layout = AdminLayout;
 
   return (
     <Layout>
@@ -305,7 +326,7 @@ const AdminDashboardPage = () => {
         </div>
       </div>
     </Layout>
-  )  )
+  )
 }
 
 export default AdminDashboardPage
