@@ -45,6 +45,12 @@ export const getSubdomain = () => {
         }
     }
 
+    // Fallback: If we didn't match APP_DOMAIN (e.g. env var missing/mismatch),
+    // but the hostname starts with "console.", treat it as console subdomain.
+    if (hostname.startsWith('console.')) {
+        return 'console';
+    }
+
     return null;
 };
 
