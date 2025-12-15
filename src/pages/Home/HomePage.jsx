@@ -340,17 +340,17 @@ const HomePage = () => {
               <h2 className="text-3xl md:text-5xl font-bold mb-6 font-heading">Our Partners & Success Stories</h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {/* Dr. Heba Salah */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* Dr. Heba Saleh */}
               <div className="glass-card p-8 relative group border-t-2 border-transparent hover:border-brand-500/50">
                 <Quote className="absolute top-6 right-6 w-8 h-8 text-primary-500/20 group-hover:text-primary-500/40 transition-colors" />
                 <p className="text-gray-300 italic mb-8 leading-relaxed text-lg">
                   "The Precision AI Judge Agent has revolutionized how we evaluate tech competition submissions. It provides consistent, unbiased scoring while maintaining the nuanced understanding we need for fair assessment."
                 </p>
                 <div className="flex items-center gap-4">
-                  <img src={DrHebaImage} alt="Dr. Heba Salah" className="w-16 h-16 rounded-full object-cover border-2 border-primary-500/20" />
+                  <img src={DrHebaImage} alt="Dr. Heba Saleh" className="w-16 h-16 rounded-full object-cover border-2 border-primary-500/20" />
                   <div>
-                    <h4 className="font-bold text-white text-lg">Dr. Heba Salah</h4>
+                    <h4 className="font-bold text-white text-lg">Dr. Heba Saleh</h4>
                     <p className="text-sm text-primary-400 uppercase tracking-wider">ITI Chairwoman</p>
                   </div>
                 </div>
