@@ -216,7 +216,7 @@ const HomePage = () => {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20">
               <h2 className="text-3xl md:text-5xl font-bold mb-6 font-heading">
-                Why Choose AgentX HUB Agents?
+                Why Choose OBSOLIO Agents?
               </h2>
               <p className="text-xl text-gray-400 max-w-3xl mx-auto">
                 Built for professionals, by professionals.
