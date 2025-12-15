@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from '../pages/Home/HomePage';
 import LoginPage from '../pages/Auth/LoginPage';
+import SignInPage from '../pages/Auth/SignInPage'; // Import SignInPage
 import RegisterPage from '../pages/Auth/RegisterPage';
 import ForgotPasswordPage from '../pages/Auth/ForgotPasswordPage';
 import ResetPasswordPage from '../pages/Auth/ResetPasswordPage';
@@ -16,7 +17,10 @@ const PublicRouter = () => {
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
+            {/* Redirect /login to /signin on public domain */}
+            <Route path="/login" element={<Navigate to="/signin" replace />} />
+            <Route path="/signin" element={<SignInPage />} />
+
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/register-simple" element={<Navigate to="/register" replace />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -35,7 +39,7 @@ const PublicRouter = () => {
             <Route path="/marketplace/*" element={<Navigate to="/agentx/hub" replace />} />
 
             {/* Redirect dashboard URLs to login if accessed on public domain */}
-            <Route path="/dashboard" element={<Navigate to="/login" replace />} />
+            <Route path="/dashboard" element={<Navigate to="/signin" replace />} />
 
             {/* 404 */}
             <Route path="*" element={<NotFoundPage />} />

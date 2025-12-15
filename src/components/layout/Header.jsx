@@ -164,7 +164,7 @@ const Header = () => {
             {!isAuthenticated ? (
               <>
                 <Link
-                  to="/login"
+                  to="/signin"
                   className="hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-primary-500 text-primary-400 hover:bg-primary-500 hover:text-white font-semibold rounded-lg transition-all"
                 >
                   <LogIn className="w-4 h-4" />
@@ -355,7 +355,7 @@ const Header = () => {
             <Link to="/agentx/hub" onClick={() => setMobileMenuOpen(false)} className="text-lg text-gray-300 hover:text-white font-medium">AgentX HUB</Link>
             <Link to="/docs/getting-started/introduction" onClick={() => setMobileMenuOpen(false)} className="text-lg text-gray-300 hover:text-white font-medium">Docs</Link>
             <hr className="border-white/10" />
-            <Link to="/login" className="text-lg text-gray-200 hover:text-white font-semibold">Sign In</Link>
+            <Link to="/signin" className="text-lg text-gray-200 hover:text-white font-semibold">Sign In</Link>
             <Link to="/register" className="glass-btn-primary text-center justify-center">Start Free Trial</Link>
           </div>
         )}

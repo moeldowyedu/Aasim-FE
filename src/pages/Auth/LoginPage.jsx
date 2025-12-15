@@ -4,6 +4,7 @@ import { useAuthStore } from '../../store/authStore';
 import { Button, Input } from '../../components/common';
 import toast from 'react-hot-toast';
 import { getSubdomain, isSystemAdminDomain } from '../../utils/subdomain';
+import { isMarketingSite } from '../../utils/tenantDetection';
 import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
 
 const LoginPage = () => {
@@ -16,9 +17,16 @@ const LoginPage = () => {
 
   const isSystemAdmin = isSystemAdminDomain();
   const subdomain = getSubdomain();
+  const onMarketingSite = isMarketingSite();
 
   // Redirect authenticated users to dashboard (only once on mount)
   useEffect(() => {
+    // If on marketing site, redirect to /signin immediately
+    if (onMarketingSite) {
+      navigate('/signin', { replace: true });
+      return;
+    }
+
     if (isAuthenticated) {
       if (useAuthStore.getState().user?.is_system_admin) {
         // If system admin is on admin domain, go to dashboard
