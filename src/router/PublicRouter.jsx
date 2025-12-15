@@ -47,8 +47,7 @@ const PublicRouter = () => {
             <Route path="/agentx/hub/agent/:id" element={<AgentDetailPage />} />
             <Route path="/marketplace/*" element={<Navigate to="/agentx/hub" replace />} />
 
-            {/* Redirect dashboard URLs to login if accessed on public domain */}
-            <Route path="/dashboard" element={<Navigate to="/signin" replace />} />
+
 
             {/* 404 */}
             <Route path="*" element={<NotFoundPage />} />
