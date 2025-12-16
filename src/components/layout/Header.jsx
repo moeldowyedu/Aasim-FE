@@ -75,7 +75,7 @@ const Header = () => {
       <nav className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
           {/* Logo - Always links to homepage */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center gap-2">
             <img
               src={logo}
               alt="OBSOLIO Logo"
@@ -84,7 +84,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center gap-6">
             <Link to="/" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">{t.home || 'Home'}</Link>
 
             {!isAuthenticated && (
@@ -94,7 +94,7 @@ const Header = () => {
             )}
 
             {/* AgentX HUB - Public for everyone */}
-            <Link to="/agentx/hub" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">AgentX HUB</Link>
+            <Link to="/agentx/hub" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">{t.agentxHub || 'AgentX HUB'}</Link>
 
 
             {!isAuthenticated ? (
@@ -207,7 +207,7 @@ const Header = () => {
                 <div className="relative" ref={userMenuRef}>
                   <button
                     onClick={toggleUserMenu}
-                    className="flex items-center space-x-2 bg-white/5 border border-white/10 px-4 py-2 rounded-xl hover:bg-white/10 transition-all"
+                    className="flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-xl hover:bg-white/10 transition-all"
                   >
                     <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-purple-500 flex items-center justify-center">
                       <span className="text-white font-semibold text-sm">
@@ -235,7 +235,7 @@ const Header = () => {
                         className="block px-4 py-3 text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
                         onClick={() => setUserMenuOpen(false)}
                       >
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-2">
                           <span className="material-icons text-sm">person</span>
                           <span>{t.profile}</span>
                         </div>
@@ -246,7 +246,7 @@ const Header = () => {
                         className="block px-4 py-3 text-gray-300 hover:bg-white/10 hover:text-white transition-colors"
                         onClick={() => setUserMenuOpen(false)}
                       >
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-2">
                           <span className="material-icons text-sm">notifications</span>
                           <span>{t.notifications}</span>
                         </div>
@@ -258,9 +258,9 @@ const Header = () => {
                           className="block px-4 py-3 text-purple-400 hover:bg-purple-500/10 transition-colors border-t border-white/10"
                           onClick={() => setUserMenuOpen(false)}
                         >
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center gap-2">
                             <span className="material-icons text-sm">admin_panel_settings</span>
-                            <span>System Admin</span>
+                            <span>{t.systemAdmin || 'System Admin'}</span>
                           </div>
                         </Link>
                       )}
@@ -269,7 +269,7 @@ const Header = () => {
                         onClick={handleLogout}
                         className="w-full text-left px-4 py-3 text-red-400 hover:bg-red-500/10 transition-colors border-t border-white/10"
                       >
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-2">
                           <span className="material-icons text-sm">logout</span>
                           <span>{t.logout}</span>
                         </div>
