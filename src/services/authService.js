@@ -166,16 +166,13 @@ const authService = {
   // Check Domain Availability
   checkDomainAvailability: async (subdomain) => {
     try {
-      // Use query param as originally intended by the "Supported methods: GET" error
-      // If this hits tenants/{id}, it might return 404 if not found.
-      const response = await api.get('/tenants/check-availability', {
-        params: { subdomain }
-      });
+      // Backend now supports GET /tenants/check-availability/{subdomain}
+      const response = await api.get(`/tenants/check-availability/${subdomain}`);
       return response.data;
     } catch (error) {
       if (error.response?.status === 404) {
-        // "Resource not found" (empty message) likely means the tenant doesn't exist.
-        // In the context of "check availability", Not Found = Available.
+        // If the endpoint returns 404 for a specific subdomain check, 
+        // it logically means "not found" -> "available".
         return { available: true, message: 'Domain is available' };
       }
       throw error;
