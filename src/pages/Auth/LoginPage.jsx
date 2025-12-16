@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuthStore } from '../../store/authStore';
 import { Button, Input } from '../../components/common';
 import toast from 'react-hot-toast';
@@ -14,6 +14,19 @@ const LoginPage = () => {
     email: '',
     password: '',
   });
+
+  const [searchParams] = useSearchParams();
+  const verified = searchParams.get('verified');
+  const alreadyVerified = searchParams.get('already_verified');
+
+  useEffect(() => {
+    if (verified === '1') {
+      toast.success('Email verified! You can now login to your workspace.');
+    }
+    if (alreadyVerified === '1') {
+      toast.info('Your email is already verified. Please login.');
+    }
+  }, [verified, alreadyVerified]);
 
   const isSystemAdmin = isSystemAdminDomain();
   const subdomain = getSubdomain();

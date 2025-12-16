@@ -210,23 +210,37 @@ const RegisterPage = () => {
       const result = await register(payload);
 
       if (result) {
-        // Check if email verification is required
-        if (result.emailVerificationRequired) {
-          toast.success('Registration successful! Please check your email to verify your account.');
-          navigate('/verify-email-sent', { replace: true });
-        } else {
-          // Direct login - bypass tenant setup as it's handled by backend now
-          toast.success('Account created successfully!');
+        if (result) {
+          // Check if verification is required
+          // Handle various response shapes (result directly or result.data)
+          const isVerificationRequired = result.emailVerificationRequired ||
+            result.verification_required ||
+            result.data?.verification_required;
 
-          // Check for workspace URL in response (could be in result directly or result.data based on return structure)
-          const workspaceUrl = result.workspace_url || result.data?.workspace_url;
-
-          if (workspaceUrl) {
-            // Redirect to the new workspace subdomain
-            window.location.href = workspaceUrl;
+          if (isVerificationRequired) {
+            // Navigate to verification pending page
+            navigate('/verify-email', {
+              state: {
+                email: formData.email,
+                workspacePreview: result.data?.workspace_preview || result.workspace_preview
+              },
+              replace: true
+            });
           } else {
-            // Fallback to local dashboard
-            navigate('/dashboard', { replace: true });
+            // Direct login - bypass tenant setup as it's handled by backend now
+            toast.success('Account created successfully!');
+
+            // Check for workspace URL in response
+            const workspaceUrl = result.workspace_url || result.data?.workspace_url;
+
+            if (workspaceUrl) {
+              // Redirect to the new workspace subdomain
+              window.location.href = workspaceUrl;
+            } else {
+              // Fallback to login page if no workspace provided (Secure default)
+              // Do NOT go to /dashboard on main domain
+              navigate('/login', { replace: true });
+            }
           }
         }
       }
@@ -250,14 +264,13 @@ const RegisterPage = () => {
         // Also show a toast generic message so they know something failed
         toast.error('Please check the form for errors.');
       } else {
-        // Only show error toast if we haven't already shown a success toast (implying the error happened during redirect/post-success)
-        // Check if authentication succeeded despite the error (e.g. redirect error)
+        // Only show error toast if we haven't already shown a success toast
         if (!useAuthStore.getState().isAuthenticated) {
           toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
         } else {
-          console.warn('Error occurred after successful registration (likely redirect issue):', error);
-          // Attempt fallback redirect
-          navigate('/dashboard', { replace: true });
+          console.warn('Error occurred after successful registration:', error);
+          // Safe fallback
+          navigate('/login', { replace: true });
         }
       }
     }

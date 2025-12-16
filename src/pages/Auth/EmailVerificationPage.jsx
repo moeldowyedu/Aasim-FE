@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { Loader, CheckCircle, XCircle, ArrowRight } from 'lucide-react';
 import authService from '../../services/authService';
 import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
@@ -11,6 +11,8 @@ const EmailVerificationPage = () => {
     const [status, setStatus] = useState('verifying'); // verifying, success, error
     const [message, setMessage] = useState('Verifying your email address...');
 
+    const location = useLocation();
+
     useEffect(() => {
         const verify = async () => {
             if (!id || !hash) {
@@ -20,30 +22,25 @@ const EmailVerificationPage = () => {
             }
 
             try {
-                // Laravel typically uses /email/verify/{id}/{hash} signed route structure
-                // We assume authService.verifyEmail handles passing these or forming the URL
-                // If authService expects a token, we might need to adjust or pass id/hash as object
-                // Let's assume we pass them or a combined URL. 
-                // Based on standard Laravel: POST /email/verify typically needs ID and Hash. 
-                // Or GET usually. Let's send them to the service.
-
-                await authService.verifyEmail(id, hash);
+                // Pass query params (expires, signature) to the service
+                await authService.verifyEmail(id, hash, location.search);
                 setStatus('success');
-                setMessage('Email verified successfully! Redirecting to dashboard...');
+                setMessage('Email verified successfully!');
 
-                // Redirect after success
+                // Redirect to success page which handles the auto-redirect to login
                 setTimeout(() => {
-                    navigate('/dashboard');
-                }, 3000);
+                    navigate('/verification-success');
+                }, 1500);
             } catch (error) {
                 console.error("Verification failed", error);
                 setStatus('error');
+                // Check for specific error reasons if returned
                 setMessage(error.response?.data?.message || 'Verification failed. The link may have expired.');
             }
         };
 
         verify();
-    }, [id, hash, navigate]);
+    }, [id, hash, navigate, location.search]);
 
     return (
         <div className="min-h-screen bg-[#0B0E14] relative flex items-center justify-center p-4 overflow-hidden">
