@@ -115,6 +115,17 @@ export const useAuthStore = create(
         }
       },
 
+      // Resend Verification
+      resendVerification: async (email) => {
+        try {
+          const result = await authService.resendVerificationEmail(email);
+          return result;
+        } catch (error) {
+          console.error('Resend verification failed:', error);
+          throw error;
+        }
+      },
+
       // Check Domain Availability
       checkDomainAvailability: async (slug) => {
         // Don't set global loading state to avoid blocking UI

@@ -210,22 +210,25 @@ const RegisterPage = () => {
       const result = await register(payload);
 
       if (result) {
-        // Check if email verification is required
-        if (result.emailVerificationRequired) {
-          toast.success('Registration successful! Please check your email to verify your account.');
-          navigate('/verify-email-sent', { replace: true });
-        } else {
-          // Direct login - bypass tenant setup as it's handled by backend now
-          toast.success('Account created successfully!');
+        if (result) {
+          // Check if verification is required
+          // Handle various response shapes (result directly or result.data)
+          const isVerificationRequired = result.emailVerificationRequired ||
+            result.verification_required ||
+            result.data?.verification_required;
 
-          // Check for workspace URL in response (could be in result directly or result.data based on return structure)
-          const workspaceUrl = result.workspace_url || result.data?.workspace_url;
-
-          if (workspaceUrl) {
-            // Redirect to the new workspace subdomain
-            window.location.href = workspaceUrl;
+          if (isVerificationRequired) {
+            // Navigate to verification pending page
+            navigate('/verify-email', {
+              state: {
+                email: formData.email,
+                workspacePreview: result.data?.workspace_preview || result.workspace_preview
+              },
+              replace: true
+            });
           } else {
-            // Fallback to local dashboard
+            // Legacy flow (shouldn't happen with new backend)
+            toast.success('Account created successfully!');
             navigate('/dashboard', { replace: true });
           }
         }

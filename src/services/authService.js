@@ -116,8 +116,13 @@ const authService = {
 
   // Resend Verification Email
   resendVerificationEmail: async (email) => {
-    const response = await api.post('/email/resend', { email });
-    return response.data;
+    try {
+      const response = await api.post('/auth/email/resend', { email });
+      return response.data;
+    } catch (error) {
+      console.error('Resend verification error:', error);
+      throw error;
+    }
   },
 
   // Get Current User

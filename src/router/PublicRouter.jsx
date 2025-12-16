@@ -15,6 +15,9 @@ import AgentDetailPage from '../pages/AgentX/AgentDetailPage';
 import VerifyEmailSentPage from '../pages/Auth/VerifyEmailSentPage';
 import EmailVerificationPage from '../pages/Auth/EmailVerificationPage';
 import ResendVerificationPage from '../pages/Auth/ResendVerificationPage';
+import VerifyEmailPendingPage from '../pages/Auth/VerifyEmailPendingPage';
+import VerificationSuccessPage from '../pages/Auth/VerificationSuccessPage';
+import VerificationFailedPage from '../pages/Auth/VerificationFailedPage';
 
 const PublicRouter = () => {
     return (
@@ -31,6 +34,11 @@ const PublicRouter = () => {
 
             {/* Email Verification */}
             <Route path="/verify-email-sent" element={<VerifyEmailSentPage />} />
+            {/* New Verification Flow */}
+            <Route path="/verify-email" element={<VerifyEmailPendingPage />} />
+            <Route path="/verification-success" element={<VerificationSuccessPage />} />
+            <Route path="/verification-failed" element={<VerificationFailedPage />} />
+
             <Route path="/verify-email/:id/:hash" element={<EmailVerificationPage />} />
             <Route path="/resend-verification" element={<ResendVerificationPage />} />
 
