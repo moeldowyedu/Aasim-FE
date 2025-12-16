@@ -227,9 +227,20 @@ const RegisterPage = () => {
               replace: true
             });
           } else {
-            // Legacy flow (shouldn't happen with new backend)
+            // Direct login - bypass tenant setup as it's handled by backend now
             toast.success('Account created successfully!');
-            navigate('/dashboard', { replace: true });
+
+            // Check for workspace URL in response
+            const workspaceUrl = result.workspace_url || result.data?.workspace_url;
+
+            if (workspaceUrl) {
+              // Redirect to the new workspace subdomain
+              window.location.href = workspaceUrl;
+            } else {
+              // Fallback to login page if no workspace provided (Secure default)
+              // Do NOT go to /dashboard on main domain
+              navigate('/login', { replace: true });
+            }
           }
         }
       }
@@ -253,14 +264,13 @@ const RegisterPage = () => {
         // Also show a toast generic message so they know something failed
         toast.error('Please check the form for errors.');
       } else {
-        // Only show error toast if we haven't already shown a success toast (implying the error happened during redirect/post-success)
-        // Check if authentication succeeded despite the error (e.g. redirect error)
+        // Only show error toast if we haven't already shown a success toast
         if (!useAuthStore.getState().isAuthenticated) {
           toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
         } else {
-          console.warn('Error occurred after successful registration (likely redirect issue):', error);
-          // Attempt fallback redirect
-          navigate('/dashboard', { replace: true });
+          console.warn('Error occurred after successful registration:', error);
+          // Safe fallback
+          navigate('/login', { replace: true });
         }
       }
     }

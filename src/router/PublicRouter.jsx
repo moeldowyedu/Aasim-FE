@@ -27,6 +27,9 @@ const PublicRouter = () => {
             <Route path="/login" element={<Navigate to="/signin" replace />} />
             <Route path="/signin" element={<SignInPage />} />
 
+            {/* Guard: Redirect /dashboard to /login on public domain to prevent SaaS leak */}
+            <Route path="/dashboard" element={<Navigate to="/login" replace />} />
+
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/register-simple" element={<Navigate to="/register" replace />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
