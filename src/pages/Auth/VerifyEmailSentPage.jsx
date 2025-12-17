@@ -63,14 +63,14 @@ const VerifyEmailSentPage = () => {
                         <div className="space-y-4">
                             <Button
                                 variant="primary"
-                                className="w-full py-4 text-base font-semibold shadow-lg shadow-primary-500/20"
+                                className="w-full py-2.5 text-sm font-semibold shadow-lg shadow-primary-500/20"
                                 onClick={() => window.open('https://gmail.com', '_blank')}
                             >
                                 Open Email App
-                                <ArrowRight className="w-5 h-5 ml-2" />
+                                <ArrowRight className="w-4 h-4 ml-2" />
                             </Button>
 
-                            <div className="flex items-center justify-between text-sm px-2 pt-2">
+                            <div className="flex items-center justify-between text-sm px-1">
                                 <button
                                     onClick={() => navigate('/login')}
                                     className="text-gray-400 hover:text-white flex items-center gap-2 transition-colors"
