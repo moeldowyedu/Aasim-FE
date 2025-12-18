@@ -257,31 +257,43 @@ const Header = () => {
                   {/* Dropdown Menu */}
                   {userMenuOpen && (
                     <div className="absolute right-0 mt-2 w-56 glass-card bg-[#0B0E14] border border-white/10 rounded-xl overflow-hidden shadow-2xl">
-                      <div className="px-4 py-3 border-b border-white/10 bg-white/5">
-                        <p className="text-sm font-semibold text-white">
+                      <div className="px-4 py-4 border-b border-white/10 bg-white/5 space-y-1">
+                        <p className="text-sm font-bold text-white leading-none">
                           {getDisplayName()}
                         </p>
-                        <p className="text-xs text-gray-400 mt-0.5">{user?.email || ''}</p>
-                        <p className="text-xs text-primary-400 font-medium mt-1 capitalize">{user?.role || 'User'}</p>
+                        <p className="text-xs text-gray-400 font-mono">{user?.email || ''}</p>
+                        <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary-500/10 text-primary-400 border border-primary-500/20">
+                          {user?.role || 'User'}
+                        </span>
                       </div>
 
-                      {/* Tenant Dashboard Link */}
+                      {/* Workspace / Tenant Section */}
                       {currentTenant && (
-                        <a
-                          href={`${window.location.protocol}//${currentTenant.subdomain}.${import.meta.env.VITE_APP_DOMAIN || 'obsolio.com'}/dashboard`}
-                          className="block px-4 py-3 bg-primary-500/10 hover:bg-primary-500/20 text-primary-400 hover:text-primary-300 transition-colors border-b border-white/10"
-                          onClick={() => setUserMenuOpen(false)}
-                        >
-                          <div className="flex items-center gap-2">
-                            <span className="material-icons text-sm">dashboard</span>
-                            <div className="flex flex-col">
-                              <span className="font-semibold text-sm">Dashboard</span>
-                              <span className="text-[10px] opacity-75 leading-none mt-0.5">
-                                {currentTenant.subdomain}.{import.meta.env.VITE_APP_DOMAIN || 'obsolio.com'}
+                        <div className="px-4 py-3 border-b border-white/10">
+                          <p className="text-[10px] uppercase tracking-wider text-gray-500 font-bold mb-2">My Workspace</p>
+                          <a
+                            href={`${window.location.protocol}//${currentTenant.subdomain}.${import.meta.env.VITE_APP_DOMAIN || 'obsolio.com'}/dashboard`}
+                            className="group block p-2 -mx-2 rounded-lg hover:bg-white/5 transition-colors"
+                            onClick={() => setUserMenuOpen(false)}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-8 h-8 rounded bg-primary-500/10 flex items-center justify-center text-primary-400 group-hover:bg-primary-500/20 transition-colors">
+                                <span className="material-icons text-sm">business</span>
+                              </div>
+                              <div className="flex flex-col overflow-hidden">
+                                <span className="text-sm text-gray-200 font-medium truncate group-hover:text-white transition-colors">
+                                  {currentTenant.name || currentTenant.subdomain}
+                                </span>
+                                <span className="text-[10px] text-primary-400 truncate">
+                                  {currentTenant.subdomain}.{import.meta.env.VITE_APP_DOMAIN || 'obsolio.com'}
+                                </span>
+                              </div>
+                              <span className="material-icons text-gray-500 text-xs ml-auto group-hover:text-primary-400 group-hover:translate-x-0.5 transition-all">
+                                arrow_forward
                               </span>
                             </div>
-                          </div>
-                        </a>
+                          </a>
+                        </div>
                       )}
 
                       <Link
