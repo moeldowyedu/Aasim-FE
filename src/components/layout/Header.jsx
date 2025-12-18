@@ -71,18 +71,47 @@ const Header = () => {
   // Hydrate tenant info if missing
   useEffect(() => {
     const hydrateTenant = async () => {
-      // If we are authenticated but have no currentTenant in store
-      if (isAuthenticated && !currentTenant) {
-        // Try to get tenant ID from user object or local storage
+      // Only run if authenticated
+      if (!isAuthenticated) return;
+
+      // 1. Try to get tenant from store or local storage
+      if (!currentTenant) {
         const storedTenantId = user?.tenant_id || user?.tenantId || localStorage.getItem('current_tenant_id');
 
         if (storedTenantId) {
           try {
-            // We need to use the store's action to update global state
             await useTenantStore.getState().setCurrentTenant(storedTenantId);
+            return; // Successfully set
           } catch (error) {
-            console.error("Failed to hydrate tenant:", error);
+            console.error("Failed to hydrate tenant from ID:", error);
           }
+        }
+      }
+
+      // 2. If still no currentTenant, try to find one from the user's list
+      if (!currentTenant) {
+        try {
+          const tenants = await useTenantStore.getState().getTenants ?
+            await useTenantStore.getState().getTenants() : // usage might vary
+            await import('../../services/tenantService').then(m => m.tenantService.getTenants());
+
+          if (tenants && tenants.length > 0) {
+            // Prefer tenant where user is owner or admin
+            const ownedTenant = tenants.find(t => t.owner_id === user.id) || tenants[0];
+            if (ownedTenant) {
+              // We don't necessarily want to SWITCH the context globally (might be intentional to be on home)
+              // But we want to have a "current" one for the menu. 
+              // For now, let's set it if we are on the landing page so the menu works
+              /* 
+                 NOTE: Setting it globally might affect routing if there are redirects.
+                 However, Header relies on useTenantStore.currentTenant. 
+                 Let's just use it for the menu if possible, or force set it.
+              */
+              await useTenantStore.getState().setCurrentTenant(ownedTenant.id);
+            }
+          }
+        } catch (error) {
+          console.warn("Could not fetch tenants for header menu:", error);
         }
       }
     };
@@ -93,12 +122,16 @@ const Header = () => {
   // Helper to get display name
   const getDisplayName = () => {
     if (!user) return 'Guest';
+    // Debug log to see what user object has
+    // console.log("User Object:", user); 
+
     return user.name ||
       user.fullName ||
       user.full_name ||
-      (user.first_name ? `${user.first_name} ${user.last_name || ''}` : null) ||
+      user.username ||
+      (user.first_name ? `${user.first_name} ${user.last_name || ''}` : '') ||
       user.email?.split('@')[0] ||
-      'User';
+      'Guest User';
   }
 
   const toggleUserMenu = () => {
