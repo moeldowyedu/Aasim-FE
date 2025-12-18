@@ -109,76 +109,96 @@ const OrganizationSettingsPage = () => {
 
     useEffect(() => {
         const fetchOrganizationData = async () => {
+            setFetching(true);
             try {
-                setFetching(true);
-                // 1. Try Organization Service
-                const response = await organizationService.organizations.list();
-                const orgs = Array.isArray(response) ? response : (response.data || []);
+                let success = false;
+                let data = null;
+                let tenantId = user.tenant?.id;
 
-                if (orgs.length > 0) {
-                    const org = orgs[0];
-                    setOrgId(org.id);
-                    setUseTenantServiceForUpdate(false);
+                // Priority 1: If we have a tenant ID in the user object, use it directly via tenantService
+                // This bypasses the problematic /organizations listing that generates 500s on tenant subdomains.
+                if (tenantId) {
+                    try {
+                        const tenant = await tenantService.getTenant(tenantId);
+                        if (tenant) {
+                            success = true;
+                            data = tenant;
+                            setOrgId(tenant.id);
+                            setUseTenantServiceForUpdate(true);
+                        }
+                    } catch (e) {
+                        // Silent fail, proceed to next step
+                    }
+                }
+
+                // Priority 2: Fallback to getTenants list if direct fetch failed
+                if (!success) {
+                    try {
+                        const response = await tenantService.getTenants();
+                        const tenants = Array.isArray(response) ? response : (response.data || []);
+                        const match = tenants.find(t =>
+                            t.id === user.tenant_id ||
+                            t.subdomain === user.tenant_id ||
+                            t.id?.toString() === user.tenant_id?.toString() ||
+                            (t.subdomain && user.tenant?.name && t.name === user.tenant.name)
+                        );
+
+                        if (match) {
+                            success = true;
+                            data = match;
+                            setOrgId(match.id);
+                            setUseTenantServiceForUpdate(true);
+                        }
+                    } catch (e) {
+                        // Silent fail
+                    }
+                }
+
+                // Priority 3: Only try legacy Organization Service if absolutely necessary and we aren't in a clear tenant context
+                // This avoids the 3x retry loop on 500 errors for tenant users.
+                if (!success && !user.tenant_id) {
+                    try {
+                        const response = await organizationService.organizations.list();
+                        const orgs = Array.isArray(response) ? response : (response.data || []);
+                        if (orgs.length > 0) {
+                            success = true;
+                            data = orgs[0];
+                            setOrgId(data.id);
+                            setUseTenantServiceForUpdate(false);
+                        }
+                    } catch (e) {
+                        // Silent fail
+                    }
+                }
+
+                // Final check: Use session data if API failed but we have something
+                if (!success && user.tenant) {
+                    success = true;
+                    data = user.tenant;
+                    setOrgId(user.tenant.id);
+                    setUseTenantServiceForUpdate(true);
+                }
+
+                if (success && data) {
                     setFormData({
-                        organization_full_name: org.name || '',
-                        organization_short_name: org.short_name || '',
-                        phone: org.phone || '',
-                        industry: org.industry || '',
-                        company_size: org.company_size || '',
-                        country: org.country || '',
-                        timezone: org.timezone || '',
-                        description: org.description || '',
+                        organization_full_name: data.organization_full_name || data.name || '',
+                        organization_short_name: data.organization_short_name || data.short_name || '',
+                        phone: data.phone || '',
+                        industry: data.industry || '',
+                        company_size: data.company_size || '',
+                        country: data.country || '',
+                        timezone: data.timezone || '',
+                        description: data.description || '',
                         logo: null,
-                        logo_preview: org.logo_url || org.logo || null
+                        logo_preview: data.organizationLogo || data.logo_url || data.logo || null
                     });
                 } else {
-                    throw new Error('No organizations found via organizationService');
+                    throw new Error("Could not load organization details.");
                 }
+
             } catch (err) {
-                try {
-                    // 2. Try Tenant Service Fallback
-                    const response = await tenantService.getTenants();
-                    const tenants = Array.isArray(response) ? response : (response.data || []);
-
-                    const match = tenants.find(t =>
-                        t.id === user.tenant_id ||
-                        t.subdomain === user.tenant_id ||
-                        t.id?.toString() === user.tenant_id?.toString() ||
-                        (t.subdomain && user.tenant?.name && t.name === user.tenant.name)
-                    );
-
-                    if (match) {
-                        setOrgId(match.id);
-                        setUseTenantServiceForUpdate(true);
-                        setFormData({
-                            organization_full_name: match.organization_full_name || match.name || '',
-                            organization_short_name: match.organization_short_name || match.short_name || '',
-                            phone: match.phone || '',
-                            industry: match.industry || '',
-                            company_size: match.company_size || '',
-                            country: match.country || '',
-                            timezone: match.timezone || '',
-                            description: match.description || '',
-                            logo: null,
-                            logo_preview: match.organizationLogo || match.logo_url || match.logo
-                        });
-                    } else {
-                        throw new Error('Current tenant not found in user tenants list');
-                    }
-                } catch (fallbackErr) {
-                    if (user.tenant) {
-                        setOrgId(user.tenant.id);
-                        setUseTenantServiceForUpdate(true);
-                        setFormData(prev => ({
-                            ...prev,
-                            organization_full_name: user.tenant.name || '',
-                            logo_preview: user.tenant.logo_url
-                        }));
-                    } else {
-                        const errorMessage = err.response?.data?.message || err.message || 'Failed to load organization details.';
-                        setError(`Error: ${errorMessage} (${err.response?.status || 'Unknown Status'})`);
-                    }
-                }
+                const errorMessage = err.response?.data?.message || err.message || 'Failed to load organization details.';
+                setError(errorMessage);
             } finally {
                 setFetching(false);
             }
