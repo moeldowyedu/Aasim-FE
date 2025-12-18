@@ -13,7 +13,7 @@ export { default as rolesPermissionsService } from './rolesPermissionsService';
 
 // Organization Management
 export { default as organizationService } from './organizationService';
-export { default as tenantService } from './tenantService';
+export { tenantService } from './tenantService';
 
 // Agent Management
 export { default as agentService } from './agentService';
