@@ -41,7 +41,7 @@ const HomePage = () => {
                 </div>
 
                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-8 leading-tight tracking-tight font-heading">
-                  <span className="bg-gradient-to-r from-primary-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-primary-400 via-cyan-400 to-purple-500 bg-clip-text text-transparent font-thin">
                     OBSOLIO
                   </span>
                   <span className="block text-xl sm:text-2xl md:text-3xl mt-4 text-white font-medium tracking-wide">
