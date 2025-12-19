@@ -88,6 +88,10 @@ const OrganizationSettingsPage = () => {
     const fileInputRef = useRef(null);
     const [orgId, setOrgId] = useState(null);
     const [useTenantServiceForUpdate, setUseTenantServiceForUpdate] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
+    // Base URL for resolving relative image paths (common in Laravel)
+    const STORAGE_BASE_URL = 'https://api.obsolio.com';
 
     const [formData, setFormData] = useState({
         organization_full_name: '',
@@ -107,6 +111,21 @@ const OrganizationSettingsPage = () => {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(null);
 
+    // Normalize Image URL helper
+    const getNormalizedLogoUrl = (url) => {
+        if (!url) return null;
+        if (url.startsWith('blob:') || url.startsWith('data:')) return url;
+        if (url.startsWith('http')) return url;
+        // Handle relative paths
+        if (url.startsWith('/')) return `${STORAGE_BASE_URL}${url}`;
+        return `${STORAGE_BASE_URL}/${url}`;
+    };
+
+    // Reset error when preview changes
+    useEffect(() => {
+        setImageError(false);
+    }, [formData.logo_preview]);
+
     useEffect(() => {
         const fetchOrganizationData = async () => {
             setFetching(true);
@@ -115,23 +134,21 @@ const OrganizationSettingsPage = () => {
                 let data = null;
                 let tenantId = user.tenant?.id;
 
-                // Priority 1: If we have a tenant ID in the user object, use it directly via tenantService
-                // This bypasses the problematic /organizations listing that generates 500s on tenant subdomains.
+                // Priority 1
                 if (tenantId) {
                     try {
                         const tenant = await tenantService.getTenant(tenantId);
                         if (tenant) {
                             success = true;
                             data = tenant;
+                            // Default to using tenant service, but we will check for a better org record below
                             setOrgId(tenant.id);
                             setUseTenantServiceForUpdate(true);
                         }
-                    } catch (e) {
-                        // Silent fail, proceed to next step
-                    }
+                    } catch (e) { }
                 }
 
-                // Priority 2: Fallback to getTenants list if direct fetch failed
+                // Priority 2
                 if (!success) {
                     try {
                         const response = await tenantService.getTenants();
@@ -149,48 +166,65 @@ const OrganizationSettingsPage = () => {
                             setOrgId(match.id);
                             setUseTenantServiceForUpdate(true);
                         }
-                    } catch (e) {
-                        // Silent fail
-                    }
+                    } catch (e) { }
                 }
 
-                // Priority 3: Only try legacy Organization Service if absolutely necessary and we aren't in a clear tenant context
-                // This avoids the 3x retry loop on 500 errors for tenant users.
-                if (!success && !user.tenant_id) {
-                    try {
-                        const response = await organizationService.organizations.list();
-                        const orgs = Array.isArray(response) ? response : (response.data || []);
-                        if (orgs.length > 0) {
-                            success = true;
-                            data = orgs[0];
-                            setOrgId(data.id);
-                            setUseTenantServiceForUpdate(false);
-                        }
-                    } catch (e) {
-                        // Silent fail
+                // CRITICAL RESTORATION: Try fetching the specific Organization record.
+                // The backend dev indicated the "missing record" bug is fixed. 
+                // We MUST get the true Organization ID to avoid "No Query Results" errors on update.
+                try {
+                    const orgResponse = await organizationService.organizations.list();
+                    const orgs = Array.isArray(orgResponse) ? orgResponse : (orgResponse.data || []);
+                    if (orgs.length > 0) {
+                        // Found a specific organization!
+                        console.log("✅ Found valid Organization record:", orgs[0]);
+                        success = true;
+                        data = orgs[0];
+                        setOrgId(data.id);
+                        setUseTenantServiceForUpdate(false); // Explicitly use Org service
                     }
+                } catch (e) {
+                    console.warn("Could not fetch explicit organization list (using tenant fallback if avail)");
                 }
 
-                // Final check: Use session data if API failed but we have something
+                // Priority 3 Fallback to user session...
                 if (!success && user.tenant) {
                     success = true;
                     data = user.tenant;
+                    // If we are falling back to session, we might not have the org ID.
+                    // But if the list() call above failed, we have no choice.
                     setOrgId(user.tenant.id);
                     setUseTenantServiceForUpdate(true);
                 }
 
                 if (success && data) {
+                    // Smart Resolution: Check if we have a nested organization object
+                    // This is critical to avoid "No query results for model [App\Models\Organization]"
+                    // caused by trying to update an Organization using a Tenant ID.
+                    const orgData = data.organization || data;
+
+                    // If we found a specific organization record, use its ID and the Org Service
+                    if (data.organization?.id) {
+                        setOrgId(data.organization.id);
+                        setUseTenantServiceForUpdate(false);
+                    }
+                    // Fallback: If we assume the Tenant IS the entity to update (or backend handles it)
+                    else {
+                        setOrgId(data.id);
+                        setUseTenantServiceForUpdate(true);
+                    }
+
                     setFormData({
-                        organization_full_name: data.organization_full_name || data.name || '',
-                        organization_short_name: data.organization_short_name || data.short_name || '',
-                        phone: data.phone || '',
-                        industry: data.industry || '',
-                        company_size: data.company_size || '',
-                        country: data.country || '',
-                        timezone: data.timezone || '',
-                        description: data.description || '',
+                        organization_full_name: orgData.organization_full_name || orgData.name || '',
+                        organization_short_name: orgData.organization_short_name || orgData.short_name || '',
+                        phone: orgData.phone || '',
+                        industry: orgData.industry || '',
+                        company_size: orgData.company_size || '',
+                        country: orgData.country || '',
+                        timezone: orgData.timezone || '',
+                        description: orgData.description || '',
                         logo: null,
-                        logo_preview: data.organizationLogo || data.logo_url || data.logo || null
+                        logo_preview: getNormalizedLogoUrl(orgData.organizationLogo || orgData.logo_url || orgData.logo)
                     });
                 } else {
                     throw new Error("Could not load organization details.");
@@ -217,10 +251,12 @@ const OrganizationSettingsPage = () => {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
+            setImageError(false);
+            const objectUrl = URL.createObjectURL(file);
             setFormData(prev => ({
                 ...prev,
                 logo: file,
-                logo_preview: URL.createObjectURL(file)
+                logo_preview: objectUrl
             }));
         }
     };
@@ -299,11 +335,13 @@ const OrganizationSettingsPage = () => {
         return (
             <MainLayout>
                 <div className="flex items-center justify-center h-[calc(100vh-100px)] bg-gray-50">
-                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-gray-900 border-b-transparent"></div>
                 </div>
             </MainLayout>
         );
     }
+
+    const currentLogoUrl = getNormalizedLogoUrl(formData.logo_preview);
 
     return (
         <MainLayout>
@@ -334,13 +372,18 @@ const OrganizationSettingsPage = () => {
                         <div className="flex items-center gap-4 mb-6 pb-6 border-b border-gray-100">
                             <div
                                 onClick={triggerFileInput}
-                                className="w-16 h-16 rounded bg-gray-100 border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors overflow-hidden relative"
+                                className="w-16 h-16 rounded bg-gray-100 border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors overflow-hidden"
                             >
-                                {formData.logo_preview ? (
+                                {currentLogoUrl && !imageError ? (
                                     <img
-                                        src={formData.logo_preview}
+                                        key={currentLogoUrl}
+                                        src={currentLogoUrl}
                                         alt="Logo"
-                                        className="w-full h-full object-contain p-1 relative z-10"
+                                        onError={(e) => {
+                                            console.warn('Image failed to load:', currentLogoUrl);
+                                            setImageError(true);
+                                        }}
+                                        className="w-full h-full object-contain"
                                     />
                                 ) : (
                                     <Building2 className="w-6 h-6 text-gray-400" />

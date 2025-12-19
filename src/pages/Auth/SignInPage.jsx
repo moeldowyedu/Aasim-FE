@@ -24,7 +24,7 @@ const SignInPage = () => {
 
             if (response.success) {
                 if (response.tenants.length === 0) {
-                    setError('No workspaces found for this email.');
+                    setError('No workspace related to that account');
                 } else if (response.tenants.length === 1) {
                     // Auto-redirect
                     toast.success(`Found your workspace: ${response.tenants[0].name}`);
@@ -35,7 +35,7 @@ const SignInPage = () => {
                     setStep('selection');
                 }
             } else {
-                setError('Failed to lookup tenants. Please try again.');
+                setError('No workspace related to that account');
             }
         } catch (err) {
             console.error(err);
