@@ -7,16 +7,14 @@ import authService from '../../services/authService';
 import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
 import Input from '../../components/common/Input/Input';
 import Button from '../../components/common/Button/Button';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const ResendVerificationPage = () => {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const { theme } = useTheme();
 
-    const { register, handleSubmit, formState: { errors } } = useForm(); // Using react-hook-form conceptually or manual state
-
-    // Simplification: Manual state for specific input component compatibility if needed, 
-    // but here sticking to standard 'react-hook-form' pattern used in other files if Input component supports ref forwarding.
-    // If Input component is controlled, we might use state. Let's use controlled state matching standard form pattern.
+    const { register, handleSubmit, formState: { errors } } = useForm();
     const [email, setEmail] = useState('');
     const [validationError, setValidationError] = useState('');
 
@@ -43,10 +41,14 @@ const ResendVerificationPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#0B0E14] relative flex items-center justify-center p-4 overflow-hidden">
+        <div className={`min-h-screen relative flex items-center justify-center p-4 overflow-hidden transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0B0E14]' : 'bg-slate-50'}`}>
             {/* Background Ambience */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full opacity-30 pointer-events-none">
-                <div className="absolute top-[-20%] left-[20%] w-[600px] h-[600px] bg-primary-900/40 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow"></div>
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none">
+                {theme === 'dark' ? (
+                    <div className="absolute top-[-20%] left-[20%] w-[600px] h-[600px] bg-primary-900/40 rounded-full blur-[120px] mix-blend-screen animate-pulse-slow opacity-30"></div>
+                ) : (
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-slate-200/40 via-transparent to-transparent opacity-80" />
+                )}
             </div>
 
             <div className="w-full max-w-md relative z-10 animate-fade-in">
@@ -56,20 +58,25 @@ const ResendVerificationPage = () => {
                     </Link>
                 </div>
 
-                <div className="glass-card p-8 shadow-2xl border border-white/10 relative overflow-hidden backdrop-blur-xl bg-[#1e293b]/40 rounded-2xl">
-                    {/* Decor glow */}
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-50"></div>
+                <div className={`p-8 rounded-2xl relative overflow-hidden transition-all duration-300 ${theme === 'dark'
+                    ? 'glass-card shadow-2xl border border-white/10 backdrop-blur-xl bg-[#1e293b]/40'
+                    : 'bg-white border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)]'}`}>
+
+                    {/* Decor glow (Dark Only) */}
+                    {theme === 'dark' && (
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary-500 to-transparent opacity-50"></div>
+                    )}
 
                     {!success ? (
                         <>
-                            <h2 className="text-2xl font-bold text-white mb-2 text-center">Resend Verification</h2>
-                            <p className="text-gray-400 mb-8 text-center">
+                            <h2 className={`text-2xl font-bold mb-2 text-center ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>Resend Verification</h2>
+                            <p className={`mb-8 text-center ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
                                 Enter your email address and we'll send you a new verification link.
                             </p>
 
                             <form onSubmit={onSubmit} className="space-y-6">
                                 <Input
-                                    theme="dark"
+                                    theme={theme}
                                     label="Email Address"
                                     type="email"
                                     name="email"
@@ -96,18 +103,18 @@ const ResendVerificationPage = () => {
                             </form>
 
                             <div className="mt-6 text-center">
-                                <Link to="/signin" className="text-sm text-gray-500 hover:text-gray-300">
+                                <Link to="/signin" className={`text-sm hover:text-gray-300 transition-colors ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400 hover:text-slate-600'}`}>
                                     Back to Sign In
                                 </Link>
                             </div>
                         </>
                     ) : (
                         <div className="text-center py-4">
-                            <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <Mail className="w-8 h-8 text-green-500" />
+                            <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 ${theme === 'dark' ? 'bg-green-500/20' : 'bg-green-100 shadow-sm'}`}>
+                                <Mail className={`w-8 h-8 ${theme === 'dark' ? 'text-green-500' : 'text-green-600'}`} />
                             </div>
-                            <h2 className="text-2xl font-bold text-white mb-4">Email Sent!</h2>
-                            <p className="text-gray-400 mb-8">
+                            <h2 className={`text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>Email Sent!</h2>
+                            <p className={`mb-8 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
                                 Please check your inbox for the verification link.
                             </p>
                             <Link

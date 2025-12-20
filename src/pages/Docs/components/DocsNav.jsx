@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 const DocsNav = ({ currentSection, currentPage, mobileOpen, onNavigate }) => {
+    const { theme } = useTheme();
     const [expandedSections, setExpandedSections] = useState(['getting-started']);
 
     const toggleSection = (section) => {
@@ -79,9 +81,12 @@ const DocsNav = ({ currentSection, currentPage, mobileOpen, onNavigate }) => {
             <aside
                 className={`
           fixed lg:sticky top-24 left-0 h-[calc(100vh-6rem)] w-72 
-          bg-[#1a1f2e] border-r border-white/10 overflow-y-auto z-20
-          transition-transform duration-300 lg:translate-x-0
+          overflow-y-auto z-20
+          transition-all duration-300 lg:translate-x-0 border-r
           ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
+          ${theme === 'dark'
+                        ? 'bg-[#1a1f2e] border-white/10'
+                        : 'bg-white border-slate-200'}
         `}
             >
                 <nav className="p-4 space-y-1">
@@ -99,7 +104,9 @@ const DocsNav = ({ currentSection, currentPage, mobileOpen, onNavigate }) => {
                     text-sm font-semibold transition-colors
                     ${isCurrentSection
                                             ? 'text-primary-400 bg-primary-500/10'
-                                            : 'text-gray-300 hover:text-white hover:bg-white/5'
+                                            : (theme === 'dark'
+                                                ? 'text-gray-300 hover:text-white hover:bg-white/5'
+                                                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50')
                                         }
                   `}
                                 >
@@ -113,7 +120,7 @@ const DocsNav = ({ currentSection, currentPage, mobileOpen, onNavigate }) => {
 
                                 {/* Section Pages */}
                                 {isExpanded && (
-                                    <div className="ml-3 mt-1 space-y-0.5 border-l border-white/10 pl-3">
+                                    <div className={`ml-3 mt-1 space-y-0.5 border-l pl-3 ${theme === 'dark' ? 'border-white/10' : 'border-slate-200'}`}>
                                         {section.pages.map((page) => {
                                             const isActive = currentSection === section.id && currentPage === page.id;
 
@@ -126,7 +133,9 @@ const DocsNav = ({ currentSection, currentPage, mobileOpen, onNavigate }) => {
                             block px-3 py-1.5 rounded text-sm transition-colors
                             ${isActive
                                                             ? 'text-primary-400 bg-primary-500/10 font-medium'
-                                                            : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                                            : (theme === 'dark'
+                                                                ? 'text-gray-400 hover:text-white hover:bg-white/5'
+                                                                : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50')
                                                         }
                           `}
                                                 >

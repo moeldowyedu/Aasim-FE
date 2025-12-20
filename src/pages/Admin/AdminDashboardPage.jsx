@@ -4,32 +4,25 @@ import AdminLayout from '../../components/layout/AdminLayout'
 import { Link, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { translations } from '../../translations'
+import { useTheme } from '../../contexts/ThemeContext'
 
 const AdminDashboardPage = () => {
   const { language } = useLanguage()
+  const { theme } = useTheme()
   const t = translations[language]
   const [selectedPeriod, setSelectedPeriod] = useState('7days')
 
   // Styles
-  const cardClass = 'glass-card rounded-2xl p-6 hover:shadow-xl transition-all';
+  const cardClass = `rounded-2xl p-6 transition-all duration-300 ${theme === 'dark'
+      ? 'glass-card hover:shadow-xl border border-white/10 bg-[#1e293b]/40'
+      : 'bg-white border border-slate-200 shadow-sm hover:shadow-lg'
+    }`;
 
-  const textPrimary = 'text-secondary-900';
-  const textSecondary = 'text-secondary-600'; // Or generic gray
-  // Dark mode adjustment: glass-card on dark bg usually implies white text.
-  // This dashboard page seems to rely on some light/dark context. 
-  // Let's assume standard "Dashboard" styles for consistency.
-  // Actually, MainLayout and AdminLayout provide dark backgrounds.
-  // So text should be white/gray-300.
+  const h1Class = `text-4xl font-bold mb-2 font-heading ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`;
+  const pClass = theme === 'dark' ? 'text-gray-400' : 'text-slate-600';
 
-  const textPrimaryDark = 'text-white';
-  const textSecondaryDark = 'text-gray-400';
-
-  // Overriding for safety if context is dark (which AdminLayout is)
-  const isDark = true;
-
-  const h1Class = `text-4xl font-bold mb-2 font-heading ${isDark ? 'text-white' : 'text-gray-900'}`;
-  const pClass = isDark ? 'text-gray-400' : 'text-gray-600';
-  const cardClassDark = 'glass-card rounded-2xl p-6 hover:shadow-xl transition-all border border-white/10 bg-[#1e293b]/40';
+  const textPrimary = theme === 'dark' ? 'text-white' : 'text-slate-900';
+  const textSecondary = theme === 'dark' ? 'text-gray-400' : 'text-slate-500';
 
   // Mock Data (Temporary until connected to Store)
   const systemStats = [
@@ -89,7 +82,10 @@ const AdminDashboardPage = () => {
             <select
               value={selectedPeriod}
               onChange={(e) => setSelectedPeriod(e.target.value)}
-              className="px-4 py-2 rounded-xl font-semibold border glass-input text-gray-300"
+              className={`px-4 py-2 rounded-xl font-semibold border ${theme === 'dark'
+                  ? 'glass-input text-gray-300 border-white/20 bg-white/5'
+                  : 'bg-white text-slate-700 border-slate-300 focus:ring-2 focus:ring-primary-500'
+                }`}
             >
               <option value="24hours">{t.last24HoursOption}</option>
               <option value="7days">{t.last7DaysOption2}</option>
@@ -102,12 +98,16 @@ const AdminDashboardPage = () => {
         {/* System Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {systemStats.map((stat, index) => (
-            <div key={index} className={cardClassDark}>
+            <div key={index} className={cardClass}>
               <div className="flex items-start justify-between mb-4">
-                <div className={`w-14 h-14 rounded-xl bg-${stat.color}-500/20 flex items-center justify-center`}>
-                  <span className={`material-icons text-2xl text-${stat.color}-400`}>{stat.icon}</span>
+                <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${theme === 'dark' ? `bg-${stat.color}-500/20` : `bg-${stat.color}-100`
+                  }`}>
+                  <span className={`material-icons text-2xl ${theme === 'dark' ? `text-${stat.color}-400` : `text-${stat.color}-600`
+                    }`}>{stat.icon}</span>
                 </div>
-                <div className={`flex items-center text-sm font-semibold ${stat.trend === 'up' ? 'text-green-400' : 'text-red-400'
+                <div className={`flex items-center text-sm font-semibold ${stat.trend === 'up'
+                  ? (theme === 'dark' ? 'text-green-400' : 'text-green-600')
+                  : (theme === 'dark' ? 'text-red-400' : 'text-red-600')
                   }`}>
                   <span className="material-icons text-sm mr-1">
                     {stat.trend === 'up' ? 'trending_up' : 'trending_down'}
@@ -115,25 +115,27 @@ const AdminDashboardPage = () => {
                   {stat.percentage}
                 </div>
               </div>
-              <h3 className={`text-3xl font-bold mb-1 ${textPrimaryDark}`}>{stat.value}</h3>
-              <p className={`text-sm font-medium mb-1 ${textSecondaryDark}`}>{stat.label}</p>
-              <p className="text-gray-500 text-xs">{stat.change} from last period</p>
+              <h3 className={`text-3xl font-bold mb-1 ${textPrimary}`}>{stat.value}</h3>
+              <p className={`text-sm font-medium mb-1 ${textSecondary}`}>{stat.label}</p>
+              <p className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>{stat.change} from last period</p>
             </div>
           ))}
         </div>
 
         {/* Revenue Stats */}
-        <div className={`${cardClassDark} mb-8`}>
-          <h2 className={`text-2xl font-bold mb-6 flex items-center ${textPrimaryDark}`}>
+        <div className={`${cardClass} mb-8`}>
+          <h2 className={`text-2xl font-bold mb-6 flex items-center ${textPrimary}`}>
             <span className="material-icons text-green-500 mr-2">attach_money</span>
             {t.revenueOverviewTitle}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {revenueStats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className={`text-3xl font-bold mb-1 ${textPrimaryDark}`}>{stat.value}</div>
-                <div className={`text-sm font-medium mb-2 ${textSecondaryDark}`}>{stat.label}</div>
-                <div className={`text-sm font-semibold ${stat.trend === 'up' ? 'text-green-400' : 'text-red-400'
+                <div className={`text-3xl font-bold mb-1 ${textPrimary}`}>{stat.value}</div>
+                <div className={`text-sm font-medium mb-2 ${textSecondary}`}>{stat.label}</div>
+                <div className={`text-sm font-semibold ${stat.trend === 'up'
+                  ? (theme === 'dark' ? 'text-green-400' : 'text-green-600')
+                  : (theme === 'dark' ? 'text-red-400' : 'text-red-600')
                   }`}>
                   {stat.change}
                 </div>
@@ -145,24 +147,27 @@ const AdminDashboardPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           {/* Recent Activity */}
           <div className="lg:col-span-2">
-            <div className={cardClassDark}>
+            <div className={cardClass}>
               <div className="flex items-center justify-between mb-6">
-                <h2 className={`text-2xl font-bold ${textPrimaryDark}`}>{t.recentActivityTitle}</h2>
+                <h2 className={`text-2xl font-bold ${textPrimary}`}>{t.recentActivityTitle}</h2>
 
               </div>
               <div className="space-y-4">
                 {recentActivity.map((activity) => (
-                  <div key={activity.id} className="flex items-start space-x-4 pb-4 border-b border-white/10 last:border-0">
-                    <div className={`w-10 h-10 rounded-lg bg-${activity.color}-500/20 flex items-center justify-center flex-shrink-0`}>
-                      <span className={`material-icons text-${activity.color}-400 text-sm`}>
+                  <div key={activity.id} className={`flex items-start space-x-4 pb-4 border-b last:border-0 ${theme === 'dark' ? 'border-white/10' : 'border-slate-100'
+                    }`}>
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${theme === 'dark' ? `bg-${activity.color}-500/20` : `bg-${activity.color}-100`
+                      }`}>
+                      <span className={`material-icons text-sm ${theme === 'dark' ? `text-${activity.color}-400` : `text-${activity.color}-600`
+                        }`}>
                         {activity.icon}
                       </span>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className={`text-sm ${textPrimaryDark}`}>
-                        <span className="font-semibold text-white">{activity.user}</span> {activity.action}
+                      <p className={`text-sm ${textPrimary}`}>
+                        <span className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>{activity.user}</span> {activity.action}
                       </p>
-                      <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
+                      <p className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>{activity.time}</p>
                     </div>
                   </div>
                 ))}
@@ -172,22 +177,22 @@ const AdminDashboardPage = () => {
 
           {/* Industry Breakdown */}
           <div className="lg:col-span-1">
-            <div className={cardClassDark}>
-              <h2 className={`text-2xl font-bold mb-6 ${textPrimaryDark}`}>{t.industryBreakdownTitle}</h2>
+            <div className={cardClass}>
+              <h2 className={`text-2xl font-bold mb-6 ${textPrimary}`}>{t.industryBreakdownTitle}</h2>
               <div className="space-y-4">
                 {industryBreakdown.map((industry, index) => (
                   <div key={index}>
                     <div className="flex items-center justify-between mb-2">
-                      <span className={`text-sm font-medium ${textPrimaryDark}`}>{industry.name}</span>
-                      <span className={`text-sm font-bold ${textPrimaryDark}`}>{industry.count}</span>
+                      <span className={`text-sm font-medium ${textPrimary}`}>{industry.name}</span>
+                      <span className={`text-sm font-bold ${textPrimary}`}>{industry.count}</span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className={`w-full rounded-full h-2 ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-200'}`}>
                       <div
                         className={`bg-${industry.color}-500 h-2 rounded-full`}
                         style={{ width: `${industry.percentage}%` }}
                       />
                     </div>
-                    <div className="text-xs text-gray-500 mt-1">{industry.percentage}%</div>
+                    <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>{industry.percentage}%</div>
                   </div>
                 ))}
               </div>
@@ -196,14 +201,14 @@ const AdminDashboardPage = () => {
         </div>
 
         {/* Top Users */}
-        <div className={`${cardClassDark} mb-8`}>
+        <div className={`${cardClass} mb-8`}>
           <div className="flex items-center justify-between mb-6">
-            <h2 className={`text-2xl font-bold ${textPrimaryDark}`}>{t.topUsersTitle}</h2>
+            <h2 className={`text-2xl font-bold ${textPrimary}`}>{t.topUsersTitle}</h2>
 
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-white/5 text-gray-400">
+              <thead className={`${theme === 'dark' ? 'bg-white/5 text-gray-400' : 'bg-slate-50 text-slate-500'}`}>
                 <tr>
                   <th className="text-left py-3 px-4 text-xs font-bold uppercase">{t.tableHeaderUser}</th>
                   <th className="text-left py-3 px-4 text-xs font-bold uppercase">{t.tableHeaderEmail}</th>
@@ -213,32 +218,38 @@ const AdminDashboardPage = () => {
                   <th className="text-right py-3 px-4 text-xs font-bold uppercase">{t.tableHeaderActions}</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-300">
+              <tbody className={theme === 'dark' ? 'text-gray-300' : 'text-slate-600'}>
                 {topUsers.map((user) => (
-                  <tr key={user.id} className="border-b border-white/10 hover:bg-white/5">
+                  <tr key={user.id} className={`border-b transition-colors ${theme === 'dark'
+                      ? 'border-white/10 hover:bg-white/5'
+                      : 'border-slate-100 hover:bg-slate-50'
+                    }`}>
                     <td className="py-4 px-4">
                       <div className="flex items-center">
-                        <div className="w-10 h-10 rounded-full bg-primary-500/20 flex items-center justify-center mr-3">
-                          <span className="text-primary-400 font-semibold">{user.name[0]}</span>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 ${theme === 'dark' ? 'bg-primary-500/20' : 'bg-primary-100'
+                          }`}>
+                          <span className={`font-semibold ${theme === 'dark' ? 'text-primary-400' : 'text-primary-600'
+                            }`}>{user.name[0]}</span>
                         </div>
-                        <span className={`font-semibold ${textPrimaryDark}`}>{user.name}</span>
+                        <span className={`font-semibold ${textPrimary}`}>{user.name}</span>
                       </div>
                     </td>
-                    <td className={`py-4 px-4 ${textSecondaryDark}`}>{user.email}</td>
-                    <td className={`py-4 px-4 font-semibold ${textPrimaryDark}`}>{user.submissions}</td>
+                    <td className={`py-4 px-4 ${textSecondary}`}>{user.email}</td>
+                    <td className={`py-4 px-4 font-semibold ${textPrimary}`}>{user.submissions}</td>
                     <td className="py-4 px-4">
-                      <span className="text-primary-400 font-bold">{user.score}</span>
+                      <span className={`font-bold ${theme === 'dark' ? 'text-primary-400' : 'text-primary-600'}`}>{user.score}</span>
                     </td>
                     <td className="py-4 px-4">
                       <span className={`px-3 py-1 rounded-full text-xs font-semibold ${user.status === 'Premium'
-                        ? 'bg-yellow-500/20 text-yellow-300'
-                        : 'bg-gray-500/20 text-gray-300'
+                        ? (theme === 'dark' ? 'bg-yellow-500/20 text-yellow-300' : 'bg-yellow-100 text-yellow-700')
+                        : (theme === 'dark' ? 'bg-gray-500/20 text-gray-300' : 'bg-gray-100 text-gray-600')
                         }`}>
                         {user.status}
                       </span>
                     </td>
                     <td className="py-4 px-4 text-right">
-                      <button className="text-primary-400 hover:text-primary-300 font-semibold text-sm">
+                      <button className={`font-semibold text-sm ${theme === 'dark' ? 'text-primary-400 hover:text-primary-300' : 'text-primary-600 hover:text-primary-700'
+                        }`}>
                         {t.viewDetailsButton}
                       </button>
                     </td>

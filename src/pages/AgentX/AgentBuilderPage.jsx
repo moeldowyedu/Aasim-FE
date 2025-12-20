@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import MainLayout from '../../components/layout/MainLayout';
 import AgentBuilderWizard from '../../components/agentx/AgentBuilderWizard';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const AgentBuilderPage = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   const steps = [
     'Select Engines',
@@ -26,11 +28,11 @@ const AgentBuilderPage = () => {
   };
 
   return (
-    <MainLayout>
+    <MainLayout theme={theme}>
       <div className="p-6 max-w-5xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold font-heading text-secondary-900">Create Private Agent</h1>
-          <p className="text-secondary-600 mt-2">
+          <h1 className={`text-3xl font-bold font-heading ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>Create Private Agent</h1>
+          <p className={`mt-2 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
             Build a custom AI agent tailored to your specific use case using our Precision Engines
           </p>
         </div>

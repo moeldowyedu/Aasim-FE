@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import ScrollToTop from './components/ScrollToTop';
 import { getSubdomain, isSystemAdminDomain, isPublicDomain } from './utils/subdomain';
 
@@ -72,12 +73,14 @@ function App() {
   }
 
   return (
-    <LanguageProvider>
-      <div className="App">
-        <ScrollToTop />
-        {currentRouter}
-      </div>
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <div className="App">
+          <ScrollToTop />
+          {currentRouter}
+        </div>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 

@@ -3,16 +3,18 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../../store/authStore'
 import { useTenantStore } from '../../store/tenantStore'
 import { useLanguage } from '../../contexts/LanguageContext'
+import { useTheme } from '../../contexts/ThemeContext'
 import { translations } from '../../translations'
 import NotificationBell from '../common/NotificationBell/NotificationBell'
 import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png'
-import { Menu, X, LogIn } from 'lucide-react'
+import { Menu, X, LogIn, Sun, Moon } from 'lucide-react'
 import { getCookie } from '../../utils/cookieUtils'
 
 const Header = () => {
   const { isAuthenticated, user, logout } = useAuthStore()
   const { currentTenant } = useTenantStore()
   const { language, changeLanguage } = useLanguage()
+  const { theme, toggleTheme } = useTheme()
   const t = translations[language]
   const navigate = useNavigate()
   const [userMenuOpen, setUserMenuOpen] = useState(false)
@@ -171,7 +173,7 @@ const Header = () => {
   }
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-[#0B0E14]/90 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-6'}`}>
+    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? (theme === 'dark' ? 'bg-[#0B0E14]/90' : 'bg-white/90') + ' backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-6'}`}>
       <nav className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between">
           {/* Logo - Always links to homepage */}
@@ -185,23 +187,23 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <div className="flex items-center gap-6">
-            <Link to="/" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">{t.home || 'Home'}</Link>
+            <Link to="/" className={`${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-slate-600 hover:text-slate-900'} font-medium transition-colors hidden sm:inline`}>{t.home || 'Home'}</Link>
 
             {!isAuthenticated && (
               <>
-                <Link to="/docs/getting-started/introduction" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">{t.docs || 'Docs'}</Link>
+                <Link to="/docs/getting-started/introduction" className={`${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-slate-600 hover:text-slate-900'} font-medium transition-colors hidden sm:inline`}>{t.docs || 'Docs'}</Link>
               </>
             )}
 
             {/* AgentX HUB - Public for everyone */}
-            <Link to="/agentx/hub" className="text-gray-300 hover:text-white font-medium transition-colors hidden sm:inline">{t.agentxHub || 'AgentX HUB'}</Link>
+            <Link to="/agentx/hub" className={`${theme === 'dark' ? 'text-gray-300 hover:text-white' : 'text-slate-600 hover:text-slate-900'} font-medium transition-colors hidden sm:inline`}>{t.agentxHub || 'AgentX HUB'}</Link>
 
 
             {!isAuthenticated ? (
               <>
                 <Link
                   to="/signin"
-                  className="hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-primary-500 text-primary-400 hover:bg-primary-500 hover:text-white font-semibold rounded-lg transition-all"
+                  className={`hidden sm:flex items-center gap-2 px-4 py-2 border-2 border-primary-500 ${theme === 'dark' ? 'text-primary-400' : 'text-primary-600'} hover:bg-primary-500 hover:text-white font-semibold rounded-lg transition-all`}
                 >
                   <LogIn className="w-4 h-4" />
                   {t.signIn || 'Sign In'}
@@ -213,6 +215,15 @@ const Header = () => {
                 >
                   {t.startFreeTrial || 'Start Free Trial'}
                 </Link>
+
+                {/* Theme Toggle Button */}
+                <button
+                  onClick={toggleTheme}
+                  className={`p-2 rounded-lg transition-all ${theme === 'dark' ? 'bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10' : 'bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200'}`}
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                </button>
 
                 {/* Language Switcher - Moved to end */}
                 <div className="relative" ref={languageMenuRef}>

@@ -1,7 +1,10 @@
 import { Card } from '../common';
 import { clsx } from 'clsx';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const StatCard = ({ title, value, icon, trend, trendValue, color = 'primary' }) => {
+  const { theme } = useTheme();
+
   const colorClasses = {
     primary: 'bg-primary-600',
     secondary: 'bg-secondary-500',
@@ -14,26 +17,34 @@ const StatCard = ({ title, value, icon, trend, trendValue, color = 'primary' }) 
     <Card padding="md" hover>
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-secondary-600 mb-1">{title}</p>
-          <p className="text-3xl font-heading font-bold text-secondary-900">{value}</p>
+          <p className={clsx(
+            'text-sm font-medium mb-1',
+            theme === 'dark' ? 'text-gray-400' : 'text-slate-500'
+          )}>{title}</p>
+          <p className={clsx(
+            'text-3xl font-heading font-bold',
+            theme === 'dark' ? 'text-white' : 'text-slate-900'
+          )}>{value}</p>
           {trend && (
             <div className="flex items-center gap-1 mt-2">
               <span
                 className={clsx(
                   'text-sm font-medium',
-                  trend === 'up' ? 'text-green-600' : 'text-red-600'
+                  trend === 'up'
+                    ? (theme === 'dark' ? 'text-green-400' : 'text-green-600')
+                    : (theme === 'dark' ? 'text-red-400' : 'text-red-600')
                 )}
               >
                 {trend === 'up' ? '↑' : '↓'} {trendValue}
               </span>
-              <span className="text-xs text-gray-500">vs last month</span>
+              <span className={clsx('text-xs', theme === 'dark' ? 'text-gray-500' : 'text-slate-400')}>vs last month</span>
             </div>
           )}
         </div>
         {icon && (
           <div
             className={clsx(
-              'p-3 rounded-lg text-white',
+              'p-3 rounded-lg text-white shadow-lg',
               colorClasses[color]
             )}
           >

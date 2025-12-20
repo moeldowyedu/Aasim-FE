@@ -1,7 +1,10 @@
 import { Card, Badge } from '../common';
 import { formatDistanceToNow } from 'date-fns';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const RecentActivity = ({ activities = [] }) => {
+  const { theme } = useTheme();
+
   const getStatusColor = (status) => {
     const colors = {
       completed: 'success',
@@ -57,7 +60,7 @@ const RecentActivity = ({ activities = [] }) => {
   return (
     <Card padding="md">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-heading font-semibold text-secondary-900">
+        <h3 className={`text-lg font-heading font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
           Recent Activity
         </h3>
         <a
@@ -72,7 +75,8 @@ const RecentActivity = ({ activities = [] }) => {
         {mockActivities.map((activity) => (
           <div
             key={activity.id}
-            className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+            className={`flex items-start gap-3 p-3 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-white/5' : 'hover:bg-slate-50'
+              }`}
           >
             <div className="flex-shrink-0 mt-1">
               <Badge variant={getStatusColor(activity.status)} size="sm">
@@ -80,11 +84,11 @@ const RecentActivity = ({ activities = [] }) => {
               </Badge>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-secondary-900 truncate">
+              <p className={`text-sm font-medium truncate ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
                 {activity.agentName}
               </p>
-              <p className="text-sm text-secondary-600">{activity.action}</p>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>{activity.action}</p>
+              <p className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>
                 {formatDistanceToNow(activity.timestamp, { addSuffix: true })}
               </p>
             </div>

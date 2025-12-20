@@ -20,13 +20,13 @@ This architecture provides:
 ## Architecture Diagram
 
 ```
-┌─────────────────┐         POST          ┌─────────────────────┐
+┌─────────────────┐         POST           ┌─────────────────────┐
 │                 │  ──────────────────>   │                     │
-│  OBSOLIO Backend  │   Submission Data      │   N8n Workflows     │
+│ OBSOLIO Backend │   Submission Data      │    N8n Workflows    │
 │   (PHP API)     │                        │   (Agent System)    │
 │                 │   <──────────────────  │                     │
 └─────────────────┘    Webhook Callback    └─────────────────────┘
-                       (Results)
+                         (Results)
 
 N8n Workflows contain 6 specialized agents:
 ├── 1. Video & Audio Analysis Agent

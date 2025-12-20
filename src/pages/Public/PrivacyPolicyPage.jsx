@@ -1,25 +1,30 @@
 import React from 'react';
 import MainLayout from '../../components/layout/MainLayout';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const PrivacyPolicyPage = () => {
+    const { theme } = useTheme();
+
     return (
-        <MainLayout showSidebar={false} showFooter={true}>
-            <div className="bg-[#0B0E14] min-h-screen text-gray-300 font-sans selection:bg-primary-500/30">
+        <MainLayout showSidebar={false} showFooter={true} theme={theme}>
+            <div className={`min-h-screen font-sans selection:bg-primary-500/30 ${theme === 'dark' ? 'bg-[#0B0E14] text-gray-300' : 'bg-slate-50 text-slate-600'}`}>
 
                 {/* Header Section */}
                 <div className="relative pt-32 pb-16 overflow-hidden">
-                    <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:32px_32px]" />
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
+                    <div className={`absolute inset-0 bg-[size:32px_32px] ${theme === 'dark' ? 'bg-grid-white/[0.02]' : 'bg-grid-slate-900/[0.04]'}`} />
+                    {theme === 'dark' && (
+                        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
+                    )}
 
                     <div className="container mx-auto px-6 relative z-10 text-center">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-medium mb-6 animate-fadeIn">
                             <span className="w-1.5 h-1.5 rounded-full bg-primary-500 animate-pulse" />
                             Legal Documentation
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+                        <h1 className={`text-4xl md:text-5xl font-bold mb-6 tracking-tight ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
                             Privacy <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-primary-200">Policy</span>
                         </h1>
-                        <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                        <p className={`text-xl max-w-2xl mx-auto leading-relaxed ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
                             We are committed to protecting your personal data and ensuring transparency in how we handle it.
                         </p>
                         <p className="mt-4 text-sm text-gray-500">
@@ -30,9 +35,9 @@ const PrivacyPolicyPage = () => {
 
                 {/* Content Section */}
                 <div className="container mx-auto px-6 pb-24">
-                    <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl">
+                    <div className={`max-w-4xl mx-auto backdrop-blur-sm border rounded-3xl p-8 md:p-12 shadow-2xl ${theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-white border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.08)]'}`}>
 
-                        <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-a:text-primary-400 hover:prose-a:text-primary-300 prose-strong:text-white">
+                        <div className={`prose prose-lg max-w-none hover:prose-a:text-primary-300 ${theme === 'dark' ? 'prose-invert prose-headings:text-white prose-strong:text-white prose-a:text-primary-400' : 'prose-slate prose-headings:text-slate-900 prose-strong:text-slate-900 prose-a:text-primary-600'}`}>
                             <section className="mb-12">
                                 <h2>1. Introduction</h2>
                                 <p>
@@ -40,7 +45,7 @@ const PrivacyPolicyPage = () => {
                                 </p>
                             </section>
 
-                            <div className="w-full h-px bg-white/10 my-8" />
+                            <div className={`w-full h-px my-8 ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-100'}`} />
 
                             <section className="mb-12">
                                 <h2>2. Data We Collect</h2>
@@ -56,7 +61,7 @@ const PrivacyPolicyPage = () => {
                                 </ul>
                             </section>
 
-                            <div className="w-full h-px bg-white/10 my-8" />
+                            <div className={`w-full h-px my-8 ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-100'}`} />
 
                             <section className="mb-12">
                                 <h2>3. How We Use Your Data</h2>
@@ -70,7 +75,7 @@ const PrivacyPolicyPage = () => {
                                 </ul>
                             </section>
 
-                            <div className="w-full h-px bg-white/10 my-8" />
+                            <div className={`w-full h-px my-8 ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-100'}`} />
 
                             <section className="mb-12">
                                 <h2>4. Data Security</h2>
@@ -79,16 +84,16 @@ const PrivacyPolicyPage = () => {
                                 </p>
                             </section>
 
-                            <div className="w-full h-px bg-white/10 my-8" />
+                            <div className={`w-full h-px my-8 ${theme === 'dark' ? 'bg-white/10' : 'bg-slate-100'}`} />
 
                             <section className="mb-12">
                                 <h2>5. Contact Us</h2>
                                 <p>
                                     If you have any questions about this privacy policy or our privacy practices, please contact us at:
                                 </p>
-                                <div className="bg-white/5 rounded-xl p-6 border border-white/10 mt-6 inline-block">
-                                    <p className="m-0 text-lg font-medium text-white">Obsolio Legal Team</p>
-                                    <a href="mailto:info@obsolio.com" className="text-primary-400 hover:text-primary-300 transition-colors no-underline text-lg">
+                                <div className={`rounded-xl p-6 border mt-6 inline-block ${theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-slate-50 border-slate-200'}`}>
+                                    <p className={`m-0 text-lg font-medium ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>Obsolio Legal Team</p>
+                                    <a href="mailto:info@obsolio.com" className={`transition-colors no-underline text-lg ${theme === 'dark' ? 'text-primary-400 hover:text-primary-300' : 'text-primary-600 hover:text-primary-700'}`}>
                                         info@obsolio.com
                                     </a>
                                 </div>
