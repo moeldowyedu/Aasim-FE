@@ -26,6 +26,10 @@ const HomePage = () => {
           {/* Animated Shapes Background */}
           <AnimatedShapes />
 
+          {/* Darkness Overlay - Middle Layer (z-[1]) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0B0E14]/60 pointer-events-none z-[1]"></div>
+
+          {/* Content - Top Layer (z-10) */}
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-16">
 
