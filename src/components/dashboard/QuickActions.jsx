@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { Card } from '../common';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const QuickActions = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   const actions = [
     {
@@ -55,10 +57,10 @@ const QuickActions = () => {
             >
               {action.icon}
             </div>
-            <h3 className="font-heading font-semibold text-secondary-900 mb-1">
+            <h3 className={`font-heading font-semibold mb-1 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
               {action.title}
             </h3>
-            <p className="text-sm text-secondary-600">{action.description}</p>
+            <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>{action.description}</p>
           </div>
         </Card>
       ))}

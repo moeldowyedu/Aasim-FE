@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { Lock, Plus, Edit, Copy, Share2, Archive, Settings, TrendingUp, Shield, Users, Calendar, FileCode } from 'lucide-react';
 import MainLayout from '../../components/layout/MainLayout';
 import { formatDate, formatNumber } from '../../utils/formatters';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const PrivateAgentsPage = () => {
+  const { theme } = useTheme();
   const [privateAgents, setPrivateAgents] = useState([
     {
       id: '1',
@@ -165,9 +167,18 @@ const PrivateAgentsPage = () => {
 
   const getStatusBadge = (status) => {
     const badges = {
-      active: { color: 'bg-green-100 text-green-700 border-green-200', label: 'Active' },
-      draft: { color: 'bg-yellow-100 text-yellow-700 border-yellow-200', label: 'Draft' },
-      archived: { color: 'bg-gray-100 text-gray-700 border-gray-200', label: 'Archived' }
+      active: {
+        color: theme === 'dark' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-green-100 text-green-700 border-green-200',
+        label: 'Active'
+      },
+      draft: {
+        color: theme === 'dark' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : 'bg-yellow-100 text-yellow-700 border-yellow-200',
+        label: 'Draft'
+      },
+      archived: {
+        color: theme === 'dark' ? 'bg-gray-500/10 text-gray-400 border-gray-500/20' : 'bg-gray-100 text-gray-700 border-gray-200',
+        label: 'Archived'
+      }
     };
     const badge = badges[status] || badges.draft;
     return <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${badge.color}`}>{badge.label}</span>;
@@ -175,12 +186,14 @@ const PrivateAgentsPage = () => {
 
   const getVisibilityBadge = (visibility) => {
     return visibility === 'organization' ? (
-      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-700 border border-purple-200">
+      <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border ${theme === 'dark' ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' : 'bg-purple-100 text-purple-700 border-purple-200'
+        }`}>
         <Shield className="w-3 h-3" />
         Organization
       </span>
     ) : (
-      <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 border border-blue-200">
+      <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold border ${theme === 'dark' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-blue-100 text-blue-700 border-blue-200'
+        }`}>
         <Users className="w-3 h-3" />
         Team
       </span>
@@ -193,16 +206,16 @@ const PrivateAgentsPage = () => {
   const totalRuns = privateAgents.reduce((sum, a) => sum + a.metrics.totalRuns, 0);
 
   return (
-    <MainLayout showSidebar={true}>
+    <MainLayout showSidebar={true} theme={theme}>
       <div className="p-6 space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <Lock className="w-8 h-8 text-purple-600" />
-              <h1 className="text-3xl font-bold text-secondary-900">Private Agents</h1>
+              <h1 className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>Private Agents</h1>
             </div>
-            <p className="text-secondary-600">
+            <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
               Organization-specific agents trained on your proprietary data and processes
             </p>
           </div>
@@ -216,51 +229,51 @@ const PrivateAgentsPage = () => {
 
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="glass-card rounded-2xl p-6 hover:shadow-lg transition-shadow">
+          <div className={`rounded-2xl p-6 transition-all duration-300 ${theme === 'dark' ? 'glass-card' : 'bg-white border border-slate-200 shadow-sm hover:shadow-md'}`}>
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-secondary-600">Total Private Agents</div>
+              <div className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>Total Private Agents</div>
               <Shield className="w-5 h-5 text-purple-600" />
             </div>
-            <div className="text-3xl font-bold text-secondary-900">{privateAgents.length}</div>
-            <div className="text-xs text-gray-500 mt-1">Custom agents created</div>
+            <div className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>{privateAgents.length}</div>
+            <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>Custom agents created</div>
           </div>
 
-          <div className="glass-card rounded-2xl p-6 hover:shadow-lg transition-shadow">
+          <div className={`rounded-2xl p-6 transition-all duration-300 ${theme === 'dark' ? 'glass-card' : 'bg-white border border-slate-200 shadow-sm hover:shadow-md'}`}>
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-secondary-600">Active Agents</div>
+              <div className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>Active Agents</div>
               <TrendingUp className="w-5 h-5 text-green-600" />
             </div>
             <div className="text-3xl font-bold text-green-600">{activeAgents}</div>
-            <div className="text-xs text-gray-500 mt-1">Currently deployed</div>
+            <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>Currently deployed</div>
           </div>
 
-          <div className="glass-card rounded-2xl p-6 hover:shadow-lg transition-shadow">
+          <div className={`rounded-2xl p-6 transition-all duration-300 ${theme === 'dark' ? 'glass-card' : 'bg-white border border-slate-200 shadow-sm hover:shadow-md'}`}>
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-secondary-600">Team Agents</div>
+              <div className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>Team Agents</div>
               <Users className="w-5 h-5 text-blue-600" />
             </div>
             <div className="text-3xl font-bold text-blue-600">{teamAgents}</div>
-            <div className="text-xs text-gray-500 mt-1">Restricted access</div>
+            <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>Restricted access</div>
           </div>
 
-          <div className="glass-card rounded-2xl p-6 hover:shadow-lg transition-shadow">
+          <div className={`rounded-2xl p-6 transition-all duration-300 ${theme === 'dark' ? 'glass-card' : 'bg-white border border-slate-200 shadow-sm hover:shadow-md'}`}>
             <div className="flex items-center justify-between mb-2">
-              <div className="text-sm font-medium text-secondary-600">Total Runs</div>
+              <div className={`text-sm font-medium ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>Total Runs</div>
               <FileCode className="w-5 h-5 text-orange-600" />
             </div>
-            <div className="text-3xl font-bold text-secondary-900">{formatNumber(totalRuns)}</div>
-            <div className="text-xs text-gray-500 mt-1">Across all agents</div>
+            <div className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>{formatNumber(totalRuns)}</div>
+            <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>Across all agents</div>
           </div>
         </div>
 
         {/* Private Agents List */}
         <div>
-          <h2 className="text-xl font-bold text-secondary-900 mb-4">Your Private Agents</h2>
+          <h2 className={`text-xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>Your Private Agents</h2>
           {privateAgents.length === 0 ? (
-            <div className="glass-card rounded-3xl p-12 text-center">
+            <div className={`rounded-3xl p-12 text-center ${theme === 'dark' ? 'glass-card' : 'bg-white border border-slate-200'}`}>
               <Lock className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-secondary-900 mb-2">No Private Agents Yet</h3>
-              <p className="text-secondary-600 mb-6 max-w-md mx-auto">
+              <h3 className={`text-xl font-bold mb-2 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>No Private Agents Yet</h3>
+              <p className={`mb-6 max-w-md mx-auto ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>
                 Create custom agents trained on your organization's proprietary data and business processes
               </p>
               <Link to="/agentx/builder">
@@ -273,7 +286,9 @@ const PrivateAgentsPage = () => {
           ) : (
             <div className="space-y-4">
               {privateAgents.map((agent) => (
-                <div key={agent.id} className="glass-card rounded-2xl p-6 hover:shadow-lg transition-shadow">
+                <div key={agent.id} className={`rounded-2xl p-6 transition-all duration-300 ${theme === 'dark'
+                  ? 'glass-card hover:shadow-lg'
+                  : 'bg-white border border-slate-200 shadow-sm hover:shadow-lg'}`}>
                   <div className="flex items-start gap-6">
                     {/* Icon */}
                     <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center text-4xl flex-shrink-0 shadow-lg">
@@ -286,15 +301,17 @@ const PrivateAgentsPage = () => {
                       <div className="flex items-start justify-between mb-3">
                         <div>
                           <div className="flex items-center gap-3 mb-2">
-                            <h3 className="text-2xl font-bold text-secondary-900">{agent.name}</h3>
+                            <h3 className={`text-2xl font-bold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>{agent.name}</h3>
                             {getStatusBadge(agent.status)}
                             {getVisibilityBadge(agent.visibility)}
-                            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 text-secondary-700 border border-gray-200">
+                            <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${theme === 'dark'
+                              ? 'bg-white/10 text-gray-300 border-white/10'
+                              : 'bg-slate-100 text-slate-700 border-slate-200'}`}>
                               {agent.version}
                             </span>
                           </div>
-                          <p className="text-secondary-600 mb-3">{agent.description}</p>
-                          <div className="flex items-center gap-4 text-sm text-gray-500">
+                          <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'} mb-3`}>{agent.description}</p>
+                          <div className={`flex items-center gap-4 text-sm ${theme === 'dark' ? 'text-gray-500' : 'text-slate-500'}`}>
                             <div className="flex items-center gap-1">
                               <Calendar className="w-4 h-4" />
                               <span>Created {formatDate(agent.createdAt, 'short')}</span>
@@ -311,22 +328,22 @@ const PrivateAgentsPage = () => {
                       </div>
 
                       {/* Metrics */}
-                      <div className="grid grid-cols-3 gap-6 mb-4 pb-4 border-b border-gray-200">
+                      <div className={`grid grid-cols-3 gap-6 mb-4 pb-4 border-b ${theme === 'dark' ? 'border-white/10' : 'border-slate-100'}`}>
                         <div>
-                          <div className="text-xs text-gray-500 mb-1">Total Runs</div>
-                          <div className="text-xl font-bold text-secondary-900">
+                          <div className={`text-xs mb-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>Total Runs</div>
+                          <div className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
                             {formatNumber(agent.metrics.totalRuns)}
                           </div>
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500 mb-1">Success Rate</div>
+                          <div className={`text-xs mb-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>Success Rate</div>
                           <div className="text-xl font-bold text-green-600">
                             {agent.metrics.successRate}%
                           </div>
                         </div>
                         <div>
-                          <div className="text-xs text-gray-500 mb-1">Avg Processing</div>
-                          <div className="text-xl font-bold text-secondary-900">
+                          <div className={`text-xs mb-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>Avg Processing</div>
+                          <div className={`text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
                             {agent.metrics.avgProcessingTime}
                           </div>
                         </div>
@@ -335,24 +352,36 @@ const PrivateAgentsPage = () => {
                       {/* Actions */}
                       <div className="flex items-center gap-3">
                         <Link to={`/agentx/private/${agent.id}/edit`}>
-                          <button className="px-6 py-2 bg-blue-100 text-blue-700 rounded-xl text-sm font-semibold hover:bg-blue-200 flex items-center gap-2">
+                          <button className={`px-6 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 transition-colors ${theme === 'dark'
+                              ? 'bg-blue-500/10 text-blue-400 hover:bg-blue-500/20'
+                              : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+                            }`}>
                             <Edit className="w-4 h-4" />
                             Edit
                           </button>
                         </Link>
                         <button
                           onClick={() => handleDuplicate(agent.id)}
-                          className="px-6 py-2 border border-gray-300 rounded-xl text-sm font-semibold hover:bg-gray-50 flex items-center gap-2"
+                          className={`px-6 py-2 border rounded-xl text-sm font-semibold flex items-center gap-2 transition-colors ${theme === 'dark'
+                              ? 'border-white/10 text-gray-300 hover:bg-white/5'
+                              : 'border-slate-300 text-slate-700 hover:bg-slate-50'
+                            }`}
                         >
                           <Copy className="w-4 h-4" />
                           Duplicate
                         </button>
-                        <button className="px-6 py-2 border border-gray-300 rounded-xl text-sm font-semibold hover:bg-gray-50 flex items-center gap-2">
+                        <button className={`px-6 py-2 border rounded-xl text-sm font-semibold flex items-center gap-2 transition-colors ${theme === 'dark'
+                            ? 'border-white/10 text-gray-300 hover:bg-white/5'
+                            : 'border-slate-300 text-slate-700 hover:bg-slate-50'
+                          }`}>
                           <Share2 className="w-4 h-4" />
                           Share
                         </button>
                         <Link to={`/agentx/private/${agent.id}/settings`}>
-                          <button className="px-6 py-2 border border-gray-300 rounded-xl text-sm font-semibold hover:bg-gray-50 flex items-center gap-2">
+                          <button className={`px-6 py-2 border rounded-xl text-sm font-semibold flex items-center gap-2 transition-colors ${theme === 'dark'
+                              ? 'border-white/10 text-gray-300 hover:bg-white/5'
+                              : 'border-slate-300 text-slate-700 hover:bg-slate-50'
+                            }`}>
                             <Settings className="w-4 h-4" />
                             Settings
                           </button>
@@ -360,7 +389,10 @@ const PrivateAgentsPage = () => {
                         {agent.status !== 'archived' && (
                           <button
                             onClick={() => handleArchive(agent.id)}
-                            className="px-6 py-2 bg-gray-100 text-secondary-700 rounded-xl text-sm font-semibold hover:bg-gray-200 flex items-center gap-2"
+                            className={`px-6 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 transition-colors ${theme === 'dark'
+                                ? 'bg-white/5 text-gray-400 hover:bg-white/10'
+                                : 'bg-gray-100 text-slate-600 hover:bg-gray-200'
+                              }`}
                           >
                             <Archive className="w-4 h-4" />
                             Archive
@@ -376,17 +408,19 @@ const PrivateAgentsPage = () => {
         </div>
 
         {/* Info Box */}
-        <div className="glass-card rounded-2xl p-6 bg-gradient-to-r from-purple-50 to-blue-50 border-2 border-purple-100">
+        <div className={`rounded-2xl p-6 border-2 ${theme === 'dark'
+          ? 'glass-card border-purple-500/20 bg-purple-500/5'
+          : 'bg-purple-50 border-purple-100'}`}>
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-xl bg-purple-600 flex items-center justify-center flex-shrink-0">
               <Shield className="w-6 h-6 text-white" />
             </div>
             <div className="flex-grow">
-              <h4 className="font-bold text-secondary-900 mb-2 text-lg">Enterprise Security & Privacy</h4>
-              <p className="text-secondary-700 text-sm mb-3">
+              <h4 className={`font-bold mb-2 text-lg ${theme === 'dark' ? 'text-white' : 'text-purple-900'}`}>Enterprise Security & Privacy</h4>
+              <p className={`text-sm mb-3 ${theme === 'dark' ? 'text-gray-300' : 'text-purple-800'}`}>
                 Private agents are exclusive to your organization and provide the highest level of security and customization:
               </p>
-              <ul className="space-y-2 text-sm text-secondary-700">
+              <ul className={`space-y-2 text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-purple-800'}`}>
                 <li className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-purple-600 rounded-full" />
                   <span><strong>Data Isolation:</strong> Training data never leaves your environment</span>

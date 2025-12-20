@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { Card, Badge } from '../common';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const MyAgents = ({ agents = [] }) => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   const getStatusColor = (status) => {
     const colors = {
@@ -44,7 +46,7 @@ const MyAgents = ({ agents = [] }) => {
   return (
     <Card padding="md">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-heading font-semibold text-secondary-900">
+        <h3 className={`text-lg font-heading font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
           My Agents
         </h3>
         <button
@@ -60,15 +62,18 @@ const MyAgents = ({ agents = [] }) => {
           <div
             key={agent.id}
             onClick={() => navigate('/agentx/my-agents')}
-            className="p-4 rounded-lg border border-gray-200 hover:border-primary-300 hover:bg-primary-50 transition-all cursor-pointer"
+            className={`p-4 rounded-lg border transition-all cursor-pointer ${theme === 'dark'
+                ? 'border-white/10 hover:border-primary-500/30 hover:bg-white/5'
+                : 'border-slate-200 hover:border-primary-300 hover:bg-primary-50'
+              }`}
           >
             <div className="flex items-center justify-between mb-2">
-              <h4 className="font-medium text-secondary-900">{agent.name}</h4>
+              <h4 className={`font-medium ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>{agent.name}</h4>
               <Badge variant={getStatusColor(agent.status)} size="sm">
                 {agent.status}
               </Badge>
             </div>
-            <div className="flex items-center gap-4 text-sm text-secondary-600">
+            <div className={`flex items-center gap-4 text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>
               <span>{agent.runs} runs</span>
               <span>•</span>
               <span>Last: {agent.lastRun}</span>
@@ -77,7 +82,10 @@ const MyAgents = ({ agents = [] }) => {
               {agent.engines.map((engine, idx) => (
                 <span
                   key={idx}
-                  className="text-xs px-2 py-1 bg-gray-100 text-secondary-700 rounded"
+                  className={`text-xs px-2 py-1 rounded ${theme === 'dark'
+                      ? 'bg-white/10 text-gray-300'
+                      : 'bg-slate-100 text-slate-700'
+                    }`}
                 >
                   {engine}
                 </span>

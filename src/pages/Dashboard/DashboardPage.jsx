@@ -6,12 +6,13 @@ import { Badge } from '../../components/common';
 import { StatCard, QuickActions, RecentActivity, UsageChart, MyAgents } from '../../components/dashboard';
 import { PLANS } from '../../utils/constants';
 import { authService } from '../../services';
-
+import { useTheme } from '../../contexts/ThemeContext';
 import { differenceInDays } from 'date-fns';
 
 const DashboardPage = () => {
   const { user } = useAuthStore();
   const { currentSubscription, fetchSubscription } = useBillingStore();
+  const { theme } = useTheme();
   const [stats, setStats] = useState({
     total_agents: 0,
     total_executions: 0,
@@ -50,22 +51,22 @@ const DashboardPage = () => {
     : PLANS[0]; // Default to Starter
 
   return (
-    <MainLayout showFooter={false}>
+    <MainLayout showFooter={false} theme={theme}>
       <div className="py-6 space-y-8">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-3xl font-heading font-bold text-secondary-900 mb-1 tracking-tight">
+            <h1 className={`text-3xl font-heading font-bold mb-1 tracking-tight ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
               Dashboard
             </h1>
-            <p className="text-sm text-secondary-500">
+            <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>
               {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
           </div>
           <div className="mt-4 md:mt-0">
             <div className="flex items-center gap-3">
               <div className="text-right">
-                <p className="text-sm text-secondary-600 font-semibold mb-1">Current Plan</p>
+                <p className={`text-sm font-semibold mb-1 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>Current Plan</p>
                 <div className="flex flex-col items-end">
                   <Badge
                     variant={isTrial ? (daysLeft >= 0 ? "warning" : "error") : "primary"}
@@ -125,7 +126,7 @@ const DashboardPage = () => {
 
         {/* Quick Actions */}
         <div>
-          <h2 className="text-2xl font-heading font-bold text-secondary-900 mb-4 tracking-tight">
+          <h2 className={`text-2xl font-heading font-bold mb-4 tracking-tight ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
             Quick Actions
           </h2>
           <QuickActions />
@@ -151,16 +152,19 @@ const DashboardPage = () => {
 
         {/* Additional Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-xl p-6 border border-primary-200">
+          <div className={`rounded-xl p-6 border transition-all duration-300 ${theme === 'dark'
+              ? 'glass-card border-primary-500/20 bg-primary-900/10'
+              : 'bg-gradient-to-br from-primary-50 to-primary-100 border-primary-200'
+            }`}>
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
                 <span className="material-icons text-white text-xl">precision_manufacturing</span>
               </div>
-              <h3 className="font-heading font-semibold text-secondary-900">
+              <h3 className={`font-heading font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
                 Precision AI Engines
               </h3>
             </div>
-            <p className="text-sm text-secondary-700 mb-4">
+            <p className={`text-sm mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-700'}`}>
               Access 7 powerful engines to build custom agents
             </p>
             <a
@@ -171,36 +175,42 @@ const DashboardPage = () => {
             </a>
           </div>
 
-          <div className="bg-gradient-to-br from-secondary-50 to-secondary-100 rounded-xl p-6 border border-secondary-200">
+          <div className={`rounded-xl p-6 border transition-all duration-300 ${theme === 'dark'
+              ? 'glass-card border-secondary-500/20 bg-secondary-900/10'
+              : 'bg-gradient-to-br from-slate-50 to-slate-100 border-slate-200'
+            }`}>
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-secondary-500 rounded-lg flex items-center justify-center">
                 <span className="material-icons text-white text-xl">store</span>
               </div>
-              <h3 className="font-heading font-semibold text-secondary-900">
+              <h3 className={`font-heading font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
                 AgentX Hub
               </h3>
             </div>
-            <p className="text-sm text-secondary-700 mb-4">
+            <p className={`text-sm mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-700'}`}>
               Discover & deploy agents. Earn 70% revenue share
             </p>
             <a
               href="/agentx/marketplace"
-              className="text-sm font-medium text-secondary-600 hover:text-secondary-700"
+              className={`text-sm font-medium ${theme === 'dark' ? 'text-secondary-400 hover:text-secondary-300' : 'text-slate-600 hover:text-slate-700'}`}
             >
               Visit Marketplace →
             </a>
           </div>
 
-          <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border border-purple-200">
+          <div className={`rounded-xl p-6 border transition-all duration-300 ${theme === 'dark'
+              ? 'glass-card border-purple-500/20 bg-purple-900/10'
+              : 'bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200'
+            }`}>
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
                 <span className="material-icons text-white text-xl">supervised_user_circle</span>
               </div>
-              <h3 className="font-heading font-semibold text-secondary-900">
+              <h3 className={`font-heading font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
                 HITL Mode
               </h3>
             </div>
-            <p className="text-sm text-secondary-700 mb-4">
+            <p className={`text-sm mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-purple-800'}`}>
               Human-in-the-Loop oversight for critical tasks
             </p>
             <a

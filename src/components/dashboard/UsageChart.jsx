@@ -1,7 +1,10 @@
 import { Card } from '../common';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { useTheme } from '../../contexts/ThemeContext';
 
 const UsageChart = ({ data = [] }) => {
+  const { theme } = useTheme();
+
   // Mock data if empty
   const mockData = data.length > 0 ? data : [
     { date: 'Jan 1', runs: 45 },
@@ -16,28 +19,32 @@ const UsageChart = ({ data = [] }) => {
   return (
     <Card padding="md">
       <div className="mb-4">
-        <h3 className="text-lg font-heading font-semibold text-secondary-900 mb-1">
+        <h3 className={`text-lg font-heading font-semibold mb-1 ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
           Usage This Month
         </h3>
-        <p className="text-sm text-secondary-600">Agent executions over time</p>
+        <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>Agent executions over time</p>
       </div>
 
       <div className="h-64">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={mockData}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+            <CartesianGrid strokeDasharray="3 3" stroke={theme === 'dark' ? '#374151' : '#e5e7eb'} />
             <XAxis
               dataKey="date"
-              stroke="#6b7280"
+              stroke={theme === 'dark' ? '#9ca3af' : '#6b7280'}
               style={{ fontSize: '12px' }}
             />
-            <YAxis stroke="#6b7280" style={{ fontSize: '12px' }} />
+            <YAxis stroke={theme === 'dark' ? '#9ca3af' : '#6b7280'} style={{ fontSize: '12px' }} />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#fff',
-                border: '1px solid #e5e7eb',
+                backgroundColor: theme === 'dark' ? '#1f2937' : '#fff',
+                borderColor: theme === 'dark' ? '#374151' : '#e5e7eb',
                 borderRadius: '8px',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                color: theme === 'dark' ? '#fff' : '#000'
+              }}
+              itemStyle={{
+                color: theme === 'dark' ? '#e5e7eb' : '#374151'
               }}
             />
             <Line

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useTheme } from '../../../contexts/ThemeContext';
 
 const DocsTOC = () => {
+    const { theme } = useTheme();
     const [headings, setHeadings] = useState([]);
     const [activeId, setActiveId] = useState('');
 
@@ -49,7 +51,7 @@ const DocsTOC = () => {
     return (
         <aside className="hidden xl:block sticky top-32 w-60 h-[calc(100vh-8rem)] overflow-y-auto">
             <div className="p-4">
-                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+                <h4 className={`text-xs font-semibold uppercase tracking-wider mb-3 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-500'}`}>
                     On this page
                 </h4>
                 <nav className="space-y-1">
@@ -62,7 +64,7 @@ const DocsTOC = () => {
                 ${heading.level === 3 ? 'pl-4' : ''}
                 ${activeId === heading.id
                                     ? 'text-primary-400 font-medium'
-                                    : 'text-gray-400 hover:text-white'
+                                    : (theme === 'dark' ? 'text-gray-400 hover:text-white' : 'text-slate-500 hover:text-slate-900')
                                 }
               `}
                         >
