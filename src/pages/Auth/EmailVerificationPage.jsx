@@ -14,7 +14,7 @@ const EmailVerificationPage = () => {
     const [message, setMessage] = useState('Verifying your email address...');
     const { theme, toggleTheme } = useTheme();
 
-    const [targetUrl, setTargetUrl] = useState('/dashboard');
+    const [targetUrl, setTargetUrl] = useState('/');
 
     useEffect(() => {
         const verify = async () => {

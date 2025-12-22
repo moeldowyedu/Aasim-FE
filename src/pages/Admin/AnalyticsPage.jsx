@@ -1,48 +1,38 @@
-import { useState } from 'react'
-import MainLayout from '../../components/layout/MainLayout'
-import { useLanguage } from '../../contexts/LanguageContext'
-import { translations } from '../../translations'
+import { useState } from 'react';
+import AdminLayout from '../../components/layout/AdminLayout';
+import { Card } from '../../components/common';
+import { useTheme } from '../../contexts/ThemeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { translations } from '../../translations';
+import {
+  DollarSign, UserPlus, TrendingUp, GitMerge, Download,
+  BarChart3, PieChart, LineChart
+} from 'lucide-react';
 
 const AnalyticsPage = () => {
-  const { language } = useLanguage()
-  const t = translations[language]
-  const [selectedPeriod, setSelectedPeriod] = useState('30days')
-  const [selectedMetric, setSelectedMetric] = useState('submissions')
+  const { theme } = useTheme();
+  const { language } = useLanguage();
+  const t = translations[language];
+  const [selectedPeriod, setSelectedPeriod] = useState('30days');
+  const [selectedMetric, setSelectedMetric] = useState('submissions');
+
+  // Styles
+  const textPrimary = theme === 'dark' ? 'text-white' : 'text-slate-900';
+  const textSecondary = theme === 'dark' ? 'text-gray-400' : 'text-slate-500';
+
+  const COLORS = {
+    green: { bg: 'bg-green-500', text: 'text-green-500', lightBg: 'bg-green-500/20', lightText: 'text-green-400', paleBg: 'bg-green-100', paleText: 'text-green-600' },
+    blue: { bg: 'bg-blue-500', text: 'text-blue-500', lightBg: 'bg-blue-500/20', lightText: 'text-blue-400', paleBg: 'bg-blue-100', paleText: 'text-blue-600' },
+    purple: { bg: 'bg-purple-500', text: 'text-purple-500', lightBg: 'bg-purple-500/20', lightText: 'text-purple-400', paleBg: 'bg-purple-100', paleText: 'text-purple-600' },
+    orange: { bg: 'bg-orange-500', text: 'text-orange-500', lightBg: 'bg-orange-500/20', lightText: 'text-orange-400', paleBg: 'bg-orange-100', paleText: 'text-orange-600' },
+  };
 
   const overviewStats = [
-    {
-      label: t.totalRevenueLabel,
-      value: '$87,540',
-      change: '+22.5%',
-      trend: 'up',
-      icon: 'attach_money',
-      color: 'green'
-    },
-    {
-      label: t.newUsersLabel,
-      value: '1,247',
-      change: '+18.2%',
-      trend: 'up',
-      icon: 'person_add',
-      color: 'blue'
-    },
-    {
-      label: t.activeSessionsLabel,
-      value: '3,842',
-      change: '+12.8%',
-      trend: 'up',
-      icon: 'trending_up',
-      color: 'purple'
-    },
-    {
-      label: t.conversionRateLabel,
-      value: '4.8%',
-      change: '+0.9%',
-      trend: 'up',
-      icon: 'conversion_path',
-      color: 'orange'
-    },
-  ]
+    { label: t.totalRevenueLabel, value: '$87,540', change: '+22.5%', trend: 'up', icon: DollarSign, color: 'green' },
+    { label: t.newUsersLabel, value: '1,247', change: '+18.2%', trend: 'up', icon: UserPlus, color: 'blue' },
+    { label: t.activeSessionsLabel, value: '3,842', change: '+12.8%', trend: 'up', icon: TrendingUp, color: 'purple' },
+    { label: t.conversionRateLabel, value: '4.8%', change: '+0.9%', trend: 'up', icon: GitMerge, color: 'orange' },
+  ];
 
   const topIndustries = [
     { name: t.technologyIndustry, submissions: 2845, revenue: '$28,450', growth: '+15%' },
@@ -50,14 +40,14 @@ const AnalyticsPage = () => {
     { name: t.businessIndustry, submissions: 1567, revenue: '$15,670', growth: '+8%' },
     { name: t.healthcareIndustry, submissions: 1234, revenue: '$12,340', growth: '+19%' },
     { name: t.lawIndustry, submissions: 918, revenue: '$9,180', growth: '+12%' },
-  ]
+  ];
 
   const agentPerformance = [
     { name: t.agent3Title, usage: 3245, avgScore: 87, satisfaction: 4.6 },
     { name: t.agent2Title, usage: 2856, avgScore: 89, satisfaction: 4.7 },
     { name: t.agent1Title, usage: 1432, avgScore: 85, satisfaction: 4.5 },
     { name: t.agent4Title, usage: 923, avgScore: 91, satisfaction: 4.8 },
-  ]
+  ];
 
   const userEngagementData = [
     { day: 'Mon', submissions: 120, users: 45 },
@@ -67,73 +57,81 @@ const AnalyticsPage = () => {
     { day: 'Fri', submissions: 165, users: 62 },
     { day: 'Sat', submissions: 95, users: 38 },
     { day: 'Sun', submissions: 85, users: 32 },
-  ]
+  ];
 
   const revenueBreakdown = [
     { category: 'Premium Subscriptions', amount: 45680, percentage: 52 },
     { category: 'Per-Evaluation Fees', amount: 28450, percentage: 32 },
     { category: 'Enterprise Contracts', amount: 13410, percentage: 16 },
-  ]
+  ];
 
   return (
-    <MainLayout>
-      <div className="py-8">
+    <AdminLayout>
+      <div className="space-y-6">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-secondary-900 mb-2 font-heading">{t.analyticsDashboardTitle}</h1>
-            <p className="text-secondary-600">{t.analyticsDashboardDesc}</p>
+            <h1 className={`text-3xl font-bold mb-2 ${textPrimary}`}>{t.analyticsDashboardTitle}</h1>
+            <p className={textSecondary}>{t.analyticsDashboardDesc}</p>
           </div>
-          <div className="mt-4 md:mt-0 flex space-x-3">
+          <div className="flex items-center space-x-3 mt-4 md:mt-0">
             <select
               value={selectedPeriod}
               onChange={(e) => setSelectedPeriod(e.target.value)}
-              className="glass-input px-4 py-2 rounded-xl font-semibold"
+              className={`px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${theme === 'dark'
+                  ? 'bg-gray-800 border-gray-700 text-white'
+                  : 'bg-white border-slate-200 text-slate-900'
+                }`}
             >
               <option value="7days">{t.last7DaysOption}</option>
               <option value="30days">{t.last30DaysOption}</option>
               <option value="90days">{t.last90DaysOption}</option>
               <option value="year">{t.lastYearOption}</option>
             </select>
-            <button className="glass-btn-primary rounded-xl px-6 py-3 font-semibold inline-flex items-center">
-              <span className="material-icons mr-2">download</span>
-              {t.exportReportButton}
+            <button className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:shadow-lg transition-all">
+              <Download className="w-5 h-5" />
+              <span className="font-semibold">{t.exportReportButton}</span>
             </button>
           </div>
         </div>
 
         {/* Overview Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {overviewStats.map((stat, index) => (
-            <div key={index} className="glass-card rounded-2xl p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div className={`w-14 h-14 rounded-xl bg-${stat.color}-100 flex items-center justify-center`}>
-                  <span className={`material-icons text-2xl text-${stat.color}-600`}>{stat.icon}</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {overviewStats.map((stat, index) => {
+            const Icon = stat.icon;
+            const colors = COLORS[stat.color];
+            return (
+              <Card key={index}>
+                <div className="flex items-start justify-between mb-4">
+                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${theme === 'dark' ? colors.lightBg : colors.paleBg}`}>
+                    <Icon className={`w-6 h-6 ${theme === 'dark' ? colors.lightText : colors.paleText}`} />
+                  </div>
+                  <span className={`text-sm font-semibold ${stat.trend === 'up' ? 'text-green-500' : 'text-red-500'}`}>
+                    {stat.change}
+                  </span>
                 </div>
-                <span className={`text-sm font-semibold ${stat.trend === 'up' ? 'text-green-600' : 'text-red-600'}`}>
-                  {stat.change}
-                </span>
-              </div>
-              <div className="text-3xl font-bold text-secondary-900 mb-1">{stat.value}</div>
-              <div className="text-sm text-secondary-600">{stat.label}</div>
-            </div>
-          ))}
+                <div className={`text-3xl font-bold mb-1 ${textPrimary}`}>{stat.value}</div>
+                <div className={`text-sm ${textSecondary}`}>{stat.label}</div>
+              </Card>
+            );
+          })}
         </div>
 
         {/* User Engagement Chart */}
-        <div className="glass-card rounded-2xl p-6 mb-8">
+        <Card>
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-secondary-900">{t.userEngagementTrendsTitle}</h2>
+            <h2 className={`text-2xl font-bold ${textPrimary}`}>{t.userEngagementTrendsTitle}</h2>
             <div className="flex space-x-2">
               {['submissions', 'users', 'revenue'].map((metric) => (
                 <button
                   key={metric}
                   onClick={() => setSelectedMetric(metric)}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-                    selectedMetric === metric
-                      ? 'bg-primary-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${selectedMetric === metric
+                      ? 'bg-purple-600 text-white'
+                      : theme === 'dark'
+                        ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
                 >
                   {metric.charAt(0).toUpperCase() + metric.slice(1)}
                 </button>
@@ -141,114 +139,124 @@ const AnalyticsPage = () => {
             </div>
           </div>
 
-          {/* Simple Bar Chart */}
           <div className="h-64 flex items-end justify-between space-x-2">
             {userEngagementData.map((data, index) => (
               <div key={index} className="flex-1 flex flex-col items-center">
-                <div className="w-full bg-gray-200 rounded-t-lg relative" style={{ height: '100%' }}>
+                <div className={`w-full rounded-t-lg relative ${theme === 'dark' ? 'bg-gray-700/50' : 'bg-slate-100'}`} style={{ height: '100%' }}>
                   <div
-                    className="w-full bg-gradient-to-t from-primary-500 to-primary-600 rounded-t-lg absolute bottom-0"
+                    className="w-full bg-gradient-to-t from-purple-600 to-pink-600 rounded-t-lg absolute bottom-0 transition-all duration-500"
                     style={{ height: `${(data.submissions / 165) * 100}%` }}
                   />
                 </div>
-                <div className="text-xs text-secondary-600 mt-2 font-semibold">{data.day}</div>
-                <div className="text-xs text-gray-500">{data.submissions}</div>
+                <div className={`text-xs mt-2 font-semibold ${textSecondary}`}>{data.day}</div>
+                <div className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>{data.submissions}</div>
               </div>
             ))}
           </div>
-        </div>
+        </Card>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Top Industries */}
-          <div className="glass-card rounded-2xl p-6">
-            <h2 className="text-2xl font-bold text-secondary-900 mb-6">{t.topIndustriesTitle}</h2>
+          <Card>
+            <div className="flex items-center space-x-2 mb-6">
+              <BarChart3 className="w-6 h-6 text-purple-500" />
+              <h2 className={`text-2xl font-bold ${textPrimary}`}>{t.topIndustriesTitle}</h2>
+            </div>
             <div className="space-y-4">
               {topIndustries.map((industry, index) => (
-                <div key={index} className="flex items-center justify-between pb-4 border-b border-gray-100 last:border-0">
+                <div key={index} className={`flex items-center justify-between pb-4 border-b last:border-0 ${theme === 'dark' ? 'border-gray-700' : 'border-slate-100'}`}>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-semibold text-secondary-900">{industry.name}</span>
-                      <span className="text-sm font-bold text-secondary-900">{industry.revenue}</span>
+                      <span className={`font-semibold ${textPrimary}`}>{industry.name}</span>
+                      <span className={`text-sm font-bold ${textPrimary}`}>{industry.revenue}</span>
                     </div>
-                    <div className="flex items-center justify-between text-sm text-secondary-600">
+                    <div className={`flex items-center justify-between text-sm ${textSecondary}`}>
                       <span>{industry.submissions} {t.submissionsLabel}</span>
-                      <span className="text-green-600 font-semibold">{industry.growth}</span>
+                      <span className="text-green-500 font-semibold">{industry.growth}</span>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
+          </Card>
 
           {/* Revenue Breakdown */}
-          <div className="glass-card rounded-2xl p-6">
-            <h2 className="text-2xl font-bold text-secondary-900 mb-6">{t.revenueBreakdownTitle}</h2>
+          <Card>
+            <div className="flex items-center space-x-2 mb-6">
+              <PieChart className="w-6 h-6 text-blue-500" />
+              <h2 className={`text-2xl font-bold ${textPrimary}`}>{t.revenueBreakdownTitle}</h2>
+            </div>
             <div className="space-y-6">
               {revenueBreakdown.map((item, index) => (
                 <div key={index}>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-secondary-900">{item.category}</span>
-                    <span className="text-sm font-bold text-secondary-900">${item.amount.toLocaleString()}</span>
+                    <span className={`text-sm font-medium ${textPrimary}`}>{item.category}</span>
+                    <span className={`text-sm font-bold ${textPrimary}`}>${item.amount.toLocaleString()}</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3">
+                  <div className={`w-full rounded-full h-3 ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-200'}`}>
                     <div
-                      className="bg-gradient-to-r from-primary-500 to-primary-600 h-3 rounded-full"
+                      className="bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full"
                       style={{ width: `${item.percentage}%` }}
                     />
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">{item.percentage}{t.percentOfTotalRevenue}</div>
+                  <div className={`text-xs mt-1 ${textSecondary}`}>{item.percentage}{t.percentOfTotalRevenue}</div>
                 </div>
               ))}
             </div>
-            <div className="mt-6 pt-6 border-t border-gray-200">
+            <div className={`mt-6 pt-6 border-t ${theme === 'dark' ? 'border-gray-700' : 'border-slate-100'}`}>
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-secondary-900">{t.totalRevenueLabel2}</span>
-                <span className="text-2xl font-bold text-primary-600">
+                <span className={`font-semibold ${textPrimary}`}>{t.totalRevenueLabel2}</span>
+                <span className="text-2xl font-bold text-purple-500">
                   ${revenueBreakdown.reduce((sum, item) => sum + item.amount, 0).toLocaleString()}
                 </span>
               </div>
             </div>
-          </div>
+          </Card>
         </div>
 
         {/* Agent Performance */}
-        <div className="glass-card rounded-2xl p-6 mb-8">
-          <h2 className="text-2xl font-bold text-secondary-900 mb-6">{t.aiAgentPerformanceTitle}</h2>
+        <Card padding="none" className="overflow-hidden">
+          <div className="p-6">
+            <div className="flex items-center space-x-2 mb-6">
+              <LineChart className="w-6 h-6 text-green-500" />
+              <h2 className={`text-2xl font-bold ${textPrimary}`}>{t.aiAgentPerformanceTitle}</h2>
+            </div>
+          </div>
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50/80">
+              <thead className={theme === 'dark' ? 'bg-gray-900/50' : 'bg-slate-50'}>
                 <tr>
-                  <th className="text-left py-3 px-4 text-xs font-bold text-secondary-700 uppercase">{t.tableHeaderAgent}</th>
-                  <th className="text-left py-3 px-4 text-xs font-bold text-secondary-700 uppercase">{t.tableHeaderUsageCount}</th>
-                  <th className="text-left py-3 px-4 text-xs font-bold text-secondary-700 uppercase">{t.tableHeaderAvgScore}</th>
-                  <th className="text-left py-3 px-4 text-xs font-bold text-secondary-700 uppercase">{t.tableHeaderSatisfaction}</th>
-                  <th className="text-left py-3 px-4 text-xs font-bold text-secondary-700 uppercase">{t.tableHeaderPerformance}</th>
+                  <th className={`text-left py-3 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderAgent}</th>
+                  <th className={`text-left py-3 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderUsageCount}</th>
+                  <th className={`text-left py-3 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderAvgScore}</th>
+                  <th className={`text-left py-3 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderSatisfaction}</th>
+                  <th className={`text-left py-3 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderPerformance}</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className={`divide-y ${theme === 'dark' ? 'divide-gray-800' : 'divide-slate-100'}`}>
                 {agentPerformance.map((agent, index) => (
-                  <tr key={index} className="border-b border-gray-100">
-                    <td className="py-4 px-4">
-                      <div className="font-semibold text-secondary-900">{agent.name}</div>
+                  <tr key={index} className={`transition-colors ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-slate-50'}`}>
+                    <td className="py-4 px-6">
+                      <div className={`font-semibold ${textPrimary}`}>{agent.name}</div>
                     </td>
-                    <td className="py-4 px-4">
-                      <span className="font-semibold text-secondary-900">{agent.usage.toLocaleString()}</span>
+                    <td className="py-4 px-6">
+                      <span className={`font-semibold ${textPrimary}`}>{agent.usage.toLocaleString()}</span>
                     </td>
-                    <td className="py-4 px-4">
+                    <td className="py-4 px-6">
                       <div className="flex items-center">
-                        <div className="text-primary-600 font-bold">{agent.avgScore}</div>
-                        <div className="text-gray-500 text-sm ml-1">{t.outOfHundred}</div>
+                        <div className="text-purple-500 font-bold">{agent.avgScore}</div>
+                        <div className={`text-sm ml-1 ${textSecondary}`}>{t.outOfHundred}</div>
                       </div>
                     </td>
-                    <td className="py-4 px-4">
+                    <td className="py-4 px-6">
                       <div className="flex items-center">
-                        <span className="material-icons text-yellow-500 text-sm mr-1">star</span>
-                        <span className="font-semibold text-secondary-900">{agent.satisfaction}</span>
-                        <span className="text-gray-500 text-sm ml-1">{t.outOfFive}</span>
+                        <span className="text-yellow-500 text-lg mr-1">★</span>
+                        <span className={`font-semibold ${textPrimary}`}>{agent.satisfaction}</span>
+                        <span className={`text-sm ml-1 ${textSecondary}`}>{t.outOfFive}</span>
                       </div>
                     </td>
-                    <td className="py-4 px-4">
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                    <td className="py-4 px-6">
+                      <div className={`w-full rounded-full h-2 ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-200'}`}>
                         <div
                           className="bg-gradient-to-r from-green-400 to-green-600 h-2 rounded-full"
                           style={{ width: `${agent.avgScore}%` }}
@@ -260,35 +268,37 @@ const AnalyticsPage = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        </Card>
 
         {/* Key Insights */}
-        <div className="glass-card rounded-2xl p-6">
-          <h2 className="text-2xl font-bold text-secondary-900 mb-6 flex items-center">
-            <span className="material-icons text-primary-600 mr-2">insights</span>
-            {t.keyInsightsTitle}
-          </h2>
+        <Card>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className={`text-2xl font-bold ${textPrimary} flex items-center`}>
+              <TrendingUp className="w-6 h-6 text-blue-500 mr-2" />
+              {t.keyInsightsTitle}
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="glass-card rounded-xl p-4 bg-gradient-to-br from-green-50 to-white">
-              <span className="material-icons text-green-600 text-3xl mb-3">trending_up</span>
-              <h3 className="font-bold text-secondary-900 mb-2">{t.growingRevenueTitle}</h3>
-              <p className="text-sm text-secondary-700">{t.growingRevenueDesc}</p>
+            <div className={`rounded-xl p-4 transition-all ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-750' : 'bg-green-50'}`}>
+              <TrendingUp className="w-8 h-8 text-green-500 mb-3" />
+              <h3 className={`font-bold mb-2 ${textPrimary}`}>{t.growingRevenueTitle}</h3>
+              <p className={`text-sm ${textSecondary}`}>{t.growingRevenueDesc}</p>
             </div>
-            <div className="glass-card rounded-xl p-4 bg-gradient-to-br from-blue-50 to-white">
-              <span className="material-icons text-blue-600 text-3xl mb-3">people</span>
-              <h3 className="font-bold text-secondary-900 mb-2">{t.userGrowthTitle}</h3>
-              <p className="text-sm text-secondary-700">{t.userGrowthDesc}</p>
+            <div className={`rounded-xl p-4 transition-all ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-750' : 'bg-blue-50'}`}>
+              <UserPlus className="w-8 h-8 text-blue-500 mb-3" />
+              <h3 className={`font-bold mb-2 ${textPrimary}`}>{t.userGrowthTitle}</h3>
+              <p className={`text-sm ${textSecondary}`}>{t.userGrowthDesc}</p>
             </div>
-            <div className="glass-card rounded-xl p-4 bg-gradient-to-br from-purple-50 to-white">
-              <span className="material-icons text-purple-600 text-3xl mb-3">psychology</span>
-              <h3 className="font-bold text-secondary-900 mb-2">{t.aiPerformanceTitle}</h3>
-              <p className="text-sm text-secondary-700">{t.aiPerformanceDesc}</p>
+            <div className={`rounded-xl p-4 transition-all ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-750' : 'bg-purple-50'}`}>
+              <BarChart3 className="w-8 h-8 text-purple-500 mb-3" />
+              <h3 className={`font-bold mb-2 ${textPrimary}`}>{t.aiPerformanceTitle}</h3>
+              <p className={`text-sm ${textSecondary}`}>{t.aiPerformanceDesc}</p>
             </div>
           </div>
-        </div>
+        </Card>
       </div>
-    </MainLayout>
-  )
-}
+    </AdminLayout>
+  );
+};
 
-export default AnalyticsPage
+export default AnalyticsPage;

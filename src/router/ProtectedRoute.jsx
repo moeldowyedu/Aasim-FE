@@ -73,7 +73,7 @@ const ProtectedRoute = ({ children, requireAdmin = false, requireSystemAdmin = f
 
   if (requireAdmin && user?.role !== 'admin' && !user?.is_system_admin) {
     // User is authenticated but not an admin (system_admin counts as admin too)
-    return <Navigate to="/dashboard" replace />
+    return <Navigate to="/" replace />
   }
 
   // Enforce tenant creation for non-admin users

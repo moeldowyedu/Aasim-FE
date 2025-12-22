@@ -52,7 +52,7 @@ export const useImpersonation = () => {
                 targetHost = `${tenantSubdomain}.${appDomain}`;
             }
 
-            const targetUrl = `${protocol}//${targetHost}/dashboard?impersonating=true&console_session=active`;
+            const targetUrl = `${protocol}//${targetHost}/?impersonating=true&console_session=active`;
 
             toast.success(`Impersonating tenant: ${tenantSubdomain}`);
             window.location.href = targetUrl;

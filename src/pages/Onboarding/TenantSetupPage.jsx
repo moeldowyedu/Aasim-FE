@@ -126,7 +126,7 @@ const TenantSetupPage = () => {
 
         // Redirect to dashboard
         setTimeout(() => {
-          navigate('/dashboard', { replace: true });
+          navigate('/', { replace: true });
         }, 500);
       }
     } catch (error) {

@@ -1,10 +1,17 @@
 import { useState } from 'react'
 import MainLayout from '../../components/layout/MainLayout'
 import AdminLayout from '../../components/layout/AdminLayout'
+import { Card } from '../../components/common'
 import { Link, useLocation } from 'react-router-dom'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { translations } from '../../translations'
 import { useTheme } from '../../contexts/ThemeContext'
+import {
+  Users, UploadCloud, CheckCircle, Cloud,
+  DollarSign, TrendingUp, TrendingDown,
+  UserPlus, Rocket, Star, Bug,
+  Activity, Database, Server, HardDrive
+} from 'lucide-react'
 
 const AdminDashboardPage = () => {
   const { language } = useLanguage()
@@ -12,24 +19,37 @@ const AdminDashboardPage = () => {
   const t = translations[language]
   const [selectedPeriod, setSelectedPeriod] = useState('7days')
 
-  // Styles
-  const cardClass = `rounded-2xl p-6 transition-all duration-300 ${theme === 'dark'
-      ? 'glass-card hover:shadow-xl border border-white/10 bg-[#1e293b]/40'
-      : 'bg-white border border-slate-200 shadow-sm hover:shadow-lg'
-    }`;
-
   const h1Class = `text-4xl font-bold mb-2 font-heading ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`;
   const pClass = theme === 'dark' ? 'text-gray-400' : 'text-slate-600';
 
   const textPrimary = theme === 'dark' ? 'text-white' : 'text-slate-900';
   const textSecondary = theme === 'dark' ? 'text-gray-400' : 'text-slate-500';
 
+  // Constants
+  const COLORS = {
+    blue: { bg: 'bg-blue-500', text: 'text-blue-500', lightBg: 'bg-blue-500/20', lightText: 'text-blue-400', paleBg: 'bg-blue-100', paleText: 'text-blue-600' },
+    purple: { bg: 'bg-purple-500', text: 'text-purple-500', lightBg: 'bg-purple-500/20', lightText: 'text-purple-400', paleBg: 'bg-purple-100', paleText: 'text-purple-600' },
+    green: { bg: 'bg-green-500', text: 'text-green-500', lightBg: 'bg-green-500/20', lightText: 'text-green-400', paleBg: 'bg-green-100', paleText: 'text-green-600' },
+    indigo: { bg: 'bg-indigo-500', text: 'text-indigo-500', lightBg: 'bg-indigo-500/20', lightText: 'text-indigo-400', paleBg: 'bg-indigo-100', paleText: 'text-indigo-600' },
+    yellow: { bg: 'bg-yellow-500', text: 'text-yellow-500', lightBg: 'bg-yellow-500/20', lightText: 'text-yellow-400', paleBg: 'bg-yellow-100', paleText: 'text-yellow-600' },
+    red: { bg: 'bg-red-500', text: 'text-red-500', lightBg: 'bg-red-500/20', lightText: 'text-red-400', paleBg: 'bg-red-100', paleText: 'text-red-600' },
+    orange: { bg: 'bg-orange-500', text: 'text-orange-500', lightBg: 'bg-orange-500/20', lightText: 'text-orange-400', paleBg: 'bg-orange-100', paleText: 'text-orange-600' },
+  }
+
+  // Helper to get color classes based on theme
+  const getColor = (colorName) => {
+    const pal = COLORS[colorName] || COLORS.blue
+    return theme === 'dark'
+      ? { bg: pal.lightBg, text: pal.lightText, raw: pal.bg }
+      : { bg: pal.paleBg, text: pal.paleText, raw: pal.bg }
+  }
+
   // Mock Data (Temporary until connected to Store)
   const systemStats = [
-    { label: 'Total Users', value: '1,247', change: '+125', trend: 'up', icon: 'people', color: 'blue', percentage: '+11.2%' },
-    { label: 'Total Submissions', value: '8,456', change: '+892', trend: 'up', icon: 'upload_file', color: 'purple', percentage: '+11.8%' },
-    { label: 'Completed Evaluations', value: '7,234', change: '+756', trend: 'up', icon: 'check_circle', color: 'green', percentage: '+11.7%' },
-    { label: 'System Uptime', value: '99.98%', change: '+0.02%', trend: 'up', icon: 'cloud_done', color: 'indigo', percentage: 'Last 30 days' },
+    { label: 'Total Users', value: '1,247', change: '+125', trend: 'up', icon: Users, color: 'blue', percentage: '+11.2%' },
+    { label: 'Total Submissions', value: '8,456', change: '+892', trend: 'up', icon: UploadCloud, color: 'purple', percentage: '+11.8%' },
+    { label: 'Completed Evaluations', value: '7,234', change: '+756', trend: 'up', icon: CheckCircle, color: 'green', percentage: '+11.7%' },
+    { label: 'System Uptime', value: '99.98%', change: '+0.02%', trend: 'up', icon: Cloud, color: 'indigo', percentage: 'Last 30 days' },
   ];
 
   const revenueStats = [
@@ -40,10 +60,10 @@ const AdminDashboardPage = () => {
   ];
 
   const recentActivity = [
-    { id: 1, user: 'Sarah Johnson', action: 'registered a new account', time: '2 mins ago', icon: 'person_add', color: 'green' },
-    { id: 2, user: 'Mike Chen', action: 'deployed a new agent', time: '15 mins ago', icon: 'rocket_launch', color: 'blue' },
-    { id: 3, user: 'Emma Davis', action: 'upgraded to Premium', time: '1 hour ago', icon: 'star', color: 'yellow' },
-    { id: 4, user: 'Alex Wilson', action: 'reported an issue', time: '2 hours ago', icon: 'bug_report', color: 'red' },
+    { id: 1, user: 'Sarah Johnson', action: 'registered a new account', time: '2 mins ago', icon: UserPlus, color: 'green' },
+    { id: 2, user: 'Mike Chen', action: 'deployed a new agent', time: '15 mins ago', icon: Rocket, color: 'blue' },
+    { id: 3, user: 'Emma Davis', action: 'upgraded to Premium', time: '1 hour ago', icon: Star, color: 'yellow' },
+    { id: 4, user: 'Alex Wilson', action: 'reported an issue', time: '2 hours ago', icon: Bug, color: 'red' },
   ];
 
   const industryBreakdown = [
@@ -83,49 +103,50 @@ const AdminDashboardPage = () => {
               value={selectedPeriod}
               onChange={(e) => setSelectedPeriod(e.target.value)}
               className={`px-4 py-2 rounded-xl font-semibold border ${theme === 'dark'
-                  ? 'glass-input text-gray-300 border-white/20 bg-white/5'
-                  : 'bg-white text-slate-700 border-slate-300 focus:ring-2 focus:ring-primary-500'
+                ? 'glass-input text-gray-300 border-white/20 bg-white/5'
+                : 'bg-white text-slate-700 border-slate-300 focus:ring-2 focus:ring-primary-500'
                 }`}
             >
-              <option value="24hours">{t.last24HoursOption}</option>
-              <option value="7days">{t.last7DaysOption2}</option>
-              <option value="30days">{t.last30DaysOption2}</option>
-              <option value="90days">{t.last90DaysOption2}</option>
+              <option className={theme === 'dark' ? 'bg-gray-800' : 'bg-white'} value="24hours">{t.last24HoursOption}</option>
+              <option className={theme === 'dark' ? 'bg-gray-800' : 'bg-white'} value="7days">{t.last7DaysOption2}</option>
+              <option className={theme === 'dark' ? 'bg-gray-800' : 'bg-white'} value="30days">{t.last30DaysOption2}</option>
+              <option className={theme === 'dark' ? 'bg-gray-800' : 'bg-white'} value="90days">{t.last90DaysOption2}</option>
             </select>
           </div>
         </div>
 
         {/* System Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {systemStats.map((stat, index) => (
-            <div key={index} className={cardClass}>
-              <div className="flex items-start justify-between mb-4">
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${theme === 'dark' ? `bg-${stat.color}-500/20` : `bg-${stat.color}-100`
-                  }`}>
-                  <span className={`material-icons text-2xl ${theme === 'dark' ? `text-${stat.color}-400` : `text-${stat.color}-600`
-                    }`}>{stat.icon}</span>
+          {systemStats.map((stat, index) => {
+            const colors = getColor(stat.color)
+            return (
+              <Card key={index} hover className="transition-all duration-300">
+                <div className="flex items-start justify-between mb-4">
+                  <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${colors.bg}`}>
+                    <stat.icon className={`w-7 h-7 ${colors.text}`} />
+                  </div>
+                  <div className={`flex items-center text-sm font-semibold ${stat.trend === 'up'
+                    ? 'text-green-500'
+                    : 'text-red-500'
+                    }`}>
+                    <span className="mr-1">
+                      {stat.trend === 'up' ? <TrendingUp className="w-4 h-4" /> : <TrendingDown className="w-4 h-4" />}
+                    </span>
+                    {stat.percentage}
+                  </div>
                 </div>
-                <div className={`flex items-center text-sm font-semibold ${stat.trend === 'up'
-                  ? (theme === 'dark' ? 'text-green-400' : 'text-green-600')
-                  : (theme === 'dark' ? 'text-red-400' : 'text-red-600')
-                  }`}>
-                  <span className="material-icons text-sm mr-1">
-                    {stat.trend === 'up' ? 'trending_up' : 'trending_down'}
-                  </span>
-                  {stat.percentage}
-                </div>
-              </div>
-              <h3 className={`text-3xl font-bold mb-1 ${textPrimary}`}>{stat.value}</h3>
-              <p className={`text-sm font-medium mb-1 ${textSecondary}`}>{stat.label}</p>
-              <p className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>{stat.change} from last period</p>
-            </div>
-          ))}
+                <h3 className={`text-3xl font-bold mb-1 ${textPrimary}`}>{stat.value}</h3>
+                <p className={`text-sm font-medium mb-1 ${textSecondary}`}>{stat.label}</p>
+                <p className={`text-xs ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>{stat.change} from last period</p>
+              </Card>
+            )
+          })}
         </div>
 
         {/* Revenue Stats */}
-        <div className={`${cardClass} mb-8`}>
+        <Card className="mb-8" padding="lg">
           <h2 className={`text-2xl font-bold mb-6 flex items-center ${textPrimary}`}>
-            <span className="material-icons text-green-500 mr-2">attach_money</span>
+            <DollarSign className="w-6 h-6 text-green-500 mr-2" />
             {t.revenueOverviewTitle}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -134,77 +155,77 @@ const AdminDashboardPage = () => {
                 <div className={`text-3xl font-bold mb-1 ${textPrimary}`}>{stat.value}</div>
                 <div className={`text-sm font-medium mb-2 ${textSecondary}`}>{stat.label}</div>
                 <div className={`text-sm font-semibold ${stat.trend === 'up'
-                  ? (theme === 'dark' ? 'text-green-400' : 'text-green-600')
-                  : (theme === 'dark' ? 'text-red-400' : 'text-red-600')
+                  ? 'text-green-500'
+                  : 'text-red-500'
                   }`}>
                   {stat.change}
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </Card>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           {/* Recent Activity */}
           <div className="lg:col-span-2">
-            <div className={cardClass}>
+            <Card className="h-full">
               <div className="flex items-center justify-between mb-6">
                 <h2 className={`text-2xl font-bold ${textPrimary}`}>{t.recentActivityTitle}</h2>
-
               </div>
               <div className="space-y-4">
-                {recentActivity.map((activity) => (
-                  <div key={activity.id} className={`flex items-start space-x-4 pb-4 border-b last:border-0 ${theme === 'dark' ? 'border-white/10' : 'border-slate-100'
-                    }`}>
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${theme === 'dark' ? `bg-${activity.color}-500/20` : `bg-${activity.color}-100`
+                {recentActivity.map((activity) => {
+                  const colors = getColor(activity.color)
+                  return (
+                    <div key={activity.id} className={`flex items-start space-x-4 pb-4 border-b last:border-0 ${theme === 'dark' ? 'border-white/10' : 'border-slate-100'
                       }`}>
-                      <span className={`material-icons text-sm ${theme === 'dark' ? `text-${activity.color}-400` : `text-${activity.color}-600`
-                        }`}>
-                        {activity.icon}
-                      </span>
+                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${colors.bg}`}>
+                        <activity.icon className={`w-5 h-5 ${colors.text}`} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className={`text-sm ${textPrimary}`}>
+                          <span className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>{activity.user}</span> {activity.action}
+                        </p>
+                        <p className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>{activity.time}</p>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className={`text-sm ${textPrimary}`}>
-                        <span className={`font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>{activity.user}</span> {activity.action}
-                      </p>
-                      <p className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>{activity.time}</p>
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
-            </div>
+            </Card>
           </div>
 
           {/* Industry Breakdown */}
           <div className="lg:col-span-1">
-            <div className={cardClass}>
+            <Card className="h-full">
               <h2 className={`text-2xl font-bold mb-6 ${textPrimary}`}>{t.industryBreakdownTitle}</h2>
-              <div className="space-y-4">
-                {industryBreakdown.map((industry, index) => (
-                  <div key={index}>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className={`text-sm font-medium ${textPrimary}`}>{industry.name}</span>
-                      <span className={`text-sm font-bold ${textPrimary}`}>{industry.count}</span>
+              <div className="space-y-6">
+                {industryBreakdown.map((industry, index) => {
+                  const colors = getColor(industry.color)
+                  return (
+                    <div key={index}>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className={`text-sm font-medium ${textPrimary}`}>{industry.name}</span>
+                        <span className={`text-sm font-bold ${textPrimary}`}>{industry.count}</span>
+                      </div>
+                      <div className={`w-full rounded-full h-2 ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-200'}`}>
+                        <div
+                          className={`h-2 rounded-full ${colors.raw}`}
+                          style={{ width: `${industry.percentage}%` }}
+                        />
+                      </div>
+                      <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>{industry.percentage}%</div>
                     </div>
-                    <div className={`w-full rounded-full h-2 ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-200'}`}>
-                      <div
-                        className={`bg-${industry.color}-500 h-2 rounded-full`}
-                        style={{ width: `${industry.percentage}%` }}
-                      />
-                    </div>
-                    <div className={`text-xs mt-1 ${theme === 'dark' ? 'text-gray-500' : 'text-slate-400'}`}>{industry.percentage}%</div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
-            </div>
+            </Card>
           </div>
         </div>
 
         {/* Top Users */}
-        <div className={`${cardClass} mb-8`}>
-          <div className="flex items-center justify-between mb-6">
+        <Card className="mb-8" padding="none">
+          <div className="p-6 border-b border-gray-200 dark:border-gray-800">
             <h2 className={`text-2xl font-bold ${textPrimary}`}>{t.topUsersTitle}</h2>
-
           </div>
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -220,9 +241,9 @@ const AdminDashboardPage = () => {
               </thead>
               <tbody className={theme === 'dark' ? 'text-gray-300' : 'text-slate-600'}>
                 {topUsers.map((user) => (
-                  <tr key={user.id} className={`border-b transition-colors ${theme === 'dark'
-                      ? 'border-white/10 hover:bg-white/5'
-                      : 'border-slate-100 hover:bg-slate-50'
+                  <tr key={user.id} className={`border-b border-gray-100 dark:border-gray-800 transition-colors ${theme === 'dark'
+                    ? 'hover:bg-white/5'
+                    : 'hover:bg-slate-50'
                     }`}>
                     <td className="py-4 px-4">
                       <div className="flex items-center">
@@ -258,7 +279,7 @@ const AdminDashboardPage = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        </Card>
 
       </div>
     </Layout>

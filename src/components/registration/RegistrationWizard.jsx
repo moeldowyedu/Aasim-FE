@@ -26,7 +26,7 @@ const RegistrationWizard = () => {
   // Redirect authenticated users to dashboard (only once on mount)
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/dashboard', { replace: true });
+      navigate('/', { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -81,7 +81,7 @@ const RegistrationWizard = () => {
 
         // Navigate to dashboard where they can set up organization structure
         setTimeout(() => {
-          navigate('/dashboard', { replace: true });
+          navigate('/', { replace: true });
         }, 500);
       }
     } catch (error) {
@@ -94,7 +94,7 @@ const RegistrationWizard = () => {
   // Redirect if already complete
   useEffect(() => {
     if (isComplete) {
-      navigate('/dashboard', { replace: true });
+      navigate('/', { replace: true });
     }
   }, [isComplete, navigate]);
 

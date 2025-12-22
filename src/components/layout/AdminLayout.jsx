@@ -46,8 +46,8 @@ const AdminLayout = ({ children }) => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${theme === 'dark'
-      ? 'bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900'
-      : 'bg-slate-50'}`}>
+      ? 'bg-[#0B0E14]'
+      : 'bg-white'}`}>
 
       {/* Top Header */}
       <header className={`fixed top-0 left-0 right-0 h-16 backdrop-blur-sm border-b z-50 transition-colors duration-300 ${theme === 'dark'

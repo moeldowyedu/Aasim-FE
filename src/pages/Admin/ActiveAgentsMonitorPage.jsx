@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import AdminLayout from '../../components/layout/AdminLayout';
+import { Card } from '../../components/common';
+import { useTheme } from '../../contexts/ThemeContext';
 import {
   Activity, Clock, CheckCircle, XCircle, Loader, PauseCircle,
   Play, Square, FileText, TrendingUp, Zap, Filter, RefreshCw,
@@ -8,6 +10,7 @@ import {
 } from 'lucide-react';
 
 const ActiveAgentsMonitorPage = () => {
+  const { theme } = useTheme();
   const [filterStatus, setFilterStatus] = useState('all');
   const [autoRefresh, setAutoRefresh] = useState(true);
   const [refreshInterval, setRefreshInterval] = useState(10);
@@ -15,6 +18,41 @@ const ActiveAgentsMonitorPage = () => {
 
   const location = useLocation();
 
+  // Styles
+  const textPrimary = theme === 'dark' ? 'text-white' : 'text-slate-900';
+  const textSecondary = theme === 'dark' ? 'text-gray-400' : 'text-slate-500';
+
+  const COLORS = {
+    blue: { bg: 'bg-blue-500', text: 'text-blue-500', lightBg: 'bg-blue-500/20', lightText: 'text-blue-400', paleBg: 'bg-blue-100', paleText: 'text-blue-600' },
+    purple: { bg: 'bg-purple-500', text: 'text-purple-500', lightBg: 'bg-purple-500/20', lightText: 'text-purple-400', paleBg: 'bg-purple-100', paleText: 'text-purple-600' },
+    green: { bg: 'bg-green-500', text: 'text-green-500', lightBg: 'bg-green-500/20', lightText: 'text-green-400', paleBg: 'bg-green-100', paleText: 'text-green-600' },
+    indigo: { bg: 'bg-indigo-500', text: 'text-indigo-500', lightBg: 'bg-indigo-500/20', lightText: 'text-indigo-400', paleBg: 'bg-indigo-100', paleText: 'text-indigo-600' },
+    yellow: { bg: 'bg-yellow-500', text: 'text-yellow-500', lightBg: 'bg-yellow-500/20', lightText: 'text-yellow-400', paleBg: 'bg-yellow-100', paleText: 'text-yellow-600' },
+    red: { bg: 'bg-red-500', text: 'text-red-500', lightBg: 'bg-red-500/20', lightText: 'text-red-400', paleBg: 'bg-red-100', paleText: 'text-red-600' },
+    orange: { bg: 'bg-orange-500', text: 'text-orange-500', lightBg: 'bg-orange-500/20', lightText: 'text-orange-400', paleBg: 'bg-orange-100', paleText: 'text-orange-600' },
+    gray: { bg: 'bg-gray-500', text: 'text-gray-500', lightBg: 'bg-gray-500/20', lightText: 'text-gray-400', paleBg: 'bg-gray-100', paleText: 'text-gray-600' },
+    cyan: { bg: 'bg-cyan-500', text: 'text-cyan-500', lightBg: 'bg-cyan-500/20', lightText: 'text-cyan-400', paleBg: 'bg-cyan-100', paleText: 'text-cyan-600' },
+  };
+
+  const getColor = (colorName) => {
+    // Handle complex names or defaults
+    let base = 'blue';
+    if (colorName.includes('blue')) base = 'blue';
+    else if (colorName.includes('green') || colorName.includes('emerald')) base = 'green';
+    else if (colorName.includes('purple')) base = 'purple';
+    else if (colorName.includes('yellow') || colorName.includes('orange')) base = 'yellow'; // Map orange/yellow together or separate if needed
+    else if (colorName.includes('red') || colorName.includes('pink')) base = 'red';
+    else if (colorName.includes('gray')) base = 'gray';
+    else if (colorName.includes('cyan')) base = 'cyan';
+
+    // Specific override for the 'queue' type colors often used
+    if (colorName.includes('yellow') && colorName.includes('orange')) base = 'orange';
+
+    const pal = COLORS[base] || COLORS.blue;
+    return theme === 'dark'
+      ? { bg: pal.lightBg, text: pal.lightText, raw: pal.bg }
+      : { bg: pal.paleBg, text: pal.paleText, raw: pal.bg }
+  };
 
   // Simulated auto-refresh
   useEffect(() => {
@@ -33,28 +71,28 @@ const ActiveAgentsMonitorPage = () => {
       value: '34',
       change: 'Active executions',
       icon: Play,
-      color: 'from-blue-500 to-cyan-500'
+      color: 'blue' // Simplified from gradient strings
     },
     {
       label: 'Queued',
       value: '12',
       change: 'Waiting to execute',
       icon: Clock,
-      color: 'from-yellow-500 to-orange-500'
+      color: 'orange'
     },
     {
       label: 'Completed Today',
       value: '1,247',
       change: '98.6% success rate',
       icon: CheckCircle,
-      color: 'from-green-500 to-emerald-500'
+      color: 'green'
     },
     {
       label: 'Failed Today',
       value: '18',
       change: '1.4% error rate',
       icon: XCircle,
-      color: 'from-red-500 to-pink-500'
+      color: 'red'
     }
   ];
 
@@ -265,17 +303,17 @@ const ActiveAgentsMonitorPage = () => {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'Running':
-        return <Loader className="w-4 h-4 text-blue-400 animate-spin" />;
+        return <Loader className="w-4 h-4 text-blue-500 animate-spin" />;
       case 'Queued':
-        return <Clock className="w-4 h-4 text-yellow-400" />;
+        return <Clock className="w-4 h-4 text-yellow-500" />;
       case 'Completed':
-        return <CheckCircle className="w-4 h-4 text-green-400" />;
+        return <CheckCircle className="w-4 h-4 text-green-500" />;
       case 'Failed':
-        return <XCircle className="w-4 h-4 text-red-400" />;
+        return <XCircle className="w-4 h-4 text-red-500" />;
       case 'Paused':
-        return <PauseCircle className="w-4 h-4 text-gray-400" />;
+        return <PauseCircle className="w-4 h-4 text-gray-500" />;
       default:
-        return <Activity className="w-4 h-4 text-gray-400" />;
+        return <Activity className="w-4 h-4 text-gray-500" />;
     }
   };
 
@@ -299,26 +337,19 @@ const ActiveAgentsMonitorPage = () => {
   const getActivityTypeColor = (type) => {
     switch (type) {
       case 'completed':
-        return 'text-green-400';
+        return 'text-green-500';
       case 'started':
-        return 'text-blue-400';
+        return 'text-blue-500';
       case 'failed':
-        return 'text-red-400';
+        return 'text-red-500';
       case 'queued':
-        return 'text-yellow-400';
+        return 'text-yellow-500';
       case 'paused':
-        return 'text-gray-400';
+        return 'text-gray-500';
       default:
-        return 'text-gray-400';
+        return 'text-gray-500';
     }
   };
-
-  // Styles
-  const cardClass = 'glass-card rounded-2xl p-6 hover:shadow-xl transition-all border border-white/10 bg-[#1e293b]/40';
-  const textPrimary = 'text-white';
-  const textSecondary = 'text-gray-400';
-  const tableHeaderClass = 'bg-gray-900/80 text-gray-400';
-  const tableRowClass = 'border-t border-gray-700/50 hover:bg-gray-900/50';
 
   return (
     <AdminLayout>
@@ -331,12 +362,14 @@ const ActiveAgentsMonitorPage = () => {
           </div>
           <div className="mt-4 md:mt-0 flex items-center space-x-3">
             {/* Auto Refresh Toggle */}
-            <div className={`flex items-center space-x-2 rounded-lg px-4 py-2 border bg-gray-800 border-gray-700`}>
+            <div className={`flex items-center space-x-2 rounded-lg px-4 py-2 border transition-all ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-slate-200 shadow-sm'}`}>
               <RefreshCw className={`w-4 h-4 ${autoRefresh ? 'text-green-500 animate-spin' : textSecondary}`} />
               <span className={`text-sm font-semibold ${textPrimary}`}>Auto-refresh:</span>
               <button
                 onClick={() => setAutoRefresh(!autoRefresh)}
-                className={`px-3 py-1 rounded text-xs font-bold transition-colors ${autoRefresh ? 'bg-green-600 text-white' : 'bg-gray-700 text-gray-300'
+                className={`px-3 py-1 rounded text-xs font-bold transition-colors ${autoRefresh
+                  ? 'bg-green-600 text-white'
+                  : theme === 'dark' ? 'bg-gray-700 text-gray-300' : 'bg-slate-200 text-slate-500'
                   }`}
               >
                 {autoRefresh ? 'ON' : 'OFF'}
@@ -348,7 +381,10 @@ const ActiveAgentsMonitorPage = () => {
               <select
                 value={refreshInterval}
                 onChange={(e) => setRefreshInterval(Number(e.target.value))}
-                className={`px-4 py-2 border rounded-lg text-sm focus:outline-none focus:border-purple-500 bg-gray-800 border-gray-700 text-white`}
+                className={`px-4 py-2 border rounded-lg text-sm focus:outline-none focus:border-purple-500 transition-all ${theme === 'dark'
+                    ? 'bg-gray-800 border-gray-700 text-white'
+                    : 'bg-white border-slate-200 text-slate-700 shadow-sm'
+                  }`}
               >
                 <option value={5}>5s</option>
                 <option value={10}>10s</option>
@@ -367,42 +403,43 @@ const ActiveAgentsMonitorPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => {
             const Icon = stat.icon;
+            const colors = getColor(stat.color);
             return (
-              <div key={index} className={cardClass}>
+              <Card key={index} hover>
                 <div className="flex items-start justify-between mb-4">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center`}>
-                    <Icon className="w-6 h-6 text-white" />
+                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${colors.bg}`}>
+                    <Icon className={`w-6 h-6 ${colors.text}`} />
                   </div>
                 </div>
                 <h3 className={`text-3xl font-bold mb-1 ${textPrimary}`}>{stat.value}</h3>
                 <p className={`${textSecondary} text-sm font-medium mb-2`}>{stat.label}</p>
-                <p className="text-gray-500 text-xs">{stat.change}</p>
-              </div>
+                <p className={`${textSecondary} text-xs`}>{stat.change}</p>
+              </Card>
             );
           })}
         </div>
 
         {/* Performance Metrics */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className={cardClass}>
+          <Card>
             <div className="flex items-center space-x-2 mb-4">
-              <Clock className="w-5 h-5 text-purple-400" />
+              <Clock className="w-5 h-5 text-purple-500" />
               <h3 className={`text-lg font-bold ${textPrimary}`}>Avg Execution Time</h3>
             </div>
             <div className={`text-3xl font-bold ${textPrimary}`}>{performanceMetrics.avgExecutionTime}</div>
-          </div>
+          </Card>
 
-          <div className={cardClass}>
+          <Card>
             <div className="flex items-center space-x-2 mb-4">
-              <TrendingUp className="w-5 h-5 text-green-400" />
+              <TrendingUp className="w-5 h-5 text-green-500" />
               <h3 className={`text-lg font-bold ${textPrimary}`}>Success Rate</h3>
             </div>
-            <div className="text-3xl font-bold text-green-400">{performanceMetrics.successRate}</div>
-          </div>
+            <div className="text-3xl font-bold text-green-500">{performanceMetrics.successRate}</div>
+          </Card>
 
-          <div className={cardClass}>
+          <Card>
             <div className="flex items-center space-x-2 mb-4">
-              <Database className="w-5 h-5 text-blue-400" />
+              <Database className="w-5 h-5 text-blue-500" />
               <h3 className={`text-lg font-bold ${textPrimary}`}>Engine Usage</h3>
             </div>
             <div className="space-y-1">
@@ -413,11 +450,11 @@ const ActiveAgentsMonitorPage = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </Card>
         </div>
 
         {/* Filters */}
-        <div className={`bg-gray-800/50 border-gray-700/50 backdrop-blur-sm rounded-xl p-4 border transition-all`}>
+        <Card padding="sm" className="transition-all">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <Filter className={`w-5 h-5 ${textSecondary}`} />
@@ -429,8 +466,10 @@ const ActiveAgentsMonitorPage = () => {
                   key={status}
                   onClick={() => setFilterStatus(status)}
                   className={`px-4 py-2 rounded-lg text-sm font-semibold capitalize transition-colors ${filterStatus === status
-                    ? 'bg-purple-600 text-white'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    ? 'bg-purple-600 text-white shadow-md'
+                    : theme === 'dark'
+                      ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                 >
                   {status}
@@ -438,27 +477,27 @@ const ActiveAgentsMonitorPage = () => {
               ))}
             </div>
           </div>
-        </div>
+        </Card>
 
         {/* Active Agents Table */}
-        <div className={`bg-gray-800/50 border-gray-700/50 backdrop-blur-sm rounded-xl border overflow-hidden`}>
+        <Card padding="none" className="overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className={tableHeaderClass}>
+              <thead className={theme === 'dark' ? 'bg-gray-900/50' : 'bg-slate-50'}>
                 <tr>
-                  <th className="text-left py-4 px-6 text-xs font-bold uppercase">Agent</th>
-                  <th className="text-left py-4 px-6 text-xs font-bold uppercase">Tenant</th>
-                  <th className="text-left py-4 px-6 text-xs font-bold uppercase">Status</th>
-                  <th className="text-left py-4 px-6 text-xs font-bold uppercase">Progress</th>
-                  <th className="text-left py-4 px-6 text-xs font-bold uppercase">Started</th>
-                  <th className="text-left py-4 px-6 text-xs font-bold uppercase">Duration</th>
-                  <th className="text-left py-4 px-6 text-xs font-bold uppercase">Engine</th>
-                  <th className="text-right py-4 px-6 text-xs font-bold uppercase">Actions</th>
+                  <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>Agent</th>
+                  <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>Tenant</th>
+                  <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>Status</th>
+                  <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>Progress</th>
+                  <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>Started</th>
+                  <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>Duration</th>
+                  <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>Engine</th>
+                  <th className={`text-right py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>Actions</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className={`divide-y ${theme === 'dark' ? 'divide-gray-800' : 'divide-slate-100'}`}>
                 {filteredAgents.map((agent) => (
-                  <tr key={agent.id} className={`${tableRowClass} transition-colors`}>
+                  <tr key={agent.id} className={`transition-colors ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-slate-50'}`}>
                     <td className="py-4 px-6">
                       <div className={`font-semibold ${textPrimary}`}>{agent.name}</div>
                       <div className={`text-xs ${textSecondary}`}>by {agent.user}</div>
@@ -479,11 +518,11 @@ const ActiveAgentsMonitorPage = () => {
                         <div className="flex items-center justify-between mb-1">
                           <span className={`text-xs ${textSecondary}`}>{agent.progress}%</span>
                         </div>
-                        <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div className={`w-full rounded-full h-2 ${theme === 'dark' ? 'bg-gray-700' : 'bg-slate-200'}`}>
                           <div
                             className={`h-2 rounded-full transition-all ${agent.status === 'Failed' ? 'bg-red-500' :
-                              agent.status === 'Completed' ? 'bg-green-500' :
-                                'bg-blue-500'
+                                agent.status === 'Completed' ? 'bg-green-500' :
+                                  'bg-blue-500'
                               }`}
                             style={{ width: `${agent.progress}%` }}
                           />
@@ -497,26 +536,26 @@ const ActiveAgentsMonitorPage = () => {
                       <span className={`${textPrimary} font-mono text-sm`}>{agent.duration}</span>
                     </td>
                     <td className="py-4 px-6">
-                      <span className="text-purple-400 text-sm">{agent.engine}</span>
+                      <span className="text-purple-500 text-sm">{agent.engine}</span>
                     </td>
                     <td className="py-4 px-6">
                       <div className="flex items-center justify-end space-x-2">
-                        <button className={`p-2 rounded-lg transition-colors hover:bg-gray-700`} title="View Logs">
-                          <FileText className="w-4 h-4 text-blue-400" />
+                        <button className={`p-2 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-slate-200'}`} title="View Logs">
+                          <FileText className="w-4 h-4 text-blue-500" />
                         </button>
                         {agent.status === 'Running' && (
                           <>
-                            <button className={`p-2 rounded-lg transition-colors hover:bg-gray-700`} title="Pause">
-                              <PauseCircle className="w-4 h-4 text-yellow-400" />
+                            <button className={`p-2 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-slate-200'}`} title="Pause">
+                              <PauseCircle className="w-4 h-4 text-yellow-500" />
                             </button>
-                            <button className={`p-2 rounded-lg transition-colors hover:bg-gray-700`} title="Terminate">
-                              <Square className="w-4 h-4 text-red-400" />
+                            <button className={`p-2 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-slate-200'}`} title="Terminate">
+                              <Square className="w-4 h-4 text-red-500" />
                             </button>
                           </>
                         )}
                         {agent.status === 'Paused' && (
-                          <button className={`p-2 rounded-lg transition-colors hover:bg-gray-700`} title="Resume">
-                            <Play className="w-4 h-4 text-green-400" />
+                          <button className={`p-2 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-gray-700' : 'hover:bg-slate-200'}`} title="Resume">
+                            <Play className="w-4 h-4 text-green-500" />
                           </button>
                         )}
                       </div>
@@ -526,13 +565,13 @@ const ActiveAgentsMonitorPage = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        </Card>
 
         {/* Real-time Activity Feed */}
-        <div className={cardClass}>
+        <Card>
           <div className="flex items-center justify-between mb-6">
             <h2 className={`text-2xl font-bold ${textPrimary} flex items-center`}>
-              <Activity className="w-6 h-6 mr-2 text-purple-400" />
+              <Activity className="w-6 h-6 mr-2 text-purple-500" />
               Real-time Activity Feed
             </h2>
             <span className={`text-sm ${textSecondary}`}>Last 20 events</span>
@@ -541,7 +580,10 @@ const ActiveAgentsMonitorPage = () => {
             {activityFeed.map((activity) => (
               <div
                 key={activity.id}
-                className={`flex items-start justify-between p-3 rounded-lg border bg-gray-900/50 border-gray-700/50`}
+                className={`flex items-start justify-between p-3 rounded-lg border transition-all ${theme === 'dark'
+                    ? 'bg-gray-900/50 border-gray-700/50'
+                    : 'bg-slate-50 border-slate-200'
+                  }`}
               >
                 <div className="flex items-start space-x-3">
                   <div className={`mt-0.5 ${getActivityTypeColor(activity.type)}`}>
@@ -560,7 +602,7 @@ const ActiveAgentsMonitorPage = () => {
               </div>
             ))}
           </div>
-        </div>
+        </Card>
       </div>
     </AdminLayout>
   );

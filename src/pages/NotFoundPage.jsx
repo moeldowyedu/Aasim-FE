@@ -1,26 +1,34 @@
-import { Link } from 'react-router-dom'
-import { AlertCircle, Home, LayoutDashboard, HelpCircle, ArrowRight } from 'lucide-react'
-import MainLayout from '../components/layout/MainLayout'
+import { Link } from 'react-router-dom';
+import { AlertCircle, Home, LayoutDashboard, HelpCircle, ArrowRight } from 'lucide-react';
+import MainLayout from '../components/layout/MainLayout';
+import { useTheme } from '../contexts/ThemeContext';
 
 const NotFoundPage = () => {
+  const { theme } = useTheme();
+
   return (
     <MainLayout showFooter={false}>
-      <div className="min-h-screen bg-[#0B0E14] text-white flex items-center justify-center px-6 relative overflow-hidden">
+      <div className={`min-h-screen flex items-center justify-center px-6 relative overflow-hidden ${theme === 'dark' ? 'bg-[#0B0E14] text-white' : 'bg-slate-50 text-slate-900'
+        }`}>
 
         {/* Animated Background Elements */}
-        <div className="absolute inset-0 opacity-30 pointer-events-none">
-          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-[120px] animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
-        </div>
+        {theme === 'dark' && (
+          <div className="absolute inset-0 opacity-30 pointer-events-none">
+            <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-primary-500/20 rounded-full blur-[120px] animate-pulse"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+          </div>
+        )}
 
-        <div className="relative z-10 text-center max-w-3xl mx-auto pt-32">
+        <div className="relative z-10 text-center max-w-3xl mx-auto pt-10 md:pt-0">
 
           {/* Animated Icon */}
           <div className="mb-8 inline-block animate-scale-in">
             <div className="relative">
-              <div className="absolute inset-0 bg-primary-500/20 rounded-full blur-xl animate-pulse"></div>
-              <div className="relative bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-8">
-                <AlertCircle className="w-24 h-24 text-primary-400" strokeWidth={1.5} />
+              <div className={`absolute inset-0 rounded-full blur-xl animate-pulse ${theme === 'dark' ? 'bg-primary-500/20' : 'bg-primary-200'
+                }`}></div>
+              <div className={`relative backdrop-blur-md border rounded-full p-8 ${theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-white border-slate-200 shadow-xl'
+                }`}>
+                <AlertCircle className={`w-24 h-24 ${theme === 'dark' ? 'text-primary-400' : 'text-primary-600'}`} strokeWidth={1.5} />
               </div>
             </div>
           </div>
@@ -33,12 +41,12 @@ const NotFoundPage = () => {
           </h1>
 
           {/* Subheading */}
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 animate-slide-up">
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4 animate-slide-up ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
             Page Not Found
           </h2>
 
           {/* Description */}
-          <p className="text-lg text-gray-400 mb-12 max-w-xl mx-auto leading-relaxed animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <p className={`text-lg mb-12 max-w-xl mx-auto leading-relaxed animate-slide-up ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`} style={{ animationDelay: '0.1s' }}>
             The page you're looking for doesn't exist or has been moved.
             Let's get you back on track.
           </p>
@@ -49,7 +57,7 @@ const NotFoundPage = () => {
             {/* Primary CTA - Go Home */}
             <Link
               to="/"
-              className="glass-btn-primary group flex items-center gap-3 min-w-[200px] justify-center"
+              className="glass-btn-primary group flex items-center gap-3 min-w-[200px] justify-center px-6 py-3 rounded-lg font-semibold bg-primary-600 text-white hover:bg-primary-700 shadow-lg transition-all"
             >
               <Home className="w-5 h-5" />
               Go Home
@@ -58,8 +66,11 @@ const NotFoundPage = () => {
 
             {/* Secondary CTA - Dashboard */}
             <Link
-              to="/dashboard"
-              className="glass-btn hover:bg-white/10 text-white group flex items-center gap-3 min-w-[200px] justify-center"
+              to="/"
+              className={`group flex items-center gap-3 min-w-[200px] justify-center px-6 py-3 rounded-lg font-semibold border transition-all ${theme === 'dark'
+                ? 'bg-white/5 border-white/10 text-white hover:bg-white/10'
+                : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:shadow-md'
+                }`}
             >
               <LayoutDashboard className="w-5 h-5" />
               Dashboard
@@ -70,7 +81,8 @@ const NotFoundPage = () => {
           <div className="mt-8 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             <Link
               to="/support"
-              className="inline-flex items-center gap-2 text-gray-400 hover:text-primary-400 transition-colors text-sm"
+              className={`inline-flex items-center gap-2 transition-colors text-sm ${theme === 'dark' ? 'text-gray-400 hover:text-primary-400' : 'text-slate-500 hover:text-primary-600'
+                }`}
             >
               <HelpCircle className="w-4 h-4" />
               Need help? Contact Support
@@ -80,7 +92,7 @@ const NotFoundPage = () => {
         </div>
       </div>
     </MainLayout>
-  )
-}
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;

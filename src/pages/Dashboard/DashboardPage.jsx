@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import MainLayout from '../../components/layout/MainLayout';
 import { useAuthStore } from '../../store/authStore';
 import { useBillingStore } from '../../store/billingStore';
-import { Badge } from '../../components/common';
+import { Badge, Card } from '../../components/common';
 import { StatCard, QuickActions, RecentActivity, UsageChart, MyAgents } from '../../components/dashboard';
 import { PLANS } from '../../utils/constants';
 import { authService } from '../../services';
 import { useTheme } from '../../contexts/ThemeContext';
 import { differenceInDays } from 'date-fns';
+import { Link } from 'react-router-dom';
+import { Settings, Store, Users, Play, Activity } from 'lucide-react';
 
 const DashboardPage = () => {
   const { user } = useAuthStore();
@@ -20,6 +22,10 @@ const DashboardPage = () => {
     marketplace_sales: 0
   });
   const [isLoadingStats, setIsLoadingStats] = useState(true);
+
+  // Styles
+  const textPrimary = theme === 'dark' ? 'text-white' : 'text-slate-900';
+  const textSecondary = theme === 'dark' ? 'text-gray-400' : 'text-slate-500';
 
   // Calculate Trial Status
   const trialEndsAt = user?.tenant?.trial_ends_at;
@@ -51,22 +57,22 @@ const DashboardPage = () => {
     : PLANS[0]; // Default to Starter
 
   return (
-    <MainLayout showFooter={false} theme={theme}>
+    <MainLayout showFooter={false}>
       <div className="py-6 space-y-8">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between">
           <div>
-            <h1 className={`text-3xl font-heading font-bold mb-1 tracking-tight ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
+            <h1 className={`text-3xl font-heading font-bold mb-1 tracking-tight ${textPrimary}`}>
               Dashboard
             </h1>
-            <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-slate-500'}`}>
+            <p className={`text-sm ${textSecondary}`}>
               {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
           </div>
           <div className="mt-4 md:mt-0">
             <div className="flex items-center gap-3">
               <div className="text-right">
-                <p className={`text-sm font-semibold mb-1 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-600'}`}>Current Plan</p>
+                <p className={`text-sm font-semibold mb-1 ${textSecondary}`}>Current Plan</p>
                 <div className="flex flex-col items-end">
                   <Badge
                     variant={isTrial ? (daysLeft >= 0 ? "warning" : "error") : "primary"}
@@ -93,7 +99,7 @@ const DashboardPage = () => {
           <StatCard
             title="Total Agents"
             value={isLoadingStats ? "..." : String(stats.total_agents || 0)}
-            icon={<span className="material-icons text-2xl text-primary-600">smart_toy</span>}
+            icon={<Users className="w-6 h-6" />}
             color="primary"
             trend="up"
             trendValue={stats.agents_trend || "0"}
@@ -101,7 +107,7 @@ const DashboardPage = () => {
           <StatCard
             title="Runs This Month"
             value={isLoadingStats ? "..." : String(stats.total_executions || 0)}
-            icon={<span className="material-icons text-2xl text-secondary-600">play_arrow</span>}
+            icon={<Play className="w-6 h-6" />}
             color="secondary"
             trend="up"
             trendValue={stats.executions_trend || "0%"}
@@ -109,7 +115,7 @@ const DashboardPage = () => {
           <StatCard
             title="Active Workflows"
             value={isLoadingStats ? "..." : String(stats.active_workflows || 0)}
-            icon={<span className="material-icons text-2xl text-purple-600">account_tree</span>}
+            icon={<Activity className="w-6 h-6" />}
             color="purple"
             trend="up"
             trendValue={stats.workflows_trend || "0"}
@@ -117,7 +123,7 @@ const DashboardPage = () => {
           <StatCard
             title="Marketplace Sales"
             value={isLoadingStats ? "..." : `$${stats.marketplace_sales || 0}`}
-            icon={<span className="material-icons text-2xl text-orange-600">payments</span>}
+            icon={<Store className="w-6 h-6" />}
             color="orange"
             trend="up"
             trendValue={stats.sales_trend || "$0"}
@@ -126,7 +132,7 @@ const DashboardPage = () => {
 
         {/* Quick Actions */}
         <div>
-          <h2 className={`text-2xl font-heading font-bold mb-4 tracking-tight ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
+          <h2 className={`text-2xl font-heading font-bold mb-4 tracking-tight ${textPrimary}`}>
             Quick Actions
           </h2>
           <QuickActions />
@@ -152,74 +158,65 @@ const DashboardPage = () => {
 
         {/* Additional Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className={`rounded-xl p-6 border transition-all duration-300 ${theme === 'dark'
-              ? 'glass-card border-primary-500/20 bg-primary-900/10'
-              : 'bg-gradient-to-br from-primary-50 to-primary-100 border-primary-200'
-            }`}>
+          <Card hover>
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-                <span className="material-icons text-white text-xl">precision_manufacturing</span>
+                <Settings className="text-white w-6 h-6" />
               </div>
-              <h3 className={`font-heading font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
+              <h3 className={`font-heading font-semibold ${textPrimary}`}>
                 Precision AI Engines
               </h3>
             </div>
-            <p className={`text-sm mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-700'}`}>
+            <p className={`text-sm mb-4 ${textSecondary}`}>
               Access 7 powerful engines to build custom agents
             </p>
-            <a
-              href="/engines"
+            <Link
+              to="/engines"
               className="text-sm font-medium text-primary-600 hover:text-primary-700"
             >
               Explore Engines →
-            </a>
-          </div>
+            </Link>
+          </Card>
 
-          <div className={`rounded-xl p-6 border transition-all duration-300 ${theme === 'dark'
-              ? 'glass-card border-secondary-500/20 bg-secondary-900/10'
-              : 'bg-gradient-to-br from-slate-50 to-slate-100 border-slate-200'
-            }`}>
+          <Card hover>
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-secondary-500 rounded-lg flex items-center justify-center">
-                <span className="material-icons text-white text-xl">store</span>
+                <Store className="text-white w-6 h-6" />
               </div>
-              <h3 className={`font-heading font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
+              <h3 className={`font-heading font-semibold ${textPrimary}`}>
                 AgentX Hub
               </h3>
             </div>
-            <p className={`text-sm mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-700'}`}>
+            <p className={`text-sm mb-4 ${textSecondary}`}>
               Discover & deploy agents. Earn 70% revenue share
             </p>
-            <a
-              href="/agentx/marketplace"
+            <Link
+              to="/agentx/marketplace"
               className={`text-sm font-medium ${theme === 'dark' ? 'text-secondary-400 hover:text-secondary-300' : 'text-slate-600 hover:text-slate-700'}`}
             >
               Visit Marketplace →
-            </a>
-          </div>
+            </Link>
+          </Card>
 
-          <div className={`rounded-xl p-6 border transition-all duration-300 ${theme === 'dark'
-              ? 'glass-card border-purple-500/20 bg-purple-900/10'
-              : 'bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200'
-            }`}>
+          <Card hover>
             <div className="flex items-center gap-3 mb-3">
               <div className="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
-                <span className="material-icons text-white text-xl">supervised_user_circle</span>
+                <Users className="text-white w-6 h-6" />
               </div>
-              <h3 className={`font-heading font-semibold ${theme === 'dark' ? 'text-white' : 'text-slate-900'}`}>
+              <h3 className={`font-heading font-semibold ${textPrimary}`}>
                 HITL Mode
               </h3>
             </div>
-            <p className={`text-sm mb-4 ${theme === 'dark' ? 'text-gray-400' : 'text-purple-800'}`}>
+            <p className={`text-sm mb-4 ${textSecondary}`}>
               Human-in-the-Loop oversight for critical tasks
             </p>
-            <a
-              href="/hitl"
+            <Link
+              to="/hitl"
               className="text-sm font-medium text-purple-600 hover:text-purple-700"
             >
               Configure HITL →
-            </a>
-          </div>
+            </Link>
+          </Card>
         </div>
       </div>
     </MainLayout>

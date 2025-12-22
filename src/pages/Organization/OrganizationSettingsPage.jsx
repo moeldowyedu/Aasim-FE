@@ -2,10 +2,9 @@ import { useState, useEffect, useRef } from 'react';
 import { useAuthStore } from '../../store/authStore';
 import { organizationService, tenantService } from '../../services';
 import MainLayout from '../../components/layout/MainLayout';
-import Card from '../../components/common/Card/Card';
-import Input from '../../components/common/Input/Input';
-import Button from '../../components/common/Button/Button';
+import { Card, Button } from '../../components/common';
 import { Building2, Upload, AlertCircle, CheckCircle } from 'lucide-react';
+import { useTheme } from '../../contexts/ThemeContext';
 
 // --- Data Constants ---
 const INDUSTRIES = [
@@ -53,42 +52,70 @@ const TIMEZONES = [
 
 // --- Local Components ---
 
-const Select = ({ label, name, value, onChange, options, fullWidth, className, required, placeholder = "Select..." }) => (
-    <div className={`flex flex-col gap-1.5 ${fullWidth ? 'w-full' : ''}`}>
-        {label && (
-            <label className="text-sm font-medium ml-1 text-gray-700">
-                {label} {required && <span className="text-red-500">*</span>}
-            </label>
-        )}
-        <div className="relative">
-            <select
-                name={name}
-                value={value}
-                onChange={onChange}
-                className={`w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-1 focus:ring-black focus:border-black transition-all duration-200 appearance-none ${className}`}
-            >
-                <option value="" disabled>{placeholder}</option>
-                {options.map((opt) => (
-                    <option key={opt} value={opt}>{opt}</option>
-                ))}
-            </select>
-            {/* Custom Arrow */}
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                </svg>
-            </div>
-        </div>
-    </div>
-);
-
-
 const OrganizationSettingsPage = () => {
     const { user, updateUser } = useAuthStore();
+    const { theme } = useTheme();
     const fileInputRef = useRef(null);
     const [orgId, setOrgId] = useState(null);
     const [useTenantServiceForUpdate, setUseTenantServiceForUpdate] = useState(false);
     const [imageError, setImageError] = useState(false);
+
+    // Styles
+    const textPrimary = theme === 'dark' ? 'text-white' : 'text-slate-900';
+    const textSecondary = theme === 'dark' ? 'text-gray-400' : 'text-slate-500';
+    const inputClass = `w-full px-4 py-3 rounded-xl border focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-200 appearance-none ${theme === 'dark'
+            ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-500'
+            : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400'
+        }`;
+    const labelClass = `text-sm font-medium ml-1 ${textSecondary}`;
+
+    // Select Component (Local to use theme)
+    const Select = ({ label, name, value, onChange, options, fullWidth, className, required, placeholder = "Select..." }) => (
+        <div className={`flex flex-col gap-1.5 ${fullWidth ? 'w-full' : ''}`}>
+            {label && (
+                <label className={labelClass}>
+                    {label} {required && <span className="text-red-500">*</span>}
+                </label>
+            )}
+            <div className="relative">
+                <select
+                    name={name}
+                    value={value}
+                    onChange={onChange}
+                    className={`${inputClass} ${className}`}
+                >
+                    <option value="" disabled>{placeholder}</option>
+                    {options.map((opt) => (
+                        <option key={opt} value={opt} className={theme === 'dark' ? 'bg-gray-800' : 'bg-white'}>{opt}</option>
+                    ))}
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <svg className={`w-4 h-4 ${textSecondary}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    );
+
+    // Input Component (Local to use theme)
+    const Input = ({ label, name, value, onChange, fullWidth, className, required, type = "text" }) => (
+        <div className={`flex flex-col gap-1.5 ${fullWidth ? 'w-full' : ''}`}>
+            {label && (
+                <label className={labelClass}>
+                    {label} {required && <span className="text-red-500">*</span>}
+                </label>
+            )}
+            <input
+                type={type}
+                name={name}
+                value={value}
+                onChange={onChange}
+                className={`${inputClass} ${className}`}
+            />
+        </div>
+    );
+
 
     // Base URL for resolving relative image paths (common in Laravel)
     const STORAGE_BASE_URL = 'https://api.obsolio.com';
@@ -177,14 +204,14 @@ const OrganizationSettingsPage = () => {
                     const orgs = Array.isArray(orgResponse) ? orgResponse : (orgResponse.data || []);
                     if (orgs.length > 0) {
                         // Found a specific organization!
-                        console.log("✅ Found valid Organization record:", orgs[0]);
+                        // console.log("✅ Found valid Organization record:", orgs[0]);
                         success = true;
                         data = orgs[0];
                         setOrgId(data.id);
                         setUseTenantServiceForUpdate(false); // Explicitly use Org service
                     }
                 } catch (e) {
-                    console.warn("Could not fetch explicit organization list (using tenant fallback if avail)");
+                    // console.warn("Could not fetch explicit organization list (using tenant fallback if avail)");
                 }
 
                 // Priority 3 Fallback to user session...
@@ -334,8 +361,8 @@ const OrganizationSettingsPage = () => {
     if (fetching) {
         return (
             <MainLayout>
-                <div className="flex items-center justify-center h-[calc(100vh-100px)] bg-gray-50">
-                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-gray-900 border-b-transparent"></div>
+                <div className="flex items-center justify-center h-[calc(100vh-100px)]">
+                    <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-primary-600 border-b-transparent"></div>
                 </div>
             </MainLayout>
         );
@@ -345,11 +372,12 @@ const OrganizationSettingsPage = () => {
 
     return (
         <MainLayout>
-            <div className="min-h-screen bg-gray-50 py-10 px-4">
-                <div className="max-w-2xl mx-auto">
+            <div className="py-8 space-y-8">
+                <div className="max-w-4xl mx-auto">
 
                     <div className="mb-6">
-                        <h1 className="text-xl font-bold text-gray-900">Organization Settings</h1>
+                        <h1 className={`text-4xl font-bold font-heading mb-2 ${textPrimary}`}>Organization Settings</h1>
+                        <p className={textSecondary}>Manage your organization's public profile and details.</p>
                     </div>
 
                     {/* Notifications */}
@@ -366,13 +394,16 @@ const OrganizationSettingsPage = () => {
                         </div>
                     )}
 
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <Card className="p-8">
 
                         {/* Logo Upload - Compact */}
-                        <div className="flex items-center gap-4 mb-6 pb-6 border-b border-gray-100">
+                        <div className={`flex items-center gap-4 mb-8 pb-8 border-b ${theme === 'dark' ? 'border-gray-800' : 'border-gray-100'}`}>
                             <div
                                 onClick={triggerFileInput}
-                                className="w-16 h-16 rounded bg-gray-100 border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors overflow-hidden"
+                                className={`w-20 h-20 rounded-xl border-2 border-dashed flex items-center justify-center cursor-pointer transition-colors overflow-hidden ${theme === 'dark'
+                                        ? 'bg-gray-800 border-gray-700 hover:border-gray-500'
+                                        : 'bg-gray-50 border-gray-200 hover:border-gray-400'
+                                    }`}
                             >
                                 {currentLogoUrl && !imageError ? (
                                     <img
@@ -383,18 +414,19 @@ const OrganizationSettingsPage = () => {
                                             console.warn('Image failed to load:', currentLogoUrl);
                                             setImageError(true);
                                         }}
-                                        className="w-full h-full object-contain"
+                                        className="w-full h-full object-contain p-1"
                                     />
                                 ) : (
-                                    <Building2 className="w-6 h-6 text-gray-400" />
+                                    <Building2 className={`w-8 h-8 ${textSecondary}`} />
                                 )}
                             </div>
                             <div>
-                                <h3 className="text-sm font-medium text-gray-900">Organization Logo</h3>
+                                <h3 className={`font-semibold ${textPrimary}`}>Organization Logo</h3>
+                                <p className={`text-sm mb-2 ${textSecondary}`}>Recommended size: 512x512px</p>
                                 <button
                                     type="button"
                                     onClick={triggerFileInput}
-                                    className="text-xs text-blue-600 hover:text-blue-700 font-medium mt-1"
+                                    className="text-sm text-primary-600 hover:text-primary-700 font-semibold"
                                 >
                                     Change Logo
                                 </button>
@@ -403,23 +435,21 @@ const OrganizationSettingsPage = () => {
                         </div>
 
                         {/* Form Inputs - Compact Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <Input
-                                label="Name"
+                                label="Organization Name"
                                 name="organization_full_name"
                                 value={formData.organization_full_name}
                                 onChange={handleChange}
                                 required
                                 fullWidth
-                                className="bg-white"
                             />
                             <Input
-                                label="Short Name"
+                                label="Short Name (Slug)"
                                 name="organization_short_name"
                                 value={formData.organization_short_name}
                                 onChange={handleChange}
                                 fullWidth
-                                className="bg-white"
                             />
 
                             <Select
@@ -433,12 +463,11 @@ const OrganizationSettingsPage = () => {
                             />
 
                             <Input
-                                label="Phone"
+                                label="Phone Number"
                                 name="phone"
                                 value={formData.phone}
                                 onChange={handleChange}
                                 fullWidth
-                                className="bg-white"
                             />
 
                             <Select
@@ -474,29 +503,32 @@ const OrganizationSettingsPage = () => {
                             />
                         </div>
 
-                        <div className="mb-6">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <div className="mb-8">
+                            <label className={labelClass}>Description</label>
                             <textarea
                                 name="description"
                                 value={formData.description}
                                 onChange={handleChange}
-                                rows={3}
-                                className="w-full bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-black focus:border-black"
+                                rows={4}
+                                className={`mt-1.5 w-full rounded-xl border px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all ${theme === 'dark'
+                                        ? 'bg-gray-800 border-gray-700 text-white'
+                                        : 'bg-white border-gray-300 text-gray-900'
+                                    }`}
                             />
                         </div>
 
-                        <div className="flex justify-end pt-2">
+                        <div className="flex justify-end pt-4 border-t border-gray-100 dark:border-gray-800">
                             <Button
                                 onClick={handleSubmit}
                                 loading={loading}
-                                size="md"
-                                className="bg-black text-white px-8 hover:bg-gray-800"
+                                size="lg"
+                                className="bg-primary-600 text-white hover:bg-primary-700 shadow-lg"
                             >
                                 Save Changes
                             </Button>
                         </div>
 
-                    </div>
+                    </Card>
                 </div>
             </div>
         </MainLayout>

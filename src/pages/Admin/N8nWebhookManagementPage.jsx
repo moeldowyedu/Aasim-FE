@@ -1,11 +1,25 @@
-import { useState } from 'react'
-import MainLayout from '../../components/layout/MainLayout'
-import { useLanguage } from '../../contexts/LanguageContext'
-import { translations } from '../../translations'
+import { useState } from 'react';
+import AdminLayout from '../../components/layout/AdminLayout';
+import { Card } from '../../components/common';
+import { useTheme } from '../../contexts/ThemeContext';
+import { useLanguage } from '../../contexts/LanguageContext';
+import { translations } from '../../translations';
+import {
+  Webhook, Activity, CheckCircle, Brain, Search, Plus,
+  PauseCircle, PlayCircle, Edit, Trash2, Play, History,
+  X, AlertCircle, Copy
+} from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const N8nWebhookManagementPage = () => {
-  const { language } = useLanguage()
-  const t = translations[language]
+  const { theme } = useTheme();
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  // Styles
+  const textPrimary = theme === 'dark' ? 'text-white' : 'text-slate-900';
+  const textSecondary = theme === 'dark' ? 'text-gray-400' : 'text-slate-500';
+
   const [webhooks, setWebhooks] = useState([
     {
       id: 1,
@@ -40,12 +54,11 @@ const N8nWebhookManagementPage = () => {
       executions: 234,
       successRate: 96.2
     }
-  ])
+  ]);
 
-  const [showModal, setShowModal] = useState(false)
-  const [editingWebhook, setEditingWebhook] = useState(null)
-  const [selectedWebhook, setSelectedWebhook] = useState(null)
-  const [activeTab, setActiveTab] = useState('list') // list, logs, create
+  const [showModal, setShowModal] = useState(false);
+  const [editingWebhook, setEditingWebhook] = useState(null);
+  const [activeTab, setActiveTab] = useState('list'); // list, logs
 
   const [formData, setFormData] = useState({
     name: '',
@@ -62,7 +75,7 @@ const N8nWebhookManagementPage = () => {
     headers: [{ key: '', value: '' }],
     notifyOnFailure: true,
     notifyEmail: ''
-  })
+  });
 
   const availableAgents = [
     { id: 'code-judge', name: 'Precision Code Analyzer', icon: 'code', color: 'blue' },
@@ -74,7 +87,7 @@ const N8nWebhookManagementPage = () => {
     { id: 'essay-judge', name: 'Precision Writing Analyzer', icon: 'edit', color: 'green' },
     { id: 'video-judge', name: 'Precision Video Analyzer', icon: 'videocam', color: 'red' },
     { id: 'design-judge', name: 'Precision Design Analyzer', icon: 'palette', color: 'pink' }
-  ]
+  ];
 
   const webhookLogs = [
     {
@@ -107,10 +120,10 @@ const N8nWebhookManagementPage = () => {
       payload: { submissionId: 'sub_121', agentIds: ['essay-judge'] },
       error: 'Connection timeout'
     }
-  ]
+  ];
 
   const handleCreateWebhook = () => {
-    setEditingWebhook(null)
+    setEditingWebhook(null);
     setFormData({
       name: '',
       url: '',
@@ -126,12 +139,12 @@ const N8nWebhookManagementPage = () => {
       headers: [{ key: '', value: '' }],
       notifyOnFailure: true,
       notifyEmail: ''
-    })
-    setShowModal(true)
-  }
+    });
+    setShowModal(true);
+  };
 
   const handleEditWebhook = (webhook) => {
-    setEditingWebhook(webhook)
+    setEditingWebhook(webhook);
     setFormData({
       name: webhook.name,
       url: webhook.url,
@@ -147,20 +160,18 @@ const N8nWebhookManagementPage = () => {
       headers: [{ key: 'Content-Type', value: 'application/json' }],
       notifyOnFailure: true,
       notifyEmail: 'admin@example.com'
-    })
-    setShowModal(true)
-  }
+    });
+    setShowModal(true);
+  };
 
   const handleSaveWebhook = () => {
     if (editingWebhook) {
-      // Update existing webhook
       setWebhooks(webhooks.map(w =>
         w.id === editingWebhook.id
           ? { ...w, name: formData.name, url: formData.url, agents: formData.agents, trigger: formData.trigger }
           : w
-      ))
+      ));
     } else {
-      // Create new webhook
       const newWebhook = {
         id: webhooks.length + 1,
         name: formData.name,
@@ -171,156 +182,133 @@ const N8nWebhookManagementPage = () => {
         lastExecuted: null,
         executions: 0,
         successRate: 0
-      }
-      setWebhooks([...webhooks, newWebhook])
+      };
+      setWebhooks([...webhooks, newWebhook]);
     }
-    setShowModal(false)
-  }
+    setShowModal(false);
+  };
 
   const handleDeleteWebhook = (id) => {
     if (window.confirm('Are you sure you want to delete this webhook?')) {
-      setWebhooks(webhooks.filter(w => w.id !== id))
+      setWebhooks(webhooks.filter(w => w.id !== id));
     }
-  }
+  };
 
   const handleToggleStatus = (id) => {
     setWebhooks(webhooks.map(w =>
       w.id === id
         ? { ...w, status: w.status === 'active' ? 'paused' : 'active' }
         : w
-    ))
-  }
+    ));
+  };
 
   const handleTestWebhook = async (webhook) => {
-    alert(`Testing webhook: ${webhook.name}\n\nSending test payload to:\n${webhook.url}\n\nThis will trigger the n8n workflow with sample data.`)
-  }
+    toast.success(`Testing webhook: ${webhook.name}`);
+  };
 
   const toggleAgentSelection = (agentId) => {
     if (formData.agents.includes(agentId)) {
-      setFormData({ ...formData, agents: formData.agents.filter(id => id !== agentId) })
+      setFormData({ ...formData, agents: formData.agents.filter(id => id !== agentId) });
     } else {
-      setFormData({ ...formData, agents: [...formData.agents, agentId] })
+      setFormData({ ...formData, agents: [...formData.agents, agentId] });
     }
-  }
+  };
 
   const addHeaderRow = () => {
     setFormData({
       ...formData,
       headers: [...formData.headers, { key: '', value: '' }]
-    })
-  }
-
-  const updateHeader = (index, field, value) => {
-    const newHeaders = [...formData.headers]
-    newHeaders[index][field] = value
-    setFormData({ ...formData, headers: newHeaders })
-  }
+    });
+  };
 
   const removeHeader = (index) => {
     setFormData({
       ...formData,
       headers: formData.headers.filter((_, i) => i !== index)
-    })
-  }
+    });
+  };
+
+  const COLORS = {
+    blue: { bg: 'bg-blue-500', text: 'text-blue-500', lightBg: 'bg-blue-500/20', lightText: 'text-blue-400', paleBg: 'bg-blue-100', paleText: 'text-blue-600' },
+    green: { bg: 'bg-green-500', text: 'text-green-500', lightBg: 'bg-green-500/20', lightText: 'text-green-400', paleBg: 'bg-green-100', paleText: 'text-green-600' },
+    purple: { bg: 'bg-purple-500', text: 'text-purple-500', lightBg: 'bg-purple-500/20', lightText: 'text-purple-400', paleBg: 'bg-purple-100', paleText: 'text-purple-600' },
+    orange: { bg: 'bg-orange-500', text: 'text-orange-500', lightBg: 'bg-orange-500/20', lightText: 'text-orange-400', paleBg: 'bg-orange-100', paleText: 'text-orange-600' },
+  };
 
   return (
-    <MainLayout>
-      <div className="py-6">
+    <AdminLayout>
+      <div className="space-y-6">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-secondary-900 mb-2">{t.webhookManagementTitle}</h1>
-          <p className="text-secondary-600">{t.webhookManagementDesc}</p>
-        </div>
-
-        {/* Tabs */}
-        <div className="mb-6">
-          <div className="flex space-x-2 border-b border-gray-200">
-            <button
-              onClick={() => setActiveTab('list')}
-              className={`px-6 py-3 font-semibold transition-colors ${
-                activeTab === 'list'
-                  ? 'text-primary-600 border-b-2 border-primary-600'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              <span className="flex items-center">
-                <span className="material-icons mr-2">webhook</span>
-                {t.webhooksTab}
-              </span>
-            </button>
-            <button
-              onClick={() => setActiveTab('logs')}
-              className={`px-6 py-3 font-semibold transition-colors ${
-                activeTab === 'logs'
-                  ? 'text-primary-600 border-b-2 border-primary-600'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              <span className="flex items-center">
-                <span className="material-icons mr-2">history</span>
-                {t.executionLogsTab}
-              </span>
-            </button>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+          <div>
+            <h1 className={`text-3xl font-bold mb-2 ${textPrimary}`}>{t.webhookManagementTitle}</h1>
+            <p className={textSecondary}>{t.webhookManagementDesc}</p>
           </div>
         </div>
 
-        {/* Webhooks List Tab */}
+        {/* Tabs */}
+        <Card padding="none" className="p-2">
+          <div className="flex space-x-2">
+            <button
+              onClick={() => setActiveTab('list')}
+              className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-all ${activeTab === 'list'
+                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
+                : `${theme === 'dark' ? 'text-gray-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'}`
+                }`}
+            >
+              <Webhook className="w-5 h-5" />
+              <span>{t.webhooksTab}</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('logs')}
+              className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-all ${activeTab === 'logs'
+                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
+                : `${theme === 'dark' ? 'text-gray-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100'}`
+                }`}
+            >
+              <History className="w-5 h-5" />
+              <span>{t.executionLogsTab}</span>
+            </button>
+          </div>
+        </Card>
+
         {activeTab === 'list' && (
           <>
             {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              <div className="glass-card rounded-2xl p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="material-icons text-3xl text-blue-600">webhook</span>
-                  <span className="text-xs font-semibold text-green-600 bg-green-100 px-2 py-1 rounded-full">
-                    {t.activeOption}
-                  </span>
-                </div>
-                <h3 className="text-3xl font-bold text-secondary-900">{webhooks.filter(w => w.status === 'active').length}</h3>
-                <p className="text-secondary-600 text-sm">{t.activeWebhooksLabel}</p>
-              </div>
-
-              <div className="glass-card rounded-2xl p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="material-icons text-3xl text-purple-600">play_arrow</span>
-                </div>
-                <h3 className="text-3xl font-bold text-secondary-900">{webhooks.reduce((sum, w) => sum + w.executions, 0)}</h3>
-                <p className="text-secondary-600 text-sm">{t.totalExecutionsLabel}</p>
-              </div>
-
-              <div className="glass-card rounded-2xl p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="material-icons text-3xl text-green-600">check_circle</span>
-                </div>
-                <h3 className="text-3xl font-bold text-secondary-900">
-                  {(webhooks.reduce((sum, w) => sum + w.successRate, 0) / webhooks.length).toFixed(1)}%
-                </h3>
-                <p className="text-secondary-600 text-sm">{t.avgSuccessRateLabel}</p>
-              </div>
-
-              <div className="glass-card rounded-2xl p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="material-icons text-3xl text-orange-600">psychology</span>
-                </div>
-                <h3 className="text-3xl font-bold text-secondary-900">{availableAgents.length}</h3>
-                <p className="text-secondary-600 text-sm">{t.availableAgentsLabel}</p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+              {[
+                { label: t.activeWebhooksLabel, value: webhooks.filter(w => w.status === 'active').length, icon: Webhook, color: 'blue', sub: t.activeOption },
+                { label: t.totalExecutionsLabel, value: webhooks.reduce((sum, w) => sum + w.executions, 0), icon: Activity, color: 'purple', sub: '' },
+                { label: t.avgSuccessRateLabel, value: `${(webhooks.reduce((sum, w) => sum + w.successRate, 0) / webhooks.length).toFixed(1)}%`, icon: CheckCircle, color: 'green', sub: '' },
+                { label: t.availableAgentsLabel, value: availableAgents.length, icon: Brain, color: 'orange', sub: '' }
+              ].map((stat, i) => (
+                <Card key={i}>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`p-3 rounded-lg ${theme === 'dark' ? COLORS[stat.color].lightBg : COLORS[stat.color].paleBg}`}>
+                      <stat.icon className={`w-6 h-6 ${theme === 'dark' ? COLORS[stat.color].lightText : COLORS[stat.color].paleText}`} />
+                    </div>
+                    {stat.sub && <span className="text-xs font-semibold px-2 py-1 rounded-full bg-green-100 text-green-800">{stat.sub}</span>}
+                  </div>
+                  <div className={`text-3xl font-bold mb-1 ${textPrimary}`}>{stat.value}</div>
+                  <div className={`text-sm ${textSecondary}`}>{stat.label}</div>
+                </Card>
+              ))}
             </div>
 
             {/* Action Bar */}
-            <div className="mb-6 flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <div className="relative">
-                  <span className="material-icons absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                    search
-                  </span>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="flex items-center space-x-4 flex-1">
+                <div className="relative flex-1 md:max-w-md">
+                  <Search className={`absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 ${textSecondary}`} />
                   <input
                     type="text"
                     placeholder={t.searchWebhooksPlaceholder}
-                    className="glass-input pl-10 pr-4 py-2 rounded-xl"
+                    className={`w-full pl-10 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${theme === 'dark' ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-500' : 'bg-white border-slate-200 text-slate-900 placeholder-slate-400'
+                      }`}
                   />
                 </div>
-                <select className="glass-input px-4 py-2 rounded-xl">
+                <select className={`px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${theme === 'dark' ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-slate-200 text-slate-900'
+                  }`}>
                   <option>{t.allStatusOption2}</option>
                   <option>{t.activeOption}</option>
                   <option>{t.pausedOption}</option>
@@ -328,138 +316,113 @@ const N8nWebhookManagementPage = () => {
               </div>
               <button
                 onClick={handleCreateWebhook}
-                className="glass-btn-primary px-6 py-3 rounded-xl font-semibold inline-flex items-center"
+                className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:shadow-lg transition-all"
               >
-                <span className="material-icons mr-2">add</span>
-                {t.createWebhookButton}
+                <Plus className="w-5 h-5" />
+                <span className="font-semibold">{t.createWebhookButton}</span>
               </button>
             </div>
 
             {/* Webhooks Table */}
-            <div className="glass-card rounded-2xl p-6">
+            <Card padding="none" className="overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-gray-200">
-                      <th className="text-left py-4 px-4 text-xs font-semibold text-secondary-600 uppercase tracking-wider">
-                        {t.tableHeaderWebhookName}
-                      </th>
-                      <th className="text-left py-4 px-4 text-xs font-semibold text-secondary-600 uppercase tracking-wider">
-                        {t.tableHeaderStatus2}
-                      </th>
-                      <th className="text-left py-4 px-4 text-xs font-semibold text-secondary-600 uppercase tracking-wider">
-                        {t.tableHeaderConnectedAgents}
-                      </th>
-                      <th className="text-left py-4 px-4 text-xs font-semibold text-secondary-600 uppercase tracking-wider">
-                        {t.tableHeaderTrigger}
-                      </th>
-                      <th className="text-left py-4 px-4 text-xs font-semibold text-secondary-600 uppercase tracking-wider">
-                        {t.tableHeaderExecutions}
-                      </th>
-                      <th className="text-left py-4 px-4 text-xs font-semibold text-secondary-600 uppercase tracking-wider">
-                        {t.tableHeaderSuccessRate}
-                      </th>
-                      <th className="text-left py-4 px-4 text-xs font-semibold text-secondary-600 uppercase tracking-wider">
-                        {t.tableHeaderLastExecuted}
-                      </th>
-                      <th className="text-center py-4 px-4 text-xs font-semibold text-secondary-600 uppercase tracking-wider">
-                        {t.tableHeaderActions2}
-                      </th>
+                  <thead className={theme === 'dark' ? 'bg-gray-900/50' : 'bg-slate-50'}>
+                    <tr>
+                      <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderWebhookName}</th>
+                      <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderStatus2}</th>
+                      <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderConnectedAgents}</th>
+                      <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderTrigger}</th>
+                      <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderExecutions}</th>
+                      <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderSuccessRate}</th>
+                      <th className={`text-left py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderLastExecuted}</th>
+                      <th className={`text-center py-4 px-6 text-xs font-bold uppercase ${textSecondary}`}>{t.tableHeaderActions2}</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className={`divide-y ${theme === 'dark' ? 'divide-gray-800' : 'divide-slate-100'}`}>
                     {webhooks.map((webhook) => (
-                      <tr key={webhook.id} className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors">
-                        <td className="py-4 px-4">
+                      <tr key={webhook.id} className={`transition-colors ${theme === 'dark' ? 'hover:bg-gray-800' : 'hover:bg-slate-50'}`}>
+                        <td className="py-4 px-6">
                           <div>
-                            <p className="text-secondary-900 font-semibold">{webhook.name}</p>
-                            <p className="text-gray-500 text-xs font-mono mt-1">{webhook.url}</p>
+                            <div className={`font-semibold ${textPrimary}`}>{webhook.name}</div>
+                            <div className={`text-xs font-mono mt-1 w-48 truncate ${textSecondary}`}>{webhook.url}</div>
                           </div>
                         </td>
-                        <td className="py-4 px-4">
-                          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-                            webhook.status === 'active'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-gray-100 text-gray-800'
-                          }`}>
-                            <span className="material-icons text-xs mr-1">
-                              {webhook.status === 'active' ? 'check_circle' : 'pause_circle'}
-                            </span>
+                        <td className="py-4 px-6">
+                          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${webhook.status === 'active'
+                              ? 'bg-green-100 text-green-800 border border-green-200'
+                              : 'bg-gray-100 text-gray-800 border border-gray-200'
+                            }`}>
+                            {webhook.status === 'active' ? <CheckCircle className="w-3 h-3 mr-1" /> : <PauseCircle className="w-3 h-3 mr-1" />}
                             {webhook.status === 'active' ? t.activeOption : t.pausedOption}
                           </span>
                         </td>
-                        <td className="py-4 px-4">
+                        <td className="py-4 px-6">
                           <div className="flex flex-wrap gap-1">
                             {webhook.agents.slice(0, 3).map((agentId) => {
-                              const agent = availableAgents.find(a => a.id === agentId)
+                              const agent = availableAgents.find(a => a.id === agentId);
                               return agent ? (
                                 <span
                                   key={agentId}
-                                  className={`inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium bg-${agent.color}-100 text-${agent.color}-800`}
+                                  className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-${agent.color}-100 text-${agent.color}-800 border border-${agent.color}-200`}
                                 >
-                                  <span className="material-icons text-xs mr-1">{agent.icon}</span>
                                   {agent.name.split(' ')[0]}
                                 </span>
-                              ) : null
+                              ) : null;
                             })}
                             {webhook.agents.length > 3 && (
-                              <span className="inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium bg-gray-100 text-secondary-800">
+                              <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-100 text-gray-800 border border-gray-200">
                                 +{webhook.agents.length - 3}
                               </span>
                             )}
                           </div>
                         </td>
-                        <td className="py-4 px-4">
-                          <span className="text-secondary-700 text-sm capitalize">{webhook.trigger.replace('_', ' ')}</span>
+                        <td className="py-4 px-6">
+                          <span className={`text-sm capitalize ${textSecondary}`}>{webhook.trigger.replace('_', ' ')}</span>
                         </td>
-                        <td className="py-4 px-4">
-                          <span className="text-secondary-900 font-semibold">{webhook.executions}</span>
+                        <td className="py-4 px-6">
+                          <span className={`font-semibold ${textPrimary}`}>{webhook.executions}</span>
                         </td>
-                        <td className="py-4 px-4">
+                        <td className="py-4 px-6">
                           <div className="flex items-center">
-                            <span className="text-secondary-900 font-semibold">{webhook.successRate}%</span>
-                            <div className="w-16 h-2 bg-gray-200 rounded-full ml-2">
-                              <div
-                                className="h-full bg-green-500 rounded-full"
-                                style={{ width: `${webhook.successRate}%` }}
-                              ></div>
+                            <span className={`font-semibold mr-2 ${textPrimary}`}>{webhook.successRate}%</span>
+                            <div className={`w-16 h-1.5 rounded-full ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-200'}`}>
+                              <div className="h-full bg-green-500 rounded-full" style={{ width: `${webhook.successRate}%` }}></div>
                             </div>
                           </div>
                         </td>
-                        <td className="py-4 px-4">
-                          <span className="text-secondary-600 text-sm">{webhook.lastExecuted || 'Never'}</span>
+                        <td className="py-4 px-6">
+                          <span className={`text-sm ${textSecondary}`}>{webhook.lastExecuted || 'Never'}</span>
                         </td>
-                        <td className="py-4 px-4">
+                        <td className="py-4 px-6">
                           <div className="flex items-center justify-center space-x-2">
                             <button
                               onClick={() => handleTestWebhook(webhook)}
-                              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                              className={`p-2 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-gray-700 text-blue-400' : 'hover:bg-blue-50 text-blue-600'}`}
                               title="Test webhook"
                             >
-                              <span className="material-icons text-blue-600 text-sm">play_arrow</span>
+                              <Play className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => handleToggleStatus(webhook.id)}
-                              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                              className={`p-2 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-gray-700 text-orange-400' : 'hover:bg-orange-50 text-orange-600'}`}
                               title={webhook.status === 'active' ? 'Pause' : 'Activate'}
                             >
-                              <span className="material-icons text-orange-600 text-sm">
-                                {webhook.status === 'active' ? 'pause' : 'play_circle'}
-                              </span>
+                              {webhook.status === 'active' ? <PauseCircle className="w-4 h-4" /> : <PlayCircle className="w-4 h-4" />}
                             </button>
                             <button
                               onClick={() => handleEditWebhook(webhook)}
-                              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                              className={`p-2 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-gray-700 text-green-400' : 'hover:bg-green-50 text-green-600'}`}
                               title="Edit"
                             >
-                              <span className="material-icons text-green-600 text-sm">edit</span>
+                              <Edit className="w-4 h-4" />
                             </button>
                             <button
                               onClick={() => handleDeleteWebhook(webhook.id)}
-                              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                              className={`p-2 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-gray-700 text-red-400' : 'hover:bg-red-50 text-red-600'}`}
                               title="Delete"
                             >
-                              <span className="material-icons text-red-600 text-sm">delete</span>
+                              <Trash2 className="w-4 h-4" />
                             </button>
                           </div>
                         </td>
@@ -468,116 +431,120 @@ const N8nWebhookManagementPage = () => {
                   </tbody>
                 </table>
               </div>
-            </div>
+            </Card>
           </>
         )}
 
         {/* Execution Logs Tab */}
         {activeTab === 'logs' && (
-          <div className="glass-card rounded-2xl p-6">
+          <Card>
             <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-secondary-900">{t.executionLogsTitle}</h2>
-              <select className="glass-input px-4 py-2 rounded-xl">
+              <h2 className={`text-2xl font-bold ${textPrimary}`}>{t.executionLogsTitle}</h2>
+              <select className={`px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${theme === 'dark' ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-slate-200 text-slate-900'
+                }`}>
                 <option>{t.allWebhooksOption}</option>
                 {webhooks.map(w => (
                   <option key={w.id}>{w.name}</option>
                 ))}
               </select>
             </div>
-
             <div className="space-y-4">
               {webhookLogs.map((log) => {
-                const webhook = webhooks.find(w => w.id === log.webhookId)
+                const webhook = webhooks.find(w => w.id === log.webhookId);
                 return (
-                  <div key={log.id} className="glass-card rounded-xl p-6 hover:shadow-lg transition-shadow">
+                  <div key={log.id} className={`p-6 rounded-xl border transition-all ${theme === 'dark'
+                      ? 'bg-gray-800/50 border-gray-700 hover:border-gray-600'
+                      : 'bg-slate-50 border-slate-200 hover:border-purple-200'
+                    }`}>
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-start space-x-4">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                          log.status === 'success' ? 'bg-green-100' : 'bg-red-100'
-                        }`}>
-                          <span className={`material-icons ${
-                            log.status === 'success' ? 'text-green-600' : 'text-red-600'
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${log.status === 'success' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
                           }`}>
-                            {log.status === 'success' ? 'check_circle' : 'error'}
-                          </span>
+                          {log.status === 'success' ? <CheckCircle className="w-6 h-6" /> : <AlertCircle className="w-6 h-6" />}
                         </div>
                         <div>
-                          <h3 className="text-lg font-bold text-secondary-900">{webhook?.name}</h3>
-                          <p className="text-secondary-600 text-sm">{log.timestamp}</p>
+                          <h3 className={`text-lg font-bold ${textPrimary}`}>{webhook?.name}</h3>
+                          <p className={`text-sm ${textSecondary}`}>{log.timestamp}</p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-semibold text-secondary-900">Status: {log.statusCode}</div>
-                        <div className="text-xs text-secondary-600">Duration: {log.duration}s</div>
+                        <div className={`text-sm font-semibold ${log.status === 'success' ? 'text-green-500' : 'text-red-500'}`}>
+                          Status: {log.statusCode}
+                        </div>
+                        <div className={`text-xs ${textSecondary}`}>Duration: {log.duration}s</div>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <h4 className="text-sm font-semibold text-secondary-700 mb-2">Payload</h4>
-                        <pre className="bg-gray-50 p-3 rounded-lg text-xs overflow-x-auto">
+                        <h4 className={`text-sm font-semibold mb-2 ${textSecondary}`}>Payload</h4>
+                        <pre className={`p-3 rounded-lg text-xs overflow-x-auto ${theme === 'dark' ? 'bg-black/50 text-gray-300' : 'bg-white border border-slate-200 text-slate-700'
+                          }`}>
                           {JSON.stringify(log.payload, null, 2)}
                         </pre>
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-secondary-700 mb-2">
+                        <h4 className={`text-sm font-semibold mb-2 ${textSecondary}`}>
                           {log.status === 'success' ? 'Response' : 'Error'}
                         </h4>
-                        <pre className="bg-gray-50 p-3 rounded-lg text-xs overflow-x-auto">
-                          {log.status === 'success'
-                            ? JSON.stringify(log.response, null, 2)
-                            : log.error}
+                        <pre className={`p-3 rounded-lg text-xs overflow-x-auto ${theme === 'dark' ? 'bg-black/50 text-gray-300' : 'bg-white border border-slate-200 text-slate-700'
+                          }`}>
+                          {log.status === 'success' ? JSON.stringify(log.response, null, 2) : log.error}
                         </pre>
                       </div>
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
-          </div>
+          </Card>
         )}
 
         {/* Create/Edit Webhook Modal */}
         {showModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-3xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+            <div className={`rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border ${theme === 'dark' ? 'bg-[#1e293b] border-gray-700' : 'bg-white border-slate-200'
+              }`}>
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-3xl font-bold text-secondary-900">
+                <h2 className={`text-2xl font-bold ${textPrimary}`}>
                   {editingWebhook ? t.editWebhookTitle : t.createNewWebhookTitle}
                 </h2>
                 <button
                   onClick={() => setShowModal(false)}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  className={`p-2 rounded-lg transition-colors ${theme === 'dark' ? 'hover:bg-gray-700 text-gray-400' : 'hover:bg-gray-100 text-gray-500'
+                    }`}
                 >
-                  <span className="material-icons">close</span>
+                  <X className="w-6 h-6" />
                 </button>
               </div>
 
               <div className="space-y-6">
                 {/* Basic Information */}
                 <div>
-                  <h3 className="text-xl font-bold text-secondary-900 mb-4">{t.basicInformationSection}</h3>
+                  <h3 className={`text-lg font-bold mb-4 ${textPrimary}`}>{t.basicInformationSection}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold text-secondary-700 mb-2">
+                      <label className={`block text-sm font-medium mb-2 ${textSecondary}`}>
                         {t.webhookNameLabel}
                       </label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="glass-input w-full px-4 py-2 rounded-xl"
+                        className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${theme === 'dark' ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-slate-200 text-slate-900'
+                          }`}
                         placeholder={t.webhookNamePlaceholder}
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-secondary-700 mb-2">
+                      <label className={`block text-sm font-medium mb-2 ${textSecondary}`}>
                         {t.triggerEventLabel}
                       </label>
                       <select
                         value={formData.trigger}
                         onChange={(e) => setFormData({ ...formData, trigger: e.target.value })}
-                        className="glass-input w-full px-4 py-2 rounded-xl"
+                        className={`w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${theme === 'dark' ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-slate-200 text-slate-900'
+                          }`}
                       >
                         <option value="on_submission">{t.onSubmissionOption}</option>
                         <option value="on_completion">{t.onCompletionOption}</option>
@@ -590,240 +557,82 @@ const N8nWebhookManagementPage = () => {
                   </div>
                 </div>
 
-                {/* Webhook URL */}
+                {/* URL and Agents */}
                 <div>
-                  <label className="block text-sm font-semibold text-secondary-700 mb-2">
+                  <label className={`block text-sm font-medium mb-2 ${textSecondary}`}>
                     {t.n8nWebhookUrlLabel}
                   </label>
-                  <input
-                    type="url"
-                    value={formData.url}
-                    onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-                    className="glass-input w-full px-4 py-2 rounded-xl"
-                    placeholder={t.n8nWebhookUrlPlaceholder}
-                  />
-                </div>
-
-                {/* Authentication */}
-                <div>
-                  <h3 className="text-xl font-bold text-secondary-900 mb-4">{t.authenticationSection}</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-semibold text-secondary-700 mb-2">
-                        {t.authenticationTypeLabel}
-                      </label>
-                      <select
-                        value={formData.authentication}
-                        onChange={(e) => setFormData({ ...formData, authentication: e.target.value })}
-                        className="glass-input w-full px-4 py-2 rounded-xl"
-                      >
-                        <option value="none">{t.noneOption}</option>
-                        <option value="api_key">{t.apiKeyOption}</option>
-                        <option value="basic">{t.basicAuthOption}</option>
-                        <option value="bearer">{t.bearerTokenOption}</option>
-                      </select>
-                    </div>
-                    {formData.authentication === 'api_key' && (
-                      <div>
-                        <label className="block text-sm font-semibold text-secondary-700 mb-2">
-                          {t.apiKeyLabel2}
-                        </label>
-                        <input
-                          type="password"
-                          value={formData.apiKey}
-                          onChange={(e) => setFormData({ ...formData, apiKey: e.target.value })}
-                          className="glass-input w-full px-4 py-2 rounded-xl"
-                          placeholder={t.enterApiKeyPlaceholder}
-                        />
-                      </div>
-                    )}
-                    {formData.authentication === 'basic' && (
-                      <>
-                        <div>
-                          <label className="block text-sm font-semibold text-secondary-700 mb-2">
-                            {t.usernameLabel}
-                          </label>
-                          <input
-                            type="text"
-                            value={formData.username}
-                            onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                            className="glass-input w-full px-4 py-2 rounded-xl"
-                            placeholder={t.usernamePlaceholder}
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-semibold text-secondary-700 mb-2">
-                            {t.passwordLabel}
-                          </label>
-                          <input
-                            type="password"
-                            value={formData.password}
-                            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                            className="glass-input w-full px-4 py-2 rounded-xl"
-                            placeholder={t.passwordPlaceholder}
-                          />
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-
-                {/* Connected Agents */}
-                <div>
-                  <h3 className="text-xl font-bold text-secondary-900 mb-4">{t.connectedAiAgentsTitle}</h3>
-                  <p className="text-secondary-600 text-sm mb-4">
-                    {t.agentSelectionDesc}
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {availableAgents.map((agent) => (
-                      <label
-                        key={agent.id}
-                        className={`glass-card p-4 rounded-xl cursor-pointer transition-all ${
-                          formData.agents.includes(agent.id)
-                            ? 'border-2 border-primary-600 bg-primary-50'
-                            : 'hover:shadow-md'
+                  <div className="flex space-x-2">
+                    <input
+                      type="url"
+                      value={formData.url}
+                      onChange={(e) => setFormData({ ...formData, url: e.target.value })}
+                      className={`flex-1 px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${theme === 'dark' ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-slate-200 text-slate-900'
                         }`}
-                      >
-                        <div className="flex items-center space-x-3">
-                          <input
-                            type="checkbox"
-                            checked={formData.agents.includes(agent.id)}
-                            onChange={() => toggleAgentSelection(agent.id)}
-                            className="w-5 h-5 text-primary-600 rounded focus:ring-primary-500"
-                          />
-                          <div className={`w-10 h-10 rounded-lg bg-${agent.color}-100 flex items-center justify-center`}>
-                            <span className={`material-icons text-${agent.color}-600`}>{agent.icon}</span>
-                          </div>
-                          <div>
-                            <p className="text-sm font-semibold text-secondary-900">{agent.name}</p>
-                          </div>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Advanced Settings */}
-                <div>
-                  <h3 className="text-xl font-bold text-secondary-900 mb-4">{t.advancedSettingsSection}</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-semibold text-secondary-700 mb-2">
-                        {t.retryAttemptsLabel}
-                      </label>
-                      <input
-                        type="number"
-                        value={formData.retryAttempts}
-                        onChange={(e) => setFormData({ ...formData, retryAttempts: parseInt(e.target.value) })}
-                        className="glass-input w-full px-4 py-2 rounded-xl"
-                        min="0"
-                        max="10"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold text-secondary-700 mb-2">
-                        {t.timeoutLabel}
-                      </label>
-                      <input
-                        type="number"
-                        value={formData.timeout}
-                        onChange={(e) => setFormData({ ...formData, timeout: parseInt(e.target.value) })}
-                        className="glass-input w-full px-4 py-2 rounded-xl"
-                        min="5"
-                        max="300"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Custom Headers */}
-                <div>
-                  <h3 className="text-xl font-bold text-secondary-900 mb-4">{t.customHeadersSection}</h3>
-                  <div className="space-y-3">
-                    {formData.headers.map((header, index) => (
-                      <div key={index} className="flex items-center space-x-3">
-                        <input
-                          type="text"
-                          value={header.key}
-                          onChange={(e) => updateHeader(index, 'key', e.target.value)}
-                          className="glass-input flex-1 px-4 py-2 rounded-xl"
-                          placeholder={t.headerNamePlaceholder}
-                        />
-                        <input
-                          type="text"
-                          value={header.value}
-                          onChange={(e) => updateHeader(index, 'value', e.target.value)}
-                          className="glass-input flex-1 px-4 py-2 rounded-xl"
-                          placeholder={t.headerValuePlaceholder}
-                        />
-                        <button
-                          onClick={() => removeHeader(index)}
-                          className="p-2 hover:bg-red-100 rounded-lg transition-colors"
-                        >
-                          <span className="material-icons text-red-600">delete</span>
-                        </button>
-                      </div>
-                    ))}
-                    <button
-                      onClick={addHeaderRow}
-                      className="text-primary-600 hover:text-primary-700 font-semibold text-sm flex items-center"
-                    >
-                      <span className="material-icons mr-1 text-sm">add</span>
-                      {t.addHeaderButton}
+                      placeholder="https://n8n.example.com/webhook/..."
+                    />
+                    <button className={`px-4 py-2 rounded-lg border transition-colors ${theme === 'dark'
+                        ? 'bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700'
+                        : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                      }`}>
+                      <Copy className="w-5 h-5" />
                     </button>
                   </div>
                 </div>
 
-                {/* Notifications */}
                 <div>
-                  <h3 className="text-xl font-bold text-secondary-900 mb-4">{t.notificationsSection}</h3>
-                  <label className="flex items-center space-x-3 mb-4">
-                    <input
-                      type="checkbox"
-                      checked={formData.notifyOnFailure}
-                      onChange={(e) => setFormData({ ...formData, notifyOnFailure: e.target.checked })}
-                      className="w-5 h-5 text-primary-600 rounded focus:ring-primary-500"
-                    />
-                    <span className="text-secondary-700">{t.notifyOnFailureLabel}</span>
+                  <label className={`block text-sm font-medium mb-2 ${textSecondary}`}>
+                    Connected Agents
                   </label>
-                  {formData.notifyOnFailure && (
-                    <div>
-                      <label className="block text-sm font-semibold text-secondary-700 mb-2">
-                        {t.notificationEmailLabel}
-                      </label>
-                      <input
-                        type="email"
-                        value={formData.notifyEmail}
-                        onChange={(e) => setFormData({ ...formData, notifyEmail: e.target.value })}
-                        className="glass-input w-full px-4 py-2 rounded-xl"
-                        placeholder={t.adminEmailPlaceholder}
-                      />
-                    </div>
-                  )}
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {availableAgents.map((agent) => (
+                      <div
+                        key={agent.id}
+                        onClick={() => toggleAgentSelection(agent.id)}
+                        className={`cursor-pointer p-3 rounded-lg border transition-all flex items-center space-x-2 ${formData.agents.includes(agent.id)
+                            ? 'bg-purple-500/10 border-purple-500'
+                            : theme === 'dark'
+                              ? 'bg-gray-800 border-gray-700 hover:border-gray-600'
+                              : 'bg-white border-slate-200 hover:border-purple-200'
+                          }`}
+                      >
+                        <div className={`w-4 h-4 rounded border flex items-center justify-center ${formData.agents.includes(agent.id)
+                            ? 'bg-purple-500 border-purple-500'
+                            : `border-gray-400 ${theme === 'dark' ? 'bg-transparent' : 'bg-white'}`
+                          }`}>
+                          {formData.agents.includes(agent.id) && <CheckCircle className="w-3 h-3 text-white" />}
+                        </div>
+                        <span className={`text-sm ${textPrimary}`}>{agent.name}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Modal Actions */}
-              <div className="mt-8 flex items-center justify-end space-x-4">
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="glass-btn-secondary px-6 py-3 rounded-xl font-semibold"
-                >
-                  {t.cancelButton2}
-                </button>
-                <button
-                  onClick={handleSaveWebhook}
-                  className="glass-btn-primary px-6 py-3 rounded-xl font-semibold"
-                >
-                  {editingWebhook ? t.updateWebhookButton : t.createWebhookButton2}
-                </button>
+                {/* Action Buttons */}
+                <div className="flex justify-end space-x-3 pt-6 border-t border-gray-700/50">
+                  <button
+                    onClick={() => setShowModal(false)}
+                    className={`px-6 py-2 rounded-lg font-semibold transition-colors ${theme === 'dark'
+                        ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                        : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
+                      }`}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSaveWebhook}
+                    className="px-6 py-2 rounded-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg transition-all"
+                  >
+                    {editingWebhook ? 'Save Changes' : 'Create Webhook'}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         )}
       </div>
-    </MainLayout>
-  )
-}
+    </AdminLayout>
+  );
+};
 
-export default N8nWebhookManagementPage
+export default N8nWebhookManagementPage;

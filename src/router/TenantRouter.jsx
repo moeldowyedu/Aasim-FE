@@ -101,6 +101,7 @@ const TenantRouter = () => {
                 <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
 
                 <Route path="/" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+                <Route path="/dashboard" element={<Navigate to="/" replace />} />
 
                 <Route path="/onboarding/tenant-setup" element={<ProtectedRoute><TenantSetupPage /></ProtectedRoute>} />
                 <Route path="/onboarding/organization-setup" element={<ProtectedRoute><OrganizationSetupPage /></ProtectedRoute>} />

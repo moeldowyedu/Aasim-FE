@@ -30,6 +30,7 @@ const PublicRouter = () => {
             <Route path="/workspace-selection" element={<WorkspaceSelectionPage />} />
 
             {/* Guard: Redirect /dashboard to /login on public domain to prevent SaaS leak */}
+            {/* Guard: Redirect /dashboard to /login on public domain to prevent SaaS leak */}
             <Route path="/dashboard" element={<Navigate to="/login" replace />} />
 
             <Route path="/register" element={<RegisterPage />} />
