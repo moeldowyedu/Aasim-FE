@@ -36,8 +36,10 @@ const authService = {
 
     // Organization Specific Fields
     if (userData.type === 'organization') {
-      if (userData.organizationName) {
-        formData.append('organizationFullName', userData.organizationName);
+      // Support both organizationFullName (new) and organizationName (legacy)
+      const orgFullName = userData.organizationFullName || userData.organizationName;
+      if (orgFullName) {
+        formData.append('organizationFullName', orgFullName);
       }
       if (userData.organizationShortName) {
         formData.append('organizationShortName', userData.organizationShortName);
@@ -45,10 +47,6 @@ const authService = {
       // Handle file upload
       if (userData.organizationLogo instanceof File) {
         formData.append('organizationLogo', userData.organizationLogo);
-      }
-      // Legacy/Optional domain field if still used by backend
-      if (userData.organizationDomain) {
-        formData.append('organizationDomain', userData.organizationDomain);
       }
     }
 
