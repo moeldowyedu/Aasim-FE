@@ -4,7 +4,6 @@ import { Mail, Lock, User, Eye, EyeOff, ArrowRight, ArrowLeft, Building2, Users,
 import { useAuthStore } from '../../store/authStore';
 import Input from '../../components/common/Input/Input';
 import Button from '../../components/common/Button/Button';
-import PlanSelector from '../../components/registration/PlanSelector';
 import RegistrationSteps from '../../components/registration/RegistrationSteps';
 import toast from 'react-hot-toast';
 import logo from '../../assets/imgs/OBSOLIO-logo-cyan.png';
@@ -20,7 +19,6 @@ const RegisterPage = () => {
   const [formData, setFormData] = useState({
     confirmPassword: '',
     tenantType: '', // Will be set in step 1
-    selectedPlan: '', // Will be set in step 2 (stored for UI only, not sent to API)
     tenantUrl: '',
     // Personal & Shared Fields
     fullName: '',
@@ -74,12 +72,7 @@ const RegisterPage = () => {
         newErrors.tenantType = 'Please select an account type';
       }
     } else if (step === 2) {
-      // Step 2: Plan Selection
-      if (!formData.selectedPlan) {
-        newErrors.selectedPlan = 'Please select a plan';
-      }
-    } else if (step === 3) {
-      // Step 3: Account Details
+      // Step 2: Account Details (previously Step 3)
       if (!formData.fullName.trim()) {
         newErrors.fullName = 'Full name is required';
       } else if (formData.fullName.trim().length < 2) {
@@ -113,8 +106,8 @@ const RegisterPage = () => {
       if (!formData.phone) {
         newErrors.phone = 'Phone number is required';
       }
-    } else if (step === 4) {
-      // Step 4: Workspace Setup
+    } else if (step === 3) {
+      // Step 3: Workspace Setup (previously Step 4)
       if (!formData.tenantUrl) {
         newErrors.tenantUrl = 'Workspace URL is required';
       } else if (!/^[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?$/.test(formData.tenantUrl)) {
@@ -187,7 +180,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateStep(4)) {
+    if (!validateStep(3)) {
       return;
     }
 
@@ -317,13 +310,6 @@ const RegisterPage = () => {
   const handleTenantTypeChange = (type) => {
     setFormData(prev => ({ ...prev, tenantType: type }));
     setErrors({});
-  };
-
-  const handlePlanSelect = (planId) => {
-    setFormData(prev => ({ ...prev, selectedPlan: planId }));
-    if (errors.selectedPlan) {
-      setErrors(prev => ({ ...prev, selectedPlan: '' }));
-    }
   };
 
   return (
@@ -469,48 +455,8 @@ const RegisterPage = () => {
               </div>
             )}
 
-            {/* STEP 2: Plan Selection */}
+            {/* STEP 2: Account Details (previously Step 3) */}
             {currentStep === 2 && (
-              <div className="space-y-6 animate-fade-in">
-                <PlanSelector
-                  tenantType={formData.tenantType}
-                  selectedPlan={formData.selectedPlan}
-                  onSelectPlan={handlePlanSelect}
-                />
-                {errors.selectedPlan && (
-                  <p className="text-xs text-red-500 text-center animate-fade-in">{errors.selectedPlan}</p>
-                )}
-
-                <div className="flex gap-3">
-                  <Button
-                    type="button"
-                    onClick={handleBack}
-                    variant="outline"
-                    className="flex-1 py-4"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      <ArrowLeft className="w-5 h-5" />
-                      Back
-                    </span>
-                  </Button>
-                  <Button
-                    type="button"
-                    onClick={handleNext}
-                    variant="primary"
-                    className="flex-1 py-4 shadow-lg shadow-primary-500/25"
-                    disabled={!formData.selectedPlan}
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      Continue
-                      <ArrowRight className="w-5 h-5" />
-                    </span>
-                  </Button>
-                </div>
-              </div>
-            )}
-
-            {/* STEP 3: Account Details */}
-            {currentStep === 3 && (
               <div className="space-y-4 animate-fade-in">
                 <Input
                   theme={theme}
@@ -701,8 +647,8 @@ const RegisterPage = () => {
               </div>
             )}
 
-            {/* STEP 4: Workspace Setup */}
-            {currentStep === 4 && (
+            {/* STEP 3: Workspace Setup (previously Step 4) */}
+            {currentStep === 3 && (
               <div className="space-y-4 animate-fade-in">
                 <div>
                   <label className={`block text-sm font-medium mb-1 ml-1 ${theme === 'dark' ? 'text-gray-300' : 'text-slate-700'}`}>

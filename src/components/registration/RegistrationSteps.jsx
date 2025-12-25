@@ -6,9 +6,8 @@ const RegistrationSteps = ({ currentStep, tenantType }) => {
 
   const steps = [
     { number: 1, title: 'Account Type', completed: currentStep > 1 },
-    { number: 2, title: 'Choose Plan', completed: currentStep > 2 },
-    { number: 3, title: 'Account Details', completed: currentStep > 3 },
-    { number: 4, title: 'Workspace Setup', completed: currentStep > 4 }
+    { number: 2, title: 'Account Details', completed: currentStep > 2 },
+    { number: 3, title: 'Workspace Setup', completed: currentStep > 3 }
   ];
 
   return (
