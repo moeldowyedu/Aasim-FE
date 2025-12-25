@@ -45,6 +45,7 @@ const PublicRouter = () => {
             <Route path="/verify-email" element={<VerifyEmailPendingPage />} />
             <Route path="/verification-success" element={<VerificationSuccessPage />} />
             <Route path="/verification-failed" element={<VerificationFailedPage />} />
+            <Route path="/verification-error" element={<VerificationFailedPage />} />
 
             <Route path="/verify-email/:id/:hash" element={<EmailVerificationPage />} />
             <Route path="/resend-verification" element={<ResendVerificationPage />} />

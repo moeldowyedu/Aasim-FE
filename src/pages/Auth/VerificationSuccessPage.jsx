@@ -10,13 +10,22 @@ const VerificationSuccessPage = () => {
     const { theme } = useTheme();
 
     useEffect(() => {
+        // Get workspace URL from query params (sent by backend after verification)
+        const workspaceUrl = searchParams.get('workspace');
+
         // Auto redirect after 3 seconds
         const timer = setTimeout(() => {
-            navigate('/login');
+            if (workspaceUrl) {
+                // Redirect to the workspace subdomain login
+                window.location.href = workspaceUrl;
+            } else {
+                // Fallback to main login if no workspace URL provided
+                navigate('/login');
+            }
         }, 3000);
 
         return () => clearTimeout(timer);
-    }, [navigate]);
+    }, [navigate, searchParams]);
 
     return (
         <div className={`min-h-screen relative flex items-center justify-center p-4 transition-colors duration-300 ${theme === 'dark' ? 'bg-[#0B0E14]' : 'bg-slate-50'}`}>
@@ -63,7 +72,7 @@ const VerificationSuccessPage = () => {
                     </div>
 
                     <p className={`text-sm mt-4 ${theme === 'dark' ? 'text-gray-400' : 'text-slate-400'}`}>
-                        Redirecting to login...
+                        Redirecting to your workspace...
                     </p>
                 </div>
             </div>
