@@ -120,9 +120,8 @@ const RegisterPage = () => {
         newErrors.tenantUrl = 'Workspace URL is required';
       } else if (!/^[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?$/.test(formData.tenantUrl)) {
         newErrors.tenantUrl = 'Invalid format. Use lowercase letters, numbers, and hyphens (hyphens not at start/end).';
-      } else if (domainStatus === 'unavailable') {
-        newErrors.tenantUrl = 'This URL is already taken';
       }
+      // Note: Removed domainStatus check since API validates on submission
 
       if (formData.tenantType === 'organization') {
         if (!formData.organizationName.trim()) {
@@ -165,30 +164,29 @@ const RegisterPage = () => {
     }
   };
 
-  const { checkDomainAvailability } = useAuthStore();
-
-  const handleCheckDomain = async () => {
+  // Note: API doesn't have domain availability check endpoint
+  // Domain validation happens during registration
+  // We'll do basic client-side validation only
+  const handleCheckDomain = () => {
     if (!formData.tenantUrl) return;
 
     setCheckingDomain(true);
     setDomainStatus(null);
     setErrors(prev => ({ ...prev, tenantUrl: '' }));
 
-    try {
-      const result = await checkDomainAvailability(formData.tenantUrl);
-      if (result.available) {
+    // Client-side validation only
+    const isValid = /^[a-z0-9](?:[a-z0-9\-]{0,61}[a-z0-9])?$/.test(formData.tenantUrl);
+
+    setTimeout(() => {
+      if (isValid) {
         setDomainStatus('available');
+        setDomainMessage('Format is valid - availability will be checked during registration');
       } else {
         setDomainStatus('unavailable');
-        setDomainMessage(result.message || 'Already taken');
+        setDomainMessage('Invalid format. Use lowercase letters, numbers, and hyphens.');
       }
-    } catch (error) {
-      console.error(error);
-      setDomainStatus('unavailable');
-      setDomainMessage('Error checking availability');
-    } finally {
       setCheckingDomain(false);
-    }
+    }, 500); // Simulate API call for UX
   };
 
   const handleSubmit = async (e) => {
@@ -204,17 +202,16 @@ const RegisterPage = () => {
         fullName: formData.fullName.trim(),
         email: formData.email.trim(),
         password: formData.password,
-        tenantUrl: formData.tenantUrl,
+        subdomain: formData.tenantUrl, // API expects 'subdomain' not 'tenantUrl'
         country: formData.country,
         phone: formData.phone,
         plan: formData.selectedPlan, // Include selected plan
       };
 
       if (formData.tenantType === 'organization') {
-        payload.organizationName = formData.organizationName.trim();
-        payload.organizationShortName = formData.organizationShortName.trim();
-        if (formData.organizationDomain) {
-          payload.organizationDomain = formData.organizationDomain.trim();
+        payload.organizationFullName = formData.organizationName.trim(); // API expects 'organizationFullName'
+        if (formData.organizationShortName) {
+          payload.organizationShortName = formData.organizationShortName.trim();
         }
         if (formData.organizationLogo) {
           payload.organizationLogo = formData.organizationLogo;
@@ -720,12 +717,12 @@ const RegisterPage = () => {
                               : (theme === 'dark' ? 'opacity-100 hover:bg-white/10 text-primary-400 hover:text-white' : 'opacity-100 hover:bg-slate-200 text-primary-600 hover:text-primary-700') + ' cursor-pointer'
                             }
                           `}
-                          title="Check Availability"
+                          title="Validate Format"
                         >
                           {checkingDomain ? (
                             <div className="w-4 h-4 border-2 border-primary-400 border-t-transparent rounded-full animate-spin" />
                           ) : (
-                            <span className="text-xs font-bold uppercase tracking-wider">Check</span>
+                            <span className="text-xs font-bold uppercase tracking-wider">Validate</span>
                           )}
                         </button>
                       </div>
@@ -738,12 +735,12 @@ const RegisterPage = () => {
 
                   {domainStatus === 'available' && !errors.tenantUrl && (
                     <p className="mt-1.5 text-xs text-green-400 ml-1 flex items-center gap-1 animate-fade-in">
-                      ✓ Available
+                      ✓ Valid format - availability will be checked during registration
                     </p>
                   )}
                   {domainStatus === 'unavailable' && !errors.tenantUrl && (
                     <p className="mt-1.5 text-xs text-red-400 ml-1 flex items-center gap-1 animate-fade-in">
-                      ✗ {domainMessage || 'Not available'}
+                      ✗ {domainMessage || 'Invalid format'}
                     </p>
                   )}
                   {errors.tenantUrl && (
