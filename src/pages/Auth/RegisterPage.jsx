@@ -219,7 +219,16 @@ const RegisterPage = () => {
 
       // Add organization-specific required field
       if (formData.tenantType === 'organization') {
-        payload.organizationFullName = formData.organizationName.trim();
+        const orgFullName = formData.organizationName?.trim();
+
+        // Double-check the organization name exists
+        if (!orgFullName) {
+          toast.error('Organization name is required');
+          setErrors({ organizationName: 'Organization name is required' });
+          return;
+        }
+
+        payload.organizationFullName = orgFullName;
 
         // Add optional organization fields only if they have values
         if (formData.organizationShortName && formData.organizationShortName.trim()) {
@@ -231,6 +240,8 @@ const RegisterPage = () => {
       }
 
       console.log('Sending registration payload:', payload);
+      console.log('Organization name value:', formData.organizationName);
+      console.log('Trimmed organization name:', formData.organizationName?.trim());
       const result = await register(payload);
 
       if (result) {
