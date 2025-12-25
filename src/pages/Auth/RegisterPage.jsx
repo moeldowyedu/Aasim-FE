@@ -20,7 +20,7 @@ const RegisterPage = () => {
   const [formData, setFormData] = useState({
     confirmPassword: '',
     tenantType: '', // Will be set in step 1
-    selectedPlan: '', // Will be set in step 2
+    selectedPlan: '', // Will be set in step 2 (stored for UI only, not sent to API)
     tenantUrl: '',
     // Personal & Shared Fields
     fullName: '',
@@ -31,8 +31,7 @@ const RegisterPage = () => {
     // Organization Specific
     organizationName: '',
     organizationShortName: '',
-    organizationLogo: null,
-    organizationDomain: ''
+    organizationLogo: null
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -197,20 +196,23 @@ const RegisterPage = () => {
     }
 
     try {
+      // Build payload matching API spec exactly
       const payload = {
         type: formData.tenantType,
         fullName: formData.fullName.trim(),
         email: formData.email.trim(),
         password: formData.password,
-        subdomain: formData.tenantUrl, // API expects 'subdomain' not 'tenantUrl'
+        subdomain: formData.tenantUrl,
         country: formData.country,
         phone: formData.phone,
-        plan: formData.selectedPlan, // Include selected plan
       };
 
+      // Add organization-specific required field
       if (formData.tenantType === 'organization') {
-        payload.organizationFullName = formData.organizationName.trim(); // API expects 'organizationFullName'
-        if (formData.organizationShortName) {
+        payload.organizationFullName = formData.organizationName.trim();
+
+        // Add optional organization fields only if they have values
+        if (formData.organizationShortName && formData.organizationShortName.trim()) {
           payload.organizationShortName = formData.organizationShortName.trim();
         }
         if (formData.organizationLogo) {
@@ -218,6 +220,7 @@ const RegisterPage = () => {
         }
       }
 
+      console.log('Sending registration payload:', payload);
       const result = await register(payload);
 
       if (result) {
