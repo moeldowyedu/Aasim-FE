@@ -16,6 +16,7 @@ import AgentXMarketplacePage from '../pages/AgentX/MarketplacePage';
 import AgentDetailPage from '../pages/AgentX/AgentDetailPage';
 import VerifyEmailSentPage from '../pages/Auth/VerifyEmailSentPage';
 import EmailVerificationPage from '../pages/Auth/EmailVerificationPage';
+import EmailVerificationHandlerPage from '../pages/Auth/EmailVerificationHandlerPage';
 import ResendVerificationPage from '../pages/Auth/ResendVerificationPage';
 import VerifyEmailPendingPage from '../pages/Auth/VerifyEmailPendingPage';
 import VerificationSuccessPage from '../pages/Auth/VerificationSuccessPage';
@@ -41,13 +42,19 @@ const PublicRouter = () => {
 
             {/* Email Verification */}
             <Route path="/verify-email-sent" element={<VerifyEmailSentPage />} />
-            {/* New Verification Flow */}
-            <Route path="/verify-email" element={<VerifyEmailPendingPage />} />
+
+            {/* Email Verification Handler - Query Parameters Format */}
+            {/* This route handles: /verify-email?id=2&hash=xxx&expires=xxx&signature=xxx */}
+            <Route path="/verify-email" element={<EmailVerificationHandlerPage />} />
+
+            {/* Email Verification - Path Parameters Format (Legacy) */}
+            <Route path="/verify-email/:id/:hash" element={<EmailVerificationPage />} />
+
+            {/* Verification Result Pages */}
             <Route path="/verification-success" element={<VerificationSuccessPage />} />
             <Route path="/verification-failed" element={<VerificationFailedPage />} />
             <Route path="/verification-error" element={<VerificationFailedPage />} />
 
-            <Route path="/verify-email/:id/:hash" element={<EmailVerificationPage />} />
             <Route path="/resend-verification" element={<ResendVerificationPage />} />
 
             <Route path="/pricing" element={<PricingPage />} />
