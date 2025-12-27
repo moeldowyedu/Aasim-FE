@@ -37,32 +37,20 @@ const TenantsManagement = () => {
 
       const response = await adminService.getAllTenants(params);
       console.log('Tenants API Response:', response);
-      console.log('Response type:', typeof response.data);
-      console.log('Response keys:', Object.keys(response.data || {}));
-      console.log('response.data:', response.data);
-      console.log('response.tenants:', response.tenants);
+      console.log('Response type:', typeof response);
+      console.log('Response keys:', Object.keys(response || {}));
+      console.log('response.data:', response?.data);
+      console.log('response.tenants:', response?.tenants);
 
       // Handle different response structures
-      // API returns paginated data with structure: { data: { data: [...], current_page, total, ... } }
-      let tenantsData = [];
-      let metaData = {};
-
-      if (response.data && typeof response.data === 'object') {
-        // Check if response.data has pagination structure (data.data contains the array)
-        if (response.data.data && Array.isArray(response.data.data)) {
-          tenantsData = response.data.data;
-          metaData = response.data;
-        } else if (Array.isArray(response.data)) {
-          // response.data is directly an array
-          tenantsData = response.data;
-        }
-      } else if (response.tenants) {
-        tenantsData = response.tenants;
-        metaData = response.meta || response.pagination || {};
-      }
+      const tenantsData = response.data || response.tenants || response || [];
+      const metaData = response.meta || response.pagination || {};
 
       console.log('Parsed tenantsData:', tenantsData);
-      setTenants(tenantsData);
+      console.log('tenantsData is array?', Array.isArray(tenantsData));
+      console.log('tenantsData length:', tenantsData?.length);
+
+      setTenants(Array.isArray(tenantsData) ? tenantsData : []);
       setTotalPages(metaData.last_page || metaData.total_pages || 1);
     } catch (error) {
       console.error('Error fetching tenants:', error);
