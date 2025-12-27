@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 import AdminLayout from '../../components/layout/AdminLayout';
+import adminService from '../../services/adminService';
+import notify from '../../utils/toast';
 import {
   Bot, Plus, Search, Filter, Download, Trash2, Edit,
   Power, PlayCircle, BarChart3, X, Code, Package, AlertCircle,
@@ -57,223 +59,84 @@ const AgentsManagementPage = () => {
     documentation: ''
   });
 
-  // Mock Categories (will be fetched from API later)
-  const categories = [
-    { id: '1', name: 'Data Processing', slug: 'data-processing' },
-    { id: '2', name: 'Web Scraping', slug: 'web-scraping' },
-    { id: '3', name: 'API Integration', slug: 'api-integration' },
-    { id: '4', name: 'Email Automation', slug: 'email-automation' },
-    { id: '5', name: 'Social Media', slug: 'social-media' },
-    { id: '6', name: 'Analytics', slug: 'analytics' }
-  ];
-
-  // Mock Agents Data (will be replaced with API call)
-  const mockAgents = [
-    {
-      id: '1',
-      name: 'Web Scraper Pro',
-      slug: 'web-scraper-pro',
-      category: 'Web Scraping',
-      category_id: '2',
-      description: 'Advanced web scraping agent with JavaScript rendering support',
-      runtime_type: 'python',
-      version: '2.1.0',
-      status: 'active',
-      is_featured: true,
-      total_runs: 15234,
-      success_rate: 98.5,
-      created_at: '2024-01-15T10:30:00Z',
-      updated_at: '2024-03-20T14:22:00Z'
-    },
-    {
-      id: '2',
-      name: 'Email Campaign Manager',
-      slug: 'email-campaign-manager',
-      category: 'Email Automation',
-      category_id: '4',
-      description: 'Automated email campaign management and tracking',
-      runtime_type: 'nodejs',
-      version: '1.5.2',
-      status: 'active',
-      is_featured: true,
-      total_runs: 8932,
-      success_rate: 99.2,
-      created_at: '2024-02-01T09:15:00Z',
-      updated_at: '2024-03-18T11:10:00Z'
-    },
-    {
-      id: '3',
-      name: 'Data Transformer',
-      slug: 'data-transformer',
-      category: 'Data Processing',
-      category_id: '1',
-      description: 'Transform and process data between various formats',
-      runtime_type: 'python',
-      version: '3.0.1',
-      status: 'active',
-      is_featured: false,
-      total_runs: 12456,
-      success_rate: 97.8,
-      created_at: '2024-01-20T13:45:00Z',
-      updated_at: '2024-03-15T16:30:00Z'
-    },
-    {
-      id: '4',
-      name: 'Social Media Analytics',
-      slug: 'social-media-analytics',
-      category: 'Analytics',
-      category_id: '6',
-      description: 'Comprehensive social media metrics and insights',
-      runtime_type: 'nodejs',
-      version: '1.8.0',
-      status: 'active',
-      is_featured: true,
-      total_runs: 6789,
-      success_rate: 96.5,
-      created_at: '2024-02-10T11:20:00Z',
-      updated_at: '2024-03-22T09:45:00Z'
-    },
-    {
-      id: '5',
-      name: 'API Connector',
-      slug: 'api-connector',
-      category: 'API Integration',
-      category_id: '3',
-      description: 'Connect and sync data with external APIs',
-      runtime_type: 'python',
-      version: '2.3.0',
-      status: 'inactive',
-      is_featured: false,
-      total_runs: 4523,
-      success_rate: 95.2,
-      created_at: '2024-01-25T15:10:00Z',
-      updated_at: '2024-03-10T10:20:00Z'
-    },
-    {
-      id: '6',
-      name: 'Twitter Bot',
-      slug: 'twitter-bot',
-      category: 'Social Media',
-      category_id: '5',
-      description: 'Automated Twitter posting and engagement',
-      runtime_type: 'nodejs',
-      version: '1.2.5',
-      status: 'active',
-      is_featured: false,
-      total_runs: 3214,
-      success_rate: 98.1,
-      created_at: '2024-02-15T08:30:00Z',
-      updated_at: '2024-03-19T14:15:00Z'
-    },
-    {
-      id: '7',
-      name: 'CSV Parser',
-      slug: 'csv-parser',
-      category: 'Data Processing',
-      category_id: '1',
-      description: 'Parse and validate CSV files with custom schemas',
-      runtime_type: 'python',
-      version: '1.0.3',
-      status: 'active',
-      is_featured: false,
-      total_runs: 9876,
-      success_rate: 99.5,
-      created_at: '2024-02-20T12:00:00Z',
-      updated_at: '2024-03-21T16:40:00Z'
-    },
-    {
-      id: '8',
-      name: 'LinkedIn Connector',
-      slug: 'linkedin-connector',
-      category: 'Social Media',
-      category_id: '5',
-      description: 'Connect and manage LinkedIn profiles and posts',
-      runtime_type: 'nodejs',
-      version: '2.0.0',
-      status: 'inactive',
-      is_featured: false,
-      total_runs: 2134,
-      success_rate: 94.3,
-      created_at: '2024-01-30T10:45:00Z',
-      updated_at: '2024-03-05T13:25:00Z'
-    }
-  ];
+  // Categories State
+  const [categories, setCategories] = useState([]);
 
   // Fetch agents data
   useEffect(() => {
     fetchAgents();
   }, [currentPage, perPage, statusFilter, categoryFilter, runtimeFilter, sortBy, searchQuery]);
 
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await adminService.getAgentCategories();
+
+      // Handle different response structures
+      let categoriesData = [];
+      if (response.data && Array.isArray(response.data)) {
+        categoriesData = response.data;
+      } else if (Array.isArray(response)) {
+        categoriesData = response;
+      }
+
+      setCategories(categoriesData);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+      // Don't show error toast for categories as it's not critical
+    }
+  };
+
   const fetchAgents = async () => {
     setLoading(true);
     try {
-      // TODO: Replace with actual API call
-      // const response = await adminService.getAllAgents({ page: currentPage, per_page: perPage, ... });
+      const params = {
+        page: currentPage,
+        per_page: perPage,
+        search: searchQuery || undefined,
+        status: statusFilter !== 'all' ? statusFilter : undefined,
+        category: categoryFilter.length > 0 ? categoryFilter.join(',') : undefined,
+        runtime_type: runtimeFilter !== 'all' ? runtimeFilter : undefined,
+        sort: sortBy
+      };
 
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
+      const response = await adminService.getAllAgents(params);
 
-      // Filter and sort mock data
-      let filtered = [...mockAgents];
+      // Handle different response structures
+      let agentsData = [];
+      let pagination = {};
 
-      // Apply search
-      if (searchQuery) {
-        filtered = filtered.filter(agent =>
-          agent.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          agent.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          agent.description.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+      if (response.data && response.data.data && Array.isArray(response.data.data)) {
+        agentsData = response.data.data;
+        pagination = response.data;
+      } else if (response.data && Array.isArray(response.data)) {
+        agentsData = response.data;
+      } else if (Array.isArray(response)) {
+        agentsData = response;
       }
 
-      // Apply status filter
-      if (statusFilter !== 'all') {
-        filtered = filtered.filter(agent => agent.status === statusFilter);
+      setAgents(agentsData);
+
+      // Update pagination if available
+      if (pagination.last_page) {
+        setTotalPages(pagination.last_page);
       }
 
-      // Apply category filter
-      if (categoryFilter.length > 0) {
-        filtered = filtered.filter(agent => categoryFilter.includes(agent.category_id));
-      }
-
-      // Apply runtime filter
-      if (runtimeFilter !== 'all') {
-        filtered = filtered.filter(agent => agent.runtime_type === runtimeFilter);
-      }
-
-      // Apply sorting
-      switch (sortBy) {
-        case 'name_asc':
-          filtered.sort((a, b) => a.name.localeCompare(b.name));
-          break;
-        case 'name_desc':
-          filtered.sort((a, b) => b.name.localeCompare(a.name));
-          break;
-        case 'runs_desc':
-          filtered.sort((a, b) => b.total_runs - a.total_runs);
-          break;
-        case 'runs_asc':
-          filtered.sort((a, b) => a.total_runs - b.total_runs);
-          break;
-        case 'created_desc':
-          filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-          break;
-        case 'created_asc':
-          filtered.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-          break;
-      }
-
-      setAgents(filtered);
-
-      // Calculate stats
+      // Calculate stats from data
       setStats({
-        total: mockAgents.length,
-        active: mockAgents.filter(a => a.status === 'active').length,
-        inactive: mockAgents.filter(a => a.status === 'inactive').length,
-        featured: mockAgents.filter(a => a.is_featured).length
+        total: pagination.total || agentsData.length,
+        active: agentsData.filter(a => a.is_active).length,
+        inactive: agentsData.filter(a => !a.is_active).length,
+        featured: agentsData.filter(a => a.is_featured).length
       });
 
     } catch (error) {
       console.error('Error fetching agents:', error);
+      notify.error('Failed to load agents');
+      setAgents([]);
     } finally {
       setLoading(false);
     }
@@ -299,17 +162,14 @@ const AgentsManagementPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      // TODO: Replace with actual API call
-      // await adminService.createAgent(formData);
-      console.log('Creating agent:', formData);
-
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
+      await adminService.createAgent(formData);
+      notify.success('Agent created successfully');
       setShowCreateModal(false);
       resetForm();
       fetchAgents();
     } catch (error) {
       console.error('Error creating agent:', error);
+      notify.error(error.response?.data?.message || 'Failed to create agent');
     } finally {
       setLoading(false);
     }
@@ -319,18 +179,15 @@ const AgentsManagementPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      // TODO: Replace with actual API call
-      // await adminService.updateAgent(selectedAgent.id, formData);
-      console.log('Updating agent:', selectedAgent.id, formData);
-
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
+      await adminService.updateAgent(selectedAgent.id, formData);
+      notify.success('Agent updated successfully');
       setShowEditModal(false);
       setSelectedAgent(null);
       resetForm();
       fetchAgents();
     } catch (error) {
       console.error('Error updating agent:', error);
+      notify.error(error.response?.data?.message || 'Failed to update agent');
     } finally {
       setLoading(false);
     }
@@ -339,32 +196,51 @@ const AgentsManagementPage = () => {
   const handleDeleteAgent = async () => {
     setLoading(true);
     try {
-      // TODO: Replace with actual API call
-      // await adminService.deleteAgent(selectedAgent.id);
-      console.log('Deleting agent:', selectedAgent.id);
-
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
+      await adminService.deleteAgent(selectedAgent.id);
+      notify.success('Agent deleted successfully');
       setShowDeleteModal(false);
       setSelectedAgent(null);
       fetchAgents();
     } catch (error) {
       console.error('Error deleting agent:', error);
+      notify.error(error.response?.data?.message || 'Failed to delete agent');
     } finally {
       setLoading(false);
     }
   };
 
   const handleBulkActivate = async () => {
-    console.log('Bulk activate:', selectedAgents);
-    // TODO: Implement bulk activate
-    setSelectedAgents([]);
+    if (selectedAgents.length === 0) return;
+
+    setLoading(true);
+    try {
+      await adminService.bulkActivateAgents(selectedAgents);
+      notify.success(`${selectedAgents.length} agent(s) activated successfully`);
+      setSelectedAgents([]);
+      fetchAgents();
+    } catch (error) {
+      console.error('Error activating agents:', error);
+      notify.error('Failed to activate agents');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleBulkDeactivate = async () => {
-    console.log('Bulk deactivate:', selectedAgents);
-    // TODO: Implement bulk deactivate
-    setSelectedAgents([]);
+    if (selectedAgents.length === 0) return;
+
+    setLoading(true);
+    try {
+      await adminService.bulkDeactivateAgents(selectedAgents);
+      notify.success(`${selectedAgents.length} agent(s) deactivated successfully`);
+      setSelectedAgents([]);
+      fetchAgents();
+    } catch (error) {
+      console.error('Error deactivating agents:', error);
+      notify.error('Failed to deactivate agents');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleExport = () => {
